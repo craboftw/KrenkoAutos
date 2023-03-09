@@ -1,16 +1,20 @@
-package org.example;
+package main.java.org.core; //para que todos esten juntos no lo entiendo muy bien 
 
 //A class to represent a Car booking system
 public class Caravana {
-    private int id;
+    private int idA;
     private String modelo;
     private float precioPorDia;
 
     public Caravana (int identificador){ //constructor
-        id = identificador;
+        idA = identificador;
     }
 
     //observadores
+
+    public int getIdA(){
+        return idA;
+    }
 
     public String getModelo(){
         return modelo;
