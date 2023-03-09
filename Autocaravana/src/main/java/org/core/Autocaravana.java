@@ -1,12 +1,12 @@
 package main.java.org.core; //para que todos esten juntos no lo entiendo muy bien 
 
 //A class to represent a Car booking system
-public class Caravana {
+public class Autocaravana {
     private int idA;
     private String modelo;
     private float precioPorDia;
 
-    public Caravana (int identificador){ //constructor
+    public Autocaravana (int identificador){ //constructor
         idA = identificador;
     }
 

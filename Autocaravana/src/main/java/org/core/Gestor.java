@@ -2,20 +2,64 @@ package main.java.org.core;
 
 import java.util.List;
 
-import org.core.Caravana;
+import org.core.Autocaravana;
 import org.core.Reserva;
 
 public class Gestor{
-    List<Caravana> listaCaravana; //= new ArrayList<Caravana>();
-    List<Reserva> listaReserva;
+    private List<Autocaravana> listaAutocaravana; //= new ArrayList<Autocaravana>();
+    private List<Reserva> listaReserva;
 
-    void agregarCaravana(Caravana C){
-        listaCaravana.add(C);
+    public List<Autocaravana> getAutocaravanas(){
+        return listaAutocaravana;
     }
 
-    void eliminarCaravana(Caravana C){
-        boolean existe = listaCaravana.contains(C);
-        if (existe) listaCaravana.remove(C);
-        else System.out.print("Esa caravana no existe en la lista");
+    public List<Reserva> getReservas(){
+        return listaReserva;
+    }
+
+    public void agregarAutocaravana (Autocaravana C){
+        listaAutocaravana.add(C);
+    }
+
+    public void eliminarAutocaravana (Autocaravana C){
+        if(!listaAutocaravana.empty()){
+            boolean existe = listaAutocaravana.contains(C);
+            if (existe) listaAutocaravana.remove(C);
+            else System.out.print("Esa Autocaravana no existe en la lista");
+        }
+        else System.out.print("Lista Vacia");
+    }
+
+    public Autocaravana buscarAutocaravana(int id) {
+
+        for (Autocaravana A : autocaravanas) { //iterador 
+            if (A.getId() == id) {
+                return A;
+            }
+        }
+        return null;
+    }
+
+    //CAMBIAR MUCHAS COSAS
+    public Reserva crearReserva(Autocaravana A, Cliente C, DateTime fechInicio, DateTime fechFin){
+        Reserva R = new Reserva (A, C, fechInicio, fechFin);
+    
+        // Validar que la fecha de inicio sea anterior a la fecha de fin
+        if (fechInicio.isAfter(fechFin)) {
+            throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha de fin.");
+        }
+        
+        // Validar que la autocaravana esté disponible durante el periodo de reserva
+        if (!A.estaDisponible(fechInicio, fechFin)) {
+            throw new IllegalArgumentException("La autocaravana no está disponible para el periodo seleccionado.");
+        }
+        
+        // Agregar la reserva a la lista de reservas de la autocaravana y del cliente
+        A.agregarReserva(R);
+        C.agregarReserva(R);
+        
+        // Devolver la reserva creada
+        return R;
     }
 }
+
