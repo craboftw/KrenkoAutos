@@ -1,8 +1,21 @@
 # dss2022--2023-MACFLG
 
 ### El equipo está compuesto por Francisco López y Miriam Armario.
-Para sistema de control de versiones usaremos GitHub, para seguimiento de proyecto usaremos también GitHub, dado que la opción de Projects es muy útil. La comunicación se realizará en su mayoría cara a cara, y como IDE usaremos Visual Studio Code.
-Nos reuniremos semanalmente para ver los avances del proyecto, siempre teniendo de objetivo entregar cada Hito antes de la fecha límite. Las herramientas a utilizar han sido comentadas anteriormente, a medida que avancemos en los Hitos, iremos describiendo las herramientas que añadamos.
+## Equipo
+El equipo está compuesto por Francisco López y Miriam Armario.
+
+## Herramientas
+Para el sistema de control de versiones utilizaremos GitHub, y para el seguimiento del proyecto también utilizaremos GitHub, aprovechando la utilidad de su opción de Projects. Como IDE usaremos Visual Studio Code.
+
+## Comunicación
+La comunicación entre los miembros del equipo se realizará en su mayoría de forma presencial.
+
+## Reuniones
+Nos reuniremos semanalmente para revisar el avance del proyecto, con el objetivo de entregar cada hito antes de la fecha límite.
+
+## Desarrollo
+A medida que avancemos en los hitos, describiremos las herramientas que se vayan incorporando al proyecto.
+
 
 ```mermaid
 classDiagram
@@ -44,15 +57,17 @@ classDiagram
         + getCliente(): Cliente
         + getFechaInicio(): DateTime
         + getFechaFin(): DateTime
+
+
     }
 
     class GestorAlquilerAutocaravanas {
         - autocaravanas: List<Autocaravana>
         - reservas: List<Reserva>
         + agregarAutocaravana(ac: Autocaravana): void
-        + removerAutocaravana(ac: Autocaravana): void
+        + removerAutocaravana(id Autocaravana: int): void
         + getAutocaravanas(): List<Autocaravana>
-        + buscarAutocaravana(id: int): Autocaravana
+        c+ buscarAutocaravana(id: int): Autocaravana
         + crearReserva(ac: Autocaravana, cl: Cliente, fechaInicio: DateTime, fechaFin: DateTime): Reserva
         + cancelarReserva(r: Reserva): void
         + getReservas(): List<Reserva>
