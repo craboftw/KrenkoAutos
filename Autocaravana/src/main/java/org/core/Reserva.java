@@ -1,12 +1,12 @@
-package main.java.org.core;
+package org.core;
 
 import org.core.Autocaravana; //para poder usar las clases Autocaravanas y cliente creo
 import org.core.Cliente;
 
 public class Reserva{
     private int idR;
-    private Autocaravana caravanita;
-    private Cliente clientito;
+    private Autocaravana caravana;
+    private Cliente cliente;
     private DateTime fechaIni;
     private DateTime fechaFin;
 
@@ -16,8 +16,8 @@ public class Reserva{
 
     public Reserva(int identificador, Autocaravana A, Cliente C, DateTime fechI, DateTime fechF){
         idR = identificador;
-        caravanita = A;
-        clientito = C;
+        caravana = A;
+        cliente = C;
         fechaIni = fechI;
         fechaFin = fechF;
     }
@@ -27,11 +27,11 @@ public class Reserva{
     }
 
     public Autocaravana getAutocaravana(){
-        return caravanita;
+        return caravana;
     }
 
     public Cliente getCliente(){
-        return clientito;
+        return cliente;
     }
 
     public DateTime getFechaIni(){

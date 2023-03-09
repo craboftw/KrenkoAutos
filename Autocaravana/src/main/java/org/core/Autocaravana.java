@@ -1,4 +1,4 @@
-package main.java.org.core; //para que todos esten juntos no lo entiendo muy bien 
+package org.core; //para que todos esten juntos no lo entiendo muy bien 
 
 //A class to represent a Car booking system
 public class Autocaravana {

@@ -67,7 +67,7 @@ classDiagram
         + agregarAutocaravana(ac: Autocaravana): void
         + removerAutocaravana(id Autocaravana: int): void
         + getAutocaravanas(): List<Autocaravana>
-        c+ buscarAutocaravana(id: int): Autocaravana
+        + buscarAutocaravana(id: int): Autocaravana
         + crearReserva(ac: Autocaravana, cl: Cliente, fechaInicio: DateTime, fechaFin: DateTime): Reserva
         + cancelarReserva(r: Reserva): void
         + getReservas(): List<Reserva>

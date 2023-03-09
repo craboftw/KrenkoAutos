@@ -1,4 +1,4 @@
-package main.java.org.core;
+package org.core;
 
 public class Cliente{
 
