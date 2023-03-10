@@ -63,7 +63,15 @@ classDiagram
 
     class GestorAlquilerAutocaravanas {
         - autocaravanas: List<Autocaravana>
+        - clientes: List<Cliente>
         - reservas: List<Reserva>
+        - cantidadClientes(): int
+        - cantidadAutocaravanas(): int
+        - cantidadReservas(): int
+        + crearCliente(nombre: string, apellido: string, email: string): Cliente
+        + cancelarCliente(c: Cliente): void
+        + getClientes(): List<Cliente>
+        + buscarCliente(id: int): Cliente
         + agregarAutocaravana(ac: Autocaravana): void
         + removerAutocaravana(id Autocaravana: int): void
         + getAutocaravanas(): List<Autocaravana>
