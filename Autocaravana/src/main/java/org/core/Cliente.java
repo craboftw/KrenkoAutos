@@ -7,10 +7,12 @@ public class Cliente{
     private String apellido;
     private String email;
 
-    public Cliente(int identificador){ //constructor
-        idC = identificador;
-    }
-
+public Cliente(int identificador, String nom, String ape, String ema){
+    idC = identificador;
+    nombre = nom;
+    apellido = ape;
+    email = ema;
+}
     public int getIdC(){
         return idC;
     }
@@ -25,5 +27,9 @@ public class Cliente{
 
     public String getEmail(){
         return email;
+    }
+
+    public String toString(){
+        return "ID: " + idC + " Nombre: " + nombre + " Apellido: " + apellido + " Email: " + email;
     }
 }
