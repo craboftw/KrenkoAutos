@@ -12,6 +12,10 @@ public class Reserva {
     private LocalDate fechaIni;
     private LocalDate fechaFin;
 
+    private String estado; //pendiente de pensar en curso, cancelada, finalizada
+
+    private float precioTotal;
+
     public Reserva(int identificador) {
         idR = identificador;
     }
@@ -22,6 +26,7 @@ public class Reserva {
         cliente = C;
         fechaIni = fechI;
         fechaFin = fechF;
+        precioTotal = A.getPrecioPorDia()*fechF.getDayOfYear()-fechI.getDayOfYear();
     }
 
     public int getIdR() {
@@ -44,7 +49,15 @@ public class Reserva {
         return fechaFin;
     }
 
+    public float getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
     public String toString() {
-        return "Reserva: " + idR + " " + caravana + " " + cliente + " " + fechaIni + " " + fechaFin;
+        return "Reserva: " + idR + " " + caravana + " " + cliente + " " + fechaIni + " " + fechaFin + " " + precioTotal + " €";
     }
 }

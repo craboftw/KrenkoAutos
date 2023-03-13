@@ -6,11 +6,17 @@ public class Cliente{
     private String nombre;
     private String apellido;
     private String email;
+    private String dni;
 
-public Cliente(int identificador, String nom, String ape, String ema){
-    idC = identificador;
+    private static int cantidadClientes = 0;
+
+
+    public Cliente( String nom, String ape,String dn ,String ema){
+    idC = siguienteCliente();
     nombre = nom;
     apellido = ape;
+    dni = dn;
+
     email = ema;
 }
     public int getIdC(){
@@ -29,7 +35,24 @@ public Cliente(int identificador, String nom, String ape, String ema){
         return email;
     }
 
+    public String getDni(){
+        return dni;
+    }
+
+    public void modificarCliente(String nombre, String apellidos ,String dni, String email){
+        this.nombre = nombre;
+        this.apellido = apellidos;
+        this.email = email;
+        this.dni = dni;
+
+    }
+
+    public int siguienteCliente(){
+        return cantidadClientes++;
+    }
+
+
     public String toString(){
-        return "ID: " + idC + " Nombre: " + nombre + " Apellido: " + apellido + " Email: " + email;
+        return "ID: " + idC + " Nombre: " + nombre + " Apellidos: " + apellido + " DNI: " + dni + " Email: " + email;
     }
 }

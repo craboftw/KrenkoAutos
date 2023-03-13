@@ -7,34 +7,34 @@ public class Main {
     //Creacion y prueba de la clase Autocaravana
     public static void main(String[] args) {
         //*=*=*=*=*=*=*=*=*=*=*=PRUEBA CLASES INDIVIDUALES*=*=*=*=*=*=*=*=*=*=*=*
-        Autocaravana A = new Autocaravana(1, "A", 100);
+        Autocaravana A = new Autocaravana( "A", 100);
         System.out.println("El modelo de la autocaravana es: " + A.getModelo());
         System.out.println("El precio por dia de la autocaravana es: " + A.getPrecioPorDia());
         System.out.println("El id de la autocaravana es: " + A.getIdA());
         System.out.println(" ");
 
-        Autocaravana B = new Autocaravana(2, "B", 200);
+        Autocaravana B = new Autocaravana("B", 200);
         System.out.println("El modelo de la autocaravana es: " + B.getModelo());
         System.out.println("El precio por dia de la autocaravana es: " + B.getPrecioPorDia());
         System.out.println("El id de la autocaravana es: " + B.getIdA());
         System.out.println(" ");
 
-        Autocaravana C = new Autocaravana(3, "C", 300);
+        Autocaravana C = new Autocaravana( "C", 300);
         System.out.println("El modelo de la autocaravana es: " + C.getModelo());
         System.out.println("El precio por dia de la autocaravana es: " + C.getPrecioPorDia());
         System.out.println("El id de la autocaravana es: " + C.getIdA());
         System.out.println(" ");
 
         //Creacion y prueba de la clase Cliente
-        Cliente D = new Cliente(1, "Juan", "Perez", "invetado1@inventig.com");
+        Cliente D = new Cliente( "Juan", "Perez","000000000A", "invetado1@inventig.com");
         System.out.println("El id del cliente es: " + D.getIdC());
         System.out.println(" ");
 
-        Cliente E = new Cliente(2, "Maria", "Gonzalez", "invetado2@inventig.com");
+        Cliente E = new Cliente( "Maria", "Gonzalez","000000000B", "invetado2@inventig.com");
         System.out.println("El id del cliente es: " + E.getIdC());
         System.out.println(" ");
 
-        Cliente F = new Cliente(3, "Pedro", "Martinez", "invetado3@inventig.com");
+        Cliente F = new Cliente( "Pedro", "Martinez","000000000C", "invetado3@inventig.com");
         System.out.println("El id del cliente es: " + F.getIdC());
         System.out.println(" ");
 
@@ -88,6 +88,92 @@ System.out.println(" ");
         }
         System.out.println(" ");
 
+        //Pruebas de modificar las clases y luego imprimir reservas
+        I.modificarCliente(I.buscarCliente(1),"Mario", "Gonzalez", "00000000F","b@be.com");
+        I.modificarAutocaravana(I.buscarAutocaravana(1), "Z", 200);
+        //imprimir la reserva
+        System.out.println(I.buscarReserva(1));
+
+        //imprimir clientes en el gestor
+        System.out.println("Clientes en el gestor ordenados por id Ascendente:");
+        I.ordenarclientesIdAsc();
+        for (Cliente c : I.getClientes()) {
+            System.out.println(c);
+        }
+        System.out.println(" ");
+        System.out.println("Clientes en el gestor ordenados por id Descendente:");
+        I.ordenarclientesIdDesc();
+        for (Cliente c : I.getClientes()) {
+            System.out.println(c);
+        }
+        System.out.println(" ");
+        System.out.println("Clientes en el gestor ordenados por nombre Ascendente:");
+        I.ordenarclientesNombreAsc();
+        for (Cliente c : I.getClientes()) {
+            System.out.println(c);
+        }
+        System.out.println(" ");
+        System.out.println("Clientes en el gestor ordenados por nombre Descendente:");
+        I.ordenarclientesNombreDesc();
+        for (Cliente c : I.getClientes()) {
+            System.out.println(c);
+        }
+        System.out.println(" ");
+
+
+        //imprimir autorcaravanas en el gestor
+        System.out.println("Autocaravanas en el gestor:");
+        for (Autocaravana a : I.getAutocaravanas()) {
+            System.out.println(a);
+        }
+
+
+        //prueba todos los metodos ordenar de Gestor
+
+        System.out.println("Autocaravanas en el gestor ordenadas por id Ascendente:");
+        I.ordenarAutocaravanasIdAsc();
+        for (Autocaravana a : I.getAutocaravanas()) {
+            System.out.println(a);
+        }
+        System.out.println(" ");
+        System.out.println("Autocaravanas en el gestor ordenadas por id Descendente:");
+        I.ordenarAutocaravanasIdDesc();
+        for (Autocaravana a : I.getAutocaravanas()) {
+            System.out.println(a);
+        }
+        System.out.println(" ");
+        System.out.println("Autocaravanas en el gestor ordenadas por modelo Ascendente:");
+        I.ordenarAutocaravanasModeloAsc();
+        for (Autocaravana a : I.getAutocaravanas()) {
+            System.out.println(a);
+        }
+        System.out.println(" ");
+        System.out.println("Autocaravanas en el gestor ordenadas por modelo Descendente:");
+        I.ordenarAutocaravanasModeloDesc();
+        for (Autocaravana a : I.getAutocaravanas()) {
+            System.out.println(a);
+        }
+        System.out.println(" ");
+        System.out.println("Autocaravanas en el gestor ordenadas por precio Ascendente:");
+        I.ordenarAutocaravanasPrecioAsc();
+        for (Autocaravana a : I.getAutocaravanas()) {
+            System.out.println(a);
+        }
+        /*
+        System.out.println(" ");
+        System.out.println("Autocaravanas en el gestor ordenadas por precio Descendente:");
+        I.ordenarAutocaravanasPrecioDesc();
+        for (Autocaravana a : I.getAutocaravanas()) {
+            System.out.println(a);
+        }
+        System.out.println(" ");
+
+        System.out.println("Reservas en el gestor ordenadas por estado Ascendente:");
+        I.ordenarReservasEstadoAsc();
+        for (Reserva r : I.getReservas()) {
+            System.out.println(r);
+        }
+        System.out.println(" ");*/
 
     }
 

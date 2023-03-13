@@ -7,8 +7,11 @@ public class Autocaravana {
     private String modelo;
     private float precioPorDia;
 
-    public Autocaravana (int identificador, String mod, float precio){ //constructor
-        idA = identificador;
+    private static int cantidadCaravanas = 0;
+
+
+    public Autocaravana (String mod, float precio){ //constructor
+        idA = cantidadCaravanas++;
         modelo = mod;
         precioPorDia = precio;
     }
@@ -27,9 +30,12 @@ public class Autocaravana {
         return precioPorDia;
     }
 
-    //metodo para imprimir caravana por pantalla
-
+public void modificarAutocaravana(String mod, float precio){
+        modelo = mod;
+        precioPorDia = precio;
+    }
     public String toString(){
         return "ID: " + idA + " Modelo: " + modelo + " Precio por dia: " + precioPorDia;
     }
 }
+
