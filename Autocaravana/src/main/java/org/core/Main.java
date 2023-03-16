@@ -94,31 +94,7 @@ System.out.println(" ");
         //imprimir la reserva
         System.out.println(I.buscarReserva(1));
 
-        //imprimir clientes en el gestor
-        System.out.println("Clientes en el gestor ordenados por id Ascendente:");
-        I.ordenarclientesIdAsc();
-        for (Cliente c : I.getClientes()) {
-            System.out.println(c);
-        }
-        System.out.println(" ");
-        System.out.println("Clientes en el gestor ordenados por id Descendente:");
-        I.ordenarclientesIdDesc();
-        for (Cliente c : I.getClientes()) {
-            System.out.println(c);
-        }
-        System.out.println(" ");
-        System.out.println("Clientes en el gestor ordenados por nombre Ascendente:");
-        I.ordenarclientesNombreAsc();
-        for (Cliente c : I.getClientes()) {
-            System.out.println(c);
-        }
-        System.out.println(" ");
-        System.out.println("Clientes en el gestor ordenados por nombre Descendente:");
-        I.ordenarclientesNombreDesc();
-        for (Cliente c : I.getClientes()) {
-            System.out.println(c);
-        }
-        System.out.println(" ");
+      
 
 
         //imprimir autorcaravanas en el gestor
@@ -130,35 +106,23 @@ System.out.println(" ");
 
         //prueba todos los metodos ordenar de Gestor
 
-        System.out.println("Autocaravanas en el gestor ordenadas por id Ascendente:");
-        I.ordenarAutocaravanasIdAsc();
-        for (Autocaravana a : I.getAutocaravanas()) {
-            System.out.println(a);
-        }
+
+        //pruebas de estado
+        String s = "Problema";
+        I.addEstado(s);
+        I.buscarReserva(1).asociarestado("Problema");
+        System.out.println("Ver estado de la reserva 1:");
+        System.out.println(I.buscarReserva(1));
         System.out.println(" ");
-        System.out.println("Autocaravanas en el gestor ordenadas por id Descendente:");
-        I.ordenarAutocaravanasIdDesc();
-        for (Autocaravana a : I.getAutocaravanas()) {
-            System.out.println(a);
-        }
+        I.buscarReserva(1).asociarestado("Cancelado");
+        System.out.println("Ver estado de la reserva 1:");
+        System.out.println(I.buscarReserva(1));
         System.out.println(" ");
-        System.out.println("Autocaravanas en el gestor ordenadas por modelo Ascendente:");
-        I.ordenarAutocaravanasModeloAsc();
-        for (Autocaravana a : I.getAutocaravanas()) {
-            System.out.println(a);
-        }
-        System.out.println(" ");
-        System.out.println("Autocaravanas en el gestor ordenadas por modelo Descendente:");
-        I.ordenarAutocaravanasModeloDesc();
-        for (Autocaravana a : I.getAutocaravanas()) {
-            System.out.println(a);
-        }
-        System.out.println(" ");
-        System.out.println("Autocaravanas en el gestor ordenadas por precio Ascendente:");
-        I.ordenarAutocaravanasPrecioAsc();
-        for (Autocaravana a : I.getAutocaravanas()) {
-            System.out.println(a);
-        }
+
+        //I.listaReglasNegocio.add()
+        
+
+
         /*
         System.out.println(" ");
         System.out.println("Autocaravanas en el gestor ordenadas por precio Descendente:");

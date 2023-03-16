@@ -4,6 +4,9 @@ import org.core.Autocaravana; //para poder usar las clases Autocaravanas y clien
 import org.core.Cliente;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Reserva {
     private int idR;
@@ -20,6 +23,8 @@ public class Reserva {
         idR = identificador;
     }
 
+
+
     public Reserva(int identificador, Autocaravana A, Cliente C, LocalDate fechI, LocalDate fechF) {
         idR = identificador;
         caravana = A;
@@ -27,7 +32,18 @@ public class Reserva {
         fechaIni = fechI;
         fechaFin = fechF;
         precioTotal = A.getPrecioPorDia()*fechF.getDayOfYear()-fechI.getDayOfYear();
+        estado = "pendiente";
     }
+
+    //añadir listaEstados de reserva
+    
+
+    public void asociarestado(String estado) {
+            this.estado = estado;
+        
+    }
+
+    
 
     public int getIdR() {
         return idR;
@@ -57,7 +73,13 @@ public class Reserva {
         return estado;
     }
 
-    public String toString() {
-        return "Reserva: " + idR + " " + caravana + " " + cliente + " " + fechaIni + " " + fechaFin + " " + precioTotal + " €";
+    public void setPrecioTotal(float precioTotal) {
+        this.precioTotal = precioTotal;
     }
+
+    public String toString() {
+        return "Reserva: " + idR + " " + caravana + " " + cliente + " " + fechaIni + " " + fechaFin + " " + precioTotal + " €" + " " + estado;
+    }
+
+    
 }
