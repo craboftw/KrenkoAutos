@@ -16,7 +16,6 @@ public class Cliente{
     nombre = nom;
     apellido = ape;
     dni = dn;
-
     email = ema;
 }
     public int getIdC(){
@@ -52,7 +51,14 @@ public class Cliente{
     }
 
 
-    public String toString(){
-        return "ID: " + idC + " Nombre: " + nombre + " Apellidos: " + apellido + " DNI: " + dni + " Email: " + email;
+    public String toString() {
+        return "Cliente{" +
+                "idC=" + idC +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", dni='" + dni + '\'' +
+                '}';
     }
 }
+
