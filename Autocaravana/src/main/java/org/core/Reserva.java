@@ -1,58 +1,45 @@
 package org.core;
 
-import org.core.Autocaravana; //para poder usar las clases Autocaravanas y cliente creo
-import org.core.Cliente;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Reserva {
+public class Reserva implements ReglasNegocio{
     private int idR;
     private Autocaravana caravana;
     private Cliente cliente;
     private LocalDate fechaIni;
     private LocalDate fechaFin;
-
     private String estado;
-
-    private ReglasNegocio RN;
 
     private static List<String> listaEstados = new ArrayList<String>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
     private float precioTotal;
 
     private static int cantidadReservas = 0;
 
-    public Reserva(int identificador) {
-        idR = identificador;
-    }
-
-
-
-    public Reserva(int identificador, Autocaravana A, Cliente C, LocalDate fechI, LocalDate fechF) {
+    public Reserva(int identificador, Autocaravana A, Cliente C, String fechI, String fechF) {
 
         //Comprobaciones de la caravana
-        if (RN.comprobarCaravana(A) == false) {
+        if (comprobarCaravana(A) == false) {
             System.out.println("La caravana no está disponible");
             throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
         }
         caravana = A;
 
         //Comprobaciones del cliente
-        if (RN.comprobarCliente(C) == false) {
+        if (comprobarCliente(C) == false) {
             System.out.println("El cliente no cumple las condiciones");
             throw new IllegalArgumentException("El cliente no cumple las condiciones");
         }
         cliente = C;
-        fechaIni = fechI;
-        fechaFin = fechF;
-        if (RN.comprobarFecha(fechI, fechF, A, C) == false) {
+        fechaIni = LocalDate.parse(fechI);
+        fechaFin = LocalDate.parse(fechF);
+        if (comprobarFecha(fechaIni, fechaFin, A, C) == false) {
             System.out.println("Las fechas no son compatibles");
             throw new IllegalArgumentException("Las fechas no son compatibles");
         }
-
-        precioTotal = RN.calculaPrecioTotal(A, C, fechI, fechF);
+        precioTotal = calculaPrecioTotal(A, C, fechaIni, fechaFin);
         estado = "pendiente";
         idR = siguienteReserva();
 

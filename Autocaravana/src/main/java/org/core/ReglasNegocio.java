@@ -7,17 +7,9 @@ public interface ReglasNegocio{
     public default float calculaPrecioTotal(Autocaravana A, Cliente C, LocalDate fechaIni, LocalDate fechaFin)
     //devuelve el precio total de la reserva;
     {
-        calculaPrecioTotal(A, fechaIni, fechaFin);
+        //penalizacion por multa de un 10%, si la caravana tiene mas de 700000 km se descuenta un 5% del precio total
+        return (float) (A.getPrecioPorDia() * (fechaFin.toEpochDay() - fechaIni.toEpochDay()) * (1 + (C.getNumeroMultas() * 0.1)) * (1 - (A.getKilometraje() > 700000 ? 0.05 : 0)));
     }
-
-
-    public default float calculaPrecioTotal(Autocaravana A, LocalDate fechaIni, LocalDate fechaFin)
-    //devuelve el precio total de la reserva sin tener en cuenta el cliente;
-    {
-        int dias = (int) (fechaFin.toEpochDay() - fechaIni.toEpochDay());
-        return dias * A.getPrecioPorDia();
-    }
-
 
 
 
@@ -62,23 +54,52 @@ public interface ReglasNegocio{
     }
 
     //Funciones que calculan la multa por incumplimiento.
-    public default float calcularMulta(Reserva R) {
+    public default float calcularMulta(Reserva R)
+    //Calcula la multa por incumplimiento de la reserva
+    {
     int diasRetraso = (int) (LocalDate.now().toEpochDay() - R.getFechaFin().toEpochDay());
     return R.getAutocaravana().getPrecioPorDia() * diasRetraso * (float) 0.1;
     }
 
     //Funciones que comprueban si la caravana y el cliente son compatibles para la reserva
-    public default boolean comprobarCaravana(Autocaravana A) {return A.getKilometraje() <= 10000000;}
+    public default boolean comprobarCaravana(Autocaravana A)
+    //comprueba si una caravana es valida para la reserva
+    {return A.getKilometraje() <= 10000000;}
 
-    public default boolean comprobarCliente(Cliente c){ return (c.getedad() >= 18) & (c.getedad() <= 80);
+    public default boolean comprobarCliente(Cliente c)
+    //comprueba si un cliente es valido para la reserva
+    { return (c.getedad() >= 18) & (c.getedad() <= 80 & c.getNumeroMultas()<2);
 
     }
 
     //funcion que compruebe si la caravana, el cliente y las fechas son compatibles
-    public default boolean comprobarFecha(LocalDate fechaIni, LocalDate fechaFin, Autocaravana A, Cliente C) {return comprobarFecha(fechaIni,fechaFin);}
-    public default boolean comprobarFecha(LocalDate fechaIni, LocalDate fechaFin,Autocaravana A) {return comprobarFecha(fechaIni,fechaFin);}
-    public default boolean comprobarFecha(LocalDate fechaIni, LocalDate fechaFin,Cliente C) {return comprobarFecha(fechaIni,fechaFin);}
-    public default boolean comprobarFecha(LocalDate fechaIni, LocalDate fechaFin) {return fechaIni.isBefore(fechaFin);}
-    public default boolean comprobarMatricula(String matricula) {return matricula.matches("[0-9]{4}[A-D,F-H,J-N,P-T,V-Z]{3}") ;}
-    public default boolean comprobarKilometraje(int kilometraje) {return kilometraje >= 0;}
+    public default boolean comprobarFecha(LocalDate fechaIni, LocalDate fechaFin, Autocaravana A, Cliente C)
+    //comprueba si una caravana y un cliente son validos para la reserva.
+    {
+        return (fechaIni.isBefore(fechaFin)) & (fechaIni.isAfter(LocalDate.now())) & (fechaFin.isAfter(LocalDate.now())) & comprobarCaravana(A) & comprobarCliente(C);
+    }
+
+    public static boolean comprobarMatricula(String matricula) {
+        String regex = "^[0-9]{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$"; // Expresión regular para matrículas de turismos
+
+        // Verificar si la matrícula coincide con la expresión regular
+        if (!matricula.matches(regex)) {
+            return false;
+        }
+
+        // Verificar que la matrícula tenga una letra final válida
+        String letrasValidas = "BCDFGHJKLMNPRSTVWXYZ";
+        if (!letrasValidas.contains(matricula.substring(7))) {
+            return false;
+        }
+
+        // Verificar que el número de matrícula sea válido
+        int numMatricula = Integer.parseInt(matricula.substring(0, 4));
+        if (numMatricula == 0 || numMatricula > 9999) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

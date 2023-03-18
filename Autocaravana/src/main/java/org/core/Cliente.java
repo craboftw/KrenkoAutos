@@ -2,7 +2,7 @@ package org.core;
 
 import java.time.LocalDate;
 
-public class Cliente {
+public class Cliente implements ReglasNegocio{
 
     private int idC;
     private String nombre;
@@ -16,15 +16,15 @@ public class Cliente {
     private static int cantidadClientes = 0;
 
 
-    public Cliente(String nom, String ape, LocalDate fecha, String dn, String ema) {
+    public Cliente(String nom, String ape, String fecha, String dn, String ema) {
         idC = siguienteCliente();
         nombre = nom;
         apellido = ape;
-        fechaNacimiento = fecha;
+        fechaNacimiento = LocalDate.parse(fecha);
         dni = dn;
         email = ema;
         reservasRealizadas = 0;
-        multasRealizadas = 0;
+        multas = 0;
 
     }
 
@@ -64,7 +64,7 @@ public class Cliente {
     }
 
     public int getNumeroMultas() {
-        return multasRealizadas;
+        return multas;
     }
 
     public void modificarCliente(String nombre, String apellidos, String dni, String email) {
@@ -81,23 +81,18 @@ public class Cliente {
 
 
     public String toString() {
-        return "Cliente{" +
+        String impresion= "Cliente{" +
                 "idC=" + idC +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", email='" + email + '\'' +
                 ", dni='" + dni + '\'' +
-                '}';
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", reservasRealizadas=" + reservasRealizadas;
+        if(multas>0)
+            impresion += ", multas=" + multas;
+        return impresion;
     }
 
-    public int getedad() {
-        LocalDate hoy = LocalDate.now();
-        int edad = hoy.getYear() - fechaNacimiento.getYear();
-        if (hoy.getMonthValue() < fechaNacimiento.getMonthValue()) {
-            edad--;
-        } else if (hoy.getMonthValue() == fechaNacimiento.getMonthValue() && hoy.getDayOfMonth() < fechaNacimiento.getDayOfMonth()) {
-            edad--;
-        }
-        return edad;
-    }
+
 }
