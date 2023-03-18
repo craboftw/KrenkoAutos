@@ -10,6 +10,7 @@ public class Autocaravana {
     private int kilometraje;
     private static int cantidadCaravanas = 0;
     private static int cantidadCaravanasAlquiladas = 0;
+    private static ReglasNegocio RN;
 
 
     public Autocaravana (String mod, float precio, String matricula, int kilometraje){
@@ -18,7 +19,7 @@ public class Autocaravana {
         precioPorDia = precio;
 
         //Comprobar que una matricula es correcta, si no es correcta, lanzar excepcion
-        if(matricula.length() != 7){
+        if(RN.comprobarMatricula(matricula) == false){
             throw new IllegalArgumentException("La matricula debe tener 7 caracteres");
         }
 
@@ -89,7 +90,6 @@ public class Autocaravana {
         public void QuitarCaravanaReservada(){
             cantidadCaravanasAlquiladas--;
         }
-
 
     public String toString(){
         return "Autocaravana: " + idA + " " + modelo + " " + precioPorDia + " " + matricula + " " + kilometraje;

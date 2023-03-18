@@ -9,7 +9,6 @@ public interface Repositorio {
     public Collection<Reserva> cargarReservas();
     public Collection<String> cargarEstados();
     public ReglasNegocio cargarReglasNegocio();
-    public Object cargar(String nombre);
     public Collection<Object> cargarTodos();
     public void guardar(Object o);
     public void guardarColeccionEstados(Collection<String> listaEstados);

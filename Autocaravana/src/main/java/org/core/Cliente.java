@@ -1,44 +1,73 @@
 package org.core;
 
-public class Cliente{
+import java.time.LocalDate;
+
+public class Cliente {
 
     private int idC;
     private String nombre;
     private String apellido;
     private String email;
     private String dni;
+    private LocalDate fechaNacimiento;
+    private int reservasRealizadas;
+    private int multas;
 
     private static int cantidadClientes = 0;
 
 
-    public Cliente( String nom, String ape,String dn ,String ema){
-    idC = siguienteCliente();
-    nombre = nom;
-    apellido = ape;
-    dni = dn;
-    email = ema;
-}
-    public int getIdC(){
+    public Cliente(String nom, String ape, LocalDate fecha, String dn, String ema) {
+        idC = siguienteCliente();
+        nombre = nom;
+        apellido = ape;
+        fechaNacimiento = fecha;
+        dni = dn;
+        email = ema;
+        reservasRealizadas = 0;
+        multasRealizadas = 0;
+
+    }
+
+    public int getIdC() {
         return idC;
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
 
-    public String getApellido(){
+    public String getApellido() {
         return apellido;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public String getDni(){
+    public String getDni() {
         return dni;
     }
 
-    public void modificarCliente(String nombre, String apellidos ,String dni, String email){
+    public int getedad() {
+        LocalDate hoy = LocalDate.now();
+        int edad = hoy.getYear() - fechaNacimiento.getYear();
+        if (hoy.getMonthValue() < fechaNacimiento.getMonthValue()) {
+            edad--;
+        } else if (hoy.getMonthValue() == fechaNacimiento.getMonthValue() && hoy.getDayOfMonth() < fechaNacimiento.getDayOfMonth()) {
+            edad--;
+        }
+        return edad;
+    }
+
+    public int getNumeroReservasRealizadas() {
+        return reservasRealizadas;
+    }
+
+    public int getNumeroMultas() {
+        return multasRealizadas;
+    }
+
+    public void modificarCliente(String nombre, String apellidos, String dni, String email) {
         this.nombre = nombre;
         this.apellido = apellidos;
         this.email = email;
@@ -46,7 +75,7 @@ public class Cliente{
 
     }
 
-    public int siguienteCliente(){
+    public int siguienteCliente() {
         return cantidadClientes++;
     }
 
@@ -60,5 +89,15 @@ public class Cliente{
                 ", dni='" + dni + '\'' +
                 '}';
     }
-}
 
+    public int getedad() {
+        LocalDate hoy = LocalDate.now();
+        int edad = hoy.getYear() - fechaNacimiento.getYear();
+        if (hoy.getMonthValue() < fechaNacimiento.getMonthValue()) {
+            edad--;
+        } else if (hoy.getMonthValue() == fechaNacimiento.getMonthValue() && hoy.getDayOfMonth() < fechaNacimiento.getDayOfMonth()) {
+            edad--;
+        }
+        return edad;
+    }
+}
