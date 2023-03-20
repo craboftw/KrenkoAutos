@@ -16,14 +16,14 @@ public class Servidor implements Repositorio , ReglasNegocio, ReglasAutocaravana
     private final String ESTADOS_FILE = "estados.txt";
     private final String REGLASNEGOCIO_FILE = "reglasnegocio.txt";
 
-    private static final List<String> listaEstados = new ArrayList<>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
+    private static List<String> listaEstados = new ArrayList<>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
 
     public static List<String> getListaEstadoReservas() {
         return listaEstados;
     }
     public static void nuevoestado(String estado) {
-        if (!estado.isEmpty() ) {
-            Servidor.getListaEstadoReservas().add(estado);
+        if (!estado.isEmpty() & !listaEstados.contains(estado)) {
+            listaEstados.add(estado);
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
         }
@@ -53,34 +53,46 @@ public class Servidor implements Repositorio , ReglasNegocio, ReglasAutocaravana
 
     @Override
     public void cargarReservas() {
-        try (Scanner scanner = new Scanner(new File(RESERVAS_FILE))) {
-            while (scanner.hasNextLine()) {
-                new Reserva(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
+        try {Scanner scanner = new Scanner(new File(RESERVAS_FILE));
+            while (scanner.hasNextLine()) { //Idr no contenid en ninguna linea en campo[0] convertido a entero
+                String linea = scanner.nextLine();
+                boolean encontrado = false;
+                for (Reserva R : Reserva.getListaReservas())
+                {
+                    if (Integer.parseInt(linea.split(";")[0]) == R.getIdR()) {
+                        encontrado = true;
+                    }
+                }
+
+                if (encontrado) {
+                    new Reserva(linea);
+                }
+            }}
+        catch (FileNotFoundException e) {
             // Archivo no encontrado, lista vacia
         }
-
     }
 
     @Override
     public void cargarEstados() {
         try {
             Scanner scanner = new Scanner(new File(ESTADOS_FILE));
-                String linea = scanner.nextLine().replaceAll("[\\[\\]]", "");
+            while (scanner.hasNextLine()) {
 
-                List<String> estadosList = Arrays.asList(linea.split(","));
-                for (String estado : estadosList)
-                {
-                    Reserva.nuevoestado(estado);
-                }
+                String linea = scanner.nextLine();
+                System.out.println(linea);
+                if (!listaEstados.contains(linea))
+                    listaEstados.add(linea);
+            }
+            System.out.println(listaEstados);
 
-        }catch (NoSuchElementException e) {
+        } catch (NoSuchElementException | FileNotFoundException e) {
             // Archivo no encontrado, lista vacia
-        } catch (FileNotFoundException e) {
-
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public void cargarTodos() {
@@ -131,8 +143,11 @@ public class Servidor implements Repositorio , ReglasNegocio, ReglasAutocaravana
     }
 
     @Override
-    public void guardarReservas(Collection<Reserva> R) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(RESERVAS_FILE))) {
+    public void guardarReservas(Collection<Reserva> R) throws IOException {
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter(RESERVAS_FILE, true))) {
+            //Borro todo su contenido
+            pw.print("");
             for (Reserva reserva : R) {
                 pw.println(reserva.getIdR() + ";" + reserva.getAutocaravana().getIdA() + ";" + reserva.getCliente().getDni()
                         + ";" + reserva.getFechaIni() + ";" + reserva.getFechaFin() + ";" + reserva.getEstadoReserva());
@@ -140,6 +155,10 @@ public class Servidor implements Repositorio , ReglasNegocio, ReglasAutocaravana
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void cancelarReserva(Reserva reserva) {
+        reserva.asociarestado("Cancelada");
     }
 
 

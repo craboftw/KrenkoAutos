@@ -2,4 +2,5 @@ Pendiente
 Cancelada
 Finalizada
 En curso
-Pendiente
+Busca y capture
+

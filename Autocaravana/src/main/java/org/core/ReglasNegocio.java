@@ -1,6 +1,9 @@
 package org.core;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public interface ReglasNegocio{
 
@@ -14,7 +17,24 @@ public interface ReglasNegocio{
         return (float) (A.getPrecioPorDia() * (fechaFin.toEpochDay() - fechaIni.toEpochDay()) * (1 + (C.getNumeroMultas() * 0.1)) * (1 - (A.getKilometraje() > 700000 ? 0.05 : 0)));
     }
 
+    static void addEstado(String estado){
+        listaEstados.add(estado);
+    }
 
+    default void eliminarEstado(String estado)
+    {
+        listaEstados.remove(estado);
+    }
+    default boolean comprobarCambioEstado(Reserva R, String estado)
+            //Esta funcion comprueba si se puede cambiar el estado de la reserva
+    {
+        if(estado.equals("En curso")) //si el estado es en curso, la fecha de inicio debe ser hoy o antes
+            return R.getFechaIni().isBefore(LocalDate.now()) | R.getFechaIni().isEqual(LocalDate.now());
+        else if(estado.equals("Finalizada")) //si el estado es finalizada, la fecha de fin debe ser hoy o antes
+            return R.getEstadoReserva()!= "Pendiente";
+        else
+        return listaEstados.contains(estado);
+    }
 
     default boolean condicionesCancelacion(Reserva R)
             //Comprobar si se permite cancelar la reserva;

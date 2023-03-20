@@ -2,7 +2,6 @@ package org.core;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Reserva{
@@ -46,18 +45,21 @@ public class Reserva{
         estadoReserva = "pendiente";
         idR = siguienteReserva();
         listaReservas.add(this);
-
     }
 
     public Reserva(String cadena) {
+
         String[] campos = cadena.split(";");
-        idR = Integer.parseInt(campos[0]);
-        caravana = Autocaravana.buscarAutocaravana(Integer.parseInt(campos[1]));
-        cliente = Cliente.buscarCliente(campos[2]) ;
-        fechaIni = LocalDate.parse(campos[3]);
-        fechaFin = LocalDate.parse(campos[4]);
-        estadoReserva = campos[5];
-        listaReservas.add(this);
+
+            idR = Integer.parseInt(campos[0]);
+            caravana = Autocaravana.buscarAutocaravana(Integer.parseInt(campos[1]));
+            cliente = Cliente.buscarCliente(campos[2]) ;
+            fechaIni = LocalDate.parse(campos[3]);
+            fechaFin = LocalDate.parse(campos[4]);
+            estadoReserva = campos[5];
+            listaReservas.add(this);
+            System.out.println("Error al leer el fichero");
+
 
     }
 
@@ -116,7 +118,7 @@ public class Reserva{
     //añadir listaEstados de reserva
 
     public void asociarestado(String estado) {
-        if (!Servidor.getListaEstadoReservas().contains(estado)) {
+        if (servidor.comprobarCambioEstado(this, estado)) {
             this.estadoReserva = estado;
         }
     }
