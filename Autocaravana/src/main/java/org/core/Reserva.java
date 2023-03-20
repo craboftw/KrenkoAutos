@@ -13,8 +13,6 @@ public class Reserva{
     private final LocalDate fechaFin;
     private String estadoReserva;
 
-    private static final List<String> listaEstados = new ArrayList<>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
-
     private float precioTotal;
 
     private static final Servidor servidor = new Servidor();
@@ -113,25 +111,16 @@ public class Reserva{
 
     }
 
-    public static List<String> getListaEstadoReservas() {
-        return listaEstados;
-    }
+    
 
     //añadir listaEstados de reserva
 
     public void asociarestado(String estado) {
-        if (!listaEstados.contains(estado)) {
+        if (!Servidor.getListaEstadoReservas().contains(estado)) {
             this.estadoReserva = estado;
         }
     }
 
-    public static void nuevoestado(String estado) {
-        if (!estado.isEmpty() ) {
-            listaEstados.add(estado);
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
-    }
 
     public int getIdR() {
         return idR;

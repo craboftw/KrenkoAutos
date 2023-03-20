@@ -16,6 +16,19 @@ public class Servidor implements Repositorio , ReglasNegocio, ReglasAutocaravana
     private final String ESTADOS_FILE = "estados.txt";
     private final String REGLASNEGOCIO_FILE = "reglasnegocio.txt";
 
+    private static final List<String> listaEstados = new ArrayList<>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
+
+    public static List<String> getListaEstadoReservas() {
+        return listaEstados;
+    }
+    public static void nuevoestado(String estado) {
+        if (!estado.isEmpty() ) {
+            Servidor.getListaEstadoReservas().add(estado);
+        } else {
+            throw new IllegalArgumentException("El estado no es correcto");
+        }
+    }
+
     @Override
     public void cargarAutocaravanas() {
         try (Scanner scanner = new Scanner(new File(AUTOCARAVANAS_FILE))) {

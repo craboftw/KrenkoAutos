@@ -3,6 +3,9 @@ package org.core;
 import java.time.LocalDate;
 
 public interface ReglasNegocio{
+
+    static List<String> listaEstados = new ArrayList<>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
+   
     //Funciones que calculan el precio total de la reserva
     default float calculaPrecioTotal(Autocaravana A, Cliente C, LocalDate fechaIni, LocalDate fechaFin)
     //devuelve el precio total de la reserva;
