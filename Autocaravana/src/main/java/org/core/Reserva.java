@@ -75,6 +75,43 @@ public class Reserva{
         }
         return null;
     }
+    public static List<Reserva> buscarReserva(String info, String tipo) {
+        List<Reserva> lista = new ArrayList<>();
+        switch (tipo)
+        {
+            case "cliente":
+                for (Reserva r : listaReservas) {
+                    if (r.getCliente().getDni().equals(info)) {
+                        lista.add(r);
+                    }
+                }
+                break;
+            case "matricula":
+                for (Reserva r : listaReservas) {
+                    if (r.getAutocaravana().getMatricula().equals(info)) {
+                        lista.add(r);
+                    }
+                }
+                break;
+        case "estado":
+            for (Reserva r : listaReservas) {
+                if (r.getEstadoReserva().equals(info)) {
+                    lista.add(r);
+                }
+            }
+            break;
+            case "fecha":
+                for (Reserva r : listaReservas) {
+                    LocalDate fecha = LocalDate.parse(info);
+                    if (r.getFechaIni().isAfter(fecha) || r.getFechaFin().isBefore(fecha)) {
+                        lista.add(r);
+                    }
+                }
+                break;
+        }
+        return lista;
+
+    }
 
     public static List<String> getListaEstadoReservas() {
         return listaEstados;
@@ -83,15 +120,13 @@ public class Reserva{
     //añadir listaEstados de reserva
 
     public void asociarestado(String estado) {
-        if (listaEstados.contains(estado)) {
+        if (!listaEstados.contains(estado)) {
             this.estadoReserva = estado;
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
         }
     }
 
     public static void nuevoestado(String estado) {
-        if (!listaEstados.contains(estado) && !estado.isEmpty() ) {
+        if (!estado.isEmpty() ) {
             listaEstados.add(estado);
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
@@ -130,6 +165,35 @@ public class Reserva{
     public int siguienteReserva() {
         return listaReservas.size();
     }
+    public void checkOut() {
+        switch (estadoReserva)
+        {
+            case "Pendiente":
+                estadoReserva = "Finalizada";
+                break;
+            case "Cancelada":
+                System.out.println("La reserva está cancelada");
+                break;
+            case "Finalizada":
+                System.out.println("La reserva ya está finalizada");
+                break;
+            case "En curso":
+                if (LocalDate.now().isAfter(fechaFin)) {
+                    precioTotal += servidor.calcularMulta(this);
+                }
+                if (LocalDate.now().isBefore(fechaFin) & servidor.condicionesFinalizacion(this)) {
+                    precioTotal += servidor.calcularTasaFinalizacion(this);
+                }
+                if (LocalDate.now().isBefore(fechaFin) & !servidor.condicionesFinalizacion(this)) {
+                    System.out.println("No se puede finalizar la reserva");
+                    break;
+                }
+                else {
+                    estadoReserva = "Finalizada";
+                }
+                break;
+        }
+}
 
     public String toString() {
         // usar String.format() para dar formato a la salida
@@ -156,6 +220,11 @@ public class Reserva{
                 "═".repeat(13 + String.valueOf(idR).length()));
         return output;
     }
+
+
+
+
+
 
 
 

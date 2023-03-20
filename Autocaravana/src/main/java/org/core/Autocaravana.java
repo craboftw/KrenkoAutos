@@ -9,7 +9,9 @@ public class Autocaravana{
     private final int idA;
     private String modelo;
     private float precioPorDia;
-    private final String matricula;
+    private String matricula;
+
+    private int plazas;
     private int kilometraje;
     private static int cantidadCaravanas = 0;
     private static int cantidadCaravanasAlquiladas = 0;
@@ -21,7 +23,7 @@ public class Autocaravana{
 
 
 
-    public Autocaravana (String mod, float precio, String matricula, int kilometraje){
+    public Autocaravana (String mod, float precio,int plazas, String matricula, int kilometraje){
         idA = siguienteCaravana();
         modelo = mod;
         precioPorDia = precio;
@@ -36,6 +38,9 @@ public class Autocaravana{
 
         if(precioPorDia < 0){
             throw new IllegalArgumentException("El precio no puede ser negativo");
+        }
+        if(plazas < 0){
+            throw new IllegalArgumentException("Las plazas no pueden ser negativas");
         }
 
         if(kilometraje < 0){
@@ -53,8 +58,9 @@ public class Autocaravana{
         modelo = campos[1];
         precioPorDia = Float.parseFloat(campos[2]);
         matricula = campos[3];
-        kilometraje = Integer.parseInt(campos[4]);
-        estado = campos[5];
+        plazas = Integer.parseInt(campos[4]);
+        kilometraje = Integer.parseInt(campos[5]);
+        estado = campos[6];
         listaAutocaravanas.add(this);
     }
 
@@ -67,9 +73,13 @@ public class Autocaravana{
         return null;
     }
 
+
+
     public static List<Autocaravana> getListaAutocaravanas() {
         return listaAutocaravanas;
     }
+
+
 
     private int siguienteCaravana() {
         return listaAutocaravanas.size();
@@ -161,5 +171,12 @@ public class Autocaravana{
     }
 
 
+    public int getCapacidad() {
+        return plazas;
+    }
+
+    public int getPlazas() {
+        return plazas;
+    }
 }
 

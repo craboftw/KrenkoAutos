@@ -133,17 +133,19 @@ public class Cliente{
         return listaClientes;
     }
 
-    public static void  modificarCliente(Cliente cliente, String nom, String ape, String telef, String fecha, String dn, String ema) {
+
+
+    public void  modificarCliente(String nom, String ape, String telef, String fecha, String dn, String ema){
         if (nom.isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacio");
         }
-        cliente.nombre = nom;
+        nombre = nom;
         if (ape.isEmpty()) {
             throw new IllegalArgumentException("El apellido no puede estar vacio");
         }
-        cliente.apellido = ape;
+        apellido = ape;
         try {
-            cliente.fechaNacimiento = LocalDate.parse(fecha);
+            fechaNacimiento = LocalDate.parse(fecha);
         } catch (Exception e) {
             throw new IllegalArgumentException("La fecha no es correcta");
         }
@@ -151,14 +153,15 @@ public class Cliente{
         if (dn.isEmpty()) {
             throw new IllegalArgumentException("El DNI no puede estar vacio");
         }
-        if (listaClientes.stream().anyMatch(c -> c.getDni().equals(dn) && c.getIdC() != cliente.getIdC())) {
+        if (listaClientes.stream().anyMatch(c -> c.getDni().equals(dn) && c.getIdC() != getIdC())) {
             throw new IllegalArgumentException("El DNI ya existe");
         }
-        cliente.dni = dn;
+
+        dni = dn;
 
         try {
             if (telef.isEmpty()) throw new IllegalArgumentException("El telefono no puede estar vacio");
-            if (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telef) && c.getIdC() != cliente.getIdC())) {
+            if (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telef) && c.getIdC() != getIdC())) {
                 throw new IllegalArgumentException("El telefono ya existe");
             }
         }
@@ -167,13 +170,11 @@ public class Cliente{
             throw new IllegalArgumentException("El telefono no es correcto");
         }
 
-        cliente.telefono = telef;
-        cliente.email = ema;
+        telefono = telef;
+        email = ema;
         if (dn.isEmpty()) {
             throw new IllegalArgumentException("El DNI no es correcto");
         }
-        cliente.reservasRealizadas = 0;
-        cliente.multas = 0;
     }
 
     public int siguienteCliente() {

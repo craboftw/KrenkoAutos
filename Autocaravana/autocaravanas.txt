@@ -1,2 +1,1 @@
-0;Vito;2.0;0001BCD;120000;Disponible
-1;Berlingo;2.0;0001MDM;120000;Disponible
+0;0001MDM;10.0;4020PKT;0;0;Disponible
