@@ -1,31 +1,93 @@
 package org.core;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Cliente implements ReglasNegocio{
+public class Cliente{
 
-    private int idC;
+    private final int idC;
     private String nombre;
     private String apellido;
+
+    private String telefono;
     private String email;
     private String dni;
     private LocalDate fechaNacimiento;
     private int reservasRealizadas;
     private int multas;
 
-    private static int cantidadClientes = 0;
+    private static final Servidor servidor = new Servidor();
+
+    private static final List<Cliente> listaClientes = new ArrayList<>();
 
 
-    public Cliente(String nom, String ape, String fecha, String dn, String ema) {
+    public Cliente(String nom, String ape,String telef, String fecha, String dn, String ema) {
         idC = siguienteCliente();
+        if (nom.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
+        }
         nombre = nom;
+        if (ape.isEmpty()) {
+            throw new IllegalArgumentException("El apellido no puede estar vacio");
+        }
         apellido = ape;
-        fechaNacimiento = LocalDate.parse(fecha);
+        try {
+            fechaNacimiento = LocalDate.parse(fecha);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("La fecha no es correcta");
+        }
+
+        if (dn.isEmpty()) {
+            throw new IllegalArgumentException("El DNI no puede estar vacio");
+        }
+        if (listaClientes.stream().anyMatch(c -> c.getDni().equals(dn))) {
+            throw new IllegalArgumentException("El DNI ya existe");
+        }
         dni = dn;
+
+        try {
+            if (telef.isEmpty()) throw new IllegalArgumentException("El telefono no puede estar vacio");
+            if (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telef))) {
+                throw new IllegalArgumentException("El telefono ya existe");
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            throw new IllegalArgumentException("El telefono no es correcto");
+        }
+
+        telefono = telef;
         email = ema;
+        if (dn.isEmpty()) {
+            throw new IllegalArgumentException("El DNI no es correcto");
+        }
         reservasRealizadas = 0;
         multas = 0;
+        listaClientes.add(this);
 
+    }
+
+    public Cliente(String campo) {
+        String[] campos = campo.split(",");
+        idC = Integer.parseInt(campos[0]);
+        nombre = campos[1];
+        apellido = campos[2];
+        telefono = campos[3];
+        fechaNacimiento = LocalDate.parse(campos[4]);
+        dni = campos[5];
+        email = campos[6];
+        reservasRealizadas = Integer.parseInt(campos[7]);
+        multas = Integer.parseInt(campos[8]);
+        listaClientes.add(this);
+    }
+
+    public static Cliente buscarCliente(int i) {
+        return listaClientes.stream().filter(c -> c.getIdC() == i).findFirst().orElse(null);
+    }
+
+    public static Cliente buscarCliente(String dni) {
+        return listaClientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(null);
     }
 
     public int getIdC() {
@@ -67,32 +129,101 @@ public class Cliente implements ReglasNegocio{
         return multas;
     }
 
-    public void modificarCliente(String nombre, String apellidos, String dni, String email) {
-        this.nombre = nombre;
-        this.apellido = apellidos;
-        this.email = email;
-        this.dni = dni;
+    public static List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
 
+    public static void  modificarCliente(Cliente cliente, String nom, String ape, String telef, String fecha, String dn, String ema) {
+        if (nom.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
+        }
+        cliente.nombre = nom;
+        if (ape.isEmpty()) {
+            throw new IllegalArgumentException("El apellido no puede estar vacio");
+        }
+        cliente.apellido = ape;
+        try {
+            cliente.fechaNacimiento = LocalDate.parse(fecha);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("La fecha no es correcta");
+        }
+
+        if (dn.isEmpty()) {
+            throw new IllegalArgumentException("El DNI no puede estar vacio");
+        }
+        if (listaClientes.stream().anyMatch(c -> c.getDni().equals(dn) && c.getIdC() != cliente.getIdC())) {
+            throw new IllegalArgumentException("El DNI ya existe");
+        }
+        cliente.dni = dn;
+
+        try {
+            if (telef.isEmpty()) throw new IllegalArgumentException("El telefono no puede estar vacio");
+            if (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telef) && c.getIdC() != cliente.getIdC())) {
+                throw new IllegalArgumentException("El telefono ya existe");
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            throw new IllegalArgumentException("El telefono no es correcto");
+        }
+
+        cliente.telefono = telef;
+        cliente.email = ema;
+        if (dn.isEmpty()) {
+            throw new IllegalArgumentException("El DNI no es correcto");
+        }
+        cliente.reservasRealizadas = 0;
+        cliente.multas = 0;
     }
 
     public int siguienteCliente() {
-        return cantidadClientes++;
+        return listaClientes.size();
     }
 
 
     public String toString() {
-        String impresion= "Cliente{" +
-                "idC=" + idC +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", email='" + email + '\'' +
-                ", dni='" + dni + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", reservasRealizadas=" + reservasRealizadas;
-        if(multas>0)
-            impresion += ", multas=" + multas;
-        return impresion;
+        String output = String.format("╔═%s═╗\n"
+                        + "║ CLIENTE %d\n"
+                        + "║═%s═║\n"
+                        + "║ Nombre: %s %s\n"
+                        + "║ Email: %s\n"
+                        + "║ DNI: %s\n"
+                        + "║ Fecha de nacimiento: %s\n"
+                        + "║ Reservas realizadas: %d\n",
+                "═".repeat(22 + String.valueOf(idC).length()),
+                idC,
+                "═".repeat(22 + String.valueOf(idC).length()),
+                nombre,
+                apellido,
+                email,
+                dni,
+                fechaNacimiento,
+                reservasRealizadas);
+        if (multas > 0) {
+            output += String.format("║ Multas: %d\n", multas);
+        }
+        output += String.format("╚═%s═╝\n", "═".repeat(22 + String.valueOf(idC).length()));
+        return output;
     }
 
 
+    public String getApellidos() {  // TODO Auto-generated method stub
+        return apellido;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public int getReservasRealizadas() {
+        return reservasRealizadas;
+    }
+
+    public int getMultas() {
+        return multas;
+    }
 }

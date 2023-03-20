@@ -1,52 +1,46 @@
 package org.core;
 
 import java.time.LocalDate;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
         //Pruebas de cada una de las clases
-        //Pruebas de la clase Autocaravana, crear una autocaravana y comprobar que se crea correctamente imprimeindolas por pantalla
-        Autocaravana A = new Autocaravana("Vito",2,"0001BCD",120000);
-        System.out.println(A.toString());
-        //Pruebas de crear Autocaravanas erroneas y ver que las excepciones son lanzadas
-        try {
-            Autocaravana B = new Autocaravana("Vito",2,"0001ACD",120000);
-            System.out.println("Deberia haber saltado una excepcion");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al crear la autocaravana");
-        }
-        try {
-            Autocaravana C = new Autocaravana("Vito",2,"0001BCD",-1);
-            System.out.println("Deberia haber saltado una excepcion");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al crear la autocaravana");
-        }
-        try {
-            Autocaravana D = new Autocaravana("Vito",-1,"0001BCD",120000);
-            System.out.println("Deberia haber saltado una excepcion");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al crear la autocaravana");
-        }
-        //Vamos a probar quitarcaravana
-        Autocaravana Auto1 = new Autocaravana ("Berlingo",5,"0000KFC",12000);
-        try {
-            System.out.println(Auto1);
-            Auto1.QuitarCaravana();
-            System.out.println(Auto1);
+        Servidor servidor = new Servidor();
+        servidor.cargarClientes();
+        servidor.cargarAutocaravanas();
+        servidor.cargarReservas();
+        servidor.cargarEstados();
 
-        } catch (Throwable e)
-        {
-            System.out.println("Ha habido un error");
-        }
 
-        //Pruebas de la clase Cliente, crear un cliente y comprobar que se crea correctamente imprimeindolas por pantalla
-        Cliente C = new Cliente("Pepe","Perez","1996-10-12","01234567B","Pepe@Perez.com");
-        System.out.println(C.toString());
-        //Pruebas de crear clientes erroneos y ver que las excepciones son lanzadas
-        try {
-            Cliente Cli1 = new Cliente("Pepe","Perez","1996-10-12","01234567B","PepePerez.com");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error al crear el cliente");
-        }
+        Autocaravana A = Autocaravana.buscarAutocaravana(1);
+        Cliente Cli0 = Cliente.buscarCliente(0);
+        Reserva R = Reserva.buscarReserva(0);
+        Reserva.nuevoestado("Busca y captura");
+        //System.out.println(A);
+        //System.out.println(Cli0);
+        //Reserva R = new Reserva(A,Cli0,"2024-11-10","2024-11-20");
+        //System.out.println(R);
+        Cliente.getListaClientes().forEach(System.out::println);
+
+
+        Cliente.modificarCliente(Cli0,"Manolo","Perez","666777888","1995-03-20","12345678A","Juanito@Perez.fake");
+
+        servidor.guardarAutocaravana(Autocaravana.getListaAutocaravanas());
+        servidor.guardarCliente(Cliente.getListaClientes());
+        servidor.guardarReservas(Reserva.getListaReservas());
+        servidor.guardarEstado(Reserva.getListaEstadoReservas());
+
+
+        R.asociarestado("Busca y captura");
+
+        Reserva.getListaEstadoReservas().forEach(System.out::println);
+        Cliente.getListaClientes().forEach(System.out::println);
+        Autocaravana.getListaAutocaravanas().forEach(System.out::println);
+        Reserva.getListaReservas().forEach(System.out::println);
+
     }
+
+
 }
