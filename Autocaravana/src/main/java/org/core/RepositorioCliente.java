@@ -2,12 +2,10 @@ package org.core;
 
 import java.util.Collection;
 
-public interface RepositorioCliente{
-    public static void guardarCliente(java.util.Collection<Cliente> clientes) {
+public interface RepositorioCliente {
+    static void guardarCliente(java.util.Collection<Cliente> clientes) {
 
     }
-
-    public void guardarEstadosCliente(Collection<String> EstadosCliente);
 
     static void cargarClientes() {
 
@@ -16,4 +14,6 @@ public interface RepositorioCliente{
     static void cargarEstadosCliente() {
 
     }
+
+    void guardarEstadosCliente(Collection<String> EstadosCliente);
 }

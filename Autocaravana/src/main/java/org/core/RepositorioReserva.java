@@ -5,11 +5,11 @@ public interface RepositorioReserva {
 
     }
 
-    void guardarReservas(java.util.Collection<Reserva> R);
-
     static void cargarEstadosReserva() {
 
     }
+
+    void guardarReservas(java.util.Collection<Reserva> R);
 
     void guardarEstadosReserva(java.util.Collection<String> EstadosReserva);
 

@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.*;
 
 
-public class ServicioReserva implements ReglasReserva,RepositorioReserva {
-    private static List<String> listaEstadoReserva = new ArrayList<>(Arrays.asList("En curso", "Finalizada", "Cancelada", "Pendiente"));
+public class ServicioReserva implements ReglasReserva, RepositorioReserva {
+    private static final List<String> listaEstadoReserva = new ArrayList<>(Arrays.asList("En curso", "Finalizada", "Cancelada", "Pendiente"));
     private static final String RESERVAS_FILE = "reservas.txt";
     private static final String ESTADOSRESERVAS_FILE = "estadosreserva.txt";
 
@@ -16,8 +16,7 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
             while (scanner.hasNextLine()) { //Idr no contenid en ninguna linea en campo[0] convertido a entero
                 String linea = scanner.nextLine();
                 boolean encontrado = true;
-                for (Reserva R : Reserva.getListaReservas())
-                {
+                for (Reserva R : Reserva.getListaReservas()) {
                     if (Integer.parseInt(linea.split(";")[0]) == R.getIdR()) {
                         encontrado = false;
                     }
@@ -27,8 +26,7 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
                     new Reserva(linea);
                 }
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             // Archivo no encontrado, lista vacia
         }
     }
@@ -48,32 +46,6 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
 
         } catch (NoSuchElementException | FileNotFoundException e) {
             // Archivo no encontrado, lista vacia
-        }}
-
-
-    @Override
-    public void guardarReservas(Collection<Reserva> R) {
-
-        try (PrintWriter pw = new PrintWriter(new FileWriter(RESERVAS_FILE, true))) {
-            //Borro todo su contenido
-            pw.print("");
-            for (Reserva reserva : R) {
-                pw.println(reserva.getIdR() + ";" + reserva.getAutocaravana().getIdA() + ";" + reserva.getCliente().getDni()
-                        + ";" + reserva.getFechaIni() + ";" + reserva.getFechaFin() + ";" + reserva.getEstadoReserva());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void guardarEstadosReserva(Collection<String> listaEstados) {
-        try (PrintWriter pw = new PrintWriter(new File(ESTADOSRESERVAS_FILE))) {
-            for (String estado : listaEstados) {
-                pw.println(estado);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
@@ -107,6 +79,32 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
             throw new IllegalArgumentException("El estado no es correcto");
         }
         return true;
+    }
+
+    @Override
+    public void guardarReservas(Collection<Reserva> R) {
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter(RESERVAS_FILE, true))) {
+            //Borro todo su contenido
+            pw.print("");
+            for (Reserva reserva : R) {
+                pw.println(reserva.getIdR() + ";" + reserva.getAutocaravana().getIdA() + ";" + reserva.getCliente().getDni()
+                        + ";" + reserva.getFechaIni() + ";" + reserva.getFechaFin() + ";" + reserva.getEstadoReserva());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void guardarEstadosReserva(Collection<String> listaEstados) {
+        try (PrintWriter pw = new PrintWriter(new File(ESTADOSRESERVAS_FILE))) {
+            for (String estado : listaEstados) {
+                pw.println(estado);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

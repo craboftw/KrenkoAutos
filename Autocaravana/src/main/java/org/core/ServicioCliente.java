@@ -8,7 +8,7 @@ import java.util.Collection;
 public class ServicioCliente implements ReglasCliente, RepositorioCliente {
     private static final java.lang.String CLIENTES_FILE = "clientes.txt";
     private static final java.lang.String ESTADOSCLIENTE_FILE = "estadoscliente.txt";
-    private static java.util.List<java.lang.String> listaEstadosCliente = new java.util.ArrayList<>(java.util.Arrays.asList("Activo", "Inactivo", "Sancionado", "Baneado", "VIP"));
+    private static final java.util.List<java.lang.String> listaEstadosCliente = new java.util.ArrayList<>(java.util.Arrays.asList("Activo", "Inactivo", "Sancionado", "Baneado", "VIP"));
 
 
     public static java.util.List<java.lang.String> getListaEstadoClientes() {
@@ -27,10 +27,8 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
     }
 
 
-
     //@Override
-    public static void cargarEstadosCliente()
-    {
+    public static void cargarEstadosCliente() {
         try (java.util.Scanner scanner = new java.util.Scanner(new java.io.File(ESTADOSCLIENTE_FILE))) {
             while (scanner.hasNextLine()) {
                 listaEstadosCliente.add(scanner.nextLine());
@@ -51,7 +49,6 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
             e.printStackTrace();
         }
     }
-
 
 
     @Override

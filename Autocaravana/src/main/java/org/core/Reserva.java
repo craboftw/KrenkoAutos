@@ -4,21 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reserva{
+public class Reserva {
+    private static final ServicioReserva servidor = new ServicioReserva();
+    private static final List<Reserva> listaReservas = new ArrayList<>();
+    private static final int cantidadReservas = 0;
     private final int idR;
     private final Autocaravana caravana;
     private final Cliente cliente;
     private final LocalDate fechaIni;
     private final LocalDate fechaFin;
     private String estadoReserva;
-
     private float precioTotal;
-
-    private static final ServicioReserva servidor = new ServicioReserva();
-    private static List<Reserva> listaReservas = new ArrayList<>();
-
-
-    private static int cantidadReservas = 0;
 
     public Reserva(Autocaravana A, Cliente C, String fechI, String fechF) {
 
@@ -53,14 +49,14 @@ public class Reserva{
 
         String[] campos = cadena.split(";");
 
-            idR = Integer.parseInt(campos[0]);
-            caravana = Autocaravana.buscarAutocaravana(Integer.parseInt(campos[1]));
-            cliente = Cliente.buscarCliente(campos[2]) ;
-            fechaIni = LocalDate.parse(campos[3]);
-            fechaFin = LocalDate.parse(campos[4]);
-            estadoReserva = campos[5];
-            listaReservas.add(this);
-            System.out.println("Error al leer el fichero");
+        idR = Integer.parseInt(campos[0]);
+        caravana = Autocaravana.buscarAutocaravana(Integer.parseInt(campos[1]));
+        cliente = Cliente.buscarCliente(campos[2]);
+        fechaIni = LocalDate.parse(campos[3]);
+        fechaFin = LocalDate.parse(campos[4]);
+        estadoReserva = campos[5];
+        listaReservas.add(this);
+        System.out.println("Error al leer el fichero");
 
 
     }
@@ -77,10 +73,10 @@ public class Reserva{
         }
         return null;
     }
+
     public static List<Reserva> buscarReserva(String info, String tipo) {
         List<Reserva> lista = new ArrayList<>();
-        switch (tipo)
-        {
+        switch (tipo) {
             case "cliente":
                 for (Reserva r : listaReservas) {
                     if (r.getCliente().getDni().equals(info)) {
@@ -95,13 +91,13 @@ public class Reserva{
                     }
                 }
                 break;
-        case "estado":
-            for (Reserva r : listaReservas) {
-                if (r.getEstadoReserva().equals(info)) {
-                    lista.add(r);
+            case "estado":
+                for (Reserva r : listaReservas) {
+                    if (r.getEstadoReserva().equals(info)) {
+                        lista.add(r);
+                    }
                 }
-            }
-            break;
+                break;
             case "fecha":
                 for (Reserva r : listaReservas) {
                     LocalDate fecha = LocalDate.parse(info);
@@ -115,7 +111,6 @@ public class Reserva{
 
     }
 
-    
 
     //añadir listaEstados de reserva
 
@@ -158,9 +153,9 @@ public class Reserva{
     public int siguienteReserva() {
         return listaReservas.size();
     }
+
     public void checkOut() {
-        switch (estadoReserva)
-        {
+        switch (estadoReserva) {
             case "Pendiente":
                 estadoReserva = "Finalizada";
                 break;
@@ -180,13 +175,12 @@ public class Reserva{
                 if (LocalDate.now().isBefore(fechaFin) & !servidor.condicionesFinalizacion(this)) {
                     System.out.println("No se puede finalizar la reserva");
                     break;
-                }
-                else {
+                } else {
                     estadoReserva = "Finalizada";
                 }
                 break;
         }
-}
+    }
 
     public String toString() {
         // usar String.format() para dar formato a la salida
@@ -218,7 +212,6 @@ public class Reserva{
     public void eliminarReserva() {
         if (listaReservas.contains(this)) {
             listaReservas.remove(this);
-        }
-        else throw new IllegalArgumentException("La reserva ya esta eliminada");
+        } else throw new IllegalArgumentException("La reserva ya esta eliminada");
     }
 }

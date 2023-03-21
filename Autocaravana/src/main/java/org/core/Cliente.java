@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente{
+public class Cliente {
 
+    private static final ServicioCliente servidor = new ServicioCliente();
+    private static final List<Cliente> listaClientes = new ArrayList<>();
     private final int idC;
     private String nombre;
     private String apellido;
-
     private String telefono;
     private String email;
     private String dni;
@@ -17,13 +18,8 @@ public class Cliente{
     private int reservasRealizadas;
     private int multas;
 
-    private static final ServicioCliente servidor = new ServicioCliente();
 
-    private static final List<Cliente> listaClientes = new ArrayList<>();
-
-
-
-    public Cliente(String nom, String ape,String telef, String fecha, String dn, String ema) {
+    public Cliente(String nom, String ape, String telef, String fecha, String dn, String ema) {
         idC = getNumeroClientes();
         if (nom.isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacio");
@@ -52,9 +48,7 @@ public class Cliente{
             if (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telef))) {
                 throw new IllegalArgumentException("El telefono ya existe");
             }
-        }
-        catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("El telefono no es correcto");
         }
 
@@ -94,6 +88,14 @@ public class Cliente{
         return listaClientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(null);
     }
 
+    public static List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
+    public static int getNumeroClientes() {
+        return listaClientes.size();
+    }
+
     public int getIdC() {
         return idC;
     }
@@ -114,19 +116,17 @@ public class Cliente{
         return dni;
     }
 
-    public String getTelefono() {return telefono;}
-
-    public static List<Cliente> getListaClientes() {
-        return listaClientes;
+    public String getTelefono() {
+        return telefono;
     }
 
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public int getReservasRealizadas() {return reservasRealizadas;}
-
-    public static int getNumeroClientes() {return listaClientes.size();}
+    public int getReservasRealizadas() {
+        return reservasRealizadas;
+    }
 
     public int getMultas() {
         return multas;
@@ -143,7 +143,7 @@ public class Cliente{
         return edad;
     }
 
-    public void  modificarCliente(String nom, String ape, String telef, String fecha, String dn, String ema){
+    public void modificarCliente(String nom, String ape, String telef, String fecha, String dn, String ema) {
         if (nom.isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacio");
         }
@@ -172,9 +172,7 @@ public class Cliente{
             if (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telef) && c.getIdC() != getIdC())) {
                 throw new IllegalArgumentException("El telefono ya existe");
             }
-        }
-        catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("El telefono no es correcto");
         }
 
@@ -187,7 +185,7 @@ public class Cliente{
 
     public void eliminarCliente() {
         if (listaClientes.contains(this))
-        listaClientes.remove(this);
+            listaClientes.remove(this);
         else
             throw new IllegalArgumentException("El cliente no existe");
     }
@@ -217,16 +215,15 @@ public class Cliente{
         output += String.format("╚═%s═╝\n", "═".repeat(22 + String.valueOf(idC).length()));
         return output;
     }
+
     public void setMultas() {
         this.multas++;
     }
 
 
-
     public void NuevaReservasRealizadas() {
         this.reservasRealizadas++;
     }
-
 
 
 }

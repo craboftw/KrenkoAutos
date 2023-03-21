@@ -3,6 +3,7 @@ package org.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
 public class AutocaravanaTest {
@@ -12,7 +13,7 @@ public class AutocaravanaTest {
         //Borrar todos los clientes existentes
         Cliente.getListaClientes().clear();
         Autocaravana.getListaAutocaravanas().clear();
-        Reserva.getListaReservas().clear() ;
+        Reserva.getListaReservas().clear();
     }
 
 
@@ -142,8 +143,6 @@ public class AutocaravanaTest {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
         Assertions.assertThrows(IllegalArgumentException.class, () -> a.actualizarkilometraje(0));
     }
-
-
 
 
 }

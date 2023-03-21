@@ -5,47 +5,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 //A class to represent a Car booking system
-public class Autocaravana{
+public class Autocaravana {
+    private static final List<Autocaravana> listaAutocaravanas = new ArrayList<>();
+    public static ServicioAutocaravana servidor = new ServicioAutocaravana();
+    private static int cantidadCaravanasAlquiladas = 0;
     private final int idA;
+    private final String matricula;
+    private final int plazas;
     private String modelo;
     private float precioPorDia;
-    private String matricula;
-
-    private int plazas;
     private int kilometraje;
-    private static int cantidadCaravanasAlquiladas = 0;
     private String estado = "Disponible";
 
-    public static ServicioAutocaravana servidor = new ServicioAutocaravana();
-    private static List<Autocaravana> listaAutocaravanas = new ArrayList<>();
-
-    public Autocaravana (String mod, float precio,int plazas, String matricula, int kilometraje){
+    public Autocaravana(String mod, float precio, int plazas, String matricula, int kilometraje) {
         idA = siguienteCaravana();
         modelo = mod;
         precioPorDia = precio;
 
         //Comprobar que una matricula es correcta, si no es correcta, lanzar excepcion
-        if(!ReglasAutocaravana.comprobarMatricula(matricula)){
+        if (!ReglasAutocaravana.comprobarMatricula(matricula)) {
             throw new IllegalArgumentException("La matricula debe tener 7 caracteres");
         }
         if (listaAutocaravanas.stream().anyMatch(a -> a.getMatricula().equals(matricula))) {
             throw new IllegalArgumentException("La matricula ya existe");
         }
 
-        if(precioPorDia < 0){
+        if (precioPorDia < 0) {
             throw new IllegalArgumentException("El precio no puede ser negativo");
         }
-        if(plazas < 0){
+        if (plazas < 0) {
             throw new IllegalArgumentException("Las plazas no pueden ser negativas");
         }
-        this.plazas= plazas;
+        this.plazas = plazas;
 
-        if(kilometraje < 0){
+        if (kilometraje < 0) {
             throw new IllegalArgumentException("El kilometraje no puede ser negativo");
         }
         this.matricula = matricula;
         this.kilometraje = kilometraje;
-        this.estado="Disponible";
+        this.estado = "Disponible";
         listaAutocaravanas.add(this);
     }
 
@@ -62,54 +60,8 @@ public class Autocaravana{
     }
 
 
-
-
     public static List<Autocaravana> getListaAutocaravanas() {
         return listaAutocaravanas;
-    }
-
-
-
-    private int siguienteCaravana() {
-        return listaAutocaravanas.size();
-    }
-
-    public int getIdA(){
-        return idA;
-    }
-
-    public String getModelo(){
-        return modelo;
-    }
-
-    public float getPrecioPorDia(){
-        return precioPorDia;
-    }
-
-    public String getMatricula(){
-        return matricula;
-    }
-
-    public int getKilometraje(){
-        return kilometraje;
-    }
-
-
-    public void modificarKilometraje(int kilometraje){
-        this.kilometraje = kilometraje;
-    }
-
-    public void modificarAutocaravana(String mod, float precio){
-            modelo = mod;
-            precioPorDia = precio;
-    }
-
-    public void actualizarkilometraje(int kilometraje) {
-        if (kilometraje > this.kilometraje) {
-            this.kilometraje = kilometraje;
-        } else {
-            throw new IllegalArgumentException("El kilometraje no puede ser menor que el anterior");
-        }
     }
 
     public static Autocaravana buscarAutocaravana(int parseInt) {
@@ -121,35 +73,72 @@ public class Autocaravana{
         return null;
     }
 
-    public void modificarPrecio(float precio){
+    public static int getCantidadCaravanas() {
+        return listaAutocaravanas.size();
+    }
+
+    private int siguienteCaravana() {
+        return listaAutocaravanas.size();
+    }
+
+    public int getIdA() {
+        return idA;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public float getPrecioPorDia() {
+        return precioPorDia;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public int getKilometraje() {
+        return kilometraje;
+    }
+
+    public void modificarKilometraje(int kilometraje) {
+        this.kilometraje = kilometraje;
+    }
+
+    public void modificarAutocaravana(String mod, float precio) {
+        modelo = mod;
+        precioPorDia = precio;
+    }
+
+    public void actualizarkilometraje(int kilometraje) {
+        if (kilometraje > this.kilometraje) {
+            this.kilometraje = kilometraje;
+        } else {
+            throw new IllegalArgumentException("El kilometraje no puede ser menor que el anterior");
+        }
+    }
+
+    public void modificarPrecio(float precio) {
         if (precio <= 0)
             throw new IllegalArgumentException("El precio no puede ser negativo");
         precioPorDia = precio;
     }
 
-    public boolean quedanCaravanas(){
+    public boolean quedanCaravanas() {
         return getCantidadCaravanas() > 0;
     }
-
-    public static int getCantidadCaravanas() {
-        return listaAutocaravanas.size();
-    }
-
-
-
 
     public String getEstado() {
         return estado;
     }
 
-    public void cambiarEstado(String Estado)
-    {
-        if(ServicioAutocaravana.comprobarEstadoAutocaravana(Estado))
+    public void cambiarEstado(String Estado) {
+        if (ServicioAutocaravana.comprobarEstadoAutocaravana(Estado))
             estado = Estado;
     }
 
 
-    public String toString(){
+    public String toString() {
         String output = String.format("╔═══════════════════╗\n"
                         + "║ AUTOCARAVANA %d\n"
                         + "║═══════════════════║\n"
@@ -183,7 +172,7 @@ public class Autocaravana{
         if (listaAutocaravanas.contains(this))
             listaAutocaravanas.remove(this);
         else
-        throw new IllegalArgumentException("La autocaravana ya esta eliminada");
+            throw new IllegalArgumentException("La autocaravana ya esta eliminada");
     }
 }
 
