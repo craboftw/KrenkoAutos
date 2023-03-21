@@ -1,0 +1,4 @@
+Pendiente
+Cancelada
+Finalizada
+En curso

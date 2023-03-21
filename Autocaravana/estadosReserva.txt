@@ -1,0 +1,5 @@
+Activo
+Inactivo
+Sancionado
+Baneado
+VIP
