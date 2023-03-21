@@ -6,11 +6,12 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static <ServidorAutocaravana> void main(String[] args) throws IOException {
         //Pruebas de cada una de las clases
         Servidor servidor = new Servidor();
+        ServidorAutocaravana servAutocaravana = new ServidorAutocaravana();
         servidor.cargarClientes();
-        servidor.cargarAutocaravanas();
+        //servidor.cargarAutocaravanas();
         servidor.cargarReservas();
         servidor.cargarEstados();
 
@@ -46,7 +47,7 @@ public class Main {
         Autocaravana.getListaAutocaravanas().forEach(System.out::println);
         Reserva.getListaReservas().forEach(System.out::println);
 */
-        servidor.guardarAutocaravana(Autocaravana.getListaAutocaravanas());
+        servi.guar(Autocaravana.getListaAutocaravanas());
         servidor.guardarCliente(Cliente.getListaClientes());
         servidor.guardarReservas(Reserva.getListaReservas());
         servidor.guardarEstado(Servidor.getListaEstadoReservas());

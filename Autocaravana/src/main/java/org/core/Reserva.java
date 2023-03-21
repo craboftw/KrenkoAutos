@@ -14,7 +14,7 @@ public class Reserva{
 
     private float precioTotal;
 
-    private static final Servidor servidor = new Servidor();
+    private static final ServicioReserva servidor = new ServicioReserva();
     private static List<Reserva> listaReservas = new ArrayList<>();
 
 
@@ -37,7 +37,7 @@ public class Reserva{
         cliente = C;
         fechaIni = LocalDate.parse(fechI);
         fechaFin = LocalDate.parse(fechF);
-        if (!servidor.comprobarFecha(fechaIni, fechaFin, A, C)) {
+        if (!servidor.comprobarReserva(fechaIni, fechaFin, A, C)) {
             System.out.println("Las fechas no son compatibles");
             throw new IllegalArgumentException("Las fechas no son compatibles");
         }

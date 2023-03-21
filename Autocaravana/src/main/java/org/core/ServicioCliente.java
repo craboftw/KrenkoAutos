@@ -1,6 +1,21 @@
-package org.core;public class ServicioCliente{private final java.lang.String CLIENTES_FILE = "clientes.txt";private final java.lang.String ESTADOSCLIENTE_FILE = "estadosCliente.txt";private static final java.util.List<java.lang.String> listaEstadosCliente = new java.util.ArrayList<java.lang.String>(java.util.Arrays.asList("Activo", "Inactivo", "Sancionado", "Baneado", "VIP"));	public ServicioCliente()	{	}public static java.util.List<java.lang.String> getListaEstadoClientes() {
+package org.core;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+
+public class ServicioCliente implements ReglasCliente, RepositorioCliente {
+    private static final java.lang.String CLIENTES_FILE = "clientes.txt";
+    private static final java.lang.String ESTADOSCLIENTE_FILE = "estadoscliente.txt";
+    private static java.util.List<java.lang.String> listaEstadosCliente = new java.util.ArrayList<>(java.util.Arrays.asList("Activo", "Inactivo", "Sancionado", "Baneado", "VIP"));
+
+
+    public static java.util.List<java.lang.String> getListaEstadoClientes() {
         return listaEstadosCliente;
-    }@java.lang.Override
+    }
+
+    @Override
     public void cargarClientes() {
         try (java.util.Scanner scanner = new java.util.Scanner(new java.io.File(CLIENTES_FILE))) {
             while (scanner.hasNextLine()) {
@@ -9,18 +24,47 @@ package org.core;public class ServicioCliente{private final java.lang.String CLI
         } catch (java.io.FileNotFoundException e) {
             // Archivo no encontrado, lista vacia
         }
-    }@java.lang.Override
-    public void guardarCliente(java.util.Collection<org.core.Cliente> clientes) {
-        try (java.io.PrintWriter pw = new java.io.PrintWriter(new java.io.FileWriter(CLIENTES_FILE))) {
-            for (org.core.Cliente cliente : clientes) {
+    }
+
+
+
+    @Override
+    public void cargarEstadosCliente()
+    {
+        try (java.util.Scanner scanner = new java.util.Scanner(new java.io.File(ESTADOSCLIENTE_FILE))) {
+            while (scanner.hasNextLine()) {
+                new org.core.Cliente(scanner.nextLine());
+            }
+        } catch (java.io.FileNotFoundException e) {
+            // Archivo no encontrado, lista vacia
+        }
+    }
+
+    @Override
+    public void guardarCliente(Collection<Cliente> clientes) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(CLIENTES_FILE))) {
+            for (Cliente cliente : clientes) {
                 pw.println(cliente.getIdC() + "," + cliente.getNombre() + "," + cliente.getApellido() + "," +
                         cliente.getTelefono() + "," + cliente.getFechaNacimiento() + "," + cliente.getDni() + "," +
                         cliente.getEmail() + "," + cliente.getReservasRealizadas() + "," + cliente.getMultas());
             }
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }@java.lang.Override
-    public boolean comprobarCliente(org.core.Cliente c) {
-        return org.core.ReglasReserva.super.comprobarCliente(c);
-    }}
+    }
+
+
+
+    @Override
+    public void guardarEstadosCliente(Collection<String> lista) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(ESTADOSCLIENTE_FILE, false))) {
+            for (String estado : lista) {
+                pw.println(estado);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}

@@ -17,7 +17,7 @@ public class Cliente{
     private int reservasRealizadas;
     private int multas;
 
-    private static final Servidor servidor = new Servidor();
+    private static final ServicioCliente servidor = new ServicioCliente();
 
     private static final List<Cliente> listaClientes = new ArrayList<>();
 
@@ -110,7 +110,7 @@ public class Cliente{
         return dni;
     }
 
-    public int getedad() {
+    public int getEdad() {
         LocalDate hoy = LocalDate.now();
         int edad = hoy.getYear() - fechaNacimiento.getYear();
         if (hoy.getMonthValue() < fechaNacimiento.getMonthValue()) {
@@ -177,7 +177,7 @@ public class Cliente{
         }
     }
 
-    public int siguienteCliente() {
+    public int getCantidadCliente() {
         return listaClientes.size();
     }
 

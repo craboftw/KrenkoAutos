@@ -17,11 +17,8 @@ public class Autocaravana{
     private static int cantidadCaravanasAlquiladas = 0;
     private String estado = "Disponible";
 
-    public static Servidor servidor = new Servidor();
+    public static ServicioAutocaravana servidor = new ServicioAutocaravana();
     private static List<Autocaravana> listaAutocaravanas = new ArrayList<>();
-
-
-
 
     public Autocaravana (String mod, float precio,int plazas, String matricula, int kilometraje){
         idA = siguienteCaravana();
@@ -42,6 +39,7 @@ public class Autocaravana{
         if(plazas < 0){
             throw new IllegalArgumentException("Las plazas no pueden ser negativas");
         }
+        this.plazas= plazas;
 
         if(kilometraje < 0){
             throw new IllegalArgumentException("El kilometraje no puede ser negativo");
@@ -64,14 +62,6 @@ public class Autocaravana{
         listaAutocaravanas.add(this);
     }
 
-    public static Autocaravana buscarAutocaravana(int parseInt) {
-        for (Autocaravana a : listaAutocaravanas) {
-            if (a.getIdA() == parseInt) {
-                return a;
-            }
-        }
-        return null;
-    }
 
 
 
@@ -123,20 +113,25 @@ public class Autocaravana{
         }
     }
 
+    public static Autocaravana buscarAutocaravana(int parseInt) {
+        for (Autocaravana a : Autocaravana.getListaAutocaravanas()) {
+            if (a.getIdA() == parseInt) {
+                return a;
+            }
+        }
+        return null;
+    }
+
     public void modificarPrecio(float precio){
         precioPorDia = precio;
     }
 
-    public boolean QuedanCaravanas(){
-        return cantidadCaravanasAlquiladas > 0;
+    public boolean quedanCaravanas(){
+        return getCantidadCaravanas() > 0;
     }
 
-    public void AnadirCaravanaReservada(){
-        cantidadCaravanasAlquiladas++;
-    }
-
-    public void QuitarCaravanaReservada(){
-        cantidadCaravanasAlquiladas--;
+    public static int getCantidadCaravanas() {
+        return cantidadCaravanas;
     }
 
 
@@ -148,7 +143,7 @@ public class Autocaravana{
 
     public void cambiarEstado(String Estado)
     {
-        if(servidor.comprobarEstado(Estado))
+        if(ServicioAutocaravana.comprobarEstadoAutocaravana(Estado))
             estado = Estado;
     }
 
