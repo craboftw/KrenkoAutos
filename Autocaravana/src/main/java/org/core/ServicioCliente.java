@@ -33,7 +33,7 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
     {
         try (java.util.Scanner scanner = new java.util.Scanner(new java.io.File(ESTADOSCLIENTE_FILE))) {
             while (scanner.hasNextLine()) {
-                new org.core.Cliente(scanner.nextLine());
+                listaEstadosCliente.add(scanner.nextLine());
             }
         } catch (java.io.FileNotFoundException e) {
             // Archivo no encontrado, lista vacia

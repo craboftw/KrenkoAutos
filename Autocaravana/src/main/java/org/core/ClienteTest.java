@@ -1,22 +1,19 @@
 package org.core;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClienteTests {
+public class ClienteTest {
     //TEST DEL CONSTRUCTOR DE CLIENTE//////////////////////////////////////////////////////////////
 
 

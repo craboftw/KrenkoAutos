@@ -13,7 +13,6 @@ public class Autocaravana{
 
     private int plazas;
     private int kilometraje;
-    private static int cantidadCaravanas = 0;
     private static int cantidadCaravanasAlquiladas = 0;
     private String estado = "Disponible";
 
@@ -123,6 +122,8 @@ public class Autocaravana{
     }
 
     public void modificarPrecio(float precio){
+        if (precio <= 0)
+            throw new IllegalArgumentException("El precio no puede ser negativo");
         precioPorDia = precio;
     }
 
@@ -131,7 +132,7 @@ public class Autocaravana{
     }
 
     public static int getCantidadCaravanas() {
-        return cantidadCaravanas;
+        return listaAutocaravanas.size();
     }
 
 
@@ -179,8 +180,9 @@ public class Autocaravana{
     }
 
     public void eliminarAutocaravana() {
-        if (Autocaravana.getListaAutocaravanas().contains(this))
+        if (listaAutocaravanas.contains(this))
             listaAutocaravanas.remove(this);
+        else
         throw new IllegalArgumentException("La autocaravana ya esta eliminada");
     }
 }
