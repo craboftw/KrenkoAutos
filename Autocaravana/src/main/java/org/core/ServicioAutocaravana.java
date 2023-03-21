@@ -12,8 +12,8 @@ public class ServicioAutocaravana implements ReglasAutocaravana,RepositorioAutoc
 
    public ServicioAutocaravana(){  }
 
-    @Override
-    public void cargarAutocaravana() {
+    //@Override
+    public static void cargarAutocaravana() {
         try (Scanner scanner = new Scanner(new File(AUTOCARAVANAS_FILE))) {
             while (scanner.hasNextLine()) {
                 new Autocaravana(scanner.nextLine());
@@ -23,8 +23,8 @@ public class ServicioAutocaravana implements ReglasAutocaravana,RepositorioAutoc
         }
     }
 
-    @Override
-    public void cargarEstadosAutocaravana() {
+    //@Override
+    public static void cargarEstadosAutocaravana() {
         try (Scanner scanner = new Scanner(new File(ESTADOSAUTOCARAVANA_FILE))) {
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
@@ -42,7 +42,7 @@ public class ServicioAutocaravana implements ReglasAutocaravana,RepositorioAutoc
             // Archivo no encontrado, lista vacia
         }
     }
-    @Override
+    //@Override
     public void guardarEstadoAutocaravana(Collection<String> listaEstados) {
         try (PrintWriter pw = new PrintWriter(new File(ESTADOSAUTOCARAVANA_FILE))) {
             for (String estado : listaEstados) {
@@ -53,7 +53,7 @@ public class ServicioAutocaravana implements ReglasAutocaravana,RepositorioAutoc
         }
     }
 
-    @Override
+    //@Override
     public void guardarAutocaravana(Collection<Autocaravana> lista) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(AUTOCARAVANAS_FILE))) {
             for (Autocaravana autocaravana : lista) {

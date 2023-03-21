@@ -15,8 +15,8 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
         return listaEstadosCliente;
     }
 
-    @Override
-    public void cargarClientes() {
+    //@Override
+    public static void cargarClientes() {
         try (java.util.Scanner scanner = new java.util.Scanner(new java.io.File(CLIENTES_FILE))) {
             while (scanner.hasNextLine()) {
                 new org.core.Cliente(scanner.nextLine());
@@ -28,8 +28,8 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
 
 
 
-    @Override
-    public void cargarEstadosCliente()
+    //@Override
+    public static void cargarEstadosCliente()
     {
         try (java.util.Scanner scanner = new java.util.Scanner(new java.io.File(ESTADOSCLIENTE_FILE))) {
             while (scanner.hasNextLine()) {
@@ -40,8 +40,7 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
         }
     }
 
-    @Override
-    public void guardarCliente(Collection<Cliente> clientes) {
+    public static void guardarCliente(Collection<Cliente> clientes) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(CLIENTES_FILE))) {
             for (Cliente cliente : clientes) {
                 pw.println(cliente.getIdC() + "," + cliente.getNombre() + "," + cliente.getApellido() + "," +

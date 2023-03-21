@@ -173,5 +173,15 @@ public class Autocaravana{
     public int getPlazas() {
         return plazas;
     }
+
+    public void NuevaReservasRealizadas() {
+        cantidadCaravanasAlquiladas++;
+    }
+
+    public void eliminarAutocaravana() {
+        if (Autocaravana.getListaAutocaravanas().contains(this))
+            listaAutocaravanas.remove(this);
+        throw new IllegalArgumentException("La autocaravana ya esta eliminada");
+    }
 }
 

@@ -44,6 +44,8 @@ public class Reserva{
         precioTotal = servidor.calculaPrecioTotal(A, C, fechaIni, fechaFin);
         estadoReserva = "pendiente";
         idR = siguienteReserva();
+        C.NuevaReservasRealizadas();
+        A.NuevaReservasRealizadas();
         listaReservas.add(this);
     }
 
@@ -213,13 +215,10 @@ public class Reserva{
     }
 
 
-
-
-
-
-
-
-
-
-
+    public void eliminarReserva() {
+        if (listaReservas.contains(this)) {
+            listaReservas.remove(this);
+        }
+        else throw new IllegalArgumentException("La reserva ya esta eliminada");
+    }
 }

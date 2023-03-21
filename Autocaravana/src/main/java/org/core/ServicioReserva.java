@@ -9,17 +9,17 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
     private static final String RESERVAS_FILE = "reservas.txt";
     private static final String ESTADOSRESERVAS_FILE = "estadosreserva.txt";
 
-    @Override
-    public void cargarReservas() {
+    //@Override
+    public static void cargarReservas() {
         try {
             Scanner scanner = new Scanner(new File(RESERVAS_FILE));
             while (scanner.hasNextLine()) { //Idr no contenid en ninguna linea en campo[0] convertido a entero
                 String linea = scanner.nextLine();
-                boolean encontrado = false;
+                boolean encontrado = true;
                 for (Reserva R : Reserva.getListaReservas())
                 {
                     if (Integer.parseInt(linea.split(";")[0]) == R.getIdR()) {
-                        encontrado = true;
+                        encontrado = false;
                     }
                 }
 
@@ -33,8 +33,8 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
         }
     }
 
-    @Override
-    public void cargarEstadosReserva() {
+    //@Override
+    public static void cargarEstadosReserva() {
         try {
             Scanner scanner = new Scanner(new File(ESTADOSRESERVAS_FILE));
             while (scanner.hasNextLine()) {
@@ -52,7 +52,7 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
 
 
     @Override
-    public void guardarReservas(Collection<Reserva> R) throws IOException {
+    public void guardarReservas(Collection<Reserva> R) {
 
         try (PrintWriter pw = new PrintWriter(new FileWriter(RESERVAS_FILE, true))) {
             //Borro todo su contenido
@@ -77,34 +77,36 @@ public class ServicioReserva implements ReglasReserva,RepositorioReserva {
         }
     }
 
-        public static List<String> getListaEstadoReservas() {
-            return listaEstadoReserva;
-        }
+    public static List<String> getListaEstadoReservas() {
+        return listaEstadoReserva;
+    }
 
-        public static void nuevoestado(String estado) {
-            if (!estado.isEmpty() & !listaEstadoReserva.contains(estado)) {
-                listaEstadoReserva.add(estado);
-            } else {
-                throw new IllegalArgumentException("El estado no es correcto");
-            }
+    //@Override
+    public static void nuevoestado(String estado) {
+        if (!estado.isEmpty() & !listaEstadoReserva.contains(estado)) {
+            listaEstadoReserva.add(estado);
+        } else {
+            throw new IllegalArgumentException("El estado no es correcto");
         }
+    }
 
-        @Override
-        public static void eliminarEstadoReserva(String estado) {
-            if (!estado.isEmpty() & listaEstadoReserva.contains(estado)) {
-                listaEstadoReserva.remove(estado);
-            } else {
-                throw new IllegalArgumentException("El estado no es correcto");
-            }
+    //@Override
+    public static void eliminarEstadoReserva(String estado) {
+        if (!estado.isEmpty() & listaEstadoReserva.contains(estado)) {
+            listaEstadoReserva.remove(estado);
+        } else {
+            throw new IllegalArgumentException("El estado no es correcto");
         }
+    }
 
-        @Override
-        public static void comprobarEstado(String estado) {
-            if (!estado.isEmpty() & listaEstadoReserva.contains(estado)) {
-                System.out.println("El estado es correcto");
-            } else {
-                throw new IllegalArgumentException("El estado no es correcto");
-            }
+    //@Override
+    public static boolean comprobarEstadoReserva(String estado) {
+        if (!estado.isEmpty() & listaEstadoReserva.contains(estado)) {
+            System.out.println("El estado es correcto");
+        } else {
+            throw new IllegalArgumentException("El estado no es correcto");
         }
+        return true;
+    }
 
 }

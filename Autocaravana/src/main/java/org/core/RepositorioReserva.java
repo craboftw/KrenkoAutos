@@ -1,9 +1,16 @@
 package org.core;
 
 public interface RepositorioReserva {
-    void cargarReservas();
+    static void cargarReservas() {
+
+    }
+
     void guardarReservas(java.util.Collection<Reserva> R);
-    void cargarEstadosReserva();
+
+    static void cargarEstadosReserva() {
+
+    }
+
     void guardarEstadosReserva(java.util.Collection<String> EstadosReserva);
 
 }

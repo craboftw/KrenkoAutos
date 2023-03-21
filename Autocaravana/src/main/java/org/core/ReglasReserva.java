@@ -9,18 +9,43 @@ import java.util.Arrays;
 
         static List<String> listaEstadosReserva = new ArrayList<>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
 
-        static void borrarEstado(String estado);
 
-        static void borrarEstado(String estado);
+        static void borrarEstado(String estado)
+        //Borra el estado de la lista de estados de reserva
+        {
+            if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
+                listaEstadosReserva.remove(estado);
+            } else {
+                throw new IllegalArgumentException("El estado no es correcto");
+        }
+    }
 
-        static void comprobarEstado(String estado);
+        public static void eliminarEstadoReserva(String estado) {
+            if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
+                listaEstadosReserva.remove(estado);
+            } else {
+                throw new IllegalArgumentException("El estado no es correcto");
+            }
+        }
+
+        public static boolean comprobarEstadoReserva(String estado) {
+            //Comprueba si el estado de la reserva es correcto
+            {
+                if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
+                    throw new IllegalArgumentException("El estado no es correcto");
+                }
+                return true;
+            }
+        }
+
+        // static void comprobarEstado(String estado)
 
         //Funciones que calculan el precio total de la reserva
         default float calculaPrecioTotal(Autocaravana A, Cliente C, LocalDate fechaIni, LocalDate fechaFin)
         //devuelve el precio total de la reserva;
         {
             //penalizacion por multa de un 10%, si la caravana tiene mas de 700000 km se descuenta un 5% del precio total
-            return (float) (A.getPrecioPorDia() * (fechaFin.toEpochDay() - fechaIni.toEpochDay()) * (1 + (C.getNumeroMultas() * 0.1)) * (1 - (A.getKilometraje() > 700000 ? 0.05 : 0)));
+            return (float) (A.getPrecioPorDia() * (fechaFin.toEpochDay() - fechaIni.toEpochDay()) * (1 + (C.getMultas() * 0.1)) * (1 - (A.getKilometraje() > 700000 ? 0.05 : 0)));
         }
 
         static void addEstadoReserva(String estado){
@@ -31,10 +56,6 @@ import java.util.Arrays;
             }
         }
 
-        public static void eliminarEstadoReserva(String estado)
-        {
-
-        }
 
         default boolean comprobarCambioEstado(Reserva R, String estado)
         //Esta funcion comprueba si se puede cambiar el estado de la reserva
@@ -102,7 +123,7 @@ import java.util.Arrays;
 
         default boolean comprobarCliente(Cliente c)
         //comprueba si un cliente es valido para la reserva
-        { return (c.getEdad() >= 18) & (c.getEdad() <= 80 & c.getNumeroMultas()<2);
+        { return (c.getEdad() >= 18) & (c.getEdad() <= 80 & c.getMultas()<2);
 
         }
 

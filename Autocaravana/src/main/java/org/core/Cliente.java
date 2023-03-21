@@ -22,8 +22,9 @@ public class Cliente{
     private static final List<Cliente> listaClientes = new ArrayList<>();
 
 
+
     public Cliente(String nom, String ape,String telef, String fecha, String dn, String ema) {
-        idC = siguienteCliente();
+        idC = getNumeroClientes();
         if (nom.isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacio");
         }
@@ -58,6 +59,9 @@ public class Cliente{
         }
 
         telefono = telef;
+        if (ema.isEmpty()) {
+            throw new IllegalArgumentException("El email no puede estar vacio");
+        }
         email = ema;
         if (dn.isEmpty()) {
             throw new IllegalArgumentException("El DNI no es correcto");
@@ -110,6 +114,24 @@ public class Cliente{
         return dni;
     }
 
+    public String getTelefono() {return telefono;}
+
+    public static List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public int getReservasRealizadas() {return reservasRealizadas;}
+
+    public static int getNumeroClientes() {return listaClientes.size();}
+
+    public int getMultas() {
+        return multas;
+    }
+
     public int getEdad() {
         LocalDate hoy = LocalDate.now();
         int edad = hoy.getYear() - fechaNacimiento.getYear();
@@ -120,20 +142,6 @@ public class Cliente{
         }
         return edad;
     }
-
-    public int getNumeroReservasRealizadas() {
-        return reservasRealizadas;
-    }
-
-    public int getNumeroMultas() {
-        return multas;
-    }
-
-    public static List<Cliente> getListaClientes() {
-        return listaClientes;
-    }
-
-
 
     public void  modificarCliente(String nom, String ape, String telef, String fecha, String dn, String ema){
         if (nom.isEmpty()) {
@@ -177,8 +185,11 @@ public class Cliente{
         }
     }
 
-    public int getCantidadCliente() {
-        return listaClientes.size();
+    public void eliminarCliente() {
+        if (listaClientes.contains(this))
+        listaClientes.remove(this);
+        else
+            throw new IllegalArgumentException("El cliente no existe");
     }
 
 
@@ -206,25 +217,16 @@ public class Cliente{
         output += String.format("╚═%s═╝\n", "═".repeat(22 + String.valueOf(idC).length()));
         return output;
     }
-
-
-    public String getApellidos() {  // TODO Auto-generated method stub
-        return apellido;
+    public void setMultas() {
+        this.multas++;
     }
 
-    public String getTelefono() {
-        return telefono;
+
+
+    public void NuevaReservasRealizadas() {
+        this.reservasRealizadas++;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
 
-    public int getReservasRealizadas() {
-        return reservasRealizadas;
-    }
 
-    public int getMultas() {
-        return multas;
-    }
 }
