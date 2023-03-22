@@ -29,16 +29,19 @@ public class AutocaravanaTest {
         Assertions.assertEquals(0, a.getKilometraje());
         Assertions.assertEquals("Disponible", a.getEstado());
     }
+
+    @Test
     void testConstructorCampo() {
-        String campo = "1,Citroen,50,555-555-5555,8,12345678,Nueva";
+        String campo = "1,Citroen,50,555-555-5555,8,12345678,Nueva,0";
         Autocaravana autocaravana = new Autocaravana(campo);
         Assertions.assertEquals(1, autocaravana.getIdA());
         Assertions.assertEquals("Citroen", autocaravana.getModelo());
-        Assertions.assertEquals("50", autocaravana.getPrecioPorDia());
+        Assertions.assertEquals(50f, autocaravana.getPrecioPorDia());
         Assertions.assertEquals("555-555-5555", autocaravana.getMatricula());
         Assertions.assertEquals(8, autocaravana.getPlazas());
-        Assertions.assertEquals("12345678", autocaravana.getKilometraje());
+        Assertions.assertEquals(12345678, autocaravana.getKilometraje());
         Assertions.assertEquals("Nueva", autocaravana.getEstado());
+        Assertions.assertEquals(0, autocaravana.getVecesReservada());
     }
 
     @Test

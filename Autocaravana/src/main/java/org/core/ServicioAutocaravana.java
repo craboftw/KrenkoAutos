@@ -70,7 +70,7 @@ public class ServicioAutocaravana implements ReglasAutocaravana, RepositorioAuto
                 pw.println(autocaravana.getIdA() + ";" + autocaravana.getModelo() + ";" +
                         autocaravana.getPrecioPorDia() + ";" + autocaravana.getMatricula() + ";" +
                         autocaravana.getPlazas() + ";" + autocaravana.getKilometraje() + ";" +
-                        autocaravana.getEstado());
+                        autocaravana.getEstado() + ";" + autocaravana.getVecesReservada() + ";");
             }
         } catch (IOException e) {
             e.printStackTrace();

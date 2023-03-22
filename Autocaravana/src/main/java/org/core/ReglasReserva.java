@@ -81,10 +81,10 @@ public interface ReglasReserva {
     }
 
     static boolean condicionesFinalizacion(Reserva R)
-    //Funcion que comprueba si la reserva se permite finalizar antes de la fecha de finalizacion
     {
-        return true;
+        return ((int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay())) <= 3;
     }
+
 
     //Funciones que calculan la tasa de cancelacion, modificacion y finalizacion
 
@@ -117,13 +117,13 @@ public interface ReglasReserva {
     }
 
     //Funciones que comprueban si la caravana y el cliente son compatibles para la reserva
-    default boolean comprobarCaravana(Autocaravana A)
+    static boolean comprobarAutocaravana(Autocaravana A)
     //comprueba si una caravana es valida para la reserva
     {
         return A.getKilometraje() <= 10000000;
     }
 
-    default boolean comprobarCliente(Cliente c)
+    static boolean comprobarCliente(Cliente c)
     //comprueba si un cliente es valido para la reserva
     {
         return (c.getEdad() >= 18) & (c.getEdad() <= 80 & c.getMultas() < 2);
@@ -135,16 +135,25 @@ public interface ReglasReserva {
     //comprueba si una caravana y un cliente son validos para la reserva.
     {
         for (Reserva R : Reserva.getListaReservas()) {
-            if (R.getAutocaravana().equals(A)) {
+            if (R.getAutocaravana().equals(A) & R.getEstadoReserva() != "Cancelada" & R.getEstadoReserva() != "Finalizada") {
                 //comprobar si las fechas de la Reserva R se solapan con las fechas de la reserva que se quiere hacer
-                if (fechaIni.isBefore(R.getFechaFin()) && fechaIni.isAfter(R.getFechaIni()) || fechaFin.isBefore(R.getFechaFin()) && fechaFin.isAfter(R.getFechaIni()) || fechaIni.isBefore(R.getFechaIni()) && fechaFin.isAfter(R.getFechaFin()) || fechaIni.isEqual(R.getFechaIni()) || fechaFin.isEqual(R.getFechaFin())) {
+                if (
+                        (fechaIni.isBefore(R.getFechaFin()) & fechaIni.isAfter(R.getFechaIni())) |
+                                (fechaFin.isBefore(R.getFechaFin()) & fechaFin.isAfter(R.getFechaIni())) |
+                                fechaIni.isEqual(R.getFechaIni()) | fechaFin.isEqual(R.getFechaFin()) |
+                                fechaFin.isEqual(R.getFechaIni()) | fechaIni.isEqual(R.getFechaFin()))
+                {
                     return false;
                 }
             }
         }
-        return comprobarCliente(C) & comprobarCaravana(A);
+        return true;
     }
 
 
 }
+
+
+//DISPONIBLE
+//CREAMOS UNA RESERVA, ENTRE LAS RESERVAS QUE NO TIENEN ESTADO DISPONIBLE O CANCELADA, BUSCAMOS LOS QUE ESTAN DISPONIBLES EN FECHA
 

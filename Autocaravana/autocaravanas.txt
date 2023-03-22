@@ -1,1 +1,1 @@
-0;0001MDM;10.0;4020PKT;0;0;Disponible
+0,0001MDM,10.0,4020PKT,0,0,Disponible

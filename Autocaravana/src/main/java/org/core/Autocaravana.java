@@ -7,7 +7,7 @@ import java.util.List;
 public class Autocaravana {
     private static final List<Autocaravana> listaAutocaravanas = new ArrayList<>();
     public static ServicioAutocaravana servidor = new ServicioAutocaravana();
-    private static int cantidadCaravanasAlquiladas = 0;
+    private int vecesReservada = 0;
     private final int idA;
     private final String matricula;
     private final int plazas;
@@ -32,14 +32,12 @@ public class Autocaravana {
         matricula = matr;
         this.kilometraje = kilometraj;
         this.estado = ServicioAutocaravana.getListaEstadoAutocaravana().get(0);
-        cantidadCaravanasAlquiladas++;
         listaAutocaravanas.add(this);
     }
 
-    public Autocaravana(String campo)
-    //Constructor creado para la lectura de ficheros
-    {
-        String[] campos = campo.split(";");
+    public Autocaravana(String cadena){    //Constructor creado para la lectura de ficheros
+
+        String[] campos = cadena.split(",");
         idA = Integer.parseInt(campos[0]);
         modelo = campos[1];
         precioPorDia = Float.parseFloat(campos[2]);
@@ -47,6 +45,7 @@ public class Autocaravana {
         plazas = Integer.parseInt(campos[4]);
         kilometraje = Integer.parseInt(campos[5]);
         estado = campos[6];
+        vecesReservada = Integer.parseInt(campos[7]);
         listaAutocaravanas.add(this);
     }
 
@@ -94,9 +93,11 @@ public class Autocaravana {
     public int        getPlazas() {
         return plazas;
     }
+    public int getVecesReservada() {return vecesReservada;}
     public static int getCantidadCaravanas() {
         return listaAutocaravanas.size();
     }
+
 
     public void setModelo(String mod) {
         if (mod.isEmpty())
@@ -123,7 +124,7 @@ public class Autocaravana {
     }
 
     void setNuevaReservaRealizada() {
-        cantidadCaravanasAlquiladas++;
+        vecesReservada++;
     }
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧

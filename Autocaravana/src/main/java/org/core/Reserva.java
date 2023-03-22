@@ -20,8 +20,7 @@ public class Reserva {
     public Reserva(Autocaravana A, Cliente C, String fechI, String fechF) {
 
         //Comprobaciones de la caravana
-        if (!servidor.comprobarCaravana(A)) {
-            System.out.println("La caravana no está disponible");
+        if (!ReglasReserva.comprobarAutocaravana(A)) {
             throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
         }
         try
@@ -34,12 +33,10 @@ public class Reserva {
             throw new IllegalArgumentException("Error en el formato de las fechas");
         }
         //Comprobaciones del cliente
-        if (!servidor.comprobarCliente(C)) {
-            System.out.println("El cliente no cumple las condiciones");
+        if (!ReglasReserva.comprobarCliente(C)) {
             throw new IllegalArgumentException("El cliente no cumple las condiciones");
         }
         if (!servidor.comprobarReserva(fechaIni, fechaFin, A, C)) {
-            System.out.println("Las fechas no son compatibles");
             throw new IllegalArgumentException("Las fechas no son compatibles");
         }
         cliente = C;
@@ -55,22 +52,18 @@ public class Reserva {
 
     public Reserva(String cadena) {
 
-        String[] campos = cadena.split(";");
+        String[] campos = cadena.split(",");
         //
         idR = Integer.parseInt(campos[0]);
         caravana = Autocaravana.buscarAutocaravana(Integer.parseInt(campos[1]));
-        cliente = Cliente.buscarCliente(campos[2]);
+        cliente = Cliente.buscarCliente(Integer.parseInt(campos[2]));
         fechaIni = LocalDate.parse(campos[3]);
         fechaFin = LocalDate.parse(campos[4]);
         estadoReserva = campos[5];
         listaReservas.add(this);
-        System.out.println("Error al leer el fichero");
     }
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    static List<Reserva> getListaReservas() {
-        return listaReservas;
-    }
 
     public static Reserva buscarReserva(int i) {
         for (Reserva r : listaReservas) {
@@ -125,28 +118,17 @@ public class Reserva {
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y Setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
-    public int getIdR() {
-        return idR;
-    }
-    public Autocaravana getAutocaravana() {
-        return caravana;
-    }
-    public Cliente getCliente() {
-        return cliente;
-    }
-    public LocalDate getFechaIni() {
-        return fechaIni;
-    }
-    public LocalDate getFechaFin() { return fechaFin; }
-    public float getPrecioTotal() {
-        return precioTotal;
-    }
-    public String getEstadoReserva() {
-        return estadoReserva;
-    }
-    public int getCantidadReservas() {
-        return listaReservas.size();
-    }
+    static List<Reserva> getListaReservas() {return listaReservas;}
+
+    public int          getIdR() {return idR;}
+    public Autocaravana getAutocaravana() {return caravana;}
+    public Cliente      getCliente() {return cliente;}
+    public LocalDate    getFechaIni() {return fechaIni;}
+    public LocalDate    getFechaFin() { return fechaFin;}
+    public float        getPrecioTotal() {return precioTotal;}
+    public String       getEstadoReserva() {return estadoReserva;}
+    public int          getCantidadReservas() {return listaReservas.size();}
+
     public void setEstadoReserva(String estado) {
         if (servidor.comprobarCambioEstado(this, estado)) {
             this.estadoReserva = estado;
@@ -159,6 +141,13 @@ public class Reserva {
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros metodos ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
+    public void checkIn () {
+        ServicioReserva.checkIn(this);
+    }
+
+    public void checkOut () {
+        ServicioReserva.checkOut(this);
+    }
 
 
     public String toString() {

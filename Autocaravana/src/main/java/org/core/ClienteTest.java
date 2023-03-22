@@ -25,7 +25,7 @@ public class ClienteTest {
     }
 
     @Test
-    void testCliente() {
+    void testClienteCadena() {
         String campo = "1,John,Doe,555-555-5555,1990-01-01,12345678,john.doe@example.com,5,0";
         Cliente cliente = new Cliente(campo);
         assertEquals(1, cliente.getIdC());
@@ -37,6 +37,21 @@ public class ClienteTest {
         assertEquals("john.doe@example.com", cliente.getEmail());
         assertEquals(0, cliente.getMultas());
     }
+
+    @Test
+    void testConstructorCliente() {
+        Cliente cliente = new Cliente("John", "Doe", "555-555-5555", "1990-01-01", "12345678", "john.doe@example.com");
+        assertEquals(0, cliente.getIdC());
+        assertEquals("John", cliente.getNombre());
+        assertEquals("Doe", cliente.getApellido());
+        assertEquals("555-555-5555", cliente.getTelefono());
+        assertEquals(LocalDate.of(1990, 1, 1), cliente.getFechaNacimiento());
+        assertEquals("12345678", cliente.getDni());
+        assertEquals("john.doe@example.com", cliente.getEmail());
+        assertEquals(0, cliente.getMultas());
+    }
+
+
 
     @Test
     public void testNombreVacio() {

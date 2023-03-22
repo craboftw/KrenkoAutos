@@ -48,8 +48,8 @@ public class Cliente {
         listaClientes.add(this);
     }
 
-    public Cliente(String campo) {
-        String[] campos = campo.split(",");
+    public Cliente(String cadena) {
+        String[] campos = cadena.split(",");
         idC = Integer.parseInt(campos[0]);
         nombre = campos[1];
         apellido = campos[2];
