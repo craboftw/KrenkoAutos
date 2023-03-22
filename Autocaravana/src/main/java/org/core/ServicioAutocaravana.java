@@ -49,12 +49,7 @@ public class ServicioAutocaravana implements ReglasAutocaravana, RepositorioAuto
     }
 
     public static boolean comprobarEstadoAutocaravana(String estado) {
-        for (String estadoAutocaravana : listaEstadosAutocaravana) {
-            if (estadoAutocaravana.equals(estado)) {
-                return true;
-            }
-        }
-        return false;
+        return listaEstadosAutocaravana.contains(estado);
     }
 
     //@Override

@@ -91,9 +91,6 @@ public class Autocaravana {
     public String     getEstado() {
         return estado;
     }
-    public int        getCapacidad() {
-        return plazas;
-    }
     public int        getPlazas() {
         return plazas;
     }
@@ -101,7 +98,7 @@ public class Autocaravana {
         return listaAutocaravanas.size();
     }
 
-    public void setAutocaravana(String mod) {
+    public void setModelo(String mod) {
         if (mod.isEmpty())
             throw new IllegalArgumentException("El modelo no puede estar vacio");
         modelo = mod;
