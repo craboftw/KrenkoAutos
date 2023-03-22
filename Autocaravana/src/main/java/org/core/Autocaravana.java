@@ -4,7 +4,6 @@ package org.core; //para que todos esten juntos no lo entiendo muy bien
 import java.util.ArrayList;
 import java.util.List;
 
-//A class to represent a Car booking system
 public class Autocaravana {
     private static final List<Autocaravana> listaAutocaravanas = new ArrayList<>();
     public static ServicioAutocaravana servidor = new ServicioAutocaravana();
@@ -17,37 +16,29 @@ public class Autocaravana {
     private int kilometraje;
     private String estado = "Disponible";
 
-    public Autocaravana(String mod, float precio, int plazas, String matricula, int kilometraje) {
-        idA = siguienteCaravana();
+
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+    public Autocaravana(String mod, float precio, int plaz, String matr, int kilometraj) {
+
+        if (!ReglasAutocaravana.comprobarMatricula(matr)) throw new IllegalArgumentException("La matricula debe tener 7 caracteres");
+        if (listaAutocaravanas.stream().anyMatch(a -> a.getMatricula().equals(matr))) throw new IllegalArgumentException("La matricula ya existe");
+        if (precio <= 0) throw new IllegalArgumentException("El precio no puede ser negativo");
+        if (plaz <= 0) throw new IllegalArgumentException("Las plazas no pueden ser negativas");
+        if (kilometraj < 0) throw new IllegalArgumentException("El kilometraje no puede ser negativo");
+        idA = getCantidadCaravanas();
         modelo = mod;
         precioPorDia = precio;
-
-        //Comprobar que una matricula es correcta, si no es correcta, lanzar excepcion
-        if (!ReglasAutocaravana.comprobarMatricula(matricula)) {
-            throw new IllegalArgumentException("La matricula debe tener 7 caracteres");
-        }
-        if (listaAutocaravanas.stream().anyMatch(a -> a.getMatricula().equals(matricula))) {
-            throw new IllegalArgumentException("La matricula ya existe");
-        }
-
-        if (precioPorDia < 0) {
-            throw new IllegalArgumentException("El precio no puede ser negativo");
-        }
-        if (plazas < 0) {
-            throw new IllegalArgumentException("Las plazas no pueden ser negativas");
-        }
-        this.plazas = plazas;
-
-        if (kilometraje < 0) {
-            throw new IllegalArgumentException("El kilometraje no puede ser negativo");
-        }
-        this.matricula = matricula;
-        this.kilometraje = kilometraje;
-        this.estado = "Disponible";
+        plazas = plaz;
+        matricula = matr;
+        this.kilometraje = kilometraj;
+        this.estado = ServicioAutocaravana.getListaEstadoAutocaravana().get(0);
+        cantidadCaravanasAlquiladas++;
         listaAutocaravanas.add(this);
     }
 
-    public Autocaravana(String campo) {
+    public Autocaravana(String campo)
+    //Constructor creado para la lectura de ficheros
+    {
         String[] campos = campo.split(";");
         idA = Integer.parseInt(campos[0]);
         modelo = campos[1];
@@ -59,8 +50,8 @@ public class Autocaravana {
         listaAutocaravanas.add(this);
     }
 
-
-    public static List<Autocaravana> getListaAutocaravanas() {
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+    static List<Autocaravana> getListaAutocaravanas() {
         return listaAutocaravanas;
     }
 
@@ -73,13 +64,14 @@ public class Autocaravana {
         return null;
     }
 
-    public static int getCantidadCaravanas() {
-        return listaAutocaravanas.size();
+    public void eliminarAutocaravana() {
+        if (listaAutocaravanas.contains(this))
+            listaAutocaravanas.remove(this);
+        else
+            throw new IllegalArgumentException("La autocaravana ya esta eliminada");
     }
 
-    private int siguienteCaravana() {
-        return listaAutocaravanas.size();
-    }
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
     public int getIdA() {
         return idA;
@@ -100,43 +92,53 @@ public class Autocaravana {
     public int getKilometraje() {
         return kilometraje;
     }
-
-    public void modificarKilometraje(int kilometraje) {
-        this.kilometraje = kilometraje;
+    public String getEstado() {
+        return estado;
+    }
+    public int getCapacidad() {
+        return plazas;
     }
 
-    public void modificarAutocaravana(String mod, float precio) {
+    public int getPlazas() {
+        return plazas;
+    }
+
+    public static int getCantidadCaravanas() {
+        return listaAutocaravanas.size();
+    }
+
+    public void setAutocaravana(String mod) {
+        if (mod.isEmpty())
+            throw new IllegalArgumentException("El modelo no puede estar vacio");
         modelo = mod;
-        precioPorDia = precio;
     }
 
-    public void actualizarkilometraje(int kilometraje) {
+    public void setPrecioPorDia(float precioPorDia) {
+        if (precioPorDia <= 0)
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        this.precioPorDia = precioPorDia;
+    }
+
+    public void setKilometraje(int kilometraje) {
         if (kilometraje > this.kilometraje) {
             this.kilometraje = kilometraje;
         } else {
             throw new IllegalArgumentException("El kilometraje no puede ser menor que el anterior");
         }
     }
-
-    public void modificarPrecio(float precio) {
-        if (precio <= 0)
-            throw new IllegalArgumentException("El precio no puede ser negativo");
-        precioPorDia = precio;
-    }
-
-    public boolean quedanCaravanas() {
-        return getCantidadCaravanas() > 0;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void cambiarEstado(String Estado) {
+    public void setEstado(String Estado) {
         if (ServicioAutocaravana.comprobarEstadoAutocaravana(Estado))
             estado = Estado;
     }
 
+    void setNuevaReservaRealizada() {
+        cantidadCaravanasAlquiladas++;
+    }
+
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+    public boolean quedanCaravanas() {
+        return getCantidadCaravanas() > 0;
+    }
 
     public String toString() {
         String output = String.format("╔═══════════════════╗\n"
@@ -155,27 +157,7 @@ public class Autocaravana {
         return output;
     }
 
-
-    public int getCapacidad() {
-        return plazas;
-    }
-
-    public int getPlazas() {
-        return plazas;
-    }
-
-    public void NuevaReservasRealizadas() {
-        cantidadCaravanasAlquiladas++;
-    }
-
-    public void eliminarAutocaravana() {
-        if (listaAutocaravanas.contains(this))
-            listaAutocaravanas.remove(this);
-        else
-            throw new IllegalArgumentException("La autocaravana ya esta eliminada");
-    }
 }
-
 
 //              ▓▓▓▓▓▓▓▓▓▓▓▓                                              ████████
 //  ▓▓▓▓      ▓▓▓▓▓▓▓▓  ▓▓▓▓▓▓                                              ██    ████

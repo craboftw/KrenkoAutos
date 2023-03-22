@@ -36,14 +36,12 @@ public class ClienteTest {
         assertEquals("12345678", cliente.getDni());
         assertEquals("john.doe@example.com", cliente.getEmail());
         assertEquals(0, cliente.getMultas());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testNombreVacio() {
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente = new Cliente("", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
-            cliente.eliminarCliente();
         });
     }
 
@@ -51,7 +49,6 @@ public class ClienteTest {
     public void testApellidoVacio() {
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente = new Cliente("Culebra", "", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
-            cliente.eliminarCliente();
         });
     }
 
@@ -59,7 +56,6 @@ public class ClienteTest {
     public void testFechaIncorrecta() {
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2-12-21", "77172375W", "Culebrainvisible@gmail.com");
-            cliente.eliminarCliente();
         });
     }
 
@@ -68,27 +64,21 @@ public class ClienteTest {
     public void testDniVacio() {
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "", "Culebrainvisible@gmail.com");
-            cliente.eliminarCliente();
         });
-        //cliente.eliminarCliente();
     }
 
     @Test
     public void testDniExistente() {
-        Cliente cliente = new Cliente("Culebre", "invisibla", "91209129", "2000-12-21", "77172375W", "Culebrainvisible");
+        Cliente cliente = new Cliente("Culebre", "invisibla", "91209129", "2000-12-21", "77172375W", "Culebra@invisi.ble");
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente2 = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
-            cliente.eliminarCliente();
         });
-        cliente.eliminarCliente();
-
     }
 
     @Test
     public void testTelefonoVacio() {
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente = new Cliente("Culebra", "invisible", "", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
-            cliente.eliminarCliente();
         });
     }
 
@@ -97,8 +87,7 @@ public class ClienteTest {
         Cliente sujetodepruebas = new Cliente("Culebra", "invisible", "a", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente = new Cliente("Culebra", "invisible", "a", "2000-12-21", "7717375W", "Culebrainvisible@gmail.com");
-            cliente.eliminarCliente();
-            sujetodepruebas.eliminarCliente();
+
         });
     }
 
@@ -108,7 +97,6 @@ public class ClienteTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente2 = new Cliente("Sara", "Castillo", "87654321", "2000-12-21", "77172370W", "sandra@gmail.com");
-            cliente2.eliminarCliente();
         });
     }
 
@@ -116,7 +104,6 @@ public class ClienteTest {
     public void testEmailVacio() {
         assertThrows(IllegalArgumentException.class, () -> {
             Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "");
-            cliente.eliminarCliente();
         });
     }
 
@@ -126,58 +113,50 @@ public class ClienteTest {
     public void testGetNombre() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         assertEquals("Culebra", cliente.getNombre());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testGetApellido() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         assertEquals("invisible", cliente.getApellido());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testGetTelefono() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         assertEquals("77172375W", cliente.getDni());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testGetEdad() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         assertEquals(22, cliente.getEdad());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testGetDni() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         assertEquals("77172375W", cliente.getDni());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testGetEmail() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "771723756W", "Culebrainvisible@gmail.com");
         assertEquals("Culebrainvisible@gmail.com", cliente.getEmail());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testGetId() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "71772375W", "Culebrainvisible@gmail.com");
         assertEquals(0, cliente.getIdC());
-        cliente.eliminarCliente();
     }
 
     @Test
     public void testGetNumeroMultas() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         assertEquals(0, cliente.getMultas());
-        cliente.setMultas();
+        cliente.setNuevaMulta();
         assertEquals(1, cliente.getMultas());
-        cliente.eliminarCliente();
     }
 
     @Test
@@ -195,9 +174,6 @@ public class ClienteTest {
         for (Cliente C : lista2) {
             assert (Cliente.getListaClientes().contains(C));
         }
-        cliente.eliminarCliente();
-        cliente2.eliminarCliente();
-        cliente3.eliminarCliente();
     }
 
     @Test
@@ -205,7 +181,7 @@ public class ClienteTest {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
         Autocaravana autocaravana = new Autocaravana("Coche robado", 0.1f, 8, "8675GDS", 1230);
         Reserva reserva = new Reserva(autocaravana, cliente, "2023-04-21", "2023-05-21");
-        assertEquals(cliente.getReservasRealizadas(), 1);
+        assertEquals(cliente.getCantidadReservasRealizadas(), 1);
 
     }
 
@@ -215,9 +191,6 @@ public class ClienteTest {
         Cliente cliente2 = new Cliente("Pedro", "Alvarez", "666777999", "2000-10-03", "44065455w", "maraya@sirenas.existen");
 
         assertEquals(2, Cliente.getNumeroClientes());
-        cliente1.eliminarCliente();
-        cliente2.eliminarCliente();
-
     }
 
 
@@ -234,9 +207,6 @@ public class ClienteTest {
         // Buscar un cliente que no existe en la lista
         Cliente clienteNoEncontrado = Cliente.buscarCliente("12345");
         Assertions.assertNull(clienteNoEncontrado);
-
-        cliente1.eliminarCliente();
-        cliente2.eliminarCliente();
     }
 
     @Test
@@ -251,18 +221,14 @@ public class ClienteTest {
         // Buscar un cliente que no existe en la lista
         Cliente clienteNoEncontrado = Cliente.buscarCliente(10);
         Assertions.assertNull(clienteNoEncontrado);
-
-        cliente1.eliminarCliente();
-        cliente2.eliminarCliente();
-
     }
 
     @Test
+    //ANTES ERA MODIFICAR CLIENTE AHORA ES SOLO TEST MODIFICAR NOMBRE
     public void testModificarCliente() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");
-        cliente.modificarCliente("Pedro", "Alvarez", "666777999", "2000-10-03", "44065455w", "maraya@sirenas.existen");
+        cliente.setNombre("Pedro");
         assertEquals("Pedro", cliente.getNombre());
-        cliente.eliminarCliente();
     }
 
     @Test
@@ -277,7 +243,6 @@ public class ClienteTest {
         assertTrue(Cliente.getListaClientes().contains(cliente2));
         cliente2.eliminarCliente();
         assertFalse(Cliente.getListaClientes().contains(cliente2));
-
     }
 
 }

@@ -30,7 +30,7 @@ public class Reserva {
             System.out.println("El cliente no cumple las condiciones");
             throw new IllegalArgumentException("El cliente no cumple las condiciones");
         }
-        cliente = C;
+        cliente = C; //2020-10-12
         fechaIni = LocalDate.parse(fechI);
         fechaFin = LocalDate.parse(fechF);
         if (!servidor.comprobarReserva(fechaIni, fechaFin, A, C)) {
@@ -40,8 +40,8 @@ public class Reserva {
         precioTotal = servidor.calculaPrecioTotal(A, C, fechaIni, fechaFin);
         estadoReserva = "pendiente";
         idR = siguienteReserva();
-        C.NuevaReservasRealizadas();
-        A.NuevaReservasRealizadas();
+        C.setNuevaReservaRealizada();
+        A.setNuevaReservaRealizada();
         listaReservas.add(this);
     }
 
@@ -57,11 +57,9 @@ public class Reserva {
         estadoReserva = campos[5];
         listaReservas.add(this);
         System.out.println("Error al leer el fichero");
-
-
     }
 
-    public static List<Reserva> getListaReservas() {
+    static List<Reserva> getListaReservas() {
         return listaReservas;
     }
 
@@ -108,7 +106,6 @@ public class Reserva {
                 break;
         }
         return lista;
-
     }
 
 

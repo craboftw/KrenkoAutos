@@ -7,8 +7,7 @@ public class ServicioAutocaravana implements ReglasAutocaravana, RepositorioAuto
 
     private static final String AUTOCARAVANAS_FILE = "autocaravanas.txt";
     private static final String ESTADOSAUTOCARAVANA_FILE = "estadosautocaravana.txt";
-    private static final List<String> listaEstadosAutocaravana = new ArrayList<>(Arrays.asList("Operativo", "Sucio", "Averiado", "Fuera de Servicio"));
-
+    private static final List<String> listaEstadosAutocaravana = new ArrayList<>(Arrays.asList("Disponible", "Sucio", "Averiado", "Fuera de Servicio"));
 
     public ServicioAutocaravana() {
     }
@@ -45,7 +44,7 @@ public class ServicioAutocaravana implements ReglasAutocaravana, RepositorioAuto
         }
     }
 
-    public static List<String> getListaEstadoAutocaravana() {
+    static List<String> getListaEstadoAutocaravana() {
         return listaEstadosAutocaravana;
     }
 

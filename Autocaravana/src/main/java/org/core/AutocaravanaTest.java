@@ -30,23 +30,23 @@ public class AutocaravanaTest {
     @Test
     public void testModificarPrecio() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4021PKT", 0);
-        a.modificarPrecio(200);
+        a.setPrecioPorDia(200);
         Assertions.assertEquals(200, a.getPrecioPorDia(), 0.01);
     }
 
     @Test
     public void testModificarKilometraje() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        a.actualizarkilometraje(1000);
+        a.setKilometraje(1000);
         Assertions.assertEquals(1000, a.getKilometraje());
     }
 
     @Test
-    public void testActualizarKilometraje() {
+    public void testModificarKilometrajeMenos() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4023PKT", 0);
-        a.actualizarkilometraje(1000);
+        a.setKilometraje(1000);
         Assertions.assertEquals(1000, a.getKilometraje());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.actualizarkilometraje(500));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setKilometraje(500));
     }
 
     @Test
@@ -123,25 +123,25 @@ public class AutocaravanaTest {
     @Test
     public void testModificarPrecioNegativo() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4021PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.modificarPrecio(-200));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setPrecioPorDia(-200));
     }
 
     @Test
     public void testModificarPrecioCero() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4021PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.modificarPrecio(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setPrecioPorDia(0));
     }
 
     @Test
     public void testModificarKilometrajeNegativo() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.actualizarkilometraje(-1000));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setKilometraje(-1000));
     }
 
     @Test
     public void testModificarKilometrajeCero() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.actualizarkilometraje(0));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setKilometraje(0));
     }
 
 

@@ -1,8 +1,6 @@
 package org.core;
 
 public interface ReglasAutocaravana {
-
-
     static boolean comprobarMatricula(String matricula) {
         String regex = "^[0-9]{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$"; // Expresión regular para matrículas de turismos
 

@@ -43,7 +43,7 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
             for (Cliente cliente : clientes) {
                 pw.println(cliente.getIdC() + "," + cliente.getNombre() + "," + cliente.getApellido() + "," +
                         cliente.getTelefono() + "," + cliente.getFechaNacimiento() + "," + cliente.getDni() + "," +
-                        cliente.getEmail() + "," + cliente.getReservasRealizadas() + "," + cliente.getMultas());
+                        cliente.getEmail() + "," + cliente.getCantidadReservasRealizadas() + "," + cliente.getMultas());
             }
         } catch (IOException e) {
             e.printStackTrace();
