@@ -16,6 +16,7 @@ public class Reserva {
     private String estadoReserva;
     private float precioTotal;
 
+    //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Reserva(Autocaravana A, Cliente C, String fechI, String fechF) {
 
         //Comprobaciones de la caravana
@@ -23,23 +24,30 @@ public class Reserva {
             System.out.println("La caravana no está disponible");
             throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
         }
-        caravana = A;
-
+        try
+        {
+            fechaIni = LocalDate.parse(fechI);
+            fechaFin = LocalDate.parse(fechF);
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("Error en el formato de las fechas");
+        }
         //Comprobaciones del cliente
         if (!servidor.comprobarCliente(C)) {
             System.out.println("El cliente no cumple las condiciones");
             throw new IllegalArgumentException("El cliente no cumple las condiciones");
         }
-        cliente = C; //2020-10-12
-        fechaIni = LocalDate.parse(fechI);
-        fechaFin = LocalDate.parse(fechF);
         if (!servidor.comprobarReserva(fechaIni, fechaFin, A, C)) {
             System.out.println("Las fechas no son compatibles");
             throw new IllegalArgumentException("Las fechas no son compatibles");
         }
+        cliente = C;
+
+        caravana = A;
         precioTotal = servidor.calculaPrecioTotal(A, C, fechaIni, fechaFin);
-        estadoReserva = "pendiente";
-        idR = siguienteReserva();
+        estadoReserva = ServicioReserva.getListaEstadoReservas().get(0);
+        idR = getCantidadReservas();
         C.setNuevaReservaRealizada();
         A.setNuevaReservaRealizada();
         listaReservas.add(this);
@@ -48,7 +56,7 @@ public class Reserva {
     public Reserva(String cadena) {
 
         String[] campos = cadena.split(";");
-
+        //
         idR = Integer.parseInt(campos[0]);
         caravana = Autocaravana.buscarAutocaravana(Integer.parseInt(campos[1]));
         cliente = Cliente.buscarCliente(campos[2]);
@@ -59,6 +67,7 @@ public class Reserva {
         System.out.println("Error al leer el fichero");
     }
 
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     static List<Reserva> getListaReservas() {
         return listaReservas;
     }
@@ -99,7 +108,7 @@ public class Reserva {
             case "fecha":
                 for (Reserva r : listaReservas) {
                     LocalDate fecha = LocalDate.parse(info);
-                    if (r.getFechaIni().isAfter(fecha) || r.getFechaFin().isBefore(fecha)) {
+                    if (r.getFechaIni().isAfter(fecha)  || r.getFechaIni().isEqual(fecha )|| r.getFechaFin().isBefore(fecha) || r.getFechaFin().isEqual(fecha)){
                         lista.add(r);
                     }
                 }
@@ -108,76 +117,49 @@ public class Reserva {
         return lista;
     }
 
+    public void eliminarReserva() {
+        if (listaReservas.contains(this)) {
+            listaReservas.remove(this);
+        } else throw new IllegalArgumentException("La reserva ya esta eliminada");
+    }
 
-    //añadir listaEstados de reserva
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y Setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
-    public void asociarestado(String estado) {
+    public int getIdR() {
+        return idR;
+    }
+    public Autocaravana getAutocaravana() {
+        return caravana;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public LocalDate getFechaIni() {
+        return fechaIni;
+    }
+    public LocalDate getFechaFin() { return fechaFin; }
+    public float getPrecioTotal() {
+        return precioTotal;
+    }
+    public String getEstadoReserva() {
+        return estadoReserva;
+    }
+    public int getCantidadReservas() {
+        return listaReservas.size();
+    }
+    public void setEstadoReserva(String estado) {
         if (servidor.comprobarCambioEstado(this, estado)) {
             this.estadoReserva = estado;
         }
     }
 
-
-    public int getIdR() {
-        return idR;
+    void setPrecioTotal(float precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
-    public Autocaravana getAutocaravana() {
-        return caravana;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public LocalDate getFechaIni() {
-        return fechaIni;
-    }
-
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
-
-    public float getPrecioTotal() {
-        return precioTotal;
-    }
-
-    public String getEstadoReserva() {
-        return estadoReserva;
-    }
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros metodos ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
 
-    public int siguienteReserva() {
-        return listaReservas.size();
-    }
-
-    public void checkOut() {
-        switch (estadoReserva) {
-            case "Pendiente":
-                estadoReserva = "Finalizada";
-                break;
-            case "Cancelada":
-                System.out.println("La reserva está cancelada");
-                break;
-            case "Finalizada":
-                System.out.println("La reserva ya está finalizada");
-                break;
-            case "En curso":
-                if (LocalDate.now().isAfter(fechaFin)) {
-                    precioTotal += servidor.calcularMulta(this);
-                }
-                if (LocalDate.now().isBefore(fechaFin) & servidor.condicionesFinalizacion(this)) {
-                    precioTotal += servidor.calcularTasaFinalizacion(this);
-                }
-                if (LocalDate.now().isBefore(fechaFin) & !servidor.condicionesFinalizacion(this)) {
-                    System.out.println("No se puede finalizar la reserva");
-                    break;
-                } else {
-                    estadoReserva = "Finalizada";
-                }
-                break;
-        }
-    }
 
     public String toString() {
         // usar String.format() para dar formato a la salida
@@ -206,9 +188,30 @@ public class Reserva {
     }
 
 
-    public void eliminarReserva() {
-        if (listaReservas.contains(this)) {
-            listaReservas.remove(this);
-        } else throw new IllegalArgumentException("La reserva ya esta eliminada");
-    }
+
 }
+
+//              ▓▓▓▓▓▓▓▓▓▓▓▓                                              ████████
+//  ▓▓▓▓      ▓▓▓▓▓▓▓▓  ▓▓▓▓▓▓                                              ██    ████
+//  ▓▓      ▓▓▓▓    ▓▓██    ██                                                ██░░    ██
+//  ▓▓▓▓    ▓▓▓▓    ████              ▓▓▓▓                                      ██░░    ██
+//    ▓▓    ▓▓▓▓                        ▓▓▓▓                                      ██░░    ██
+//    ▓▓▓▓  ▓▓████        ▓▓        ▓▓    ██                                      ██░░░░    ██
+//      ▓▓▓▓  ██▓▓▓▓▓▓▓▓▓▓          ▓▓▓▓▓▓██                                        ██░░    ██
+//▓▓      ████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ▓▓    ▓▓▓▓██                                        ██░░░░    ██
+//▓▓▓▓▓▓    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓        ▓▓██                                        ██░░░░    ██
+//  ▓▓▓▓████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓      ▓▓██                                        ██░░░░░░    ██
+//          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    ████  ▓▓                                    ██░░░░░░    ██
+//    ▓▓██████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████████    ██                                    ██░░░░░░    ██
+//  ▓▓▓▓      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓████████    ████  ██                              ██░░░░░░░░    ██
+//  ▓▓  ▓▓▓▓██████▓▓▓▓▓▓▓▓▓▓████████  ▓▓▓▓▓▓██    ████                            ██░░░░░░      ██
+//    ▓▓▓▓        ████▓▓▓▓██████████▓▓            ██  ██                        ██░░░░░░░░    ██
+//    ▓▓▓▓            ▓▓████████    ▓▓▓▓    ██    ██  ░░██                    ██░░░░░░░░░░    ██
+//      ▓▓▓▓              ▓▓  ▓▓▓▓    ▓▓▓▓▓▓██      ██  ░░████            ████░░░░░░░░░░░░    ██
+//                        ▓▓    ▓▓▓▓                ██    ░░░░████████████░░░░░░░░░░░░░░    ██
+//                      ████      ██                  ██    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░    ██
+//                  ▓▓████      ████                    ██    ░░░░░░░░░░░░░░░░░░░░░░      ██
+//‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                        ██        ░░░░░░░░░░          ██
+//Francisco López Guerrero                                  ████                    ████
+//Miriam Armario Cantos                                         ████          ██████
+//‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                                  ██████████

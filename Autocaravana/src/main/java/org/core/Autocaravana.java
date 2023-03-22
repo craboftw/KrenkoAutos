@@ -1,4 +1,4 @@
-package org.core; //para que todos esten juntos no lo entiendo muy bien 
+package org.core;
 
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class Autocaravana {
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Autocaravana(String mod, float precio, int plaz, String matr, int kilometraj) {
 
-        if (!ReglasAutocaravana.comprobarMatricula(matr)) throw new IllegalArgumentException("La matricula debe tener 7 caracteres");
+        if (!ReglasAutocaravana.comprobarMatricula(matr)) throw new IllegalArgumentException("La matricula no es valida");
         if (listaAutocaravanas.stream().anyMatch(a -> a.getMatricula().equals(matr))) throw new IllegalArgumentException("La matricula ya existe");
         if (precio <= 0) throw new IllegalArgumentException("El precio no puede ser negativo");
         if (plaz <= 0) throw new IllegalArgumentException("Las plazas no pueden ser negativas");
@@ -73,36 +73,30 @@ public class Autocaravana {
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
-    public int getIdA() {
+    public int        getIdA() {
         return idA;
     }
-
-    public String getModelo() {
+    public String     getModelo() {
         return modelo;
     }
-
-    public float getPrecioPorDia() {
+    public float      getPrecioPorDia() {
         return precioPorDia;
     }
-
-    public String getMatricula() {
+    public String     getMatricula() {
         return matricula;
     }
-
-    public int getKilometraje() {
+    public int        getKilometraje() {
         return kilometraje;
     }
-    public String getEstado() {
+    public String     getEstado() {
         return estado;
     }
-    public int getCapacidad() {
+    public int        getCapacidad() {
         return plazas;
     }
-
-    public int getPlazas() {
+    public int        getPlazas() {
         return plazas;
     }
-
     public static int getCantidadCaravanas() {
         return listaAutocaravanas.size();
     }

@@ -80,7 +80,7 @@ public interface ReglasReserva {
         return (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay()) > 3;
     }
 
-    default boolean condicionesFinalizacion(Reserva R)
+    static boolean condicionesFinalizacion(Reserva R)
     //Funcion que comprueba si la reserva se permite finalizar antes de la fecha de finalizacion
     {
         return true;
@@ -102,14 +102,14 @@ public interface ReglasReserva {
         return R.getAutocaravana().getPrecioPorDia() * diasRestantes * (float) 0.05;
     }
 
-    default float calcularTasaFinalizacion(Reserva R) {
+    static float calcularTasaFinalizacion(Reserva R) {
         //si cancelo la reserva con dias de antelacion me devuelven el 50% del precio de los dias que me queden por utilizar
         int diasRestantes = (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay());
         return R.getPrecioTotal() - R.getAutocaravana().getPrecioPorDia() * diasRestantes * (float) 0.50;
     }
 
     //Funciones que calculan la multa por incumplimiento.
-    default float calcularMulta(Reserva R)
+    static float calcularMulta(Reserva R)
     //Calcula la multa por incumplimiento de la reserva
     {
         int diasRetraso = (int) (LocalDate.now().toEpochDay() - R.getFechaFin().toEpochDay());

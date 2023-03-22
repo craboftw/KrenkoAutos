@@ -107,8 +107,16 @@ public class ClienteTest {
         });
     }
 
+    @Test
+    public void testEmailSincaracteres(){
+        assertThrows(IllegalArgumentException.class, () -> {
+                    Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "culebra#invisi.ble");});
+        assertThrows(IllegalArgumentException.class, () -> {
+            Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "culebra@invisi,ble");});
+        }
 
-    //TEST DE LOS METODOS GET//////////////////////////////////////////////////////////////////////
+
+            //TEST DE LOS METODOS GET//////////////////////////////////////////////////////////////////////
     @Test
     public void testGetNombre() {
         Cliente cliente = new Cliente("Culebra", "invisible", "12345678", "2000-12-21", "77172375W", "Culebrainvisible@gmail.com");

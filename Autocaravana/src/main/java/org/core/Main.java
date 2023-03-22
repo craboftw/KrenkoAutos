@@ -37,6 +37,17 @@ public class Main {
             System.out.println(estado);
         }
 
+        Cliente cli = new Cliente("12345678A", "Juan", "Perez", "1960-02-02", "666666666", "A@B.com");
+        Autocaravana car = new Autocaravana("1234ABC", 9f,4,"5050MLR",100);
+        Reserva res = new Reserva(car, cli, "2023-03-22", "2024-01-10");
+        System.out.println(res);
+        ServicioReserva.checkIn(res);
+        System.out.println(res);
+        ServicioReserva.checkOut(res);
+        System.out.println(res);
+
+
+
     }
 
 

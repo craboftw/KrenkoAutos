@@ -5,7 +5,7 @@ public interface ReglasAutocaravana {
         String regex = "^[0-9]{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$"; // Expresión regular para matrículas de turismos
 
         // Verificar si la matrícula coincide con la expresión regular
-        if (!matricula.matches(regex)) {
+        if (!matricula.matches(regex)){
             return false;
         }
 

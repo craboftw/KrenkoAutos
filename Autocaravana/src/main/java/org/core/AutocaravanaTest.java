@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class AutocaravanaTest {
 
@@ -25,6 +28,17 @@ public class AutocaravanaTest {
         Assertions.assertEquals("4029PKT", a.getMatricula());
         Assertions.assertEquals(0, a.getKilometraje());
         Assertions.assertEquals("Disponible", a.getEstado());
+    }
+    void testConstructorCampo() {
+        String campo = "1,Citroen,50,555-555-5555,8,12345678,Nueva";
+        Autocaravana autocaravana = new Autocaravana(campo);
+        Assertions.assertEquals(1, autocaravana.getIdA());
+        Assertions.assertEquals("Citroen", autocaravana.getModelo());
+        Assertions.assertEquals("50", autocaravana.getPrecioPorDia());
+        Assertions.assertEquals("555-555-5555", autocaravana.getMatricula());
+        Assertions.assertEquals(8, autocaravana.getPlazas());
+        Assertions.assertEquals("12345678", autocaravana.getKilometraje());
+        Assertions.assertEquals("Nueva", autocaravana.getEstado());
     }
 
     @Test
@@ -68,17 +82,6 @@ public class AutocaravanaTest {
         Assertions.assertEquals(a2, Autocaravana.buscarAutocaravana(a2.getIdA()));
         Assertions.assertNull(Autocaravana.buscarAutocaravana(999));
 
-
-    }
-
-    @Test
-    public void testListaAutocaravanas() {
-        Autocaravana a1 = new Autocaravana("Modelo1", 100, 4, "4026PKT", 0);
-        Autocaravana a2 = new Autocaravana("Modelo2", 200, 6, "8008SSS", 0);
-        List<Autocaravana> lista = Autocaravana.getListaAutocaravanas();
-        Assertions.assertEquals(2, lista.size());
-        Assertions.assertTrue(lista.contains(a1));
-        Assertions.assertTrue(lista.contains(a2));
 
     }
 
@@ -142,6 +145,57 @@ public class AutocaravanaTest {
     public void testModificarKilometrajeCero() {
         Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
         Assertions.assertThrows(IllegalArgumentException.class, () -> a.setKilometraje(0));
+    }
+
+    //TESTS DE GET
+
+    @Test
+    public void testGetIdA(){
+        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
+        Assertions.assertEquals(0, a.getIdA());
+    }
+
+    @Test
+    public void testGetModelo(){
+        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
+        Assertions.assertEquals("Modelo1", a.getModelo());
+    }
+    
+    @Test
+    public void testGetPrecioPorDia(){
+        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
+        Assertions.assertEquals(100, a.getPrecioPorDia());
+    }
+
+    @Test
+    public void testGetMatricula(){
+        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
+        assertEquals ("4022PKT", a.getMatricula());
+    }
+    @Test
+    public void testGetKilometraje(){
+        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
+        assertEquals(0, a.getKilometraje());
+    }
+    
+    @Test
+    public void testGetEstado() {
+        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
+        a.setEstado("Nueva");
+        assertEquals("Nueva", a.getEstado());
+    }
+
+    @Testpubli
+
+    @Test
+    public void testGetListaAutocaravanas() {
+        Autocaravana a1 = new Autocaravana("Modelo1", 100, 4, "4026PKT", 0);
+        Autocaravana a2 = new Autocaravana("Modelo2", 200, 6, "8008SSS", 0);
+        List<Autocaravana> lista = Autocaravana.getListaAutocaravanas();
+        Assertions.assertEquals(2, lista.size());
+        Assertions.assertTrue(lista.contains(a1));
+        Assertions.assertTrue(lista.contains(a2));
+
     }
 
 
