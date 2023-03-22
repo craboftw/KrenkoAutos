@@ -98,7 +98,6 @@ public class Autocaravana {
         return listaAutocaravanas.size();
     }
 
-
     public void setModelo(String mod) {
         if (mod.isEmpty())
             throw new IllegalArgumentException("El modelo no puede estar vacio");
@@ -174,16 +173,4 @@ public class Autocaravana {
 //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                        ██        ░░░░░░░░░░          ██
 //Francisco López Guerrero                                  ████                    ████
 //Miriam Armario Cantos                                         ████          ██████
-//‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                                  ██████████
-
-
-
-
-
-
-
-
-
-
-
-
+//‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                                    ██████████
