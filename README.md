@@ -405,3 +405,12 @@ classDiagram
     Cliente -- RepositorioCliente
     Reserva -- RepositorioReserva
 ```
+
+- # MADR - Markdown Architectural Decision Record
+## Cambios en el diseño del proyecto
+
+En el diseño inicial del proyecto, como solo sabíamos C++ pensamos un diseño en el que el cliente pudiera implementar sus propias reglas de negocio a través de una lista de funciones. Sin embargo, en Java, se encontró que esta implementación no era adecuada en este lenguaje.
+
+Al consultar con el profesor se llegó a la conclusión de que se debía utilizar el patrón de diseño **Strategy**  para lograr un mejor diseño.
+
+En el nuevo diseño, se eliminó la lista de funciones para implementar reglas de negocio y se agregaron varias interfaces **ReglasReserva**, **ReglasAutocaravana**, **ReglasCliente** las cuales utiliza el **Patrón Strategy** para definir diferentes estrategias de negocio. Por consejo del profesor, también implemtamos unas interfaces para seguir el **Patrón Respository**. Se agregaron las clases **ServicioReserva**, **ServicioAutocaravana** y **ServicioCliente** que implementan las interfaces y definen los métodos. Estas tres últimas clases, son las que el Cliente tendría que implementar para definir las reglas de trabajo y el cómo se almacenan. 
