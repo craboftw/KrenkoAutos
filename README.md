@@ -1,5 +1,6 @@
 # dss2022--2023-MACFLG
 
+# HITO 0
 ### El equipo está compuesto por Francisco López y Miriam Armario.
 ## Equipo
 El equipo está compuesto por Francisco López y Miriam Armario.
@@ -88,4 +89,319 @@ classDiagram
     GestorAlquilerAutocaravanas --> Autocaravana
     GestorAlquilerAutocaravanas --> Reserva
     GestorAlquilerAutocaravanas --> Cliente
+```
+
+# HITO 1
+## Diagrama de secuencia
+
+```mermaid
+sequenceDiagram
+    participant Cliente
+    participant Autocaravana
+    participant ReglasReserva
+    participant servidor
+    participant ServicioReserva
+    participant listaReservas
+
+    Cliente->>ReglasReserva: comprobarCliente(C)
+    ReglasReserva-->>Cliente: resultado
+
+    Autocaravana->>ReglasReserva: comprobarAutocaravana(A)
+    ReglasReserva-->>Autocaravana: resultado
+
+    Cliente->>Reserva: Reserva(A, C, fechI, fechF)
+    Autocaravana->>Reserva: Reserva(A, C, fechI, fechF)
+
+    Reserva->>ReglasReserva: comprobarAutocaravana(A)
+    Reserva->>ReglasReserva: comprobarCliente(C)
+    ReglasReserva-->>Reserva: resultado
+    Reserva->>servidor: comprobarReserva(fechaIni, fechaFin, A, C)
+    servidor-->>Reserva: resultado
+
+    alt las fechas son compatibles
+        Reserva->>C: setNuevaReservaRealizada()
+        C-->>Reserva: resultado
+        Reserva->>A: setNuevaReservaRealizada()
+        A-->>Reserva: resultado
+        Reserva->>servidor: calculaPrecioTotal(A, C, fechaIni, fechaFin)
+        servidor-->>Reserva: precioTotal
+        Reserva->>ServicioReserva: getListaEstadoReservas().get(0)
+        ServicioReserva-->>Reserva: estadoReserva
+        Reserva->>Reserva: getCantidadReservas()
+        Reserva-->>Reserva: idR
+        Reserva->>listaReservas: add(this)
+    else las fechas no son compatibles
+        Reserva->>Reserva: IllegalArgumentException("Las fechas no son compatibles")
+    end
+```
+
+## Diagrama de Clases
+
+```mermaid
+classDiagram
+    class Autocaravana {
+        + servidor : ServicioAutocaravana
+        - estado : String
+        - idA : int
+        - kilometraje : int
+        - listaAutocaravanas : List<Autocaravana>
+        - matricula : String
+        - modelo : String
+        - plazas : int
+        - precioPorDia : float
+        - vecesReservada : int
+        + Autocaravana()
+        + Autocaravana()
+        + buscarAutocaravana()
+        + eliminarAutocaravana()
+        + getCantidadCaravanas()
+        + getEstado()
+        + getIdA()
+        + getKilometraje()
+        + getMatricula()
+        + getModelo()
+        + getPlazas()
+        + getPrecioPorDia()
+        + getVecesReservada()
+        + quedanCaravanas()
+        + setEstado()
+        + setKilometraje()
+        + setModelo()
+        + setPrecioPorDia()
+        + toString()
+        ~ getListaAutocaravanas()
+        ~ setNuevaReservaRealizada()
+    }
+
+
+
+
+    class AutocaravanaTest {
+         + setUp()
+        + test()
+    }
+
+
+
+
+    class Cliente {
+        - apellido : String
+        - dni : String
+        - email : String
+        - fechaNacimiento : LocalDate
+        - idC : int
+        - listaClientes : List<Cliente>
+        - multas : int
+        - nombre : String
+        - reservasRealizadas : int
+        - servidor : ServicioCliente
+        - telefono : String
+        + Cliente()
+        + Cliente()
+        + buscarCliente()
+        + buscarCliente()
+        + eliminarCliente()
+        + getApellido()
+        + getCantidadReservasRealizadas()
+        + getDni()
+        + getEdad()
+        + getEmail()
+        + getFechaNacimiento()
+        + getIdC()
+        + getMultas()
+        + getNombre()
+        + getNumeroClientes()
+        + getTelefono()
+        + setApellido()
+        + setDni()
+        + setEmail()
+        + setFechaNacimiento()
+        + setNombre()
+        + setNuevaMulta()
+        + setNuevaReservaRealizada()
+        + setTelefono()
+        + toString()
+        ~ getListaClientes()
+    }
+
+
+
+
+    class ClienteTest {
+        + setUp()
+        + test()
+    }
+
+
+    class ReglasAutocaravana {
+        + comprobarMatricula()
+    }
+
+
+    class ReglasCliente {
+        + comprobarCliente()
+        + comprobarDNI()
+        + comprobarEdad()
+    }
+
+
+
+
+    class ReglasReserva {
+        + listaEstadosReserva : List<String>
+        + addEstadoReserva()
+        + borrarEstado()
+        + calculaPrecioTotal()
+        + calcularMulta()
+        + calcularTasaCancelacion()
+        + calcularTasaFinalizacion()
+        + calcularTasaModificacion()
+        + comprobarAutocaravana()
+        + comprobarCambioEstado()
+        + comprobarCliente()
+        + comprobarEstadoReserva()
+        + comprobarReserva()
+        + condicionesCancelacion()
+        + condicionesFinalizacion()
+        + condicionesModificacion()
+        + eliminarEstadoReserva()
+    }
+
+
+
+
+    class RepositorioAutocaravana {
+        + cargarAutocaravana()
+        + cargarEstadosAutocaravana()
+        + guardarAutocaravana()
+        + guardarEstadoAutocaravana()
+    }
+
+
+
+
+    class RepositorioCliente {
+        + cargarClientes()
+        + cargarEstadosCliente()
+        + guardarCliente()
+        + guardarEstadosCliente()
+    }
+
+
+
+
+    class RepositorioReserva {
+        + cargarEstadosReserva()
+        + cargarReservas()
+        + guardarEstadosReserva()
+        + guardarReservas()
+    }
+
+
+
+
+    class Reserva {
+        - cantidadReservas : int
+        - estadoReserva : String
+        - fechaFin : LocalDate
+        - fechaIni : LocalDate
+        - idR : int
+        - listaReservas : List<Reserva>
+        - precioTotal : float
+        - servidor : ServicioReserva
+        + Reserva()
+        + Reserva()
+        + buscarReserva()
+        + buscarReserva()
+        + checkIn()
+        + checkOut()
+        + eliminarReserva()
+        + getAutocaravana()
+        + getCantidadReservas()
+        + getCliente()
+        + getEstadoReserva()
+        + getFechaFin()
+        + getFechaIni()
+        + getIdR()
+        + getPrecioTotal()
+        + setEstadoReserva()
+        + toString()
+        ~ getListaReservas()
+        ~ setPrecioTotal()
+    }
+
+
+
+
+    class ReservaTest {
+        + setUp()
+        + test()
+    }
+
+
+
+
+    class ServicioAutocaravana {
+        - AUTOCARAVANAS_FILE : String
+        - ESTADOSAUTOCARAVANA_FILE : String
+        - listaEstadosAutocaravana : List<String>
+        + ServicioAutocaravana()
+        + cargarAutocaravana()
+        + cargarEstadosAutocaravana()
+        + comprobarEstadoAutocaravana()
+        + guardarAutocaravana()
+        + guardarEstadoAutocaravana()
+        ~ getListaEstadoAutocaravana()
+
+  }
+
+
+
+    class ServicioCliente {
+        - CLIENTES_FILE : String
+        - ESTADOSCLIENTE_FILE : String
+        - listaEstadosCliente : List<String>
+        + cargarClientes()
+        + cargarEstadosCliente()
+        + getListaEstadoClientes()
+        + guardarCliente()
+        + guardarEstadosCliente()
+    }
+
+
+
+
+    class ServicioReserva {
+        - ESTADOSRESERVAS_FILE : String
+        - RESERVAS_FILE : String
+        - listaEstadoReserva : List<String>
+        + cargarEstadosReserva()
+        + cargarReservas()
+        + checkIn()
+        + checkOut()
+        + comprobarEstadoReserva()
+        + eliminarEstadoReserva()
+        + getListaEstadoReservas()
+        + guardarEstadosReserva()
+        + guardarReservas()
+        + nuevoestado()
+
+        Autocaravana *-- ReglasAutocaravana
+    }
+
+    Autocaravana *--ReglasAutocaravana
+    Reserva *--ReglasReserva
+    Cliente *--ReglasCliente
+
+    ServicioCliente .. ReglasCliente
+    ServicioAutocaravana .. ReglasAutocaravana
+    ServicioReserva .. ReglasReserva
+
+    ServicioCliente .. RepositorioCliente
+    ServicioReserva .. RepositorioReserva
+    ServicioAutocaravana .. RepositorioAutocaravana
+
+    Autocaravana -- RepositorioAutocaravana
+    Cliente -- RepositorioCliente
+    Reserva -- RepositorioReserva
 ```
