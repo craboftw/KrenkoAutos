@@ -206,5 +206,5 @@ public class Cliente {
 //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                        ██        ░░░░░░░░░░          ██
 //Francisco López Guerrero                                  ████                    ████
 //Miriam Armario Cantos                                         ████          ██████
-//‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                                  ██████████
+//‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧                                                     ██████████
 
