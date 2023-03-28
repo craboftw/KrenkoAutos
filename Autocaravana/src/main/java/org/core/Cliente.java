@@ -7,7 +7,6 @@ import java.util.List;
 public class Cliente {
 
     private static final ServicioCliente servidor = new ServicioCliente();
-    private static final List<Cliente> listaClientes = new ArrayList<>();
     private final int idC;
     private String nombre;
     private String apellido;
@@ -19,25 +18,8 @@ public class Cliente {
     private int multas;
 
 //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Cliente(String nom, String ape, String telef, String fecha, String dn, String ema) {
-
-        try {
-            fechaNacimiento = LocalDate.parse(fecha);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("La fecha no es correcta");
-        }
-        if (nom.isEmpty()) throw new IllegalArgumentException("El nombre no puede estar vacio");
-        if (ape.isEmpty()) throw new IllegalArgumentException("El apellido no puede estar vacio");
-        if (dn.isEmpty()) throw new IllegalArgumentException("El DNI no puede estar vacio");
-        if (listaClientes.stream().anyMatch(c -> c.getDni().equals(dn))) throw new IllegalArgumentException("El DNI ya existe");
-        if (telef.isEmpty()) throw new IllegalArgumentException("El telefono no puede estar vacio");
-        if (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telef))) throw new IllegalArgumentException("El telefono ya existe");
-        if (ema.isEmpty()) throw new IllegalArgumentException("El email no puede estar vacio");
-        if (!(ema.contains("@") & ema.contains("."))) throw new IllegalArgumentException("El email no es correcto");
-        if (listaClientes.stream().anyMatch(c -> c.getEmail().equals(ema))) throw new IllegalArgumentException("El email ya existe");
-        if (!ReglasCliente.comprobarDNI(dn)) throw new IllegalArgumentException("El DNI no es correcto");
-
-        idC = getNumeroClientes();
+    public Cliente(int id, String nom, String ape, String telef, String fecha, String dn, String ema) {
+        idC = id;
         nombre = nom;
         apellido = ape;
         telefono = telef;
@@ -45,7 +27,6 @@ public class Cliente {
         email = ema;
         reservasRealizadas = 0;
         multas = 0;
-        listaClientes.add(this);
     }
 
     public Cliente(String cadena) {
@@ -59,28 +40,12 @@ public class Cliente {
         email = campos[6];
         reservasRealizadas = Integer.parseInt(campos[7]);
         multas = Integer.parseInt(campos[8]);
-        listaClientes.add(this);
     }
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public static List<Cliente> getListaClientes() {return listaClientes;}
-    public static Cliente buscarCliente(int i) {
-        return listaClientes.stream().filter(c -> c.getIdC() == i).findFirst().orElse(null);
-    }
 
-    public static Cliente buscarCliente(String dni) {
-        return listaClientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(null);
-    }
-
-    public void eliminarCliente() {
-        if (listaClientes.contains(this))
-            listaClientes.remove(this);
-        else
-            throw new IllegalArgumentException("El cliente no existe");
-    }
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y Setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
-    public static int getNumeroClientes() { return listaClientes.size(); }
     public int getIdC() {return idC;}
     public String getNombre() {return nombre;}
     public String getApellido() { return apellido;}
@@ -114,8 +79,7 @@ public class Cliente {
     }
 
     public void setTelefono(String telefono) {
-        if (telefono.isEmpty() || (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(telefono) && c.getIdC() != getIdC())))
-            throw new IllegalArgumentException("El telefono no puede estar vacio");
+
         this.telefono = telefono;
     }
 
