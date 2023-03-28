@@ -6,7 +6,8 @@ import java.util.List;
 
 public class Autocaravana {
     private static final List<Autocaravana> listaAutocaravanas = new ArrayList<>();
-    public static ServicioAutocaravana servidor = new ServicioAutocaravana();
+
+    //public static ServicioAutocaravana servidor = new ServicioAutocaravana();
     private int vecesReservada = 0;
     private final int idA;
     private final String matricula;

@@ -5,48 +5,28 @@ import java.time.LocalDate;
 import java.util.*;
 
 
-public class ServicioReserva implements ReglasReserva, RepositorioReserva {
+public class ServicioReserva implements ReglasReserva  {
+
+    private static List<Reserva> listaReservas = new ArrayList<>();
     private static final List<String> listaEstadoReserva = new ArrayList<>(Arrays.asList("Pendiente", "Finalizada", "Cancelada", "En curso"));
-    private static final String RESERVAS_FILE = "reservas.txt";
-    private static final String ESTADOSRESERVAS_FILE = "estadosreserva.txt";
 
-    //@Override
-    public static void cargarReservas() {
-        try {
-            Scanner scanner = new Scanner(new File(RESERVAS_FILE));
-            while (scanner.hasNextLine()) { //Idr no contenid en ninguna linea en campo[0] convertido a entero
-                String linea = scanner.nextLine();
-                boolean encontrado = true;
-                for (Reserva R : Reserva.getListaReservas()) {
-                    if (Integer.parseInt(linea.split(";")[0]) == R.getIdR()) {
-                        encontrado = false;
-                    }
-                }
-
-                if (encontrado) {
-                    new Reserva(linea);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            // Archivo no encontrado, lista vacia
+    public void comprobarReserva(Autocaravana A, Cliente C, String fechI, String fechF)
+    {
+        if (!ReglasReserva.comprobarAutocaravana(A)) {
+            throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
         }
-    }
-
-    //@Override
-    public static void cargarEstadosReserva() {
-        try {
-            Scanner scanner = new Scanner(new File(ESTADOSRESERVAS_FILE));
-            while (scanner.hasNextLine()) {
-
-                String linea = scanner.nextLine();
-                System.out.println(linea);
-                if (!listaEstadoReserva.contains(linea))
-                    listaEstadoReserva.add(linea);
-            }
-            System.out.println(listaEstadoReserva);
-
-        } catch (NoSuchElementException | FileNotFoundException e) {
-            // Archivo no encontrado, lista vacia
+        try
+        {
+            LocalDate fechaIni = LocalDate.parse(fechI);
+            LocalDate fechaFin = LocalDate.parse(fechF);
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("Error en el formato de las fechas");
+        }
+        //Comprobaciones del cliente
+        if (!ReglasReserva.comprobarCliente(C)) {
+            throw new IllegalArgumentException("El cliente no cumple las condiciones");
         }
     }
 
@@ -72,41 +52,6 @@ public class ServicioReserva implements ReglasReserva, RepositorioReserva {
         }
     }
 
-    //@Override
-    public static boolean comprobarEstadoReserva(String estado) {
-        if (!estado.isEmpty() & listaEstadoReserva.contains(estado)) {
-            System.out.println("El estado es correcto");
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
-        return true;
-    }
-
-    @Override
-    public void guardarReservas(Collection<Reserva> R) {
-
-        try (PrintWriter pw = new PrintWriter(new FileWriter(RESERVAS_FILE, true))) {
-            //Borro todo su contenido
-            pw.print("");
-            for (Reserva reserva : R) {
-                pw.println(reserva.getIdR() + ";" + reserva.getAutocaravana().getIdA() + ";" + reserva.getCliente().getDni()
-                        + ";" + reserva.getFechaIni() + ";" + reserva.getFechaFin() + ";" + reserva.getEstadoReserva());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void guardarEstadosReserva(Collection<String> listaEstados) {
-        try (PrintWriter pw = new PrintWriter(new File(ESTADOSRESERVAS_FILE))) {
-            for (String estado : listaEstados) {
-                pw.println(estado);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void checkOut(Reserva reserva) {
         String estadoReserva = reserva.getEstadoReserva();
@@ -168,5 +113,62 @@ public class ServicioReserva implements ReglasReserva, RepositorioReserva {
                 break;
         }
     }
+
+
+    public static Reserva buscarReserva(int i) {
+        for (Reserva r : listaReservas) {
+            if (r.getIdR() == i) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    public static List<Reserva> buscarReserva(String info, String tipo) {
+        List<Reserva> lista = new ArrayList<>();
+        switch (tipo) {
+            case "cliente":
+                for (Reserva r : listaReservas) {
+                    if (r.getCliente().getDni().equals(info)) {
+                        lista.add(r);
+                    }
+                }
+                break;
+            case "matricula":
+                for (Reserva r : listaReservas) {
+                    if (r.getAutocaravana().getMatricula().equals(info)) {
+                        lista.add(r);
+                    }
+                }
+                break;
+            case "estado":
+                for (Reserva r : listaReservas) {
+                    if (r.getEstadoReserva().equals(info)) {
+                        lista.add(r);
+                    }
+                }
+                break;
+            case "fecha":
+                for (Reserva r : listaReservas) {
+                    LocalDate fecha = LocalDate.parse(info);
+                    if (r.getFechaIni().isAfter(fecha)  || r.getFechaIni().isEqual(fecha )|| r.getFechaFin().isBefore(fecha) || r.getFechaFin().isEqual(fecha)){
+                        lista.add(r);
+                    }
+                }
+                break;
+        }
+        return lista;
+    }
+
+    public int          getCantidadReservas() {return listaReservas.size();}
+
+
+    public void eliminarReserva() {
+        if (listaReservas.contains(this)) {
+            listaReservas.remove(this);
+        } else throw new IllegalArgumentException("La reserva ya esta eliminada");
+    }
+
+
 
 }

@@ -25,8 +25,7 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
             // Archivo no encontrado, lista vacia
         }
     }
-
-
+    
     //@Override
     public static void cargarEstadosCliente() {
         try (java.util.Scanner scanner = new java.util.Scanner(new java.io.File(ESTADOSCLIENTE_FILE))) {
