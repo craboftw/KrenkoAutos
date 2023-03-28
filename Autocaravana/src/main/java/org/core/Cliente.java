@@ -62,7 +62,7 @@ public class Cliente {
         listaClientes.add(this);
     }
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    static List<Cliente> getListaClientes() {return listaClientes;}
+    public static List<Cliente> getListaClientes() {return listaClientes;}
     public static Cliente buscarCliente(int i) {
         return listaClientes.stream().filter(c -> c.getIdC() == i).findFirst().orElse(null);
     }

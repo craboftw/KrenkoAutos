@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="ReservaTest" time="0.04" tests="17" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana/target/test-classes:/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana/target/classes:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter/5.9.2/junit-jupiter-5.9.2.jar:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.2/junit-jupiter-api-5.9.2.jar:/home/craboftw/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/craboftw/.m2/repository/org/junit/platform/junit-platform-commons/1.9.2/junit-platform-commons-1.9.2.jar:/home/craboftw/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.2/junit-jupiter-params-5.9.2.jar:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.2/junit-jupiter-engine-5.9.2.jar:/home/craboftw/.m2/repository/org/junit/platform/junit-platform-engine/1.9.2/junit-platform-engine-1.9.2.jar:"/>
+    <property name="java.vm.vendor" value="Red Hat, Inc."/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://www.redhat.com/"/>
+    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk-17.0.6.0.10-1.fc37.x86_64/lib"/>
+    <property name="sun.java.command" value="/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana/target/surefire/surefirebooter7777211893819070835.jar /home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana/target/surefire 2023-03-23T12-09-36_012-jvmRun1 surefire9205749214857982442tmp surefire_011156491619400093739tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana/target/test-classes:/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana/target/classes:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter/5.9.2/junit-jupiter-5.9.2.jar:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.2/junit-jupiter-api-5.9.2.jar:/home/craboftw/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/craboftw/.m2/repository/org/junit/platform/junit-platform-commons/1.9.2/junit-platform-commons-1.9.2.jar:/home/craboftw/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.9.2/junit-jupiter-params-5.9.2.jar:/home/craboftw/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.2/junit-jupiter-engine-5.9.2.jar:/home/craboftw/.m2/repository/org/junit/platform/junit-platform-engine/1.9.2/junit-platform-engine-1.9.2.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/craboftw"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-01-17"/>
+    <property name="java.home" value="/usr/lib/jvm/java-17-openjdk-17.0.6.0.10-1.fc37.x86_64"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana/target/surefire/surefirebooter7777211893819070835.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.6+10"/>
+    <property name="user.name" value="craboftw"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.1.18-200.fc37.x86_64"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="(Red_Hat-17.0.6.0.10-1.fc37)"/>
+    <property name="localRepository" value="/home/craboftw/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugzilla.redhat.com/enter_bug.cgi?product=Fedora&amp;component=java-17-openjdk&amp;version=37"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="17.0.6"/>
+    <property name="user.dir" value="/home/craboftw/Documentos/Universidad/DSS/Github/Autocaravana"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Red Hat, Inc."/>
+    <property name="java.vm.version" value="17.0.6+10"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testFechaCoincidentes" classname="ReservaTest" time="0.004"/>
+  <testcase name="testCheckOut" classname="ReservaTest" time="0.004">
+    <system-out><![CDATA[La reserva está cancelada
+La reserva ya está finalizada
+El estado de la reserva es En curso
+El estado de la reserva es En curso
+No se puede finalizar la reserva
+]]></system-out>
+  </testcase>
+  <testcase name="testGetPrecioTotal" classname="ReservaTest" time="0.001"/>
+  <testcase name="testFechaErroneaExcepcion" classname="ReservaTest" time="0.002"/>
+  <testcase name="testGetEstadoReserva" classname="ReservaTest" time="0.002"/>
+  <testcase name="testGetListaReservas" classname="ReservaTest" time="0.001"/>
+  <testcase name="testCheckIn" classname="ReservaTest" time="0.002">
+    <system-out><![CDATA[La reserva está cancelada
+La reserva ya está finalizada
+La reserva ya está en curso
+La reserva no ha empezado
+]]></system-out>
+  </testcase>
+  <testcase name="testGetFechaFin" classname="ReservaTest" time="0.001"/>
+  <testcase name="testGetFechaIni" classname="ReservaTest" time="0.001"/>
+  <testcase name="testGetCliente" classname="ReservaTest" time="0.001"/>
+  <testcase name="testGetAutocaravana" classname="ReservaTest" time="0.001"/>
+  <testcase name="testGetIdr" classname="ReservaTest" time="0.001"/>
+  <testcase name="testCaravanaReserva" classname="ReservaTest" time="0.002"/>
+  <testcase name="testClienteReserva" classname="ReservaTest" time="0.002"/>
+  <testcase name="testReservaCadena" classname="ReservaTest" time="0.001"/>
+  <testcase name="testGetCantidadReservas" classname="ReservaTest" time="0.001"/>
+  <testcase name="testConstructorReserva" classname="ReservaTest" time="0.001"/>
+</testsuite>

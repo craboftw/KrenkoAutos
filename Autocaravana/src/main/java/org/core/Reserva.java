@@ -39,8 +39,8 @@ public class Reserva {
         if (!servidor.comprobarReserva(fechaIni, fechaFin, A, C)) {
             throw new IllegalArgumentException("Las fechas no son compatibles");
         }
-        cliente = C;
 
+        cliente = C;
         caravana = A;
         precioTotal = servidor.calculaPrecioTotal(A, C, fechaIni, fechaFin);
         estadoReserva = ServicioReserva.getListaEstadoReservas().get(0);
@@ -118,7 +118,7 @@ public class Reserva {
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y Setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
-    static List<Reserva> getListaReservas() {return listaReservas;}
+    public static List<Reserva> getListaReservas() {return listaReservas;}
 
     public int          getIdR() {return idR;}
     public Autocaravana getAutocaravana() {return caravana;}

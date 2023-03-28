@@ -50,7 +50,7 @@ public class Autocaravana {
     }
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    static List<Autocaravana> getListaAutocaravanas() {
+    public static List<Autocaravana> getListaAutocaravanas() {
         return listaAutocaravanas;
     }
 
