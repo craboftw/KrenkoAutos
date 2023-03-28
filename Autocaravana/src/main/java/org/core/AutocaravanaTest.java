@@ -16,22 +16,23 @@ public class AutocaravanaTest {
     public void setUp() {
         //Borrar todos los clientes existentes
         Cliente.getListaClientes().clear();
-        Autocaravana.getListaAutocaravanas().clear();
+        ServicioAutocaravana.getListaAutocaravanas().clear();
         Reserva.getListaReservas().clear();
     }
 
 
     @Test
     public void testConstructor() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4029PKT", 0);
-        assertEquals("Modelo1", a.getModelo());
-        assertEquals(100, a.getPrecioPorDia(), 0.01);
-        assertEquals("4029PKT", a.getMatricula());
-        assertEquals(0, a.getKilometraje());
-        assertEquals("Disponible", a.getEstado());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals(0, a1.getIdA());
+        assertEquals("Modelo1", a1.getModelo());
+        assertEquals(100, a1.getPrecioPorDia(), 0.01);
+        assertEquals("4029PKT", a1.getMatricula());
+        assertEquals(0, a1.getKilometraje());
+        assertEquals("Disponible", a1.getEstado());
     }
 
-    @Test
+    /*@Test
     void testConstructorCampo() {
         String campo = "1,Citroen,50,555-555-5555,8,12345678,Nueva,0";
         Autocaravana autocaravana = new Autocaravana(campo);
@@ -44,47 +45,47 @@ public class AutocaravanaTest {
         assertEquals("Nueva", autocaravana.getEstado());
         assertEquals(0, autocaravana.getVecesReservada());
     }
-
+*/
     @Test
     public void testModificarPrecio() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4021PKT", 0);
-        a.setPrecioPorDia(200);
-        assertEquals(200, a.getPrecioPorDia(), 0.01);
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        a1.setPrecioPorDia(200);
+        assertEquals(200, a1.getPrecioPorDia(), 0.01);
     }
 
     @Test
     public void testModificarKilometraje() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        a.setKilometraje(1000);
-        assertEquals(1000, a.getKilometraje());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        a1.setKilometraje(1000);
+        assertEquals(1000, a1.getKilometraje());
     }
 
     @Test
     public void testModificarKilometrajeMenos() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4023PKT", 0);
-        a.setKilometraje(1000);
-        assertEquals(1000, a.getKilometraje());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setKilometraje(500));
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        a1.setKilometraje(1000);
+        assertEquals(1000, a1.getKilometraje());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a1.setKilometraje(500));
     }
 
     @Test
     public void testAnadirQuitarCaravanaReservada() {
-        Autocaravana a1 = new Autocaravana("Modelo1", 100, 4, "4024PKT", 0);
-        assertEquals(1, Autocaravana.getCantidadCaravanas());
-        Autocaravana a2 = new Autocaravana("Modelo2", 200, 6, "8008SSS", 0);
-        assertEquals(2, Autocaravana.getCantidadCaravanas());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals(1, ServicioAutocaravana.getCantidadCaravanas());
+        Autocaravana a2 = new Autocaravana(1,"Modelo2", 200, 6, "8008SSS", 0, "Alquilada");
+        assertEquals(2, ServicioAutocaravana.getCantidadCaravanas());
         a1.eliminarAutocaravana();
         a2.eliminarAutocaravana();
-        assertEquals(0, Autocaravana.getCantidadCaravanas());
+        assertEquals(0, ServicioAutocaravana.getCantidadCaravanas());
     }
 
     @Test
     public void testBuscarAutocaravana() {
-        Autocaravana a1 = new Autocaravana("Modelo1", 100, 4, "4025PKT", 0);
-        Autocaravana a2 = new Autocaravana("Modelo2", 200, 6, "8008SSS", 0);
-        assertEquals(a1, Autocaravana.buscarAutocaravana(a1.getIdA()));
-        assertEquals(a2, Autocaravana.buscarAutocaravana(a2.getIdA()));
-        Assertions.assertNull(Autocaravana.buscarAutocaravana(999));
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        Autocaravana a2 = new Autocaravana(1,"Modelo2", 200, 6, "8008SSS", 0, "Alquilada");
+        assertEquals(a1, ServicioAutocaravana.buscarAutocaravana(a1.getIdA()));
+        assertEquals(a2, ServicioAutocaravana.buscarAutocaravana(a2.getIdA()));
+        Assertions.assertNull(ServicioAutocaravana.buscarAutocaravana(999));
 
 
     }
@@ -92,16 +93,16 @@ public class AutocaravanaTest {
     @Test
     public void crearAutocaravanaConMatriculaIncorrectaLanzaExcepcion() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Autocaravana autocaravana = new Autocaravana("VW California", 80.0f, 4, "123456", 0);
+            Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
 
         });
     }
 
     @Test
     public void crearAutocaravanaConMatriculaYaExistenteLanzaExcepcion() {
-        Autocaravana autocaravana1 = new Autocaravana("VW California", 80.0f, 4, "4020PKT", 0);
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-                    Autocaravana autocaravana2 = new Autocaravana("VW California", 80.0f, 4, "4020PKT", 0);
+            Autocaravana a2 = new Autocaravana(1,"Modelo2", 200, 6, "8008SSS", 0, "Alquilada");
                 }
         );
     }
@@ -109,108 +110,108 @@ public class AutocaravanaTest {
     @Test
     public void crearAutocaravanaConPrecioNegativoLanzaExcepcion() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Autocaravana autocaravana = new Autocaravana("VW California", -10.0f, 4, "4020PKT", 0);
+            Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
         });
     }
 
     @Test
     public void crearAutocaravanaConPlazasNegativasLanzaExcepcion() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Autocaravana autocaravana = new Autocaravana("VW California", 80.0f, -4, "4020PKT", 0);
+            Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
         });
     }
 
     @Test
     public void crearAutocaravanaConKilometrajeNegativoLanzaExcepcion() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Autocaravana autocaravana = new Autocaravana("VW California", 80.0f, 4, "4020PKT", -1);
+            Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
         });
     }
 
     @Test
     public void testModificarPrecioNegativo() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4021PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setPrecioPorDia(-200));
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a1.setPrecioPorDia(-200));
     }
 
     @Test
     public void testModificarPrecioCero() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4021PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setPrecioPorDia(0));
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a1.setPrecioPorDia(0));
     }
 
     @Test
     public void testModificarKilometrajeNegativo() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setKilometraje(-1000));
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a1.setKilometraje(-1000));
     }
 
     @Test
     public void testModificarKilometrajeCero() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> a.setKilometraje(0));
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        Assertions.assertThrows(IllegalArgumentException.class, () -> a1.setKilometraje(0));
     }
 
     //TESTS DE GET
 
     @Test
     public void testGetIdA(){
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        assertEquals(0, a.getIdA());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals(0, a1.getIdA());
     }
 
     @Test
     public void testGetModelo(){
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        assertEquals("Modelo1", a.getModelo());
-        a.setModelo("Modelo2");
-        assertEquals("Modelo2", a.getModelo());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals("Modelo1", a1.getModelo());
+        a1.setModelo("Modelo2");
+        assertEquals("Modelo2", a1.getModelo());
     }
     
     @Test
     public void testGetPrecioPorDia(){
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        assertEquals(100, a.getPrecioPorDia());
-        a.setPrecioPorDia(20);
-        assertEquals(20, a.getPrecioPorDia());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals(100, a1.getPrecioPorDia());
+        a1.setPrecioPorDia(20);
+        assertEquals(20, a1.getPrecioPorDia());
 
     }
 
     @Test
     public void testGetMatricula(){
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        assertEquals ("4022PKT", a.getMatricula());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals ("4022PKT", a1.getMatricula());
     }
     @Test
     public void testGetKilometraje(){
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        assertEquals(0, a.getKilometraje());
-        a.setKilometraje(1);
-        assertEquals(1, a.getKilometraje());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals(0, a1.getKilometraje());
+        a1.setKilometraje(1);
+        assertEquals(1, a1.getKilometraje());
 
     }
     
     @Test
     public void testGetEstado() {
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        a.setEstado("Sucio");
-        assertEquals("Sucio", a.getEstado());
-        a.setEstado("EstadoInventado");
-        assertEquals("Sucio", a.getEstado());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        a1.setEstado("Sucio");
+        assertEquals("Sucio", a1.getEstado());
+        a1.setEstado("EstadoInventado");
+        assertEquals("Sucio", a1.getEstado());
 
     }
 
     @Test
     public void testGetPlazas(){
-        Autocaravana a = new Autocaravana("Modelo1", 100, 4, "4022PKT", 0);
-        assertEquals(4, a.getPlazas());
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        assertEquals(4, a1.getPlazas());
     }
 
     @Test
     public void testGetListaAutocaravanas() {
-        Autocaravana a1 = new Autocaravana("Modelo1", 100, 4, "4026PKT", 0);
-        Autocaravana a2 = new Autocaravana("Modelo2", 200, 6, "8008SSS", 0);
-        List<Autocaravana> lista = Autocaravana.getListaAutocaravanas();
+        Autocaravana a1 = new Autocaravana(0,"Modelo1", 100, 4, "4025PKT", 0,"Alquilada");
+        Autocaravana a2 = new Autocaravana(1,"Modelo2", 200, 6, "8008SSS", 0, "Alquilada");
+        List<Autocaravana> lista = ServicioAutocaravana.getListaAutocaravanas();
         assertEquals(2, lista.size());
         Assertions.assertTrue(lista.contains(a1));
         Assertions.assertTrue(lista.contains(a2));

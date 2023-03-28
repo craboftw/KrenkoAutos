@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Autocaravana {
-    private static final List<Autocaravana> listaAutocaravanas = new ArrayList<>();
 
-    //public static ServicioAutocaravana servidor = new ServicioAutocaravana();
     private int vecesReservada = 0;
     private final int idA;
     private final String matricula;
@@ -15,28 +13,23 @@ public class Autocaravana {
     private String modelo;
     private float precioPorDia;
     private int kilometraje;
-    private String estado = "Disponible";
+    private String estadoA = "Disponible";
 
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Autocaravana(String mod, float precio, int plaz, String matr, int kilometraj) {
+    public Autocaravana(int id, String mod, float precio, int plaz, String matr, int kilometraj, String estado) {
 
-        if (!ReglasAutocaravana.comprobarMatricula(matr)) throw new IllegalArgumentException("La matricula no es valida");
-        if (listaAutocaravanas.stream().anyMatch(a -> a.getMatricula().equals(matr))) throw new IllegalArgumentException("La matricula ya existe");
-        if (precio <= 0) throw new IllegalArgumentException("El precio no puede ser negativo");
-        if (plaz <= 0) throw new IllegalArgumentException("Las plazas no pueden ser negativas");
-        if (kilometraj < 0) throw new IllegalArgumentException("El kilometraje no puede ser negativo");
-        idA = getCantidadCaravanas();
+        idA = id;
         modelo = mod;
         precioPorDia = precio;
         plazas = plaz;
         matricula = matr;
-        this.kilometraje = kilometraj;
-        this.estado = ServicioAutocaravana.getListaEstadoAutocaravana().get(0);
-        listaAutocaravanas.add(this);
+        kilometraje = kilometraj;
+        estadoA = estado;
+
     }
 
-    public Autocaravana(String cadena){    //Constructor creado para la lectura de ficheros
+    /*public Autocaravana(String cadena){    //Constructor creado para la lectura de ficheros
 
         String[] campos = cadena.split(",");
         idA = Integer.parseInt(campos[0]);
@@ -48,28 +41,13 @@ public class Autocaravana {
         estado = campos[6];
         vecesReservada = Integer.parseInt(campos[7]);
         listaAutocaravanas.add(this);
-    }
+    }*/
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public static List<Autocaravana> getListaAutocaravanas() {
-        return listaAutocaravanas;
-    }
 
-    public static Autocaravana buscarAutocaravana(int parseInt) {
-        for (Autocaravana a : Autocaravana.getListaAutocaravanas()) {
-            if (a.getIdA() == parseInt) {
-                return a;
-            }
-        }
-        return null;
-    }
 
-    public void eliminarAutocaravana() {
-        if (listaAutocaravanas.contains(this))
-            listaAutocaravanas.remove(this);
-        else
-            throw new IllegalArgumentException("La autocaravana ya esta eliminada");
-    }
+
+
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
@@ -89,15 +67,12 @@ public class Autocaravana {
         return kilometraje;
     }
     public String     getEstado() {
-        return estado;
+        return estadoA;
     }
     public int        getPlazas() {
         return plazas;
     }
     public int getVecesReservada() {return vecesReservada;}
-    public static int getCantidadCaravanas() {
-        return listaAutocaravanas.size();
-    }
 
     public void setModelo(String mod) {
         if (mod.isEmpty())
@@ -120,7 +95,7 @@ public class Autocaravana {
     }
     public void setEstado(String Estado) {
         if (ServicioAutocaravana.comprobarEstadoAutocaravana(Estado))
-            estado = Estado;
+            estadoA = Estado;
     }
 
     void setNuevaReservaRealizada() {
@@ -128,9 +103,6 @@ public class Autocaravana {
     }
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public boolean quedanCaravanas() {
-        return getCantidadCaravanas() > 0;
-    }
 
     public String toString() {
         String output = String.format("╔═══════════════════╗\n"

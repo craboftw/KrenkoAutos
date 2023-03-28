@@ -7,21 +7,52 @@ public class ServicioAutocaravana implements ReglasAutocaravana, RepositorioAuto
 
     private static final String AUTOCARAVANAS_FILE = "autocaravanas.txt";
     private static final String ESTADOSAUTOCARAVANA_FILE = "estadosautocaravana.txt";
+    private static final List<Autocaravana> listaAutocaravanas = new ArrayList<>();
     private static final List<String> listaEstadosAutocaravana = new ArrayList<>(Arrays.asList("Disponible", "Sucio", "Averiado", "Fuera de Servicio"));
 
-    public ServicioAutocaravana() {
+    public ServicioAutocaravana() {}
+
+
+    public void altaAutocaravana(String mod, float precio, int plaz, String matr, int kilometraj){
+        comprobarAutocaravana(mod, precio, plaz, matr, kilometraj);
+        String estado = listaEstadosAutocaravana.get(0);
+        int idA = listaAutocaravanas.size();
+        Autocaravana A = new Autocaravana(idA,mod, precio, plaz, matr, kilometraj, estado);
+        listaAutocaravanas.add(A);
+
+    }
+    public void comprobarAutocaravana(String mod, float precio, int plaz, String matr, int kilometraj){
+        if (!ReglasAutocaravana.comprobarMatricula(matr)) throw new IllegalArgumentException("La matricula no es valida");
+        if (listaAutocaravanas.stream().anyMatch(a -> a.getMatricula().equals(matr))) throw new IllegalArgumentException("La matricula ya existe");
+        if (precio <= 0) throw new IllegalArgumentException("El precio no puede ser negativo");
+        if (plaz <= 0) throw new IllegalArgumentException("Las plazas no pueden ser negativas");
+        if (kilometraj < 0) throw new IllegalArgumentException("El kilometraje no puede ser negativo");
+
+    }
+    public static Autocaravana buscarAutocaravana(int parseInt) {
+        for (Autocaravana a : listaAutocaravanas) {
+            if (a.getIdA() == parseInt) {
+                return a;
+            }
+        }
+        return null;
     }
 
-    //@Override
-    public static void cargarAutocaravana() {
-        try (Scanner scanner = new Scanner(new File(AUTOCARAVANAS_FILE))) {
-            while (scanner.hasNextLine()) {
-                new Autocaravana(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            // Archivo no encontrado, lista vacia
-        }
+    public void eliminarAutocaravana() {
+        if (listaAutocaravanas.contains(this))
+            listaAutocaravanas.remove(this);
+        else
+            throw new IllegalArgumentException("La autocaravana ya esta eliminada");
     }
+
+    public static List<Autocaravana> getListaAutocaravanas() {
+        return listaAutocaravanas;
+    }
+
+    public static int getCantidadCaravanas() {
+        return listaAutocaravanas.size();
+    }
+
 
     //@Override
     public static void cargarEstadosAutocaravana() {
@@ -47,6 +78,10 @@ public class ServicioAutocaravana implements ReglasAutocaravana, RepositorioAuto
     static List<String> getListaEstadoAutocaravana() {
         return listaEstadosAutocaravana;
     }
+    public boolean quedanCaravanas() {
+        return getCantidadCaravanas() > 0;
+    }
+
 
     public static boolean comprobarEstadoAutocaravana(String estado) {
         return listaEstadosAutocaravana.contains(estado);
