@@ -21,8 +21,7 @@ public class ClienteServicio implements ClienteReglas {
     public static Cliente buscarCliente(int i) {
         return clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC() == i).findFirst().orElse(null);
     }
-
-
+    
     public static Cliente buscarCliente(String dni) {
         return clienteRepositorio.cargarCliente().stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(null);
     }

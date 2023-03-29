@@ -10,13 +10,15 @@ public class ReservaServicio{
 
     public void comprobarReserva(Autocaravana A, Cliente C, String fechI, String fechF)
     {
+        LocalDate fechaIni;
+        LocalDate fechaFin;
         if (!reservaReglas.comprobarAutocaravana(A)) {
             throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
         }
         try
         {
-            LocalDate fechaIni = LocalDate.parse(fechI);
-            LocalDate fechaFin = LocalDate.parse(fechF);
+            fechaIni = LocalDate.parse(fechI);
+            fechaFin = LocalDate.parse(fechF);
         }
         catch (Exception e)
         {
@@ -26,7 +28,16 @@ public class ReservaServicio{
         if (!reservaReglas.comprobarCliente(C)) {
             throw new IllegalArgumentException("El cliente no cumple las condiciones");
         }
+
+       if ( reservaReglas.comprobarReserva(fechaIni, fechaFin, A, C)){
+              throw new IllegalArgumentException("La reserva ya existe");
+            }
+        Reserva reserva = new Reserva(reservaRepositorio.getCantidadReserva(), A, C, fechaIni, fechaFin, reservaReglas.calculaPrecioTotal(A, C, fechaIni, fechaFin), reservaRepositorio.cargarEstadoDefault());
+        reservaRepositorio.guardarReserva(reserva);
     }
+
+
+
 
     public static Collection<String> getListaEstadoReservas() {
         return reservaRepositorio.cargarEstadosReserva();
