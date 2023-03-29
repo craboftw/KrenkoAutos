@@ -8,8 +8,6 @@ public class ReservaServicio{
     private static ReservaReglas reservaReglas;
     private static ReservaRepositorio reservaRepositorio;
 
-    private static final List<String> listaEstadoReserva = new ArrayList<>(Arrays.asList("Pendiente", "Finalizada", "Cancelada", "En curso"));
-
     public void comprobarReserva(Autocaravana A, Cliente C, String fechI, String fechF)
     {
         if (!reservaReglas.comprobarAutocaravana(A)) {
@@ -30,14 +28,15 @@ public class ReservaServicio{
         }
     }
 
-    public static List<String> getListaEstadoReservas() {
-        return listaEstadoReserva;
+    public static Collection<String> getListaEstadoReservas() {
+        return reservaRepositorio.cargarEstadosReserva();
     }
 
     //@Override
     public static void nuevoestado(String estado) {
-        if (!estado.isEmpty() & !listaEstadoReserva.contains(estado)) {
-            listaEstadoReserva.add(estado);
+        if (!estado.isEmpty())//& !listaEstadoReserva.contains(estado))
+        {
+            //listaEstadoReserva.add(estado);
             reservaRepositorio.guardarEstadoReserva(estado);
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
@@ -134,8 +133,7 @@ public class ReservaServicio{
     }
 
     public static void eliminarEstadoReserva(String estado) {
-        if (!estado.isEmpty() & reservaRepositorio.existeReservaEstado(estado)){
-            listaEstadoReserva.remove(estado);
+        if (!estado.isEmpty() & reservaRepositorio.existeEstadoReserva(estado)){
             reservaRepositorio.eliminarEstadoReserva(estado);
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
@@ -143,7 +141,7 @@ public class ReservaServicio{
     }
 
     public void setEstadoReserva(Reserva R,String estado) {
-        if (listaEstadoReserva.contains(estado))
+        if (reservaRepositorio.comprobarEstadoReserva(estado))
             throw new IllegalArgumentException("El estado no es correcto");
         R.setEstadoReserva(estado); }
 

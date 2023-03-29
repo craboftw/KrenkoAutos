@@ -17,14 +17,13 @@ public interface ReservaRepositorio {
     public Collection<String> cargarEstadosReserva() ;
     void guardarEstadoReserva(Collection<String> listaEstados);
     void guardarEstadoReserva(String estado);
-    public default String cargarEstadoDefault() {
-        return "Disponible";
-    }
-
+    public default String cargarEstadoDefault() {return "Disponible";}
 
     void eliminarReserva(Reserva r);
 
-    boolean existeReservaEstado(String estado);
+    boolean existeEstadoReserva(String estado);
 
     void eliminarEstadoReserva(String estado);
+
+    boolean comprobarEstadoReserva(String estado);
 }

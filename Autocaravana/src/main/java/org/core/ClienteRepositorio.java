@@ -2,11 +2,11 @@ package org.core;
 
 import java.util.Collection;
 
-public interface ClienteRepositorios {
+public interface ClienteRepositorio {
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Cliente‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public void guardarCliente(Collection<Cliente> caravanas) ;
-    public void guardarCliente(Cliente caravana) ;
+    public void guardarCliente(Collection<Cliente> clientes) ;
+    public void guardarCliente(Cliente cliente) ;
     public Collection<Cliente> cargarCliente() ;
     public Collection<Cliente> cargarCliente(String estado,String dato) ;
     public int getCantidadCliente();
@@ -19,4 +19,7 @@ public interface ClienteRepositorios {
     }
 
 
+    boolean existeCliente(Cliente c);
+
+    void eliminarCliente(Cliente c);
 }
