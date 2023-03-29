@@ -1,2 +1,0 @@
-0,Manolo,Perez,666777888,1995-03-20,12345678A,Juanito@Perez.fake,0,0
-1,Pepe,Perez,666774888,1996-10-12,91234567B,Pepe@pozo.com,0,0

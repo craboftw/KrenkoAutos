@@ -1,17 +1,22 @@
 package org.core;
 
-public interface ClienteReglas {
+import java.time.LocalDate;
 
-    static boolean comprobarDNI(String dn) {
+public interface ClienteReglas {
+    ClienteRepositorio clienteRepositorio = null;
+
+    default boolean comprobarDNI(String dn) {
         return true;
     }
 
-    static boolean comprobarEdad(int edad) {
+    default boolean comprobarEdad(int edad) {
         return edad>=18;
     }
 
-    default boolean comprobarCliente(Cliente c) {
-        return true;
+    default void comprobarTelefono(Cliente cli, String t){
+        if (t.isEmpty() || (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getTelefono().equals(t) && c.getIdC() != cli.getIdC())))
+            throw new IllegalArgumentException("El telefono no puede estar vacio");
+        cli.setTelefono(t);
     }
 
 }

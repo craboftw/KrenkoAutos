@@ -37,13 +37,6 @@ public class ReservaServicio{
     }
 
 
-
-
-    public static Collection<String> getListaEstadoReservas() {
-        return reservaRepositorio.cargarEstadosReserva();
-    }
-
-    //@Override
     public static void nuevoestado(String estado) {
         if (!estado.isEmpty())//& !listaEstadoReserva.contains(estado))
         {
@@ -137,18 +130,21 @@ public class ReservaServicio{
 
     public int getCantidadReservas() {return reservaRepositorio.getCantidadReserva();}
 
-    public void eliminarReserva(Reserva R) {
-        if (reservaRepositorio.existeReserva(R)) {
-            reservaRepositorio.eliminarReserva(R);
+    public void eliminarReserva(Reserva reserva) {
+        if (reservaRepositorio.existeReserva(reserva)) {
+            reservaRepositorio.eliminarReserva(reserva);
         } else throw new IllegalArgumentException("La reserva ya esta eliminada");
     }
 
-    public static void eliminarEstadoReserva(String estado) {
-        if (!estado.isEmpty() & reservaRepositorio.existeEstadoReserva(estado)){
-            reservaRepositorio.eliminarEstadoReserva(estado);
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
+    public void cancelarReserva(Reserva reserva)
+    {
+        if (reserva.getEstadoReserva().equals("Cancelada"))
+            throw new IllegalArgumentException("La reserva ya está cancelada");
+        if (reserva.getEstadoReserva().equals("Finalizada"))
+            throw new IllegalArgumentException("La reserva ya está finalizada");
+        if(reservaReglas.condicionesCancelacion(reserva))
+            reserva.setEstadoReserva("Cancelada");
+            reserva.setPrecioTotal(reserva.getPrecioTotal() - reservaReglas.calcularTasaCancelacion(reserva));
     }
 
     public void setEstadoReserva(Reserva R,String estado) {
@@ -161,7 +157,103 @@ public class ReservaServicio{
             throw new IllegalArgumentException("El precio no puede ser negativo");
         setPrecioTotal(R,precioTotal); }
 
+    public void modificarReservaEnCurso(Reserva reserva, String fechF) {
+        LocalDate fechaIni;
+        LocalDate fechaFin;
+        if (reserva.getEstadoReserva().equals("Cancelada")) {
+            throw new IllegalArgumentException("La reserva está cancelada.");
+        }
+        if (reserva.getEstadoReserva().equals("Finalizada")) {
+            throw new IllegalArgumentException("La reserva está finalizada.");
+        }
+        if (reserva.getEstadoReserva().equals("En curso")) {
+
+            try {
+                fechaFin = LocalDate.parse(fechF);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Error en el formato de las fechas.");
+            }
+            //Comprobaciones del cliente
+            if (!reservaReglas.comprobarCliente(reserva.getCliente())) {
+                throw new IllegalArgumentException("El cliente no cumple las condiciones.");
+            }
+            if (!reservaReglas.comprobarAutocaravana(reserva.getAutocaravana())) {
+                throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones.");
+            }
+            if (reservaReglas.comprobarReserva(reserva.getFechaIni(), fechaFin, reserva.getAutocaravana(), reserva.getCliente())) {
+                throw new IllegalArgumentException("La autocaravana no está disponible en las fechas seleccionadas.");
+            }
+            if(!reservaReglas.condicionesModificacion(reserva))
+                throw new IllegalArgumentException("No se puede modificar la reserva.");
+            reserva.setFechaFin(fechaFin);
+
+            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(reserva.getAutocaravana(), reserva.getCliente(), reserva.getFechaIni(), fechaFin) + reservaReglas.calcularTasaModificacion(reserva));
+
+        }
+    }
+
+    public void modificarReserva(Reserva reserva, String fechI, String fechF){
+        LocalDate fechaIni;
+        LocalDate fechaFin;
+        if (reserva.getEstadoReserva().equals("Cancelada")) {
+            throw new IllegalArgumentException("La reserva está cancelada");
+        }
+        if (reserva.getEstadoReserva().equals("Finalizada")) {
+            throw new IllegalArgumentException("La reserva está finalizada");
+        }
+        if (reserva.getEstadoReserva().equals("En curso")) {
 
 
+            try {
+                fechaIni = LocalDate.parse(fechI);
+                fechaFin = LocalDate.parse(fechF);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Error en el formato de las fechas");
+            }
+            //Comprobaciones del cliente
+            if (!reservaReglas.comprobarCliente(reserva.getCliente())) {
+                throw new IllegalArgumentException("El cliente no cumple las condiciones");
+            }
+            if (!reservaReglas.comprobarAutocaravana(reserva.getAutocaravana())) {
+                throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
+            }
+            if (fechaIni.isBefore(LocalDate.now())) {
+                throw new IllegalArgumentException("La fecha inicial no puede ser anterior a la fecha actual");
+            }
+            if (reservaReglas.comprobarReserva(fechaIni, fechaFin, reserva.getAutocaravana(), reserva.getCliente())) {
+                throw new IllegalArgumentException("La autocaravana no está disponible en las fechas seleccionadas");
+            }
 
-}
+            reserva.setFechaIni(fechaIni);
+            reserva.setFechaFin(fechaFin);
+            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(reserva.getAutocaravana(), reserva.getCliente(), fechaIni, fechaFin));
+        } else
+            throw new IllegalArgumentException("La reserva no está en curso");
+    }
+
+
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de estados ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+
+        void eliminarEstadoReserva(String estado)
+        {
+            if (!estado.isEmpty() & reservaRepositorio.comprobarEstadoReserva(estado)) {
+                reservaRepositorio.eliminarEstadoReserva(estado);
+            } else {
+                throw new IllegalArgumentException("El estado no es correcto");
+            }
+        }
+
+        void addEstadoReserva(String estado) {
+            if (!estado.isEmpty() & !reservaRepositorio.comprobarEstadoReserva(estado)) {
+                reservaRepositorio.guardarEstadoReserva(estado);
+            } else {
+                throw new IllegalArgumentException("El estado no es correcto");
+            }
+        }
+
+        public static Collection<String> getListaEstadoReservas() {
+            return reservaRepositorio.cargarEstadosReserva();
+        }
+
+
+    }

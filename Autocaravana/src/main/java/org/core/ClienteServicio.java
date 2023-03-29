@@ -2,6 +2,7 @@ package org.core;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ClienteServicio implements ClienteReglas {
@@ -32,11 +33,22 @@ public class ClienteServicio implements ClienteReglas {
         else
             throw new IllegalArgumentException("El cliente no existe");
     }
-    public void comprobarCliente(String nom, String ape, String telef, String fecha, String dn, String ema){try {
-        LocalDate.parse(fecha);
+    public void comprobarCliente(String nom, String ape, String telef, String cumpleanos, String dn, String ema){
+        LocalDate diaDeCum;
+        try {
+            diaDeCum = LocalDate.parse(cumpleanos);
     } catch (Exception e) {
         throw new IllegalArgumentException("La fecha no es correcta");
     }
+        //Calculo su edad
+        LocalDate hoy = LocalDate.now();
+        int edad = hoy.getYear() - diaDeCum.getYear();
+        if (hoy.getMonthValue() < diaDeCum.getMonthValue()) {
+            edad--;
+        } else if (hoy.getMonthValue() == diaDeCum.getMonthValue() && hoy.getDayOfMonth() < diaDeCum.getDayOfMonth()) {
+            edad--; }
+
+        if (clienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
         if (nom.isEmpty()) throw new IllegalArgumentException("El nombre no puede estar vacio");
         if (ape.isEmpty()) throw new IllegalArgumentException("El apellido no puede estar vacio");
         if (dn.isEmpty()) throw new IllegalArgumentException("El DNI no puede estar vacio");
@@ -46,15 +58,11 @@ public class ClienteServicio implements ClienteReglas {
         if (ema.isEmpty()) throw new IllegalArgumentException("El email no puede estar vacio");
         if (!(ema.contains("@") & ema.contains("."))) throw new IllegalArgumentException("El email no es correcto");
         if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getEmail().equals(ema))) throw new IllegalArgumentException("El email ya existe");
-        if (!ClienteReglas.comprobarDNI(dn)) throw new IllegalArgumentException("El DNI no es correcto");
+        if (!clienteReglas.comprobarDNI(dn)) throw new IllegalArgumentException("El DNI no es correcto");
 
     }
 
-    public void comprobarTelefono(Cliente cli, String t){
-        if (t.isEmpty() || (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getTelefono().equals(t) && c.getIdC() != cli.getIdC())))
-            throw new IllegalArgumentException("El telefono no puede estar vacio");
-        cli.setTelefono(t);
-    }
+
 
     public void setNombre(Cliente cli, String nombre) {
         if (nombre.isEmpty())
@@ -97,7 +105,28 @@ public class ClienteServicio implements ClienteReglas {
         } else if (hoy.getMonthValue() == nueva.getMonthValue() && hoy.getDayOfMonth() < nueva.getDayOfMonth()) {
             edad--;
         }
-        if (ClienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
+        if (clienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
         cli.setFechaNacimiento(nueva);
+    }
+
+    void eliminarEstadoCliente(String estado)
+    {
+        if (!estado.isEmpty() & clienteRepositorio.existeEstadoCliente(estado)) {
+            clienteRepositorio.eliminarEstadoCliente(estado);
+        } else {
+            throw new IllegalArgumentException("El estado no es correcto");
+        }
+    }
+
+    void addEstadocliente(String estado) {
+        if (!estado.isEmpty() & !clienteRepositorio.existeEstadoCliente(estado)) {
+            clienteRepositorio.guardarEstadoCliente(estado);
+        } else {
+            throw new IllegalArgumentException("El estado no es correcto");
+        }
+    }
+
+    public static Collection<String> getListaEstadoclientes() {
+        return clienteRepositorio.cargarEstadosCliente();
     }
 }

@@ -1,6 +1,7 @@
 package org.core;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 public class Cliente {
 
@@ -80,6 +81,10 @@ public class Cliente {
     public void setNuevaReservaRealizada() {this.reservasRealizadas++; }
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+
+
+
+
     public String toString() {
         String output = String.format("╔═%s═╗\n"
                         + "║ CLIENTE %d\n"

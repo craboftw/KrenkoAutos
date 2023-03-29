@@ -8,46 +8,7 @@ import java.util.List;
 
 public interface ReservaReglas {
     ReservaRepositorio reservaRepositorio = null;
-    Collection<String> listaEstadosReserva = new ArrayList<>(Arrays.asList("Pendiente", "Finalizada", "Cancelada", "En curso"));
 
-
-    default void borrarEstado(String estado)
-    //Borra el estado de la lista de estados de reserva
-    {
-        if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
-            listaEstadosReserva.remove(estado);
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
-    }
-
-    default void eliminarEstadoReserva(String estado) {
-        if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
-            listaEstadosReserva.remove(estado);
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
-    }
-
-    default boolean comprobarEstadoReserva(String estado) {
-        //Comprueba si el estado de la reserva es correcto
-        {
-            if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
-                throw new IllegalArgumentException("El estado no es correcto");
-            }
-            return true;
-        }
-    }
-
-    // static void comprobarEstado(String estado)
-
-    default void addEstadoReserva(String estado) {
-        if (!estado.isEmpty() & !listaEstadosReserva.contains(estado)) {
-            listaEstadosReserva.add(estado);
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
-    }
 
     //Funciones que calculan el precio total de la reserva
     default float calculaPrecioTotal(Autocaravana A, Cliente C, LocalDate fechaIni, LocalDate fechaFin)
@@ -141,10 +102,4 @@ public interface ReservaReglas {
         return true;
     }
 
-
 }
-
-
-//DISPONIBLE
-//CREAMOS UNA RESERVA, ENTRE LAS RESERVAS QUE NO TIENEN ESTADO DISPONIBLE O CANCELADA, BUSCAMOS LOS QUE ESTAN DISPONIBLES EN FECHA
-

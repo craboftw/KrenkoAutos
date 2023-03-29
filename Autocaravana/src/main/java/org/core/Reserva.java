@@ -8,8 +8,8 @@ public class Reserva {
     private final int idR;
     private final Autocaravana autocaravanaR;
     private final Cliente clienteR;
-    private final LocalDate fechaIni;
-    private final LocalDate fechaFin;
+    private LocalDate fechaIni;
+    private LocalDate fechaFin;
     private String estadoR;
     private float precioTotal;
 
@@ -23,6 +23,8 @@ public class Reserva {
         fechaFin = fechF;
         estadoR = estado;
         precioTotal = precioTot;
+        C.setNuevaReservaRealizada();
+        A.setNuevaReservaRealizada();
     }
 
 
@@ -35,7 +37,7 @@ public class Reserva {
 //  ( 　(三ヽ人　 /　  |
 //  |　ﾉ⌒＼ ￣￣ヽ   ノ
 //   ヽ＿＿＿＞､＿_／
-//      ｜( 王 ﾉ〈   (\__/)
+//      ｜( 王 ﾉ〈  (\__/)
 //      /ﾐ`ー―彡\  (•ㅅ•)
 //     / ╰ ___╯ \ /    \>
 //    /  /    \  \\____/
@@ -52,9 +54,9 @@ public class Reserva {
     public String       getEstadoReserva() {return estadoR;}
 
     void setEstadoReserva(String estado) { this.estadoR = estado; }
-
     void setPrecioTotal(float precioTotal) { this.precioTotal = precioTotal; }
-
+    void setFechaIni(LocalDate fechaIni) {this.fechaIni = fechaIni;}
+    void setFechaFin(LocalDate fechaFin) {this.fechaFin = fechaFin;}
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros metodos ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
 
@@ -83,6 +85,7 @@ public class Reserva {
                 "═".repeat(13 + String.valueOf(idR).length()));
         return output;
     }
+
 
 
 

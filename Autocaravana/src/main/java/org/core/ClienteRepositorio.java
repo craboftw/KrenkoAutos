@@ -14,12 +14,16 @@ public interface ClienteRepositorio {
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Estados‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Collection<String> cargarEstadosCliente() ;
     void guardarEstadoCliente(Collection<String> listaEstados);
-    public default String cargarEstadoDefault() {
-        return "Disponible";
-    }
+    void guardarEstadoCliente(String estado);
+
+    public default String cargarEstadoDefault() {return "Disponible";}
 
 
     boolean existeCliente(Cliente c);
 
     void eliminarCliente(Cliente c);
+
+    void eliminarEstadoCliente(String estado);
+
+    boolean existeEstadoCliente(String estado);
 }
