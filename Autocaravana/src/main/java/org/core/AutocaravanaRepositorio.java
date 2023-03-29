@@ -15,6 +15,7 @@ public interface AutocaravanaRepositorio {
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Estados‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Collection<String> cargarEstadosAutocaravana() ;
     void guardarEstadoAutocaravana(Collection<String> listaEstados);
+    void guardarEstadoAutocaravana(String estado);
     public default String cargarEstadoDefault() {
         return "Disponible";
     }
@@ -25,4 +26,6 @@ public interface AutocaravanaRepositorio {
     boolean existeAutocaravana(Autocaravana a);
 
     boolean existeEstadoAutocaravana(String estado);
+
+    void eliminarEstadoAutocaravana(String estado);
 }
