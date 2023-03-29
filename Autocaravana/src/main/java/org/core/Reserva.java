@@ -27,7 +27,7 @@ public class Reserva {
 
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-
+//
 //⠀  ⠀   (\__/)
 //       (•ㅅ•)      Aqui antes hubo una lista
 //     ＿ノヽ ノ＼＿      ahora solo el y yo.
@@ -37,9 +37,9 @@ public class Reserva {
 //   ヽ＿＿＿＞､＿_／
 //      ｜( 王 ﾉ〈   (\__/)
 //      /ﾐ`ー―彡\  (•ㅅ•)
-//     / ╰    ╯ \ /    \>
-//    /  /    \  \ \    /
-
+//     / ╰ ___╯ \ /    \>
+//    /  /    \  \\____/
+//
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y Setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
 
@@ -51,14 +51,9 @@ public class Reserva {
     public float        getPrecioTotal() {return precioTotal;}
     public String       getEstadoReserva() {return estadoR;}
 
-    public void setEstadoReserva(String estado) {
-            this.estadoR = estado;
+    void setEstadoReserva(String estado) { this.estadoR = estado; }
 
-    }
-
-    void setPrecioTotal(float precioTotal) {
-        this.precioTotal = precioTotal;
-    }
+    void setPrecioTotal(float precioTotal) { this.precioTotal = precioTotal; }
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros metodos ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 

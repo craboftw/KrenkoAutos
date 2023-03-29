@@ -1,16 +1,1 @@
-org/core/ReglasReserva.class
-org/core/ClienteTest.class
-org/core/ReglasCliente.class
-org/core/Cliente.class
-org/core/Autocaravana.class
-org/core/Reserva.class
-org/core/ServicioAutocaravana.class
-org/core/ReglasAutocaravana.class
-org/core/RepositorioReserva.class
 org/core/Main.class
-org/core/RepositorioCliente.class
-org/core/AutocaravanaTest.class
-org/core/ServicioReserva.class
-org/core/ReservaTest.class
-org/core/RepositorioAutocaravana.class
-org/core/ServicioCliente.class

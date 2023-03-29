@@ -1,18 +1,18 @@
 package org.core;
 
-import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
 
-public class ServicioReserva implements ReglasReserva  {
+public class ReservaServicio{
+    private static ReservaReglas reservaReglas;
+    private static ReservaRepositorio reservaRepositorio;
 
-    private static List<Reserva> listaReservas = new ArrayList<>();
     private static final List<String> listaEstadoReserva = new ArrayList<>(Arrays.asList("Pendiente", "Finalizada", "Cancelada", "En curso"));
 
     public void comprobarReserva(Autocaravana A, Cliente C, String fechI, String fechF)
     {
-        if (!ReglasReserva.comprobarAutocaravana(A)) {
+        if (!reservaReglas.comprobarAutocaravana(A)) {
             throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
         }
         try
@@ -25,7 +25,7 @@ public class ServicioReserva implements ReglasReserva  {
             throw new IllegalArgumentException("Error en el formato de las fechas");
         }
         //Comprobaciones del cliente
-        if (!ReglasReserva.comprobarCliente(C)) {
+        if (!reservaReglas.comprobarCliente(C)) {
             throw new IllegalArgumentException("El cliente no cumple las condiciones");
         }
     }
@@ -38,19 +38,14 @@ public class ServicioReserva implements ReglasReserva  {
     public static void nuevoestado(String estado) {
         if (!estado.isEmpty() & !listaEstadoReserva.contains(estado)) {
             listaEstadoReserva.add(estado);
+            reservaRepositorio.guardarEstadoReserva(estado);
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
         }
     }
 
     //@Override
-    public static void eliminarEstadoReserva(String estado) {
-        if (!estado.isEmpty() & listaEstadoReserva.contains(estado)) {
-            listaEstadoReserva.remove(estado);
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
-    }
+
 
 
     public static void checkOut(Reserva reserva) {
@@ -64,14 +59,14 @@ public class ServicioReserva implements ReglasReserva  {
                 break;
             case "En curso":
                 if (LocalDate.now().isAfter(reserva.getFechaFin())) {
-                    reserva.setPrecioTotal(reserva.getPrecioTotal() + ReglasReserva.calcularMulta(reserva));;
+                    reserva.setPrecioTotal(reserva.getPrecioTotal() + reservaReglas.calcularMulta(reserva));;
                 }
                 else
-                if (LocalDate.now().isBefore(reserva.getFechaFin()) & ReglasReserva.condicionesFinalizacion(reserva)) {
-                    reserva.setPrecioTotal(reserva.getPrecioTotal() - ReglasReserva.calcularTasaFinalizacion(reserva));;
+                if (LocalDate.now().isBefore(reserva.getFechaFin()) & reservaReglas.condicionesFinalizacion(reserva)) {
+                    reserva.setPrecioTotal(reserva.getPrecioTotal() - reservaReglas.calcularTasaFinalizacion(reserva));;
                 }
                 else //POR AQUI
-                if (LocalDate.now().isBefore(reserva.getFechaFin()) & !ReglasReserva.condicionesFinalizacion(reserva)) {
+                if (LocalDate.now().isBefore(reserva.getFechaFin()) & !reservaReglas.condicionesFinalizacion(reserva)) {
                     System.out.println("No se puede finalizar la reserva");
                     break;
                 }
@@ -115,8 +110,10 @@ public class ServicioReserva implements ReglasReserva  {
     }
 
 
+    //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+
     public static Reserva buscarReserva(int i) {
-        for (Reserva r : listaReservas) {
+        for (Reserva r : reservaRepositorio.cargarReserva()) {
             if (r.getIdR() == i) {
                 return r;
             }
@@ -124,50 +121,37 @@ public class ServicioReserva implements ReglasReserva  {
         return null;
     }
 
-    public static List<Reserva> buscarReserva(String info, String tipo) {
-        List<Reserva> lista = new ArrayList<>();
-        switch (tipo) {
-            case "cliente":
-                for (Reserva r : listaReservas) {
-                    if (r.getCliente().getDni().equals(info)) {
-                        lista.add(r);
-                    }
-                }
-                break;
-            case "matricula":
-                for (Reserva r : listaReservas) {
-                    if (r.getAutocaravana().getMatricula().equals(info)) {
-                        lista.add(r);
-                    }
-                }
-                break;
-            case "estado":
-                for (Reserva r : listaReservas) {
-                    if (r.getEstadoReserva().equals(info)) {
-                        lista.add(r);
-                    }
-                }
-                break;
-            case "fecha":
-                for (Reserva r : listaReservas) {
-                    LocalDate fecha = LocalDate.parse(info);
-                    if (r.getFechaIni().isAfter(fecha)  || r.getFechaIni().isEqual(fecha )|| r.getFechaFin().isBefore(fecha) || r.getFechaFin().isEqual(fecha)){
-                        lista.add(r);
-                    }
-                }
-                break;
-        }
-        return lista;
+    public static Collection<Reserva> buscarReserva(String tipo, String info) {
+        return reservaRepositorio.cargarReserva(tipo, info);
     }
 
-    public int          getCantidadReservas() {return listaReservas.size();}
+    public int getCantidadReservas() {return reservaRepositorio.getCantidadReserva();}
 
-
-    public void eliminarReserva() {
-        if (listaReservas.contains(this)) {
-            listaReservas.remove(this);
+    public void eliminarReserva(Reserva R) {
+        if (reservaRepositorio.existeReserva(R)) {
+            reservaRepositorio.eliminarReserva(R);
         } else throw new IllegalArgumentException("La reserva ya esta eliminada");
     }
+
+    public static void eliminarEstadoReserva(String estado) {
+        if (!estado.isEmpty() & reservaRepositorio.existeReservaEstado(estado)){
+            listaEstadoReserva.remove(estado);
+            reservaRepositorio.eliminarEstadoReserva(estado);
+        } else {
+            throw new IllegalArgumentException("El estado no es correcto");
+        }
+    }
+
+    public void setEstadoReserva(Reserva R,String estado) {
+        if (listaEstadoReserva.contains(estado))
+            throw new IllegalArgumentException("El estado no es correcto");
+        R.setEstadoReserva(estado); }
+
+    public void setPrecioTotal(Reserva R,float precioTotal) {
+        if (precioTotal < 0)
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        setPrecioTotal(R,precioTotal); }
+
 
 
 

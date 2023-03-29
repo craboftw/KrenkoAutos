@@ -3,14 +3,15 @@ package org.core;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-public interface ReglasReserva {
+public interface ReservaReglas {
+    ReservaRepositorio reservaRepositorio = null;
+    Collection<String> listaEstadosReserva = new ArrayList<>(Arrays.asList("Pendiente", "Finalizada", "Cancelada", "En curso"));
 
-    List<String> listaEstadosReserva = new ArrayList<>(Arrays.asList("Pendiente", "Cancelada", "Finalizada", "En curso"));
 
-
-    static void borrarEstado(String estado)
+    default void borrarEstado(String estado)
     //Borra el estado de la lista de estados de reserva
     {
         if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
@@ -20,7 +21,7 @@ public interface ReglasReserva {
         }
     }
 
-    static void eliminarEstadoReserva(String estado) {
+    default void eliminarEstadoReserva(String estado) {
         if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
             listaEstadosReserva.remove(estado);
         } else {
@@ -28,7 +29,7 @@ public interface ReglasReserva {
         }
     }
 
-    static boolean comprobarEstadoReserva(String estado) {
+    default boolean comprobarEstadoReserva(String estado) {
         //Comprueba si el estado de la reserva es correcto
         {
             if (!estado.isEmpty() & listaEstadosReserva.contains(estado)) {
@@ -40,7 +41,7 @@ public interface ReglasReserva {
 
     // static void comprobarEstado(String estado)
 
-    static void addEstadoReserva(String estado) {
+    default void addEstadoReserva(String estado) {
         if (!estado.isEmpty() & !listaEstadosReserva.contains(estado)) {
             listaEstadosReserva.add(estado);
         } else {
@@ -56,16 +57,6 @@ public interface ReglasReserva {
         return (float) (A.getPrecioPorDia() * (fechaFin.toEpochDay() - fechaIni.toEpochDay()) * (1 + (C.getMultas() * 0.1)) * (1 - (A.getKilometraje() > 700000 ? 0.05 : 0)));
     }
 
-    default boolean comprobarCambioEstado(Reserva R, String estado)
-    //Esta funcion comprueba si se puede cambiar el estado de la reserva
-    {
-        if (estado.equals("En curso")) //si el estado es en curso, la fecha de inicio debe ser hoy o antes
-            return R.getFechaIni().isBefore(LocalDate.now()) | R.getFechaIni().isEqual(LocalDate.now());
-        else if (estado.equals("Finalizada")) //si el estado es finalizada, la fecha de fin debe ser hoy o antes
-            return R.getEstadoReserva() != "Pendiente";
-        else
-            return listaEstadosReserva.contains(estado);
-    }
 
     default boolean condicionesCancelacion(Reserva R)
     //Comprobar si se permite cancelar la reserva;
@@ -80,7 +71,7 @@ public interface ReglasReserva {
         return (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay()) > 3;
     }
 
-    static boolean condicionesFinalizacion(Reserva R)
+    default boolean condicionesFinalizacion(Reserva R)
     {
         return ((int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay())) <= 3;
     }
@@ -102,14 +93,14 @@ public interface ReglasReserva {
         return R.getAutocaravana().getPrecioPorDia() * diasRestantes * (float) 0.05;
     }
 
-    static float calcularTasaFinalizacion(Reserva R) {
+    default float calcularTasaFinalizacion(Reserva R) {
         //si cancelo la reserva con dias de antelacion me devuelven el 50% del precio de los dias que me queden por utilizar
         int diasRestantes = (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay());
         return R.getPrecioTotal() - R.getAutocaravana().getPrecioPorDia() * diasRestantes * (float) 0.50;
     }
 
     //Funciones que calculan la multa por incumplimiento.
-    static float calcularMulta(Reserva R)
+    default float calcularMulta(Reserva R)
     //Calcula la multa por incumplimiento de la reserva
     {
         int diasRetraso = (int) (LocalDate.now().toEpochDay() - R.getFechaFin().toEpochDay());
@@ -117,13 +108,13 @@ public interface ReglasReserva {
     }
 
     //Funciones que comprueban si la caravana y el cliente son compatibles para la reserva
-    static boolean comprobarAutocaravana(Autocaravana A)
+    default boolean comprobarAutocaravana(Autocaravana A)
     //comprueba si una caravana es valida para la reserva
     {
         return A.getKilometraje() <= 10000000;
     }
 
-    static boolean comprobarCliente(Cliente c)
+    default boolean comprobarCliente(Cliente c)
     //comprueba si un cliente es valido para la reserva
     {
         return (c.getEdad() >= 18) & (c.getEdad() <= 80 & c.getMultas() < 2);
@@ -134,7 +125,7 @@ public interface ReglasReserva {
     default boolean comprobarReserva(LocalDate fechaIni, LocalDate fechaFin, Autocaravana A, Cliente C)
     //comprueba si una caravana y un cliente son validos para la reserva.
     {
-        for (Reserva R : Reserva.getListaReservas()) {
+        for (Reserva R : reservaRepositorio.cargarReserva()) {
             if (R.getAutocaravana().equals(A) & R.getEstadoReserva() != "Cancelada" & R.getEstadoReserva() != "Finalizada") {
                 //comprobar si las fechas de la Reserva R se solapan con las fechas de la reserva que se quiere hacer
                 if (

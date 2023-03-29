@@ -1,6 +1,6 @@
 import org.core.Autocaravana;
 import org.core.Cliente;
-import org.core.ReglasReserva;
+import org.core.ReservaReglas;
 import org.core.Reserva;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -290,7 +290,7 @@ public class ReservaTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Reserva r = new Reserva(a, c, "2023-04-01", "2023-04-07");
         });
-        Assertions.assertFalse(ReglasReserva.comprobarAutocaravana(a));
+        Assertions.assertFalse(ReservaReglas.comprobarAutocaravana(a));
     }
 
     @Test
@@ -300,7 +300,7 @@ public class ReservaTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Reserva r = new Reserva(a, c, "2023-04-01", "2023-04-07");
         });
-        Assertions.assertFalse(ReglasReserva.comprobarCliente(c));
+        Assertions.assertFalse(ReservaReglas.comprobarCliente(c));
     }
 
     @Test

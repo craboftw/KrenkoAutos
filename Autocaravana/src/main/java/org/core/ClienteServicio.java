@@ -1,14 +1,10 @@
 package org.core;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class ServicioCliente implements ReglasCliente, RepositorioCliente {
+public class ClienteServicio implements ClienteReglas {
     private static final java.lang.String CLIENTES_FILE = "clientes.txt";
     private static final java.lang.String ESTADOSCLIENTE_FILE = "estadoscliente.txt";
     private static final java.util.List<java.lang.String> listaEstadosCliente = new java.util.ArrayList<>(java.util.Arrays.asList("Activo", "Inactivo", "Sancionado", "Baneado", "VIP"));
@@ -27,9 +23,8 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
         int idC = listaClientes.size();
         Cliente c = new Cliente(idC, nom, ape, telef, fecha, dn, ema);
         listaClientes.add(c);
-
-
     }
+
     public static int getNumeroClientes() { return listaClientes.size(); }
 
     public static Cliente buscarCliente(int i) {
@@ -61,14 +56,58 @@ public class ServicioCliente implements ReglasCliente, RepositorioCliente {
         if (ema.isEmpty()) throw new IllegalArgumentException("El email no puede estar vacio");
         if (!(ema.contains("@") & ema.contains("."))) throw new IllegalArgumentException("El email no es correcto");
         if (listaClientes.stream().anyMatch(c -> c.getEmail().equals(ema))) throw new IllegalArgumentException("El email ya existe");
-        if (!ReglasCliente.comprobarDNI(dn)) throw new IllegalArgumentException("El DNI no es correcto");
+        if (!ClienteReglas.comprobarDNI(dn)) throw new IllegalArgumentException("El DNI no es correcto");
 
     }
 
-    public void comprobarTelefono(String t){
-        if (t.isEmpty() || (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(t) && c.getIdC() != getIdC())))
+    public void comprobarTelefono(Cliente cli, String t){
+        if (t.isEmpty() || (listaClientes.stream().anyMatch(c -> c.getTelefono().equals(t) && c.getIdC() != cli.getIdC())))
             throw new IllegalArgumentException("El telefono no puede estar vacio");
+        cli.setTelefono(t);
     }
 
+    public void setNombre(Cliente cli, String nombre) {
+        if (nombre.isEmpty())
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
+        cli.setNombre(nombre);
+    }
 
+    public void setApellido(Cliente cli, String apellido) {
+        if (apellido.isEmpty())
+            throw new IllegalArgumentException("El apellido no puede estar vacio");
+        cli.setApellido(apellido);
+    }
+
+    public void setEmail(Cliente cli, String email) {
+        if (email.isEmpty())
+            throw new IllegalArgumentException("El email no puede estar vacio");
+        if (listaClientes.stream().anyMatch(c -> c.getEmail().equals(email) && c.getIdC() != cli.getIdC()))
+            throw new IllegalArgumentException("El email ya existe");
+        cli.setEmail(email);
+    }
+
+    public void setDni(Cliente cli, String dni) {
+        if (dni.isEmpty() || (listaClientes.stream().anyMatch(c -> c.getDni().equals(dni) && c.getIdC() != cli.getIdC())))
+            throw new IllegalArgumentException("El DNI no puede estar vacio");
+        cli.setDni(dni);
+    }
+
+    public void setFechaNacimiento(Cliente cli, String fechaNacimiento) {
+        LocalDate nueva;
+        try {
+            nueva = LocalDate.parse(fechaNacimiento);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("La fecha no es correcta");
+        }
+        //Calculo su edad
+        LocalDate hoy = LocalDate.now();
+        int edad = hoy.getYear() - nueva.getYear();
+        if (hoy.getMonthValue() < nueva.getMonthValue()) {
+            edad--;
+        } else if (hoy.getMonthValue() == nueva.getMonthValue() && hoy.getDayOfMonth() < nueva.getDayOfMonth()) {
+            edad--;
+        }
+        if (ClienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
+        cli.setFechaNacimiento(nueva);
+    }
 }

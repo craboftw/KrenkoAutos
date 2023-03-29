@@ -1,12 +1,9 @@
 package org.core;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Cliente {
 
-    private static final ServicioCliente servidor = new ServicioCliente();
     private final int idC;
     private String nombre;
     private String apellido;
@@ -66,57 +63,20 @@ public class Cliente {
         return edad;
     }
 
-    public void setNombre(String nombre) {
-        if (nombre.isEmpty())
-            throw new IllegalArgumentException("El nombre no puede estar vacio");
-        this.nombre = nombre;
-    }
+    void setNombre(String nombre){this.nombre = nombre;}
 
-    public void setApellido(String apellido) {
-        if (apellido.isEmpty())
-            throw new IllegalArgumentException("El apellido no puede estar vacio");
-        this.apellido = apellido;
-    }
+    void setApellido(String apellido) {this.apellido = apellido;}
 
-    public void setTelefono(String telefono) {
+    void setTelefono(String telefono) {this.telefono = telefono;}
 
-        this.telefono = telefono;
-    }
+    void setEmail(String email){this.email = email;}
 
-    public void setEmail(String email) {
-        if (email.isEmpty())
-            throw new IllegalArgumentException("El email no puede estar vacio");
-        if (listaClientes.stream().anyMatch(c -> c.getEmail().equals(email) && c.getIdC() != getIdC()))
-            throw new IllegalArgumentException("El email ya existe");
-        this.email = email;
-    }
+    void setDni(String dni){this.dni = dni;}
 
-    public void setDni(String dni) {
-        if (dni.isEmpty() || (listaClientes.stream().anyMatch(c -> c.getDni().equals(dni) && c.getIdC() != getIdC())))
-            throw new IllegalArgumentException("El DNI no puede estar vacio");
-        this.dni = dni;
-    }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        LocalDate nueva;
-        try {
-            nueva = LocalDate.parse(fechaNacimiento);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("La fecha no es correcta");
-        }
-        //Calculo su edad
-        LocalDate hoy = LocalDate.now();
-        int edad = hoy.getYear() - nueva.getYear();
-        if (hoy.getMonthValue() < nueva.getMonthValue()) {
-            edad--;
-        } else if (hoy.getMonthValue() == nueva.getMonthValue() && hoy.getDayOfMonth() < nueva.getDayOfMonth()) {
-            edad--;
-        }
-        if (ReglasCliente.comprobarEdad(edad)) throw new IllegalArgumentException("El cliente debe ser mayor de edad");
-        this.fechaNacimiento = nueva;
-    }
+    void setFechaNacimiento(LocalDate fechaNacimiento) {this.fechaNacimiento = fechaNacimiento;}
 
     public void setNuevaMulta() {this.multas++; }
+
     public void setNuevaReservaRealizada() {this.reservasRealizadas++; }
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧

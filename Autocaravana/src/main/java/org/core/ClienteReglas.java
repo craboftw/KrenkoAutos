@@ -1,6 +1,6 @@
 package org.core;
 
-public interface ReglasCliente {
+public interface ClienteReglas {
 
     static boolean comprobarDNI(String dn) {
         return true;
@@ -13,4 +13,5 @@ public interface ReglasCliente {
     default boolean comprobarCliente(Cliente c) {
         return true;
     }
+
 }

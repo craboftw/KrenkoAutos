@@ -1,9 +1,6 @@
 package org.core;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Autocaravana {
 
     private int vecesReservada = 0;
@@ -72,35 +69,20 @@ public class Autocaravana {
     public int        getPlazas() {
         return plazas;
     }
-    public int getVecesReservada() {return vecesReservada;}
+    public int        getVecesReservada() {return vecesReservada;}
 
-    public void setModelo(String mod) {
-        if (mod.isEmpty())
-            throw new IllegalArgumentException("El modelo no puede estar vacio");
-        modelo = mod;
-    }
+    void setModelo(String mod) {this.modelo = mod;}
 
-    public void setPrecioPorDia(float precioPorDia) {
-        if (precioPorDia <= 0)
-            throw new IllegalArgumentException("El precio no puede ser negativo");
-        this.precioPorDia = precioPorDia;
-    }
+    void setPrecioPorDia(float precioPorDia) {this.precioPorDia = precioPorDia;}
 
-    public void setKilometraje(int kilometraje) {
-        if (kilometraje > this.kilometraje) {
-            this.kilometraje = kilometraje;
-        } else {
-            throw new IllegalArgumentException("El kilometraje no puede ser menor que el anterior");
-        }
-    }
-    public void setEstado(String Estado) {
-        if (ServicioAutocaravana.comprobarEstadoAutocaravana(Estado))
+    void setKilometraje(int kilometraje){this.kilometraje = kilometraje;}
+
+    void setEstado(String Estado) {
+        if (AutocaravanaServicio.comprobarEstadoAutocaravana(Estado))
             estadoA = Estado;
     }
 
-    void setNuevaReservaRealizada() {
-        vecesReservada++;
-    }
+    public void setNuevaReservaRealizada() {vecesReservada++;}
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
