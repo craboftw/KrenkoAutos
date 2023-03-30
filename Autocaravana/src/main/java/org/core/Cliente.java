@@ -80,9 +80,9 @@ public class Cliente {
 
     public void setNuevaReservaRealizada() {this.reservasRealizadas++; }
 
+
+
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-
-
 
 
     public String toString() {

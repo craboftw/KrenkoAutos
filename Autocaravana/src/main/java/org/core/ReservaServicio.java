@@ -173,13 +173,7 @@ public class ReservaServicio{
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error en el formato de las fechas.");
             }
-            //Comprobaciones del cliente
-            if (!reservaReglas.comprobarCliente(reserva.getCliente())) {
-                throw new IllegalArgumentException("El cliente no cumple las condiciones.");
-            }
-            if (!reservaReglas.comprobarAutocaravana(reserva.getAutocaravana())) {
-                throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones.");
-            }
+
             if (reservaReglas.comprobarReserva(reserva.getFechaIni(), fechaFin, reserva.getAutocaravana(), reserva.getCliente())) {
                 throw new IllegalArgumentException("La autocaravana no está disponible en las fechas seleccionadas.");
             }
@@ -192,7 +186,7 @@ public class ReservaServicio{
         }
     }
 
-    public void modificarReserva(Reserva reserva, String fechI, String fechF){
+    public void modificarReserva(Reserva reserva, Autocaravana a, String fechI, String fechF){ //todavia no esta en curso
         LocalDate fechaIni;
         LocalDate fechaFin;
         if (reserva.getEstadoReserva().equals("Cancelada")) {
@@ -201,8 +195,7 @@ public class ReservaServicio{
         if (reserva.getEstadoReserva().equals("Finalizada")) {
             throw new IllegalArgumentException("La reserva está finalizada");
         }
-        if (reserva.getEstadoReserva().equals("En curso")) {
-
+        if (!reserva.getEstadoReserva().equals("En curso")) {
 
             try {
                 fechaIni = LocalDate.parse(fechI);
@@ -210,17 +203,14 @@ public class ReservaServicio{
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error en el formato de las fechas");
             }
-            //Comprobaciones del cliente
-            if (!reservaReglas.comprobarCliente(reserva.getCliente())) {
-                throw new IllegalArgumentException("El cliente no cumple las condiciones");
-            }
-            if (!reservaReglas.comprobarAutocaravana(reserva.getAutocaravana())) {
+
+            if (!reservaReglas.comprobarAutocaravana(a)) {
                 throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
             }
             if (fechaIni.isBefore(LocalDate.now())) {
                 throw new IllegalArgumentException("La fecha inicial no puede ser anterior a la fecha actual");
             }
-            if (reservaReglas.comprobarReserva(fechaIni, fechaFin, reserva.getAutocaravana(), reserva.getCliente())) {
+            if (reservaReglas.comprobarReserva(fechaIni, fechaFin, a, reserva.getCliente())) {
                 throw new IllegalArgumentException("La autocaravana no está disponible en las fechas seleccionadas");
             }
 
