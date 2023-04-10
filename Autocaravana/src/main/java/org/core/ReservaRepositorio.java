@@ -8,7 +8,7 @@ public interface ReservaRepositorio {
     public void guardarReserva(Collection<Reserva> caravanas) ;
     public void guardarReserva(Reserva caravana) ;
     public Collection<Reserva> cargarReserva() ;
-    public Collection<Reserva> cargarReserva(String estado,String dato) ;
+    public Collection<Reserva> cargarReserva(String tipo,String dato) ; //
     public int getCantidadReserva();
 
     public boolean existeReserva(Reserva reserva);

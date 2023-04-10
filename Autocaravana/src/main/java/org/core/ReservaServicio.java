@@ -51,6 +51,7 @@ public class ReservaServicio{
 
 
 
+
     public static void checkOut(Reserva reserva) {
         String estadoReserva = reserva.getEstadoReserva();
         switch (reserva.getEstadoReserva()) {
@@ -81,7 +82,7 @@ public class ReservaServicio{
         }
     }
 
-    public static void  checkIn(Reserva reserva) {
+    public static void  checkIn(Reserva reserva) { //principio open close revisar
         String estadoReserva = reserva.getEstadoReserva();
         switch (estadoReserva) {
             case "Cancelada":

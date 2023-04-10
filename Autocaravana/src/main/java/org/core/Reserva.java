@@ -13,6 +13,8 @@ public class Reserva {
     private String estadoR;
     private float precioTotal;
 
+    //lo que queda por pagar
+
     //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Reserva(int id, Autocaravana A, Cliente C, LocalDate fechI, LocalDate fechF,float precioTot, String estado) {
         idR = id;

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ReservaReglas {
     ReservaRepositorio reservaRepositorio = null;
+    //Separar funciones en distintas clases por ambito
 
 
     //Funciones que calculan el precio total de la reserva
