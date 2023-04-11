@@ -35,9 +35,9 @@ public class ClienteServicio {
         return clienteRepositorio.cargarCliente().stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(null);
     }
 
-    public void eliminarCliente(Cliente c) {
-        if (clienteRepositorio.existeCliente(c))
-            clienteRepositorio.eliminarCliente(c);
+    public void eliminarCliente(String dni) {
+        if (clienteRepositorio.existeCliente(dni))
+            clienteRepositorio.eliminarCliente(buscarCliente(dni));
         else
             throw new IllegalArgumentException("El cliente no existe");
     }
@@ -120,7 +120,15 @@ public class ClienteServicio {
             edad--;
         }
         if (clienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
-        cli.setFechaNacimiento(nueva);
+        cli.setFechaNacimiento(nueva.toString());
+    }
+
+    public void setTelefono(Cliente cli, String telefono) {
+        if (telefono.isEmpty())
+            throw new IllegalArgumentException("El telefono no puede estar vacio");
+        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getTelefono().equals(telefono) && c.getIdC() != cli.getIdC()))
+            throw new IllegalArgumentException("El telefono ya existe");
+        cli.setTelefono(telefono);
     }
 
     void eliminarEstadoCliente(String estado)
@@ -146,5 +154,10 @@ public class ClienteServicio {
     public  Collection<Cliente> getListaClientes() {
         return clienteRepositorio.cargarCliente();
     }
+
+    public void guardarCliente(Cliente c) {
+        clienteRepositorio.guardarCliente(c);
+    }
+
 
 }

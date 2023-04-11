@@ -11,7 +11,7 @@ public class Cliente {
     private String telefono;
     private String email;
     private String dni;
-    private LocalDate fechaNacimiento;
+    private String fechaNacimiento;
     private int cantidadReservasRealizadas;
     private int multas;
 
@@ -21,7 +21,7 @@ public class Cliente {
         nombre = nom;
         apellido = ape;
         telefono = telef;
-        fechaNacimiento = LocalDate.parse(fech);
+        fechaNacimiento = fech;
         dni = dn;
         email = ema;
         cantidadReservasRealizadas = 0;
@@ -52,15 +52,16 @@ public class Cliente {
     public String getEmail() {return email;}
     public String getDni() {return dni;}
     public String getTelefono() {return telefono;}
-    public LocalDate getFechaNacimiento() {return fechaNacimiento;}
+    public String getFechaNacimiento() {return fechaNacimiento.toString();}
     public int getCantidadReservasRealizadas() {return cantidadReservasRealizadas;}
     public int getMultas() {return multas;}
-    public int agetEdad() {
+    public int Edad() {
         LocalDate hoy = LocalDate.now();
-        int edad = hoy.getYear() - fechaNacimiento.getYear();
-        if (hoy.getMonthValue() < fechaNacimiento.getMonthValue()) {
+        LocalDate fechaparseada = LocalDate.parse(fechaNacimiento);
+        int edad = hoy.getYear() - fechaparseada.getYear();
+        if (hoy.getMonthValue() < fechaparseada.getMonthValue()) {
             edad--;
-        } else if (hoy.getMonthValue() == fechaNacimiento.getMonthValue() && hoy.getDayOfMonth() < fechaNacimiento.getDayOfMonth()) {
+        } else if (hoy.getMonthValue() == fechaparseada.getMonthValue() && hoy.getDayOfMonth() < fechaparseada.getDayOfMonth()) {
             edad--;
         }
         return edad;
@@ -79,7 +80,7 @@ public class Cliente {
 
     void setDni(String dni){this.dni = dni;}
 
-    void setFechaNacimiento(LocalDate fechaNacimiento) {this.fechaNacimiento = fechaNacimiento;}
+    void setFechaNacimiento(String fecha) {this.fechaNacimiento = fecha;}
 
     public void setNuevaMulta() {this.multas++; }
 

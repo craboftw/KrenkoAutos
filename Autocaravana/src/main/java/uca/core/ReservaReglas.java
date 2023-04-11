@@ -75,7 +75,7 @@ public interface ReservaReglas {
     default boolean comprobarCliente(Cliente c)
     //comprueba si un cliente es valido para la reserva
     {
-        return (c.agetEdad() >= 18) & (c.agetEdad() <= 80 & c.getMultas() < 2);
+        return (c.Edad() >= 18) & (c.Edad() <= 80 & c.getMultas() < 2);
 
     }
 

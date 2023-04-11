@@ -31,7 +31,11 @@ public class ClienteUI {
 
     @ShellMethod(key = "crear-cliente", value = "Crea un nuevo cliente")
     public String crearCliente(@ShellOption String nom, @ShellOption String ape, @ShellOption String tel, @ShellOption String fecha, @ShellOption String dni, @ShellOption String email) {
-        clienteServicio.altaCliente(nom, ape, tel, fecha, dni, email);
+        try{
+            clienteServicio.altaCliente(nom, ape, tel, fecha, dni, email);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
         return "Cliente creado con éxito";
     }
 
@@ -51,15 +55,42 @@ public class ClienteUI {
     }
 
     @ShellMethod(key = "modificar-email", value = "Modifica el email de un cliente")
-    public String modificarTelefono(@ShellOption String dni, @ShellOption String email) {
+    public String modificarEmail(@ShellOption String dni, @ShellOption String email) {
         Cliente cliente = clienteServicio.buscarCliente(dni);
         if (cliente != null) {
+            clienteServicio.eliminarCliente(dni);
             clienteServicio.setEmail(cliente, email);
+            clienteServicio.guardarCliente(cliente);
             return "Email modificado con éxito";
         } else {
             return "No se ha encontrado ningún cliente con ese dni";
         }
     }
+
+    @ShellMethod(key = "modificar-telefono", value = "Modifica el telefono de un cliente")
+    public String modificarTelefono(@ShellOption String dni, @ShellOption String telefono) {
+        Cliente cliente = clienteServicio.buscarCliente(dni);
+        if (cliente != null) {
+            clienteServicio.eliminarCliente(dni);
+            clienteServicio.setTelefono(cliente, telefono);
+            clienteServicio.guardarCliente(cliente);
+            return "Telefono modificado con éxito";
+        } else {
+            return "No se ha encontrado ningún cliente con ese dni";
+        }
+    }
+
+    @ShellMethod(key = "borrar-cliente", value = "Borra un cliente")
+    public String eliminarCliente(@ShellOption String dni) {
+        if (clienteServicio.buscarCliente(dni)!= null) {
+            clienteServicio.eliminarCliente(dni);
+            return "Cliente eliminado con éxito";
+        } else {
+            return "No se ha encontrado ningún cliente con ese dni";
+        }
+    }
+
+
 }
 
 

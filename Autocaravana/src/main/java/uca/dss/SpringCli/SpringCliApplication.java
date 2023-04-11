@@ -14,17 +14,18 @@ public class SpringCliApplication {
 
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		runAnimation();
-		SpringApplication.run(SpringCliApplication.class, args);
+	runAnimation();
+	SpringApplication.run(SpringCliApplication.class, args);
 	}
 
 	public static void runAnimation() throws InterruptedException, IOException {
 		String art = "   -           __\n" +
 				" --          ~( @\\   \\\n" +
-				"---   _________]_[__/_>________\n" +
-				"     /  ____ \\ <>     |  ____  \\\n" +
-				"    =\\_/ __ \\_\\_______|_/ __ \\__D\n" +
+				"---   " + "\033[31m" + "_________"+ "\033[0m" +"]_[ " + "\033[31m" + "__/_>________\n" + "\033[0m"  +
+				"\033[31m" + "     /  ____ \\ <>     |  ____  \\\n"+ "\033[0m" +
+				"\033[31m" + "    =\\_/ "+ "\033[0m" +"__" + "\033[31m" + " \\_\\_______|_/ " + "\033[0m" +"__" + "\033[31m" + " \\__D\n"+ "\033[0m" +
 				"________(__)_____________(__)____\n";
+
 
 		String logo = " .----------------.  .----------------.  .----------------.  .-----------------. .----------------.  .----------------.  \n"
 				+ "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. | \n"
@@ -74,8 +75,7 @@ public class SpringCliApplication {
 
 			Thread.sleep(100);
 			// borra la consola
-			System.out.flush();
-
+			//System.out.flush();
 
 			System.out.print("\033[H\033[2J");
 		}

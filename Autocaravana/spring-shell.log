@@ -69,3 +69,55 @@
 1681205761407:buscar-cliente 00011122X
 1681207387295:listar-clientes
 1681207407844:modificar-email 00011122X slay@waps.boombastic
+1681223660283:help
+1681223674702:buscar-cliente
+1681223683212:listar-clientes
+1681223829839:crear-cliente francisco lopez
+1681223850845:crear-cliente francisco lopez 666888999 1999-11-17 44065455P fran99@lopez.com
+1681224007315:crear-cliente fran lopez 666777888
+1681224037695:crear-cliente francisco lopez 666888999 1999-11-17 44065455P fran99@lopez.com
+1681224124760:vshell:>crear-cliente francisco lopez 666888999 1999-11-17 44065455P fran99@lopez.com
+1681224125967:shell:>crear-cliente francisco lopez 666888999 1999-11-17 44065455P fran99@lopez.com
+1681224149005:crear-cliente francisco lopez 666888999 1999-11-17 44065455P fran99@lopez.com
+1681224467818:crear-cliente maraya armario 777888999 2000-12-22 66677888R armarican@armari.com
+1681224740555:crear-cliente francisco lopez 666888999 1999-11-17 44065455P fran99@lopez.com
+1681224752701:crear-cliente maraya armario 777888999 2000-12-22 66677888R armarican@armari.com
+1681225031397:crear-cliente francisco lopez 666888999 1999-11-17 44065455P fran99@lopez.com
+1681225040445:crear-cliente maraya armario 777888999 2000-12-22 66677888R armarican@armari.com
+1681225045333:listar-clientes
+1681225451287:help
+1681225467307:modificar-cliente
+1681225474940:modificar-email
+1681225500494:modificar-email 66677888R larmario@lamari.cona
+1681225505069:listar-clientes
+1681225702642:eliminar-cliente
+1681225707334:borrar-cliente
+1681225737698:borrar-cliente [200~66677888R
+1681225747004:listar-clientes
+1681225757796:borrar-cliente 66677888R
+1681225765601:stacktrace
+1681225792589:listar-cliente
+1681225794291:listar-clientes
+1681225944114:help
+1681225961038:modificar-email 66677888R
+1681225978392:modificar-email 66677888R maraya@mari.com
+1681225983907:listar-clientes
+1681227087114:eliminar-cliente 66677888R
+1681227095552:eliminar-cliente
+1681227098730:help
+1681227109268:borrar-cliente 66677888R
+1681228993642:listar-usuarios
+1681228996136:help
+1681229030000:listar-clientes
+1681229087185:eliminar-cliente
+1681229091683:borrar-cliente
+1681229116387:borrar-cliente 66677888R
+1681229122099:stacktrace
+1681229554578:listar-clientes
+1681229567023:borrar-cliente 66677888R
+1681229572163:stacktrace
+1681229747168:listar-clientes
+1681229757621:borrar-cliente 66677888R
+1681229761977:listar-clientes
+1681229956917:help
+1681230734375:listar-clientes

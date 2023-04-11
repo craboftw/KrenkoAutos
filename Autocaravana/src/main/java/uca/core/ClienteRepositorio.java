@@ -19,7 +19,7 @@ public interface ClienteRepositorio {
     default String cargarEstadoDefault() {return "Disponible";}
 
 
-    boolean existeCliente(Cliente c);
+    boolean existeCliente(String dni);
 
     void eliminarCliente(Cliente c);
 

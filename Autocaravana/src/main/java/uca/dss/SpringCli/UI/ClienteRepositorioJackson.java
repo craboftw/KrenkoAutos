@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClienteRepositorioJackson implements ClienteRepositorio {
 
@@ -84,37 +86,36 @@ public class ClienteRepositorioJackson implements ClienteRepositorio {
     }
 
     @Override
-    public Collection<String> cargarEstadosCliente() {
+    public Collection<String> cargarEstadosCliente() { //pendiente de borrar
         return null;
     }
 
     @Override
-    public void guardarEstadoCliente(Collection<String> listaEstados) {
+    public void guardarEstadoCliente(Collection<String> listaEstados) { //pendiente de borrar
+    }
+
+    @Override
+    public void guardarEstadoCliente(String estado) { //pendiente de borrar
 
     }
 
     @Override
-    public void guardarEstadoCliente(String estado) {
-
-    }
-
-    @Override
-    public boolean existeCliente(Cliente c) {
-        return false;
+    public boolean existeCliente(String dni) {
+return cargarCliente().stream().anyMatch(c -> c.getDni().equals(dni));
     }
 
     @Override
     public void eliminarCliente(Cliente c) {
+        guardarCliente((Collection<Cliente>) cargarCliente().stream().filter(cliente -> cliente.getIdC() != c.getIdC()).collect(Collectors.toList()));
+    }
+
+    @Override
+    public void eliminarEstadoCliente(String estado) { //pendiente de borrar
 
     }
 
     @Override
-    public void eliminarEstadoCliente(String estado) {
-
-    }
-
-    @Override
-    public boolean existeEstadoCliente(String estado) {
+    public boolean existeEstadoCliente(String estado) { //pendiente de borrar
         return false;
     }
 }
