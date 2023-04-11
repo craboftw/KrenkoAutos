@@ -1,0 +1,71 @@
+1681121363220:help
+1681134155169:crear-cliente
+1681134213742:crear-cliente miriam armario 666777888 21/12/2000 7711712635R armaricon@gmail.com
+1681134237204:crear-cliente miriam armario 666777888 2000/12/21 7711712635R armaricon@gmail.com
+1681134254687:crear-cliente miriam armario 666777888 2000-12-21 7711712635R armaricon@gmail.com
+1681134287145:crear-cliente miriam armario 666777888 1997-12-21 7711712635R armaricon@gmail.com
+1681134294161:stacktrace
+1681134426746:crear-cliente miriam armario 666777888 2000-12-21 7711712635R armaricon@gmail.com
+1681134441402:stacktrace
+1681134489847:crear-cliente miriam armario 666777888 2000-12-21 7711712635R armaricon@gmail.com
+1681135675869:crear-cliente
+1681135705165:crear-cliente miriam armario 666777666 2000-12-21 440999333R armaricon@gmail.com
+1681135748829:stacktrace
+1681135920529:crear-cliente miriam armario
+1681135945415:crear-cliente miriam armario 666777888 2000-12-21 444000999R armaricon@gmail.com
+1681135962186:stacktrace
+1681136117858:crear-cliente
+1681136151727:crear-cliente miriam armario 666777888 2000-12-21 44400099R armaricon@gmail.com
+1681136470267:stacktrace
+1681136541008:crear-cliente miriam armario 666777888 2000-12-21 44400099R armaricon@gmail.com
+1681136973743:ckear
+1681136975033:clear
+1681136980637:help
+1681136984448:clear
+1681136987875:clear()
+1681136990862:crear-cliente miriam armario 666777888 2000-12-21 44400099R armaricon@gmail.com
+1681137905246:crear-cliente miriam armario 666777666 2000-12-21 440999333R armaricon@gmail.com
+1681138995925:t uca.core.Cliente.getEdad(Cliente.java:58)
+1681138995937:t java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+1681138995946:t java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+1681138995957:t java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+1681138995963:t java.base/java.lang.reflect.Method.invoke(Method.java:568)
+1681139013773:crear-cliente miriam armario 666777666 2000-12-21 440999333R armaricon@gmail.com
+1681139591994:crear-cliente pakito lopez 999888777 2000-11-17 99900099P ermaricon@gmail.com
+1681139644726:listar-clientes
+1681140596780:listar-cliente
+1681140602621:listar-clientes
+1681141544450:listar-cliente
+1681141547585:listar-clientes
+1681141617740:crear cliente violeti naharro 696969696 00011122X slay@wap.s
+1681141634623:crear-cliente violeti naharro 696969696 00011122X slay@wap.s
+1681141642411:crear-cliente
+1681141669510:crear cliente violeti naharro 696969696 2001-07-16 00011122X slay@wap.s
+1681141708047:crear-cliente violeti naharro 696969696 2001-07-16 00011122X slay@wap.s
+1681141713429:listar-clientes
+1681141895261:crear-cliente tomi morales 777888654 00011123J tomi@espelusa.com
+1681141966699:crear-cliente tomi morales 2000-12-12 777888654 00011123J tomi@espelusa.com
+1681156007994:help
+1681156013751:run-animation
+1681197209255:help
+1681197216118:run-animation
+1681197333181:stacktrace
+1681197961734:run-animation
+1681198229508:clear
+1681198231645:clear()
+1681198237654:run-animation
+1681200472421:clear
+1681200476139:run-animation
+1681200503845:clear
+1681200509093:run-animation
+1681200516367:clear
+1681200518477:run-animation
+1681200734102:clear
+1681201066732:run-animation
+1681205716460:help
+1681205735315:buscar-cliente
+1681205747202:listarcliente
+1681205752111:listar-clientes
+1681205761407:buscar-cliente 00011122X
+1681207387295:listar-clientes
+1681207407844:modificar-email 00011122X slay@waps.boombastic

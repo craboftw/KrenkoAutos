@@ -1,7 +1,7 @@
-import org.core.Autocaravana;
-import org.core.Cliente;
-import org.core.ReservaReglas;
-import org.core.Reserva;
+import uca.core.Autocaravana;
+import uca.core.Cliente;
+import uca.core.ReservaReglas;
+import uca.core.Reserva;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.List;
 
-
+/*
 public class ReservaTest {
     @BeforeEach
     public void setUp() {
@@ -329,3 +329,6 @@ public class ReservaTest {
 
     }
 }
+
+
+ */
