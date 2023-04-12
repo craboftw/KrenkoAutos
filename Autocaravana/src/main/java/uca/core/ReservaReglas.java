@@ -1,5 +1,6 @@
 package uca.core;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface ReservaReglas {
@@ -8,11 +9,14 @@ public interface ReservaReglas {
 
 
     //Funciones que calculan el precio total de la reserva
-    default float calculaPrecioTotal(Autocaravana A, Cliente C, LocalDate fechaIni, LocalDate fechaFin)
+    default BigDecimal calculaPrecioTotal(Autocaravana A, Cliente C, LocalDate fechaIni, LocalDate fechaFin)
     //devuelve el precio total de la reserva;
     {
         //penalizacion por multa de un 10%, si la caravana tiene mas de 700000 km se descuenta un 5% del precio total
-        return (float) (A.getPrecioPorDia() * (fechaFin.toEpochDay() - fechaIni.toEpochDay()) * (1 + (C.getMultas() * 0.1)) * (1 - (A.getKilometraje() > 700000 ? 0.05 : 0)));
+        BigDecimal precio= A.getPrecioPorDia().multiply(BigDecimal.valueOf((int) (fechaFin.toEpochDay() - fechaIni.toEpochDay()))).multiply(BigDecimal.valueOf(1.1));
+        if (A.getKilometraje() > 700000)
+            precio =  precio.multiply(BigDecimal.valueOf(0.95));
+        return precio;
     }
 
 
@@ -41,20 +45,20 @@ public interface ReservaReglas {
     //Tasa  por cancelar antes de comenzar la reserva
     {
         //si cancelo la reserva con dias de antelacion me devuelven el 90% del precio total.
-        return R.getPrecioTotal() * (float) 0.90;
+        return R.getPrecioTotal().multiply(BigDecimal.valueOf(0.9)).floatValue();
     }
 
-    default float calcularTasaModificacion(Reserva R)
+    default BigDecimal calcularTasaModificacion(Reserva R)
     //Tasa por modificar tras comenzar la reserva
     {
         int diasRestantes = (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay());
-        return R.getAutocaravana().getPrecioPorDia() * diasRestantes * (float) 0.05;
+        return R.getPrecioTotal().subtract(R.getAutocaravana().getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)));
     }
 
-    default float calcularTasaFinalizacion(Reserva R) {
+    default BigDecimal calcularTasaFinalizacion(Reserva R) {
         //si cancelo la reserva con dias de antelacion me devuelven el 50% del precio de los dias que me queden por utilizar
         int diasRestantes = (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay());
-        return R.getPrecioTotal() - R.getAutocaravana().getPrecioPorDia() * diasRestantes * (float) 0.50;
+        return R.getPrecioTotal().subtract(R.getAutocaravana().getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)).multiply(BigDecimal.valueOf(0.5)));
     }
 
     //Funciones que calculan la multa por incumplimiento.
@@ -62,7 +66,7 @@ public interface ReservaReglas {
     //Calcula la multa por incumplimiento de la reserva
     {
         int diasRetraso = (int) (LocalDate.now().toEpochDay() - R.getFechaFin().toEpochDay());
-        return R.getAutocaravana().getPrecioPorDia() * diasRetraso * (float) 0.1;
+return R.getPrecioTotal().multiply(BigDecimal.valueOf(0.1)).multiply(BigDecimal.valueOf(diasRetraso)).floatValue();
     }
 
     //Funciones que comprueban si la caravana y el cliente son compatibles para la reserva

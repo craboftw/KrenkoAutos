@@ -3,12 +3,22 @@ package uca.dss.SpringCli;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.shell.standard.commands.Clear;
+import uca.core.ClienteServicio;
+import uca.dss.SpringCli.UI.ClienteUI;
 
 import java.io.IOException;
 
 @SpringBootApplication
 public class SpringCliApplication {
+
+	//set ClienteServicio in ClienteUI.java
+
+
+
+
+
 
 
 

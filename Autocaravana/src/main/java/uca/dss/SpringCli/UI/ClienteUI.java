@@ -1,21 +1,11 @@
 package uca.dss.SpringCli.UI;
-import jdk.jshell.JShell;
-import org.springframework.boot.ansi.AnsiColor;
-import org.springframework.boot.ansi.AnsiStyle;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
-import org.springframework.shell.boot.SpringShellProperties;
-import org.springframework.shell.standard.commands.Clear;
 import uca.core.Cliente;
+import uca.core.ClienteReglas;
 import uca.core.ClienteServicio;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import uca.dss.SpringCli.SpringCliApplication;
 
-import java.io.IOException;
-import java.util.Collection;
 
 @ShellComponent
 public class ClienteUI {
@@ -26,7 +16,7 @@ public class ClienteUI {
 
     public ClienteUI() {
         this.clienteControlador = new ClienteControlador();
-        this.clienteServicio = new ClienteServicio(new ClienteRepositorioJackson(), new ClienteReglasBasicas());
+        this.clienteServicio = new ClienteServicio(new ClienteRepositorioJackson(),new ClienteReglasBasicas() );
     }
 
     @ShellMethod(key = "crear-cliente", value = "Crea un nuevo cliente")
@@ -55,39 +45,131 @@ public class ClienteUI {
     }
 
     @ShellMethod(key = "modificar-email", value = "Modifica el email de un cliente")
-    public String modificarEmail(@ShellOption String dni, @ShellOption String email) {
-        Cliente cliente = clienteServicio.buscarCliente(dni);
-        if (cliente != null) {
-            clienteServicio.eliminarCliente(dni);
-            clienteServicio.setEmail(cliente, email);
-            clienteServicio.guardarCliente(cliente);
-            return "Email modificado con éxito";
-        } else {
-            return "No se ha encontrado ningún cliente con ese dni";
+    public String modificarEmail(@ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de dato [dni|idC]") String type,
+                                 @ShellOption(help = "Valor del dato") String dato,
+                                 @ShellOption(help = "Nuevo email") String email) {
+        try {
+            if (type.equals("dni")) {
+                clienteServicio.setEmail(dato, email);
+            } else if (type.equals("idC")) {
+                int idC = Integer.parseInt(dato);
+                clienteServicio.setEmail(idC, email);
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
+        return "Email modificado con éxito";
     }
 
-    @ShellMethod(key = "modificar-telefono", value = "Modifica el telefono de un cliente")
-    public String modificarTelefono(@ShellOption String dni, @ShellOption String telefono) {
-        Cliente cliente = clienteServicio.buscarCliente(dni);
-        if (cliente != null) {
-            clienteServicio.eliminarCliente(dni);
-            clienteServicio.setTelefono(cliente, telefono);
-            clienteServicio.guardarCliente(cliente);
-            return "Telefono modificado con éxito";
-        } else {
-            return "No se ha encontrado ningún cliente con ese dni";
+    @ShellMethod(key = "modificar-telefono", value = "Modifica el teléfono de un cliente")
+    public String modificarTelefono(@ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de dato [dni|idC]") String type,
+                                    @ShellOption(help = "Valor del dato") String dato,
+                                    @ShellOption(help = "Nuevo teléfono") String telefono) {
+        try {
+            if (type.equals("dni")) {
+                clienteServicio.setTelefono(dato, telefono);
+            } else if (type.equals("idC")) {
+                int idC = Integer.parseInt(dato);
+                clienteServicio.setTelefono(idC, telefono);
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
+        return "Teléfono modificado con éxito";
     }
 
-    @ShellMethod(key = "borrar-cliente", value = "Borra un cliente")
-    public String eliminarCliente(@ShellOption String dni) {
-        if (clienteServicio.buscarCliente(dni)!= null) {
-            clienteServicio.eliminarCliente(dni);
-            return "Cliente eliminado con éxito";
-        } else {
-            return "No se ha encontrado ningún cliente con ese dni";
+
+
+    @ShellMethod(key = "modificar-nombre", value = "Modifica el nombre de un cliente")
+    public String modificarNombre(
+            @ShellOption(help = "Valor del dato") String dato,
+            @ShellOption(help = "Nuevo nombre", value = { "-n", "--nombre" }) String nombre,
+            @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de dato [dni|idC]") String type
+
+            ) {
+        try {
+            if (type.equals("dni")) {
+                clienteServicio.setNombre(dato, nombre);
+            } else if (type.equals("idC")) {
+                int idC = Integer.parseInt(dato);
+                clienteServicio.setNombre(idC, nombre);
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
+        return "Nombre modificado con éxito";
+    }
+
+
+
+
+
+
+
+
+    @ShellMethod(key = "modificar-apellido", value = "Modifica el apellido de un cliente")
+    public String modificarapellido(@ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de dato [dni|idC]") String type,
+                                    @ShellOption(help = "Valor del dato") String dato,
+                                    @ShellOption(help = "Nuevo apellido") String nombre)
+    {
+        try {
+            if (type.equals("dni")) {
+                clienteServicio.setApellido(dato, nombre);
+            } else if (type.equals("idC")) {
+                int idC = Integer.parseInt(dato);
+                clienteServicio.setApellido(idC, nombre);
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+
+        return "Apellido modificado con éxito";
+    }
+
+    @ShellMethod(key = "modificar-fecha", value = "Modifica la fecha de nacimiento de un cliente")
+    public String modificarfecha(@ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de dato [dni|idC]") String type,
+                                 @ShellOption(help = "Valor del dato") String dato,
+                                 @ShellOption(help = "Nuevo apellido") String nombre)
+    {
+        try {
+            if (type.equals("dni")) {
+                clienteServicio.setFechaNacimiento(dato , nombre);
+            } else if (type.equals("idC")) {
+                int idC = Integer.parseInt(dato);
+                clienteServicio.setFechaNacimiento(idC, nombre);
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Fecha modificado con éxito";
+    }
+
+    @ShellMethod(key = "borrar-cliente", value = "Modifica la fecha de nacimiento de un cliente")
+    public String borrarcliente(@ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de dato [dni|idC]") String type,
+                                @ShellOption(help = "Valor del dato") String dato){
+        try {
+            if (type.equals("dni")) {
+                clienteServicio.eliminarCliente(dato);            }
+            else if (type.equals("idC")) {
+                int idC = Integer.parseInt(dato);
+                clienteServicio.eliminarCliente(idC);            }
+            else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Cliente eliminado con éxito";
     }
 
 

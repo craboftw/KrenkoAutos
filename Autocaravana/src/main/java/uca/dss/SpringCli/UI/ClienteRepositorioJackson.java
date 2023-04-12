@@ -101,7 +101,13 @@ public class ClienteRepositorioJackson implements ClienteRepositorio {
 
     @Override
     public boolean existeCliente(String dni) {
-return cargarCliente().stream().anyMatch(c -> c.getDni().equals(dni));
+
+        return cargarCliente().stream().anyMatch(c -> c.getDni().equals(dni));
+    }
+
+    @Override
+    public boolean existeCliente(int idc) {
+    return cargarCliente().stream().anyMatch(c -> c.getIdC() == idc);
     }
 
     @Override

@@ -121,3 +121,93 @@
 1681229761977:listar-clientes
 1681229956917:help
 1681230734375:listar-clientes
+1681283901530:help
+1681283911836:listar-clientes
+1681283925965:modificar-nombre help
+1681283932751:help modificar-nombre
+1681284206128:modificar-nombre help
+1681284212275:help modificar-nombre
+1681287111737:listar-clientes
+1681287129279:help modificar-cliente
+1681287143323:help modificar-nombre
+1681287196158:modificar-nombre 0 francisco -t idc
+1681287213845:modificar-nombre 0 francisco -t idC
+1681287219424:listar-cliente
+1681287223075:listar-clientes
+1681287275689:modificar-nombre 0 pakito -t idC
+1681287279639:listar-clientes
+1681287307797:modificar-nombre 44065455P Francisco -t dni
+1681287311648:listar-clientes
+1681293290575:modificar-nombre
+1681293302775:modificar-nombre 44065455P Pakito
+1681293375703:modificar-nombre -t dni 44065455P Pakito
+1681293736438:listar-clientes
+1681294486789:modificar-nombre 44065455P Fran
+1681294720485:modificar-nombre 44065455P pak
+1681294937772:modificar-cliente 44065455P PAKITO
+1681294944997:stacktrace
+1681294983794:modificar-nombre 44065455P PAKITO
+1681295328028:listar-clientes
+1681295340822:modificar-nombre 0 FRAN
+1681295345889:listar-clientes
+1681295667196:modificar-nombre 44065455P franisco
+1681295671039:listar-clientes
+1681295678200:modificar-nombre 0 pak
+1681295682194:listar-clientes
+1681295739907:modificar-nombre 44065455 fran
+1681295750497:modificar-nombre 44065455P fran
+1681295756375:listar-clientes
+1681297533017:modificar-nombre 0 Franisco
+1681297542361:modificar-nombre 0 Franisco idC
+1681297548058:listar-clinetes
+1681297552084:listar-clientes
+1681297578168:modificar-nombre 44065455 Fran dni
+1681297590051:modificar-nombre 44065455P Fran dni
+1681297594905:listar-clientes
+1681311853310:listar-autocaravana
+1681311855012:help
+1681313294942:listar-cliente
+1681313301449:listar-clientes
+1681313315737:help
+1681313371430:listar-autocaravana
+1681313382020:listar-autocaravanas
+1681313392136:crear-autocaravana
+1681313423359:crear-autocaravana sexo 6666kys citroen 69 1 420
+1681313460131:public interface AutocaravanaReglas {
+1681313470609:crear-autocaravana sexo 6666KYS citroen 69 1 420
+1681313475361:listar-autocaravanas
+1681313702505:listar-clientes
+1681313710903:listar-autocaravanas
+1681315963518:crear-autocaravana
+1681316010495:crear-autocaravana 01 4200THC Eva 999 1 999999
+1681316016929:listar-autocaravanas
+1681316295401:crear-autocaravana
+1681316366856:crear-autocaravana eva01 4200THC 9999 1 99999
+1681316370789:listar-autocaravanas
+1681316495283:crear-autocaravana
+1681316575875:crear-autocaravana toyota-supra 0001BBB 50 5 0
+1681316581375:listar-autocaravanas
+1681334063182:crear-autocaravana
+1681334104883:crear-autocaravana tesla-s 0000DLH 10 90 12345
+1681334109055:shell:>crear-autocaravana tesla-s 0000DLH 10 90 12345
+1681334134267:crear-autocaravana tesla-s 1111DLH 10 90 12345
+1681334142186:listar-autocaravana
+1681334149143:listar-autocaravanas
+1681335124598:buscar-autocaravana
+1681335154318:buscar-autocaravana matricula 1111DLH
+1681335160123:listar-autocaravanas
+1681335176259:buscar-autocaravana matricula 1111DLH
+1681335189668:buscar-autocaravana idA 3
+1681335312106:buscar-autocaravana
+1681335343977:buscar-autocaravana matricula 1111DLH
+1681335353748:buscar-autocaravana matricula 111DLH
+1681335360589:listar-autocaravana
+1681335367907:listar-autocaravanas
+1681335379213:buscar-autocaravana -t matricula 1111DLH
+1681335421075:buscar-autocaravana matricula 1111DLH
+1681335432658:buscar-autocaravana idA 3
+1681335441257:buscar-autocaravana idA 0
+1681335509721:buscar-autocaravana
+1681335514641:buscar-autocaravana matricula 1111DLH
+1681335571968:buscar-autocaravana matric 111
+1681335576477:buscar-autocaravana matricula 1111DLH

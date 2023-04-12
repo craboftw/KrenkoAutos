@@ -12,20 +12,13 @@ public interface AutocaravanaRepositorio {
     int getCantidadAutocaravanas(String tipo,String dato);
     int getCantidadAutocaravanas();
 
-    // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Estados‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    Collection<String> cargarEstadosAutocaravana() ;
-    void guardarEstadoAutocaravana(Collection<String> listaEstados);
-    void guardarEstadoAutocaravana(String estado);
-    default String cargarEstadoDefault() {
-        return "Disponible";
-    }
+    boolean existeAutocaravana(String matricula);
+
+    boolean existeAutocaravana(int idA);
+
+    void eliminarAutocaravana(String matricula);
+
+    void eliminarAutocaravana(int idA);
 
 
-    void eliminarAutocaravana(Autocaravana a);
-
-    boolean existeAutocaravana(Autocaravana a);
-
-    boolean existeEstadoAutocaravana(String estado);
-
-    void eliminarEstadoAutocaravana(String estado);
 }

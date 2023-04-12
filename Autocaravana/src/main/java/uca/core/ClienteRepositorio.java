@@ -20,6 +20,7 @@ public interface ClienteRepositorio {
 
 
     boolean existeCliente(String dni);
+    boolean existeCliente(int dni);
 
     void eliminarCliente(Cliente c);
 

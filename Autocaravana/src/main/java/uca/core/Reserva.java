@@ -1,5 +1,6 @@
 package uca.core;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Reserva {
@@ -9,12 +10,12 @@ public class Reserva {
     private LocalDate fechaIni;
     private LocalDate fechaFin;
     private String estadoR;
-    private float precioTotal;
+    private BigDecimal precioTotal;
 
     //lo que queda por pagar
 
     //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Reserva(int id, Autocaravana A, Cliente C, LocalDate fechI, LocalDate fechF,float precioTot, String estado) {
+    public Reserva(int id, Autocaravana A, Cliente C, LocalDate fechI, LocalDate fechF,BigDecimal precioTot, String estado) {
         idR = id;
         clienteR = C;
         autocaravanaR = A;
@@ -50,11 +51,11 @@ public class Reserva {
     public Cliente      getCliente() {return clienteR;}
     public LocalDate    getFechaIni() {return fechaIni;}
     public LocalDate    getFechaFin() { return fechaFin;}
-    public float        getPrecioTotal() {return precioTotal;}
+    public BigDecimal getPrecioTotal() {return precioTotal;}
     public String       getEstadoReserva() {return estadoR;}
 
     void setEstadoReserva(String estado) { this.estadoR = estado; }
-    void setPrecioTotal(float precioTotal) { this.precioTotal = precioTotal; }
+    void setPrecioTotal(BigDecimal precioTotal) { this.precioTotal = precioTotal; }
     void setFechaIni(LocalDate fechaIni) {this.fechaIni = fechaIni;}
     void setFechaFin(LocalDate fechaFin) {this.fechaFin = fechaFin;}
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros metodos ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 public class Cliente {
-
     private final int idC;
     private String nombre;
     private String apellido;
@@ -14,6 +13,8 @@ public class Cliente {
     private String fechaNacimiento;
     private int cantidadReservasRealizadas;
     private int multas;
+
+    public static final Cliente ClienteNulo = new Cliente(-1, "0", "0", "0", "0001-01-01", "0", "0");
 
 //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Cliente(int id, String nom, String ape, String telef, String fech, String dn, String ema) {

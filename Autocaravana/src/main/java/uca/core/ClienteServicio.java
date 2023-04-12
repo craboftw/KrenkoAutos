@@ -2,6 +2,8 @@ package uca.core;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 public class ClienteServicio {
     public ClienteServicio(ClienteRepositorio clienteRepositorio, ClienteReglas clienteReglas) {
@@ -27,12 +29,12 @@ public class ClienteServicio {
 
     public int getNumeroClientes() { return clienteRepositorio.getCantidadCliente(); }
 
-    public Cliente buscarCliente(int i) {
-        return clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC() == i).findFirst().orElse(null);
+    public Cliente buscarCliente(int idC) {
+        return clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC() == idC).findFirst().orElse(Cliente.ClienteNulo);
     }
     
     public Cliente buscarCliente(String dni) {
-        return clienteRepositorio.cargarCliente().stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(null);
+        return clienteRepositorio.cargarCliente().stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(Cliente.ClienteNulo);
     }
 
     public void eliminarCliente(String dni) {
@@ -41,20 +43,30 @@ public class ClienteServicio {
         else
             throw new IllegalArgumentException("El cliente no existe");
     }
-    public void comprobarCliente(String nom, String ape, String telef, String cumpleanos, String dn, String ema){
+
+    public void eliminarCliente(int idC) {
+        if (clienteRepositorio.existeCliente(idC))
+            clienteRepositorio.eliminarCliente(buscarCliente(idC));
+        else
+            throw new IllegalArgumentException("El cliente no existe");
+    }
+
+
+    public void comprobarCliente(String nom, String ape, String telef, String cumpleanos, String dn, String ema) {
         LocalDate diaDeCum;
         try {
             diaDeCum = LocalDate.parse(cumpleanos);
-    } catch (Exception e) {
-        throw new IllegalArgumentException("La fecha no es correcta");
-    }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("La fecha no es correcta");
+        }
         //Calculo su edad
         LocalDate hoy = LocalDate.now();
         int edad = hoy.getYear() - diaDeCum.getYear();
         if (hoy.getMonthValue() < diaDeCum.getMonthValue()) {
             edad--;
         } else if (hoy.getMonthValue() == diaDeCum.getMonthValue() && hoy.getDayOfMonth() < diaDeCum.getDayOfMonth()) {
-            edad--; }
+            edad--;
+        }
 
         if (clienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
         if (nom.isEmpty()) throw new IllegalArgumentException("El nombre no puede estar vacio");
@@ -74,37 +86,80 @@ public class ClienteServicio {
         if (!clienteReglas.comprobarDNI(dn)) throw new IllegalArgumentException("El DNI no es correcto");
 
     }
-    //
 
 
-
-    public void setNombre(Cliente cli, String nombre) {
+    public void setNombre(int idC, String nombre) {
         if (nombre.isEmpty())
             throw new IllegalArgumentException("El nombre no puede estar vacio");
-        cli.setNombre(nombre);
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clientes.stream().filter(c -> c.getIdC() == idC).findFirst().ifPresentOrElse(c -> c.setNombre(nombre), () -> {
+            throw new IllegalArgumentException("El cliente no existe");
+        });
+        clienteRepositorio.guardarCliente(clientes);
     }
 
-    public void setApellido(Cliente cli, String apellido) {
+    public void setNombre(String dni, String nombre) {
+        if (nombre.isEmpty())
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().ifPresentOrElse(c -> c.setNombre(nombre), () -> {
+            throw new IllegalArgumentException("El cliente no existe");
+        });
+        clienteRepositorio.guardarCliente(clientes);
+    }
+
+    public void setApellido(int idC, String apellido) {
         if (apellido.isEmpty())
             throw new IllegalArgumentException("El apellido no puede estar vacio");
-        cli.setApellido(apellido);
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clientes.stream().filter(c -> c.getIdC() == idC).findFirst().ifPresentOrElse(c -> c.setApellido(apellido), () -> {
+            throw new IllegalArgumentException("El cliente no existe");
+        });
+        clienteRepositorio.guardarCliente(clientes);
     }
 
-    public void setEmail(Cliente cli, String email) {
+    public void setApellido(String dni, String apellido) {
+        if (apellido.isEmpty())
+            throw new IllegalArgumentException("El apellido no puede estar vacio");
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().ifPresent(c -> c.setApellido(apellido));
+        clienteRepositorio.guardarCliente(clientes);
+    }
+
+    public void setEmail(String dni, String email) {
+
         if (email.isEmpty())
             throw new IllegalArgumentException("El email no puede estar vacio");
-        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getEmail().equals(email) && c.getIdC() != cli.getIdC()))
+        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getEmail().equals(email) && !c.getDni().equals(dni)))
             throw new IllegalArgumentException("El email ya existe");
-        cli.setEmail(email);
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().ifPresent(c -> c.setEmail(email));
+        clienteRepositorio.guardarCliente(clientes);}
+
+    public void setEmail(int idC, String email)
+    {
+        if (email.isEmpty())
+            throw new IllegalArgumentException("El email no puede estar vacio");
+        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getEmail().equals(email) && c.getIdC()!=idC))
+            throw new IllegalArgumentException("El email ya existe");
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC()==idC).findFirst().ifPresent(c -> c.setEmail(email));
+        clienteRepositorio.guardarCliente(clientes);
     }
 
-    public void setDni(Cliente cli, String dni) {
-        if (dni.isEmpty() || (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getDni().equals(dni) && c.getIdC() != cli.getIdC())))
+    public void setDni(int idC, String dni) {
+        if (dni.isEmpty())
             throw new IllegalArgumentException("El DNI no puede estar vacio");
-        cli.setDni(dni);
+        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getDni().equals(dni) && c.getIdC()!=idC))
+            throw new IllegalArgumentException("El DNI ya existe");
+        if (!clienteReglas.comprobarDNI(dni)) throw new IllegalArgumentException("El DNI no es correcto");
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC()==idC).findFirst().ifPresent(c -> c.setDni(dni));
+        clienteRepositorio.guardarCliente(clientes);
     }
 
-    public void setFechaNacimiento(Cliente cli, String fechaNacimiento) {
+
+    public void setFechaNacimiento(String dni, String fechaNacimiento) {
         LocalDate nueva;
         try {
             nueva = LocalDate.parse(fechaNacimiento);
@@ -120,16 +175,53 @@ public class ClienteServicio {
             edad--;
         }
         if (clienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
-        cli.setFechaNacimiento(nueva.toString());
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().ifPresent(c -> c.setFechaNacimiento(fechaNacimiento));
+        clienteRepositorio.guardarCliente(clientes);
     }
 
-    public void setTelefono(Cliente cli, String telefono) {
+
+    public void setFechaNacimiento(int idC, String fechaNacimiento) {
+        LocalDate nueva;
+        try {
+            nueva = LocalDate.parse(fechaNacimiento);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("La fecha no es correcta");
+        }
+        //Calculo su edad
+        LocalDate hoy = LocalDate.now();
+        int edad = hoy.getYear() - nueva.getYear();
+        if (hoy.getMonthValue() < nueva.getMonthValue()) {
+            edad--;
+        } else if (hoy.getMonthValue() == nueva.getMonthValue() && hoy.getDayOfMonth() < nueva.getDayOfMonth()) {
+            edad--;
+        }
+        if (clienteReglas.comprobarEdad(edad)) throw new IllegalArgumentException("La edad no es valida");
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC()==idC).findFirst().ifPresent(c -> c.setFechaNacimiento(fechaNacimiento));
+        clienteRepositorio.guardarCliente(clientes);
+}
+
+    public void setTelefono(int idC, String telefono) {
         if (telefono.isEmpty())
             throw new IllegalArgumentException("El telefono no puede estar vacio");
-        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getTelefono().equals(telefono) && c.getIdC() != cli.getIdC()))
+        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getTelefono().equals(telefono) && c.getIdC() != c.getIdC()))
             throw new IllegalArgumentException("El telefono ya existe");
-        cli.setTelefono(telefono);
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC()==idC).findFirst().ifPresent(c -> c.setTelefono(telefono));
+        clienteRepositorio.guardarCliente(clientes);
     }
+
+    public void setTelefono(String dni, String telefono) {
+        if (telefono.isEmpty())
+            throw new IllegalArgumentException("El telefono no puede estar vacio");
+        if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getTelefono().equals(telefono) && !c.getDni().equals(dni)))
+            throw new IllegalArgumentException("El telefono ya existe");
+        List<Cliente> clientes = clienteRepositorio.cargarCliente().stream().toList();
+        clientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().ifPresent(c -> c.setTelefono(telefono));
+        clienteRepositorio.guardarCliente(clientes);
+    }
+
 
     void eliminarEstadoCliente(String estado)
     {

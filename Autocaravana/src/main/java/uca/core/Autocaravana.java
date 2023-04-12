@@ -1,20 +1,22 @@
 package uca.core;
 
 
+import java.math.BigDecimal;
+
 public class Autocaravana {
 
     private int vecesReservada = 0;
     private final int idA;
     private final String matricula;
-    private final int plazas;
+    private int plazas;
     private String modelo;
-    private float precioPorDia;
+    private BigDecimal precioPorDia;
     private int kilometraje;
     private String estadoA = "Disponible";
 
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Autocaravana(int id, String mod, float precio, int plaz, String matr, int kilometraj, String estado) {
+    public Autocaravana(int id, String mod, BigDecimal precio, int plaz, String matr, int kilometraj, String estado) {
 
         idA = id;
         modelo = mod;
@@ -23,7 +25,20 @@ public class Autocaravana {
         matricula = matr;
         kilometraje = kilometraj;
         estadoA = estado;
+        vecesReservada = 0;
 
+
+    }
+
+    public Autocaravana() {
+        idA = -1;
+        modelo = "";
+        precioPorDia = BigDecimal.valueOf(-1);
+        plazas = 0;
+        matricula = "";
+        kilometraje = -1;
+        estadoA = "";
+        vecesReservada = -1;
     }
 
     /*public Autocaravana(String cadena){    //Constructor creado para la lectura de ficheros
@@ -54,7 +69,7 @@ public class Autocaravana {
     public String     getModelo() {
         return modelo;
     }
-    public float      getPrecioPorDia() {
+    public BigDecimal      getPrecioPorDia() {
         return precioPorDia;
     }
     public String     getMatricula() {
@@ -73,12 +88,14 @@ public class Autocaravana {
 
     void setModelo(String mod) {this.modelo = mod;}
 
-    void setPrecioPorDia(float precioPorDia) {this.precioPorDia = precioPorDia;}
+    void setPrecioPorDia(BigDecimal precioPorDia) {this.precioPorDia = precioPorDia;}
 
     void setKilometraje(int kilometraje){this.kilometraje = kilometraje;}
 
+    public void setPlazas(int plazas) {
+        this.plazas= plazas;
+    }
     void setEstado(String Estado) {
-        if (AutocaravanaServicio.comprobarEstadoAutocaravana(Estado))
             estadoA = Estado;
     }
 
@@ -91,9 +108,9 @@ public class Autocaravana {
                         + "║ AUTOCARAVANA %d\n"
                         + "║═══════════════════║\n"
                         + "║ Modelo: %s\n"
-                        + "║ Precio por día: %.2f\n"
+                        + "║ Precio por día: %.2f €\n"
                         + "║ Matrícula: %s\n"
-                        + "║ Kilometraje: %d\n"
+                        + "║ Kilometraje: %d km\n"
                         + "╚═══════════════════╝\n",
                 idA,
                 modelo,
@@ -102,6 +119,7 @@ public class Autocaravana {
                 kilometraje);
         return output;
     }
+
 
 }
 

@@ -1,103 +1,169 @@
 package uca.core;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class AutocaravanaServicio {
 
-    private static AutocaravanaRepositorio autocaravanaRepositorio;
-    private static AutocaravanaReglas autocaravanaReglas;
+    private final AutocaravanaRepositorio autocaravanaRepositorio;
+    private final AutocaravanaReglas autocaravanaReglas;
+    private final AutocaravanaEstadoRepositorio autocaravanaEstadoRepositorio;
 
 
-    public AutocaravanaServicio() {
+    public AutocaravanaServicio(AutocaravanaRepositorio autocaravanaRepositorio, AutocaravanaReglas autocaravanaReglas, AutocaravanaEstadoRepositorio autocaravanaEstadoRepositorio) {
+        this.autocaravanaRepositorio = autocaravanaRepositorio;
+        this.autocaravanaReglas = autocaravanaReglas;
+        this.autocaravanaEstadoRepositorio = autocaravanaEstadoRepositorio;
+
     }
 
 
-    public void altaAutocaravana(String mod, float precio, int plaz, String matr, int kilometraj) {
+    public void altaAutocaravana(String mod, BigDecimal precio, int plaz, String matr, int kilometraj) {
         comprobarAutocaravana(mod, precio, plaz, matr, kilometraj);
-        String estado = autocaravanaRepositorio.cargarEstadoDefault();
+        String estado = autocaravanaEstadoRepositorio.cargarEstadoDefault();
         int idA = autocaravanaRepositorio.getCantidadAutocaravanas();
         Autocaravana A = new Autocaravana(idA, mod, precio, plaz, matr, kilometraj, estado);
         autocaravanaRepositorio.guardarAutocaravana(A);
 
     }
 
-    public void comprobarAutocaravana(String mod, float precio, int plaz, String matr, int kilometraj) {
+    public void comprobarAutocaravana(String mod, BigDecimal precio, int plaz, String matr, int kilometraj) {
         if (!AutocaravanaReglas.comprobarMatricula(matr))
             throw new IllegalArgumentException("La matricula no es valida");
         if (autocaravanaRepositorio.cargarAutocaravana().stream().anyMatch(a -> a.getMatricula().equals(matr)))
             throw new IllegalArgumentException("La matricula ya existe");
-        if (precio <= 0) throw new IllegalArgumentException("El precio no puede ser negativo");
+        if (precio.compareTo(BigDecimal.ZERO) <= 0) throw new IllegalArgumentException("El precio no puede ser negativo");
         if (plaz <= 0) throw new IllegalArgumentException("Las plazas no pueden ser negativas");
         if (kilometraj < 0) throw new IllegalArgumentException("El kilometraje no puede ser negativo");
 
     }
 
-    public static Autocaravana buscarAutocaravana(int parseInt) {
-        for (Autocaravana a : autocaravanaRepositorio.cargarAutocaravana()) {
-            if (a.getIdA() == parseInt) {
-                return a;
-            }
-        }
-        return null;
+    public Collection<Autocaravana> buscarAutocaravana(String tipo, String dato){
+        return autocaravanaRepositorio.cargarAutocaravana(tipo,dato);
     }
 
-    public void eliminarAutocaravana(Autocaravana a) {
-        if (autocaravanaRepositorio.existeAutocaravana(a))
-            autocaravanaRepositorio.eliminarAutocaravana(a);
-        else
-            throw new IllegalArgumentException("La autocaravana ya esta eliminada");
-    }
-
-    public static Collection<Autocaravana> getListaAutocaravanas() {
+    public Collection<Autocaravana> getListaAutocaravanas() {
         return autocaravanaRepositorio.cargarAutocaravana();
     }
 
-    static Collection<String> getListaEstadoAutocaravana() {
-        return autocaravanaRepositorio.cargarEstadosAutocaravana();
+    public Collection<String> getListaEstadoAutocaravana() {
+        return autocaravanaEstadoRepositorio.cargarEstadosAutocaravana();
     }
 
     public boolean quedanCaravanas() {
         return autocaravanaRepositorio.getCantidadAutocaravanas("Estado", "Disponible") > 0;
     }
 
-    public static boolean comprobarEstadoAutocaravana(String estado) {
-        return autocaravanaRepositorio.existeEstadoAutocaravana(estado);
+    public boolean comprobarEstadoAutocaravana(String estado) {
+        return autocaravanaEstadoRepositorio.existeEstadoAutocaravana(estado);
     }
 
 
-    public void setModelo(Autocaravana au, String mod) {
+    public void setModelo(int idA, String mod) {
         if (mod.isEmpty())
             throw new IllegalArgumentException("El modelo no puede estar vacio");
-        au.setModelo(mod);
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setModelo(mod));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
     }
 
-    public void setPrecioPorDia(Autocaravana au, float precioPorDia) {
-        if (precioPorDia <= 0)
+    public void setModelo(String matricula, String mod){
+        if (mod.isEmpty())
+            throw new IllegalArgumentException("El modelo no puede estar vacio");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setModelo(mod));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
+    public void setPrecioPorDia(int idA, BigDecimal precioPorDia) {
+        if (precioPorDia.compareTo(BigDecimal.ZERO) <= 0)
             throw new IllegalArgumentException("El precio no puede ser negativo");
-        au.setPrecioPorDia(precioPorDia);
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setPrecioPorDia(precioPorDia));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
     }
 
-    public void setKilometraje(Autocaravana au, int kilometraje) {
-        if (kilometraje > au.getKilometraje()) {
-            au.setKilometraje(kilometraje);
-        } else {
-            throw new IllegalArgumentException("El kilometraje no puede ser menor que el anterior");
-        }
+    public void setPrecioPorDia(String matricula, BigDecimal precioPorDia) {
+        if (precioPorDia.compareTo(BigDecimal.ZERO) <= 0)
+            throw new IllegalArgumentException("El precio no puede ser negativo");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setPrecioPorDia(precioPorDia));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
     }
+
+    public void setPlazas(int idA, int plazas) {
+        if (plazas <= 0)
+            throw new IllegalArgumentException("Las plazas no pueden ser negativas");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setPlazas(plazas));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
+    public void setPlazas(String matricula, int plazas) {
+        if (plazas <= 0)
+            throw new IllegalArgumentException("Las plazas no pueden ser negativas");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setPlazas(plazas));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
+    public void setEstado(int idA, String estado) {
+        if (estado.isEmpty())
+            throw new IllegalArgumentException("El estado no puede estar vacio");
+        if (!autocaravanaEstadoRepositorio.existeEstadoAutocaravana(estado))
+            throw new IllegalArgumentException("El estado no es correcto");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setEstado(estado));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
+    public void setEstado(String matricula, String estado) {
+        if (estado.isEmpty())
+            throw new IllegalArgumentException("El estado no puede estar vacio");
+        if (!autocaravanaEstadoRepositorio.existeEstadoAutocaravana(estado))
+            throw new IllegalArgumentException("El estado no es correcto");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setEstado(estado));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
+    public void setKilometraje(int idA, int kilometraje) {
+        if (kilometraje <= 0)
+            throw new IllegalArgumentException("El kilometraje no puede ser negativo");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setKilometraje(kilometraje));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
+    public void setKilometraje(String matricula, int kilometraje) {
+        if (kilometraje <= 0)
+            throw new IllegalArgumentException("El kilometraje no puede ser negativo");
+        var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
+        autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setKilometraje(kilometraje));
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
+    public void eliminarAutocaravana(int idA) {
+        var autocaravanas = new ArrayList<>(autocaravanaRepositorio.cargarAutocaravana().stream().toList());
+        autocaravanas.removeIf(a -> a.getIdA() == idA);
+        autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
+    }
+
 
     void eliminarEstadoAutocaravana(String estado) {
-        if (!estado.isEmpty() & autocaravanaRepositorio.existeEstadoAutocaravana(estado)) {
-            autocaravanaRepositorio.eliminarEstadoAutocaravana(estado);
-        } else {
-            throw new IllegalArgumentException("El estado no es correcto");
-        }
+           if (!estado.isEmpty() & autocaravanaEstadoRepositorio.existeEstadoAutocaravana(estado)) {
+               autocaravanaEstadoRepositorio.eliminarEstadoAutocaravana(estado);
+            } else {
+                throw new IllegalArgumentException("El estado no es correcto");
+            }
     }
 
     void addEstadoAutocaravana(String estado) {
-        if (!estado.isEmpty() & !autocaravanaRepositorio.existeEstadoAutocaravana(estado)) {
-            autocaravanaRepositorio.guardarEstadoAutocaravana(estado);
+        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.existeEstadoAutocaravana(estado)) {
+            autocaravanaEstadoRepositorio.addEstadoAutocaravana(estado);
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
         }
     }
+
 }

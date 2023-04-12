@@ -1,5 +1,6 @@
 package uca.core;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -63,11 +64,11 @@ public class ReservaServicio{
                 break;
             case "En curso":
                 if (LocalDate.now().isAfter(reserva.getFechaFin())) {
-                    reserva.setPrecioTotal(reserva.getPrecioTotal() + reservaReglas.calcularMulta(reserva));
+                    reserva.setPrecioTotal(reserva.getPrecioTotal().add(BigDecimal.valueOf(reservaReglas.calcularMulta(reserva))));
                 }
                 else
                 if (LocalDate.now().isBefore(reserva.getFechaFin()) & reservaReglas.condicionesFinalizacion(reserva)) {
-                    reserva.setPrecioTotal(reserva.getPrecioTotal() - reservaReglas.calcularTasaFinalizacion(reserva));
+                    reserva.setPrecioTotal(reserva.getPrecioTotal().subtract(reservaReglas.calcularTasaFinalizacion(reserva)));
                 }
                 else //POR AQUI
                 if (LocalDate.now().isBefore(reserva.getFechaFin()) & !reservaReglas.condicionesFinalizacion(reserva)) {
@@ -145,7 +146,7 @@ public class ReservaServicio{
             throw new IllegalArgumentException("La reserva ya está finalizada");
         if(reservaReglas.condicionesCancelacion(reserva))
             reserva.setEstadoReserva("Cancelada");
-            reserva.setPrecioTotal(reserva.getPrecioTotal() - reservaReglas.calcularTasaCancelacion(reserva));
+        reserva.setPrecioTotal(reserva.getPrecioTotal().subtract(BigDecimal.valueOf(reservaReglas.calcularTasaCancelacion(reserva))));
     }
 
     public void setEstadoReserva(Reserva R,String estado) {
@@ -181,8 +182,7 @@ public class ReservaServicio{
             if(!reservaReglas.condicionesModificacion(reserva))
                 throw new IllegalArgumentException("No se puede modificar la reserva.");
             reserva.setFechaFin(fechaFin);
-
-            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(reserva.getAutocaravana(), reserva.getCliente(), reserva.getFechaIni(), fechaFin) + reservaReglas.calcularTasaModificacion(reserva));
+            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(reserva.getAutocaravana(), reserva.getCliente(), reserva.getFechaIni(), fechaFin).add( reservaReglas.calcularTasaModificacion(reserva)));
 
         }
     }
