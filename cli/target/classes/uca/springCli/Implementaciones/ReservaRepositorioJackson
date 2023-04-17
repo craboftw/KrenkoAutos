@@ -1,0 +1,61 @@
+package uca.springCli.Implementaciones;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import uca.core.ReservaRepositorio;
+
+
+public class ReservaRepositorioJackson implements ReservaRepositorio{
+    
+        String RESERVAS_FILE_PATH = "reservas.json";
+    
+        @Override
+        public Collection<String> cargarReservas() {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                File file = new File(RESERVAS_FILE_PATH);
+                if (file.exists())
+                {
+                    return objectMapper.readValue(file, new TypeReference<Collection<String>>() {});
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return new ArrayList<>();
+        }
+    
+        @Override
+        public void guardarReserva(Collection<String> listaReservas) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.writeValue(new File(RESERVAS_FILE_PATH), listaReservas);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    
+        @Override
+        public void guardarReserva(String reserva) {
+            Collection<String> listaReservas = cargarReservas();
+            listaReservas.add(reserva);
+            guardarReserva(listaReservas);
+        }
+    
+        @Override
+        public void eliminarReserva(String reserva) {
+            if(cargarReservas().contains(reserva)){
+                Collection<String> listaReservas = cargarReservas();
+                listaReservas.remove(reserva);
+                guardarReserva(listaReservas);
+            }
+            throw new IllegalArgumentException("La reserva no existe");
+        }
+
+
+}

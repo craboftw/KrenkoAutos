@@ -1,0 +1,10 @@
+package uca.springCli.Implementaciones;
+
+import uca.core.ReservaEstadoRepositorio;
+
+
+public ReservaEstadoRepositorioJackson implements ReservaEstadoRepositorioJackson {
+
+    
+
+}
