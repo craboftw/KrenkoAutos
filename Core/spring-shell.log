@@ -227,3 +227,11 @@
 1681368213088:modificar-precio 1111DLH 93 -t idA
 1681368288639:modificar-precio 1111DLH 93
 1681368293082:modificar-precio 1111DLH 93 -t matricula
+1681740454756:listar-clientes
+1681740461275:crear-cliente violeti naharro 696969696 00011122X slay@wap.s
+1681740487495:crear-cliente violeti naharro 696969696 2001-07-16 00011122X slay@wap.s
+1681740495209:listar-clientes
+1681740767264:crear-cliente violeti naharro 696969696 2001-07-16 00011122X slay@wap.s
+1681740768115:listar-clientes
+1681740845832:crear-cliente violeti naharro 696969696 2001-07-16 00011122X slay@wap.s
+1681740846873:listar-clientes
