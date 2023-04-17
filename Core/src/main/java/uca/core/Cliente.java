@@ -14,10 +14,12 @@ public class Cliente {
     private int cantidadReservasRealizadas;
     private int multas;
 
-    public static final Cliente ClienteNulo = new Cliente(-1, "0", "0", "0", "0001-01-01", "0", "0");
+    private String estado;
+
+    public static final Cliente ClienteNulo = new Cliente(-1, "0", "0", "0", "0001-01-01", "0", "0", "0");
 
 //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Cliente(int id, String nom, String ape, String telef, String fech, String dn, String ema) {
+    public Cliente(int id, String nom, String ape, String telef, String fech, String dn, String ema, String est) {
         idC = id;
         nombre = nom;
         apellido = ape;
@@ -27,6 +29,7 @@ public class Cliente {
         email = ema;
         cantidadReservasRealizadas = 0;
         multas = 0;
+        estado = est;
     }
     public Cliente() {
         idC = 0;

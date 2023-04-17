@@ -1,0 +1,11 @@
+[ {
+  "idC" : 1,
+  "nombre" : "pakito",
+  "apellido" : "lopez",
+  "telefono" : "728378237",
+  "email" : "Fran@lopez.guerrero",
+  "dni" : "293812398p",
+  "fechaNacimiento" : "1999-11-17",
+  "cantidadReservasRealizadas" : 0,
+  "multas" : 0
+} ]

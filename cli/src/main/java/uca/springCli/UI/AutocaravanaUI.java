@@ -92,6 +92,80 @@ public class AutocaravanaUI {
         return "Precio modificado con éxito";
     }
 
+    @ShellMethod(key = "modificar-plazas", value = "Modifica el número de plazas de una autocaravana.")
+    public String modificarPlazas(          @ShellOption(help = "Dato identificador") String dato,
+                                            @ShellOption(help = "Nuevo número de plazas", value = { "-m", "--modelo" }) int plazas,
+                                            @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+
+        try {
+            if (type.equals("matricula")) {
+                autocaravanaServicio.setPlazas(dato, plazas);
+            } else if (type.equals("idA")) {
+                try {
+                    int idC = Integer.parseInt(dato);
+                    autocaravanaServicio.setPlazas(idC, plazas);
+                } catch (Exception e) {
+                    return "El id debe ser un número";
+                }
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Número de plazas modificado con éxito";
+    }
+
+    @ShellMethod(key = "modificar-kilometraje", value = "Modifica el kilometraje de una autocaravana.")
+    public String modificarKilometraje(          @ShellOption(help = "Dato identificador") String dato,
+                                            @ShellOption(help = "Nuevo kilometraje", value = { "-m", "--modelo" }) int kilometraje,
+                                            @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+
+        try {
+            if (type.equals("matricula")) {
+                autocaravanaServicio.setKilometraje(dato, kilometraje);
+            } else if (type.equals("idA")) {
+                try {
+                    int idC = Integer.parseInt(dato);
+                    autocaravanaServicio.setKilometraje(idC, kilometraje);
+                } catch (Exception e) {
+                    return "El id debe ser un número";
+                }
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Kilometraje modificado con éxito";
+    }
+
+    @ShellMethod(key = "modificar-estado", value = "Modifica el estado de una autocaravana.")
+    public String modificarEstado(          @ShellOption(help = "Dato identificador") String dato,
+                                            @ShellOption(help = "Nuevo estado", value = { "-m", "--modelo" }) String estado,
+                                            @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+
+        try {
+            if (type.equals("matricula")) {
+                autocaravanaServicio.setEstado(dato, estado);
+            } else if (type.equals("idA")) {
+                try {
+                    int idC = Integer.parseInt(dato);
+                    autocaravanaServicio.setEstado(idC, estado);
+                } catch (Exception e) {
+                    return "El id debe ser un número";
+                }
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Estado modificado con éxito";
+    }
+
+
+
 
 
 }

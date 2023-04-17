@@ -6,12 +6,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+
+
 import static java.util.Collections.emptyList;
 
 public class ClienteServicio {
-    public ClienteServicio(ClienteRepositorio clienteRepositorio, ClienteReglas clienteReglas, ClienteEstadoRepositorio clienteEstadoRepositorio) {
-        this.clienteRepositorio = clienteRepositorio;
+
+
+    private final ClienteReglas clienteReglas;
+    private final ClienteRepositorio clienteRepositorio;
+    private final ClienteEstadoRepositorio clienteEstadoRepositorio;
+
+
+  public ClienteServicio(ClienteReglas clienteReglas, ClienteRepositorio clienteRepositorio, ClienteEstadoRepositorio clienteEstadoRepositorio) {
         this.clienteReglas = clienteReglas;
+        this.clienteRepositorio = clienteRepositorio;
         this.clienteEstadoRepositorio = clienteEstadoRepositorio;
     }
 
@@ -21,9 +30,6 @@ public class ClienteServicio {
 
 
 
-    private final ClienteReglas clienteReglas;
-    private final ClienteRepositorio clienteRepositorio;
-    private final ClienteEstadoRepositorio clienteEstadoRepositorio;
 
     public void altaCliente(String nom, String ape, String telef, String fecha, String dn, String ema){
         comprobarCliente(nom, ape, telef, fecha, dn, ema);
@@ -31,7 +37,7 @@ public class ClienteServicio {
         int idC = clienteRepositorio.cargarCliente().stream().mapToInt(Cliente::getIdC).max().orElse(0) +1 ;
         if (idC == -1) idC = 1;
 
-        Cliente c = new Cliente(idC, nom, ape, telef, fecha, dn, ema);
+        Cliente c = new Cliente(idC, nom, ape, telef, fecha, dn, ema, clienteEstadoRepositorio.cargarEstadoDefault());
         clienteRepositorio.guardarCliente(c);    }
 
     public int getNumeroClientes() { return clienteRepositorio.cargarCliente().size(); }

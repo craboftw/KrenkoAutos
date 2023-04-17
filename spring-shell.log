@@ -153,3 +153,50 @@
 1681750965414:borrar-cliente 1396969669p
 1681751106375:borrar-cliente
 1681751108393:listar-clientes
+1681770825398:crear-cliente
+1681770910071:crear-cliente pakito lopez 58348737 1999-11-17 2982132P fran@lopez.guerrero
+1681770915908:listar-clientes
+1681770937780:crear-autocaravana
+1681770958598:crear-autocaravana citroen-saxo 1111DLH 10 4 1990
+1681770964749:listar-autocaravanas
+1681771014684:crear-reserva
+1681771052379:crear-reserva help
+1681771097061:crear-reserva -tA idA 1 -tC idC 1 2023-05-07 2023-05-09
+1681771144659:crear-reserva 1 1  2023-05-07 2023-05-09
+1681771153299:listar-reserva
+1681771268770:listar-reservas
+1681771298507:crear-reserva 1 1 2023-05-07 2023-05-09
+1681771307681:stacktrace
+1681771455928:listar-reserva
+1681771464120:listar-reservas
+1681771473296:crear-reserva
+1681771493106:crear-reserva 1 1 2024-05-05 2024-05-07
+1681771503455:stacktrace
+1681771626993:crear-reserva 1 1 2024-05-05 2024-05-07
+1681771925904:crear-reserva -tA idA 1 -tC idC 1 2025-05-05 2026-06-06
+1681771959373:crear-reserva idA 1 idC 1 2025-05-05 2026-06-06
+1681772006348:crear-reserva -idA
+1681772025293:crear-reserva idA 1 idC 1 2025-05-05 2026-06-06
+1681772070697:crear-reserva idA -tA 1 idC -tC 1 2025-05-05 2026-06-06
+1681772084531:crear-reserva idA 1 idC 1 2025-05-05 2026-06-06
+1681772151952:crear-reserva
+1681772175188:crear-reserva --idA
+1681772203679:crear-reserva 1 1 2025-05-05 2026-06-06
+1681772242581:crear-reserva 1 1 2025-05-05 2026-06-06 -tA idA
+1681772249546:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681772284011:>crear-reserva -tA idA 1 1 2025-05-05 2026-06-06 idA idC
+1681772289985:>crear-reserva 1 1 2025-05-05 2026-06-06
+1681772308386:>crear-reserva -tA idA 1 -tC idC 1 2025-05-05 2026-06-06 idA idC
+1681772318330:crear-reserva -tA idA 1 -tC idC 1 2025-05-05 2026-06-06
+1681772421844:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681772521255:crear-reserva 1 1 2025-05-05 2026-06-06
+1681772528937:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681773222216:cpublic BigDecimal calculaPrecioTotal(Autocaravana A, Cliente C, LocalDate fechaIni, LocalDate fechaFin);
+1681773241808:}
+1681773243321:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681773249656:listar-reserva
+1681773254983:listar-reservas
+1681773306891:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681773376207:listar-reserva
+1681773380271:listar-reservas
+1681773408611:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC

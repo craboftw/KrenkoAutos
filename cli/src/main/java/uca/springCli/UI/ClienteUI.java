@@ -21,8 +21,7 @@ public class ClienteUI {
 
 
     public ClienteUI() {
-        this.clienteServicio = new ClienteServicio(new ClienteRepositorioJackson(), new ClienteReglasBasicas(), new ClienteEstadoRepositorioJackson() {
-        });
+        this.clienteServicio = new ClienteServicio( new ClienteReglasBasicas() , new ClienteRepositorioJackson(), new ClienteEstadoRepositorioJackson());
     }
 
     @ShellMethod(key = "crear-cliente", value = "Crea un nuevo cliente")

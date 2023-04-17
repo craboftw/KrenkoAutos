@@ -2,7 +2,7 @@ package uca.core;
 
 import java.util.Collection;
 
-public class ReservaEstadoRepositorio {
+public interface ReservaEstadoRepositorio {
     //package Uca.Core;
     //
     //import java.util.Collection;
@@ -18,22 +18,16 @@ public class ReservaEstadoRepositorio {
     //    void eliminarReserva(Reserva r);
     //}
 
-    public void guardarReservaEstado(Collection<String> listaEstados) {
+    public void guardarReservaEstado(Collection<String> listaEstados) ;
+
+    public void guardarReservaEstado(String estado) ;
+    public void eliminarReservaEstado(String estado) ;
+
+    public default String cargarReservaEstadoDefault() {
+        return "Por confirmar";
     }
 
-    public void guardarReservaEstado(String estado) {
-    }
-
-    public void eliminarReservaEstado(String estado) {
-    }
-
-    public String cargarReservaEstadoDefault() {
-        return "Disponible";
-    }
-
-    public Collection<String> cargarReservaEstado() {
-        return null;
-    }
+    public Collection<String> cargarReservaEstado();
 
 
 

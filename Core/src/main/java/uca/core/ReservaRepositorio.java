@@ -9,6 +9,5 @@ public interface ReservaRepositorio {
     void guardarReserva(Reserva caravana) ;
     Collection<Reserva> cargarReserva() ;
     Collection<Reserva> buscarReserva(String tipo,String dato) ; //
-    int getCantidadReserva();
     void eliminarReserva(Reserva r);
 }

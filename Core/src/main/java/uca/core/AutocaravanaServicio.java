@@ -39,6 +39,8 @@ public class AutocaravanaServicio {
 
     public Collection<Autocaravana> buscarAutocaravana(String tipo, String dato){
         switch (tipo){
+            case "idA":
+                return autocaravanaRepositorio.buscarAutocaravana("idA",dato);
             case "Matricula":
                 return autocaravanaRepositorio.buscarAutocaravana("Matricula",dato);
             case "Modelo":

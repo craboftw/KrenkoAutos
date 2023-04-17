@@ -10,7 +10,13 @@ public class ReservaServicio{
     private static ReservaRepositorio reservaRepositorio;
     private static ReservaEstadoRepositorio reservaEstadoRepositorio;
 
-    public void comprobarReserva(Autocaravana A, Cliente C, String fechI, String fechF)
+    public ReservaServicio(ReservaReglas reservaReglas, ReservaRepositorio reservaRepositorio, ReservaEstadoRepositorio reservaEstadoRepositorio) {
+        this.reservaReglas = reservaReglas;
+        this.reservaRepositorio = reservaRepositorio;
+        this.reservaEstadoRepositorio = reservaEstadoRepositorio;
+    }
+
+    public void altaReserva(Autocaravana A, Cliente C, String fechI, String fechF)
     {
         LocalDate fechaIni;
         LocalDate fechaFin;
@@ -34,7 +40,7 @@ public class ReservaServicio{
        if ( reservaReglas.comprobarReserva(fechaIni, fechaFin, A, C)){
               throw new IllegalArgumentException("La reserva ya existe");
             }
-        Reserva reserva = new Reserva(reservaRepositorio.getCantidadReserva(), A, C, fechaIni, fechaFin, reservaReglas.calculaPrecioTotal(A, C, fechaIni, fechaFin), reservaEstadoRepositorio.cargarReservaEstadoDefault());
+        Reserva reserva = new Reserva(reservaRepositorio.cargarReserva().size(), A, C, fechaIni, fechaFin, reservaReglas.calculaPrecioTotal(A, C, fechaIni, fechaFin), reservaEstadoRepositorio.cargarReservaEstadoDefault());
         reservaRepositorio.guardarReserva(reserva);
     }
 
@@ -116,7 +122,7 @@ public class ReservaServicio{
         return reservaRepositorio.buscarReserva(tipo, info);
     }
 
-    public int getCantidadReservas() {return reservaRepositorio.getCantidadReserva();}
+    public int getCantidadReservas() {return reservaRepositorio.cargarReserva().size();}
 
     public void eliminarReserva(Reserva reserva) {
             reservaRepositorio.eliminarReserva(reserva);
@@ -206,4 +212,7 @@ public class ReservaServicio{
     }
 
 
+    public Collection<Reserva> getListaReservas() {
+        return reservaRepositorio.cargarReserva();
     }
+}
