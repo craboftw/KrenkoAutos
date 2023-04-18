@@ -18,7 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cli" options="-parameters" />
-      <module name="core" options="-parameters" />
+      <module name="core" options="" />
     </option>
   </component>
 </project>
