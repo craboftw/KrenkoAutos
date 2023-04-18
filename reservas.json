@@ -1,0 +1,55 @@
+[ {
+  "idR" : 0,
+  "fechaIni" : "2025-05-05",
+  "fechaFin" : "2026-06-06",
+  "precioTotal" : 40613.1,
+  "cliente" : {
+    "idC" : 1,
+    "nombre" : "pakito",
+    "apellido" : "lopez",
+    "telefono" : "58348737",
+    "email" : "fran@lopez.guerrero",
+    "dni" : "2982132P",
+    "fechaNacimiento" : "1999-11-17",
+    "cantidadReservasRealizadas" : 1,
+    "multas" : 0
+  },
+  "autocaravana" : {
+    "vecesReservada" : 1,
+    "idA" : 3,
+    "matricula" : "1111DLH",
+    "plazas" : 90,
+    "modelo" : "tesla-s",
+    "precioPorDia" : 93,
+    "kilometraje" : 12345,
+    "estado" : "Disponible"
+  },
+  "estadoReserva" : "Pendiente"
+}, {
+  "idR" : 1,
+  "fechaIni" : "2023-05-05",
+  "fechaFin" : "2023-06-06",
+  "precioTotal" : 351964.80,
+  "cliente" : {
+    "idC" : 1,
+    "nombre" : "pakito",
+    "apellido" : "lopez",
+    "telefono" : "58348737",
+    "email" : "fran@lopez.guerrero",
+    "dni" : "2982132P",
+    "fechaNacimiento" : "1999-11-17",
+    "cantidadReservasRealizadas" : 1,
+    "multas" : 0
+  },
+  "autocaravana" : {
+    "vecesReservada" : 1,
+    "idA" : 1,
+    "matricula" : "4200THC",
+    "plazas" : 1,
+    "modelo" : "eva01",
+    "precioPorDia" : 9999.0,
+    "kilometraje" : 99999,
+    "estado" : "Disponible"
+  },
+  "estadoReserva" : "Pendiente"
+} ]

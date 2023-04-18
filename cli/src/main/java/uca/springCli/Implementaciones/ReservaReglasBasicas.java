@@ -37,12 +37,12 @@ public class ReservaReglasBasicas implements ReservaReglas
     //Comprobar si se permite modificar la reserva;
     {
         //si quedan 3 dias pa que acabe la reserva no se puede modificar
-        return (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay()) > 3;
+        return (int) (R.fechaFinF().toEpochDay() - LocalDate.now().toEpochDay()) > 3;
     }
 
     public boolean condicionesFinalizacion(Reserva R)
     {
-        return ((int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay())) <= 3;
+        return ((int) (R.fechaFinF().toEpochDay() - LocalDate.now().toEpochDay())) <= 3;
     }
 
 
@@ -58,13 +58,13 @@ public class ReservaReglasBasicas implements ReservaReglas
     public BigDecimal calcularTasaModificacion(Reserva R)
     //Tasa por modificar tras comenzar la reserva
     {
-        int diasRestantes = (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay());
+        int diasRestantes = (int) (R.fechaFinF().toEpochDay() - LocalDate.now().toEpochDay());
         return R.getPrecioTotal().subtract(R.getAutocaravana().getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)));
     }
 
     public BigDecimal calcularTasaFinalizacion(Reserva R) {
         //si cancelo la reserva con dias de antelacion me devuelven el 50% del precio de los dias que me queden por utilizar
-        int diasRestantes = (int) (R.getFechaFin().toEpochDay() - LocalDate.now().toEpochDay());
+        int diasRestantes = (int) (R.fechaFinF().toEpochDay() - LocalDate.now().toEpochDay());
         return R.getPrecioTotal().subtract(R.getAutocaravana().getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)).multiply(BigDecimal.valueOf(0.5)));
     }
 
@@ -72,7 +72,7 @@ public class ReservaReglasBasicas implements ReservaReglas
     public float calcularMulta(Reserva R)
     //Calcula la multa por incumplimiento de la reserva
     {
-        int diasRetraso = (int) (LocalDate.now().toEpochDay() - R.getFechaFin().toEpochDay());
+        int diasRetraso = (int) (LocalDate.now().toEpochDay() - R.fechaFinF().toEpochDay());
         return R.getPrecioTotal().multiply(BigDecimal.valueOf(0.1)).multiply(BigDecimal.valueOf(diasRetraso)).floatValue();
     }
 
@@ -95,15 +95,15 @@ public class ReservaReglasBasicas implements ReservaReglas
     //comprueba si una caravana y un cliente son validos para la reserva.
     {
         if (reservaRepositorio.cargarReserva().isEmpty())
-            return false;
+            return true;
         for (Reserva R : reservaRepositorio.cargarReserva()) {
             if (R.getAutocaravana().equals(A) & R.getEstadoReserva() != "Cancelada" & R.getEstadoReserva() != "Finalizada") {
                 //comprobar si las fechas de la Reserva R se solapan con las fechas de la reserva que se quiere hacer
                 if (
-                        (fechaIni.isBefore(R.getFechaFin()) & fechaIni.isAfter(R.getFechaIni())) |
-                                (fechaFin.isBefore(R.getFechaFin()) & fechaFin.isAfter(R.getFechaIni())) |
-                                fechaIni.isEqual(R.getFechaIni()) | fechaFin.isEqual(R.getFechaFin()) |
-                                fechaFin.isEqual(R.getFechaIni()) | fechaIni.isEqual(R.getFechaFin()))
+                        (fechaIni.isBefore(R.fechaFinF()) & fechaIni.isAfter(R.fechaIniF())) |
+                                (fechaFin.isBefore(R.fechaFinF()) & fechaFin.isAfter(R.fechaIniF())) |
+                                fechaIni.isEqual(R.fechaIniF()) | fechaFin.isEqual(R.fechaFinF()) |
+                                fechaFin.isEqual(R.fechaIniF()) | fechaIni.isEqual(R.fechaFinF()))
                 {
                     return false;
                 }

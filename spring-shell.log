@@ -200,3 +200,126 @@
 1681773376207:listar-reserva
 1681773380271:listar-reservas
 1681773408611:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681798237077:listar-reservas
+1681798499378:stacktrace
+1681798505947:listar-reservas
+1681798765856:crear-reserva
+1681798783363:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681798786579:listar-reservas
+1681798802466:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681800115785:listar-reservas
+1681800171532:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681800292382:listar-reservas
+1681800332953:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681800455141:listar-reservas
+1681801162699:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681801637825:listar-reservas
+1681802998348:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681804777076:listar-reservas
+1681805015064:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681805029112:listar-reservas
+1681805433889:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681805492016:listar-reservas
+1681805656560:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681805664104:listar-reservas
+1681805838683:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681805863549:listar-reservas
+1681805896404:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681805911633:listar-reservas
+1681806171612:crear-reserva 2 1 2025-05-05 2026-06-06 idA idC
+1681806338026:listar-reservas
+1681806340868:crear-reserva 2 1 2025-05-05 2026-06-06 idA idC
+1681806344279:crear-reserva 2 2 2025-05-05 2026-06-06 idA idC
+1681806348348:crear-reserva 2 1 2025-05-05 2026-06-06 idA idC
+1681806350285:listar-reservas
+1681806356390:listar-clientes
+1681806364115:crear-reserva 1 2 2025-05-05 2026-06-06 idA idC
+1681806369770:crear-reserva 2 1 2025-05-05 2026-06-06 idA idC
+1681806372478:listar-clientes
+1681806375860:listar-reservas
+1681806496090:crear-reserva 2 1 2025-05-05 2026-06-06 idA idC
+1681806498437:listar-reservas
+1681806505116:crear-reserva 3 1 2025-05-05 2026-06-06 idA idC
+1681806507648:listar-reservas
+1681821298135:crear-reserva 3 1 2025-05-05 2026-06-06 idA idC
+1681821300114:listar-reservas
+1681821335835:crear-reserva 1 1 2025-05-05 2026-06-06 idA idC
+1681821337465:listar-reservas
+1681821347857:crear-reserva 1 1 2023-05-05 2023-06-06 idA idC
+1681821349418:listar-reservas
+1681821558076:crear-reserva 1 1 2023-05-05 2023-06-06 idA idC
+1681821638904:listar-reservas
+1681821831485:crear-reserva 1 1 2023-05-05 2023-06-06 idA idC
+1681821925018:listar-reservas
+1681821931776:crear-reserva 1 1 2023-05-05 2023-06-06 idA idC
+1681822155388:listar-reservas
+1681822163364:crear-reserva 1 1 2023-05-05 2023-06-06 idA idC
+1681822194146:listar-reservas
+1681822728426:listar-autocaravanas
+1681822732222:listar-clientes
+1681822760072:mostrar-reserva
+1681822766613:mostrar-reserva 1
+1681823711892:listar-clientes
+1681823715488:listar-autocaravanas
+1681823719348:listar-reservas
+1681823725206:mostrar-reservas
+1681823728891:mostrar-reserva
+1681823731674:mostrar-reserva 1
+1681823740631:clear
+1681823746190:listar-clientes
+1681823750393:listar-autocaravanas
+1681823758863:listar-reservas
+1681823781066:mostrar-reserva 1
+1681824320605:listar-reservas
+1681827728935:mostrar-reserva 1
+1681827793292:listar-reservas
+1681828535099:listar-clientes
+1681828787021:listar-reservas
+1681828938922:listar-clientes
+1681828944937:listar-reservas
+1681829064528:listar-reservas cd /home/craboftw/Documentos/Universidad/DSS/Github ; /usr/bin/env /home/craboftw/.vscode/extensions/redhat.java-1.17.0-linux-x64/jre/17.0.6-linux-x86_64/bin/java @/tmp/cp_cz7pgk8spppfp22urgodsmf7z.argfile uca.springCli.SpringCliApplication
+1681829076404:listar-clientes
+1681829319586:listar-reservas cd /home/craboftw/Documentos/Universidad/DSS/Github ; /usr/bin/env /home/craboftw/.vscode/extensions/redhat.java-1.17.0-linux-x64/jre/17.0.6-linux-x86_64/bin/java @/tmp/cp_cz7pgk8spppfp22urgodsmf7z.argfile uca.springCli.SpringCliApplication
+1681829339941:listar-clientes
+1681829615480:listar-reservas
+1681829622032:mostrar-reserva 1
+1681829642879:clear
+1681829646461:listar-clientes
+1681829660992:listar-reservas
+1681829677585:mostrar-reserva 1
+1681830140962:listar-autocaravanas
+1681830599608:mostrar-reserva 1
+1681831526977:listar-autocaravanas
+1681831534539:mostrar-reserva 1
+1681831540054:listar-clientes
+1681831557736:help
+1681831589146:mostrar-reserva 1
+1681831618939:listar-clientes
+1681831621531:listar-autocaravanas
+1681831776696:mostrar-reserva 1
+1681831939116:clear
+1681831940274:mostrar-reserva 1
+1681833665349:help
+1681833850195:mostrar-reserva 1
+1681834015614:mostrar-reserva 0
+1681834087401:modificar-kilometraje
+1681834095703:modificar-kilometraje 111DLH 100
+1681834099410:mostrar-reserva 0
+1681845494737:listar-reservas
+1681845585924:modificar-apellido 1 makinon
+1681845593544:listar-clientes
+1681845609011:modificar-apellido 2982132P makinon
+1681845610457:listar-clientes
+1681845618786:listar-reservas
+1681845884604:listar-clientes
+1681845898431:modificar-apellido 2982132P franiftw
+1681845900877:listar-clientes
+1681845903016:listar-reservas
+1681846056694:listar-clientes
+1681846058944:listar-reservas
+1681846120396:modificar-apellido 2982132P rnado
+1681846123496:listar-clientes
+1681846132010:listar-reservas
+1681846137793:modificar-apellido 2982132P makinon
+1681846148616:mostrar-reserva 0
+1681846453036:mostrar-reserva 1

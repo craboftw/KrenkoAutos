@@ -102,32 +102,48 @@ public class Cliente {
         String white = "\033[37m";
         String reset = "\033[0m";
 
-        String output = String.format(bold + red + "╔═%s═╗\n"
-                        + "║ CLIENTE %d\n"
-                        + "║═%s═║\n"
-                        + "║ Nombre: %s%s %s%s\n"
-                        + "║ Email: %s%s%s\n"
-                        + "║ DNI: %s%s%s\n"
-                        + "║ Fecha de nacimiento: %s%s%s\n"
-                        + "║ Reservas realizadas: %s%d%s\n",
-                "═".repeat(22 + String.valueOf(idC).length()),
+        String output = String.format(red + "╔═%s═\n"
+                        + red+"║ CLIENTE "+reset+"%d"+red+"\n"
+                        + red+"║═%s═"+reset+"\n"
+                        + red+"║ Nombre: %s%s %s%s\n"
+                        + red+"║ Email: %s%s%s\n"
+                        + red+"║ DNI: %s%s%s\n"
+                        + red+"║ Fecha de nacimiento: %s%s%s\n"
+                        + red+"║ Reservas realizadas: %s%d%s\n",
+                "═".repeat(36+ String.valueOf(idC).length()),
                 idC,
-                "═".repeat(22 + String.valueOf(idC).length()),
-                white, nombre, apellido, red,
-                white, email, red,
-                white, dni, red,
-                white, fechaNacimiento, red,
-                white,cantidadReservasRealizadas, red);
+                "═".repeat(36 + String.valueOf(idC).length()),
+                reset, nombre, apellido, red,
+                reset, email, red,
+                reset, dni, red,
+                reset, fechaNacimiento, red,
+                reset,cantidadReservasRealizadas, red);
 
         if (multas > 0) {
             output += String.format("║ Multas: %s%d%s\n", green, multas, reset);
         }
-        output += String.format(bold + red + "╚═%s═╝%s\n", "═".repeat(22 + String.valueOf(idC).length()), reset);
-        return output;
+        output += String.format(red + "╚═%s═%s\n", "═".repeat(36 + String.valueOf(idC).length()), reset);
+
+        String finalOutput = "";
+        for (int i = 0; i < output.lines().toList().size(); i++){
+            finalOutput += output.lines().toList().get(i);
+            if (i != 0 & i!= 2 & i!= output.lines().toList().size() - 1)
+
+            //add a " " until every line has the same length
+            for (int j = 0; j < 54 - output.lines().toList().get(i).length(); j++){
+                finalOutput += " ";
+            }
+            if (i == 0)
+            finalOutput += red+"╗"+reset+"\n";
+            else if (i == output.lines().toList().size() - 1)
+            finalOutput += red+"╝"+reset+"\n";
+            else
+            finalOutput += red+"║"+reset+"\n";}
+
+        return finalOutput;
+
+
     }
-
-
-
 
 }
 

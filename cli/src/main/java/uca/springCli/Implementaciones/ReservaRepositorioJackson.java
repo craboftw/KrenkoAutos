@@ -11,7 +11,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import uca.core.Autocaravana;
+import uca.core.Cliente;
 import uca.core.Reserva;
 import uca.core.ReservaRepositorio;
 
@@ -23,11 +27,13 @@ public class ReservaRepositorioJackson implements ReservaRepositorio {
     @Override
     public Collection<Reserva> cargarReserva() {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
             File file = new File(RESERVAS_FILE_PATH);
             if (file.exists()) {
-                return objectMapper.readValue(file, new TypeReference<Collection<Reserva>>() {
-                });
+                ObjectMapper objectMapper = new ObjectMapper();
+                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                return arreglarReservas( objectMapper.readValue(file, new TypeReference<Collection<Reserva>>() {
+                }));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,11 +41,15 @@ public class ReservaRepositorioJackson implements ReservaRepositorio {
         return Collections.emptyList();
     }
 
+
     @Override
     public void guardarReserva(Collection<Reserva> listaReservas) {
+
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.writeValue(new File(RESERVAS_FILE_PATH), listaReservas);
+            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            objectMapper.writeValue(new File(RESERVAS_FILE_PATH), arreglarReservas(listaReservas));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +57,7 @@ public class ReservaRepositorioJackson implements ReservaRepositorio {
 
     @Override
     public void guardarReserva(Reserva reserva) {
-        Collection<Reserva> listaReservas = cargarReserva();
+        List<Reserva> listaReservas = new ArrayList<>(cargarReserva());
         listaReservas.add(reserva);
         guardarReserva(listaReservas);
     }
@@ -114,7 +124,7 @@ public class ReservaRepositorioJackson implements ReservaRepositorio {
                 for (Reserva reserva : listaReservas) {
                     LocalDate fecha = LocalDate.parse(dato);
                     //between fechaInicio y fechaFin
-                    if ((reserva.getFechaIni().equals(fecha)) || (reserva.getFechaIni().isBefore(fecha)) && ((reserva.getFechaFin().isAfter(fecha) || (reserva.getFechaFin().equals(fecha))))) {
+                    if ((reserva.fechaIniF().equals(fecha)) || (reserva.fechaIniF().isBefore(fecha)) && ((reserva.fechaFinF().isAfter(fecha) || (reserva.fechaFinF().equals(fecha))))) {
                         listaReservasFiltrada.add(reserva);
                     }
                 }
@@ -152,4 +162,28 @@ public class ReservaRepositorioJackson implements ReservaRepositorio {
 
         }
     return listaReservasFiltrada;
-    }}
+    }
+
+    private Collection<Reserva> arreglarReservas(Collection<Reserva> listaReservas) {
+            List<Autocaravana> listaAutocaravanas = new ArrayList<>(new AutocaravanaRepositorioJackson().cargarAutocaravana());
+            List<Cliente> listaClientes = new ArrayList<>(new ClienteRepositorioJackson().cargarCliente());
+            for  (Reserva reserva : listaReservas) {
+                for (Autocaravana autocaravana : listaAutocaravanas) {
+                    if (reserva.getAutocaravana().getIdA() == autocaravana.getIdA()) {
+                        reserva.setAutocaravana(autocaravana);
+                    }
+                }
+                for (Cliente cliente : listaClientes) {
+                    if (reserva.getCliente().getIdC() == cliente.getIdC()) {
+                        reserva.setCliente(cliente);
+                    }
+                }
+            
+        }
+return listaReservas;
+    }
+
+
+}
+
+

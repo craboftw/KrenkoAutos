@@ -1,10 +1,8 @@
 package uca.core;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 
 
@@ -23,9 +21,7 @@ public class ClienteServicio {
         this.clienteRepositorio = clienteRepositorio;
         this.clienteEstadoRepositorio = clienteEstadoRepositorio;
     }
-
-
-
+    
     //crear-cliente miriam armario 666777666 2000-12-21 440999333R armaricon@gmail.com
 
 

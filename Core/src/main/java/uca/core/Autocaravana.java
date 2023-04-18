@@ -104,21 +104,50 @@ public class Autocaravana {
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
     public String toString() {
-        String output = String.format("╔═══════════════════╗\n"
-                        + "║ AUTOCARAVANA %d\n"
-                        + "║═══════════════════║\n"
-                        + "║ Modelo: %s\n"
-                        + "║ Precio por día: %.2f €\n"
-                        + "║ Matrícula: %s\n"
-                        + "║ Kilometraje: %d km\n"
-                        + "╚═══════════════════╝\n",
-                idA,
-                modelo,
-                precioPorDia,
-                matricula,
-                kilometraje);
-        return output;
-    }
+        String bold = "\033[1m";
+        String red = "\033[31m";
+        String green = "\033[32m";
+        String yellow = "\033[33m";
+        String white = "\033[37m";
+        String reset = "\033[0m";
+        // usar String.format() para dar formato a la salida
+        String output = String.format(yellow + "╔═%s═\n"
+        + yellow+"║ AUTOCARAVANA "+reset+"%d\n"
+        + yellow+"║═%s═\n"
+        + yellow+"║ Modelo: "+reset+"%s\n"
+        + yellow+"║ Precio por día: "+reset+"%.2f €\n"
+        + yellow+"║ Matrícula: "+reset+"%s\n"
+        + yellow+"║ Kilometraje: "+reset+"%d km\n"
+        + yellow+"╚═%s═\n" + reset,
+        "═".repeat(27 + String.valueOf(idA).length()),
+        idA,
+        "═".repeat(27 + String.valueOf(idA).length()),
+        modelo,
+        precioPorDia,
+        matricula,
+        kilometraje,
+        "═".repeat(27 + String.valueOf(idA).length()));
+
+            //add ║ to each line at the end
+    String finalOutput = "";
+    for (int i = 0; i < output.lines().toList().size(); i++){
+        finalOutput += output.lines().toList().get(i);
+        if (i != 0 & i!= 2 & i!= output.lines().toList().size() - 2)
+        //add a " " until every line has the same length
+        for (int j = 0; j < 40 - output.lines().toList().get(i).length(); j++){
+            finalOutput += " ";
+        }
+        if (i == 0)
+        finalOutput += yellow+"╗"+reset+"\n";
+        else if (i == output.lines().toList().size() - 2)
+        finalOutput += yellow+"╝"+reset+"\n";
+        else if (i < output.lines().toList().size() - 2)
+        finalOutput += yellow+"║"+reset+"\n";}
+
+    return finalOutput;
+
+}
+
 
 
 }
