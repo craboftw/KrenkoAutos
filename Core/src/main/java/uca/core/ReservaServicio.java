@@ -6,9 +6,9 @@ import java.util.*;
 
 
 public class ReservaServicio{
-    private static ReservaReglas reservaReglas;
-    private static ReservaRepositorio reservaRepositorio;
-    private static ReservaEstadoRepositorio reservaEstadoRepositorio;
+    private final ReservaReglas reservaReglas;
+    private final ReservaRepositorio reservaRepositorio;
+    private final ReservaEstadoRepositorio reservaEstadoRepositorio;
 
     public ReservaServicio(ReservaReglas reservaReglas, ReservaRepositorio reservaRepositorio, ReservaEstadoRepositorio reservaEstadoRepositorio) {
         this.reservaReglas = reservaReglas;
@@ -44,72 +44,75 @@ public class ReservaServicio{
         reservaRepositorio.guardarReserva(reserva);
     }
 
-
-    public static void checkOut(Reserva reserva) {
-        String estadoReserva = reserva.getEstadoReserva();
-        switch (reserva.getEstadoReserva()) {
+    public String checkout(Reserva R) {
+        switch (R.getEstadoReserva()) {
             case "Cancelada":
-                System.out.println("La reserva está cancelada");
-                break;
+                return ("La reserva está cancelada");
             case "Finalizada":
-                System.out.println("La reserva ya está finalizada");
-                break;
+                return ("La reserva ya está finalizada");
             case "En curso":
-                if (LocalDate.now().isAfter(reserva.fechaFinF())) {
-                    reserva.setPrecioTotal(reserva.getPrecioTotal().add(BigDecimal.valueOf(reservaReglas.calcularMulta(reserva))));
+                if (LocalDate.now().isAfter(R.fechaFinF())
+                        || LocalDate.now().isEqual(R.fechaFinF())) {
+                    R.setPrecioTotal((reservaReglas.calcularTasaFinalizacion(R)));
+                    R.setEstadoReserva("Finalizada");
+                    reservaRepositorio.guardarReserva(R);
+                    String mensaje = "La reserva ha sido finalizada.";
+                } else {
+                    if (LocalDate.now().isBefore(R.fechaFinF())) {
+                        R.setPrecioTotal((reservaReglas.calcularTasaCancelacion(R)));
+                        R.setEstadoReserva("Cancelada");
+                        reservaRepositorio.guardarReserva(R);
+                        String mensaje = "La reserva ha sido cancelada por haber finalizado antes de la fecha prevista.";
+                        if (R.getPrecioTotal().compareTo( R.getPagado()) < 0)
+                            mensaje += "Queda pendiente de pagar " + (R.getPrecioTotal().subtract(R.getPagado())).toString() + "€";
+                        if (R.getPrecioTotal().compareTo( R.getPagado()) > 0)
+                            mensaje += "Se le devuelve " + (R.getPagado().subtract(R.getPrecioTotal())).toString() + "€";
+                        return mensaje;
+                    } else
+                        return ("La reserva no ha acabado");
                 }
-                else
-                if (LocalDate.now().isBefore(reserva.fechaFinF()) & reservaReglas.condicionesFinalizacion(reserva)) {
-                    reserva.setPrecioTotal(reserva.getPrecioTotal().subtract(reservaReglas.calcularTasaFinalizacion(reserva)));
-                }
-                else //POR AQUI
-                if (LocalDate.now().isBefore(reserva.fechaFinF()) & !reservaReglas.condicionesFinalizacion(reserva)) {
-                    System.out.println("No se puede finalizar la reserva");
-                    break;
-                }
-                    reserva.setEstadoReserva("Finalizada");
-
-            default:
-                System.out.println("El estado de la reserva es " + estadoReserva);
-                break;
-        }
-    }
-
-    public static void  checkIn(Reserva reserva) { //principio open close revisar
-        String estadoReserva = reserva.getEstadoReserva();
-        switch (estadoReserva) {
-            case "Cancelada":
-                System.out.println("La reserva está cancelada");
-                break;
-            case "Finalizada":
-                System.out.println("La reserva ya está finalizada");
-                break;
-            case "En curso":
-                System.out.println("La reserva ya está en curso");
                 break;
             case "Pendiente":
-                if ((LocalDate.now().isAfter(reserva.fechaIniF())
-            || LocalDate.now().isEqual(reserva.fechaIniF()))
-                        & LocalDate.now().isBefore(reserva.fechaFinF())) {
-                    reserva.setEstadoReserva("En curso");
-                } else {
-                    if (LocalDate.now().isAfter(reserva.fechaFinF())) {
-                        reserva.setEstadoReserva("Cancelada");
-                    }
-                    else
-                       System.out.println("La reserva no ha empezado");
-                }
-                break;
+                return ("La reserva no ha empezado");
             default:
-                System.out.println("El estado de la reserva es " + estadoReserva);
-                break;
+                return ("El estado de la reserva es " + R.getEstadoReserva());
         }
+        return ("El estado de la reserva es " + R.getEstadoReserva());    }
+
+    public String checkin(Reserva R) {
+        switch (R.getEstadoReserva()) {
+        case "Cancelada":
+            return ("La reserva está cancelada");
+        case "Finalizada":
+            return ("La reserva ya está finalizada");
+        case "En curso":
+            return ("La reserva ya está en curso");
+        case "Pendiente":
+            if ((LocalDate.now().isAfter(R.fechaIniF())
+                    || LocalDate.now().isEqual(R.fechaIniF()))
+                    & LocalDate.now().isBefore(R.fechaFinF())) {
+                R.setEstadoReserva("En curso");
+                reservaRepositorio.guardarReserva(R);
+            } else {
+                if (LocalDate.now().isAfter(R.fechaFinF())) {
+                    R.setEstadoReserva("Finalizada");
+                    R.setPrecioTotal(reservaReglas.calcularTasaAcabadaSinCheckOut(R));
+                    reservaRepositorio.guardarReserva(R);
+                } else
+                    return ("La reserva no ha empezado");
+            }
+            break;
+        default:
+            return ("El estado de la reserva es " + R.getEstadoReserva());
     }
+        return ("El estado de la reserva es " + R.getEstadoReserva());
+    }
+
 
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
-    public static Reserva buscarReserva(int i) {
+    public Reserva buscarReserva(int i) {
         for (Reserva r : reservaRepositorio.cargarReserva()) {
             if (r.getIdR() == i) {
                 return r;
@@ -118,7 +121,7 @@ public class ReservaServicio{
         return null;
     }
 
-    public static Collection<Reserva> buscarReserva(String tipo, String info) {
+    public Collection<Reserva> buscarReserva(String tipo, String info) {
         return reservaRepositorio.buscarReserva(tipo, info);
     }
 
@@ -136,7 +139,7 @@ public class ReservaServicio{
             throw new IllegalArgumentException("La reserva ya está finalizada");
         if(reservaReglas.condicionesCancelacion(reserva))
             reserva.setEstadoReserva("Cancelada");
-        reserva.setPrecioTotal(reserva.getPrecioTotal().subtract(BigDecimal.valueOf(reservaReglas.calcularTasaCancelacion(reserva))));
+        reserva.setPrecioTotal(reserva.getPrecioTotal().subtract(reservaReglas.calcularTasaCancelacion(reserva)));
     }
 
     public void setEstadoReserva(Reserva R,String estado) {

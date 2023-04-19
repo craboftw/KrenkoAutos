@@ -48,11 +48,11 @@ public class ReservaReglasBasicas implements ReservaReglas
 
     //Funciones que calculan la tasa de cancelacion, modificacion y finalizacion
 
-    public float calcularTasaCancelacion(Reserva R)
+    public BigDecimal calcularTasaCancelacion(Reserva R)
     //Tasa  por cancelar antes de comenzar la reserva
     {
         //si cancelo la reserva con dias de antelacion me devuelven el 90% del precio total.
-        return R.getPrecioTotal().multiply(BigDecimal.valueOf(0.9)).floatValue();
+        return R.getPrecioTotal().multiply(BigDecimal.valueOf(0.9));
     }
 
     public BigDecimal calcularTasaModificacion(Reserva R)
@@ -69,11 +69,16 @@ public class ReservaReglasBasicas implements ReservaReglas
     }
 
     //Funciones que calculan la multa por incumplimiento.
-    public float calcularMulta(Reserva R)
+    public BigDecimal calcularMulta(Reserva R)
     //Calcula la multa por incumplimiento de la reserva
     {
         int diasRetraso = (int) (LocalDate.now().toEpochDay() - R.fechaFinF().toEpochDay());
-        return R.getPrecioTotal().multiply(BigDecimal.valueOf(0.1)).multiply(BigDecimal.valueOf(diasRetraso)).floatValue();
+        return R.getPrecioTotal().multiply(BigDecimal.valueOf(0.1)).multiply(BigDecimal.valueOf(diasRetraso));
+    }
+
+    @Override
+    public BigDecimal calcularTasaAcabadaSinCheckOut(Reserva R) {
+        return R.getPrecioTotal();
     }
 
     //Funciones que comprueban si la caravana y el cliente son compatibles para la reserva
@@ -111,6 +116,7 @@ public class ReservaReglasBasicas implements ReservaReglas
         }
         return true;
     }
+
 
 
 

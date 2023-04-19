@@ -18,16 +18,11 @@ public class ReservaUI {
     private final ReservaServicio reservaServicio;
     private final ClienteServicio clienteServicio;
     private final AutocaravanaServicio autocaravanaServicio;
-    private final ClienteRepositorio clienteRepositorio;
-    private final ReservaEstadoRepositorioJackson reservaEstadoRepositorio;
-
 
     public ReservaUI() {
-        this.clienteRepositorio = new ClienteRepositorioJackson();
         this.reservaServicio = new ReservaServicio(new ReservaReglasBasicas(new ReservaRepositorioJackson()), new ReservaRepositorioJackson(), new ReservaEstadoRepositorioJackson());
         this.clienteServicio = new ClienteServicio(new ClienteReglasBasicas(), new ClienteRepositorioJackson(), new ClienteEstadoRepositorioJackson());
         this.autocaravanaServicio = new AutocaravanaServicio(new AutocaravanaRepositorioJackson(), new AutocaravanaReglasBasicas(), new AutocaravanaEstadoRepositorioJackson());
-        this.reservaEstadoRepositorio = new ReservaEstadoRepositorioJackson();
     }
 
 
@@ -55,6 +50,29 @@ public class ReservaUI {
         return "Reserva creada con éxito";
     }
 
+    //Realizar el checkin a una reserva dada
+    @ShellMethod(key = "checkin", value = "Realiza el checkin a una reserva")
+    public String checkin(@ShellOption(help = "Valor del identificador") String dato,
+                          @ShellOption(help = "Tipo de identificador") String tipo) {
+        try {
+            Reserva reserva = reservaServicio.buscarReserva(tipo, dato).stream().toList().get(0);
+            return reservaServicio.checkin(reserva);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    //Realizar el checkout a una reserva dada
+    @ShellMethod(key = "checkout", value = "Realiza el checkout a una reserva")
+    public String checkout(@ShellOption(help = "Valor del identificador") String dato,
+                           @ShellOption(help = "Tipo de identificador") String tipo) {
+        try {
+            Reserva reserva = reservaServicio.buscarReserva(tipo, dato).stream().toList().get(0);
+            return reservaServicio.checkout(reserva);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
 
     @ShellMethod(key = "listar-reservas", value = "Lista todas las reservas")
@@ -76,7 +94,7 @@ public class ReservaUI {
             List<String> printautocaravana= reserva.getAutocaravana().toString().lines().collect(Collectors.toList());
             String bold = "\033[0;1m";
 
-            System.out.println(bold+"═".repeat(115));
+            System.out.println(bold+"═".repeat(117));
             System.out.println(bold+" ".repeat(15) + "Reserva" + " ".repeat(35) + "Cliente" + " ".repeat(29) + "Autocaravana");
             for (int i = 0; i < printautocaravana.size(); i++) {
                 System.out.println(printreserva.get(i) + " " + printcliente.get(i) + " " + printautocaravana.get(i));

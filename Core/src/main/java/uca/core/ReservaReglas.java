@@ -8,10 +8,11 @@ public interface ReservaReglas {
     public boolean condicionesCancelacion(Reserva R);
     public boolean condicionesModificacion(Reserva R);
     public boolean condicionesFinalizacion(Reserva R);
-    public float calcularTasaCancelacion(Reserva R);
+    public BigDecimal calcularTasaCancelacion(Reserva R);
     public BigDecimal calcularTasaModificacion(Reserva R);
     public BigDecimal calcularTasaFinalizacion(Reserva R);
-    public float calcularMulta(Reserva R);
+    public BigDecimal calcularMulta(Reserva R);
+    public BigDecimal calcularTasaAcabadaSinCheckOut(Reserva R);
     public boolean comprobarAutocaravana(Autocaravana A);
     public boolean comprobarCliente(Cliente c);
     public boolean comprobarReserva(LocalDate fechaIni, LocalDate fechaFin, Autocaravana A, Cliente C);

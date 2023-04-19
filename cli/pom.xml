@@ -17,11 +17,19 @@
     <java.version>17</java.version>
     <spring-shell.version>3.0.0</spring-shell.version>
   </properties>
+
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.shell</groupId>
       <artifactId>spring-shell-starter</artifactId>
       <version>3.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+      <version>3.0.5</version>
     </dependency>
 
     <dependency>
@@ -60,6 +68,9 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+
+
     </dependencies>
   </dependencyManagement>
 

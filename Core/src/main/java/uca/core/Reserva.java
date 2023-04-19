@@ -13,9 +13,7 @@ public class Reserva {
     private String fechaFin;
     private String estadoR;
     private BigDecimal precioTotal;
-
-    //lo que queda por pagar
-
+    private BigDecimal pagado;
     //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Reserva(int id, Autocaravana A, Cliente C, String fechI, String fechF,BigDecimal precioTot, String estado) {
         idR = id;
@@ -26,6 +24,7 @@ public class Reserva {
         fechaFin = fechF;
         estadoR = estado;
         precioTotal = precioTot;
+        pagado = new BigDecimal(0);
         C.setNuevaReservaRealizada();
         A.setNuevaReservaRealizada();
     }
@@ -40,10 +39,8 @@ public class Reserva {
         fechaFin = null;
         estadoR = null;
         precioTotal = null;
+        pagado = null;
     }
-
-
-
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 //
@@ -71,14 +68,18 @@ public class Reserva {
     public LocalDate fechaFinF() {return LocalDate.parse(fechaFin);}
     public BigDecimal getPrecioTotal() {return precioTotal;}
     public String       getEstadoReserva() {return estadoR;}
+    public BigDecimal getPagado() {return pagado;}
 
-    void setEstadoReserva(String estado) { this.estadoR = estado; }
-    void setPrecioTotal(BigDecimal precioTotal) { this.precioTotal = precioTotal; }
+    public void setEstadoReserva(String estado) { this.estadoR = estado; }
+    public void setPrecioTotal(BigDecimal precioTotal) { this.precioTotal = precioTotal; }
     void setFechaIni(String fechaIni) {this.fechaIni = fechaIni;}
     void setFechaFin(String fechaFin) {this.fechaFin = fechaFin;}
-    void setPrecioTotal(String precioTotal) {this.precioTotal = new BigDecimal(precioTotal);}
+    public void setPrecioTotal(String precioTotal) {this.precioTotal = new BigDecimal(precioTotal);}
     public void setCliente(Cliente cliente) {clienteR = cliente;}
     public void setAutocaravana(Autocaravana autocaravana) {autocaravanaR = autocaravana;}
+    public void setPagado(BigDecimal pagado) {this.pagado = pagado;}
+    public boolean estaPagada() {return pagado.compareTo(precioTotal) == 0;}
+
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros metodos ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 

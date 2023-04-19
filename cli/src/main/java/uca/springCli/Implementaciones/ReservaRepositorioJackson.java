@@ -58,6 +58,11 @@ public class ReservaRepositorioJackson implements ReservaRepositorio {
     @Override
     public void guardarReserva(Reserva reserva) {
         List<Reserva> listaReservas = new ArrayList<>(cargarReserva());
+        //Si existe una reserva tiene el mismo id, la borramos y la volvemos a guardar
+        if (listaReservas.stream().anyMatch(r -> r.getIdR() == reserva.getIdR()))  {
+            listaReservas.removeIf(r -> r.getIdR() == reserva.getIdR());
+            guardarReserva(listaReservas);
+        }
         listaReservas.add(reserva);
         guardarReserva(listaReservas);
     }
