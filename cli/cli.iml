@@ -78,5 +78,10 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.14.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.14.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.14.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-autoconfigure:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-core:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard-commands:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-table:3.0.1" level="project" />
   </component>
 </module>
