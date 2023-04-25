@@ -67,7 +67,62 @@ public class Print {
         return finalOutput;
     }
 
-    static String imprimir(Reserva reserva) {
+    static String imprimir(Reserva reserva, Autocaravana autocaravana, Cliente cliente){
+        String green = "\033[32m";
+        String reset = "\033[0m";
+        var idR = reserva.getIdR();
+        var autocaravanaR = reserva.getAutocaravana();
+        var clienteR = reserva.getCliente();
+        var fechaIni = reserva.getFechaIni();
+        var fechaFin = reserva.getFechaFin();
+        var estadoR = reserva.getEstadoReserva();
+        var precioTotal = reserva.getPrecioTotal();
+        var precioPagado = reserva.getPagado();
+
+
+        // usar String.format() para dar formato a la salida
+        String output = String.format(green +"╔═%s═"+reset +"\n"
+                        + green +"║ RESERVA "+reset+"%d"+reset+"\n"
+                        + green +"║══%s═" +reset+ "\n"
+                        + green +"║ Fecha Inicio: "+reset+"%s"+reset+"\n"
+                        + green +"║ Fecha Fin: "+reset+"%s"+reset+"\n"
+                        + green +"║ Precio Total: "+reset+"%.2f"+reset+"\n"
+                        + green +"║ Estado: "+reset+"%s"+reset+"\n"
+                        + green +"║ Precio pagado: "+reset+"%s"+reset+"\n"
+                        + green +"╚═%s═"+reset+"\n",
+                "═".repeat(Math.max(0, 36 + String.valueOf(idR).length() - 2)),
+                idR,
+                "═".repeat(Math.max(0, 37 + String.valueOf(idR).length() - 4)),
+
+                fechaIni,
+                fechaFin,
+                precioTotal,
+                estadoR,
+                precioPagado,
+                "═".repeat(Math.max(0, 36 + String.valueOf(idR).length() - 2)));
+
+
+        //add ║ to each line at the end
+        String finalOutput = "";
+        for (int i = 0; i < output.lines().toList().size(); i++){
+            finalOutput += output.lines().toList().get(i);
+            if (i != 0 & i!= 2 & i!= output.lines().toList().size() - 1)
+
+                //add a " " until every line has the same length
+                for (int j = 0; j < 51 - output.lines().toList().get(i).length(); j++){
+                    finalOutput += " ";
+                }
+            if (i == 0)
+                finalOutput += green+"╗"+reset+"\n";
+            else if (i == output.lines().toList().size() - 1)
+                finalOutput += green+"╝"+reset+"\n";
+            else
+                finalOutput += green+"║"+reset+"\n";}
+
+        return finalOutput;
+    }
+
+    static String imprimir(Reserva reserva){
         String green = "\033[32m";
         String reset = "\033[0m";
         var idR = reserva.getIdR();
@@ -84,7 +139,7 @@ public class Print {
                         + green +"║ RESERVA "+reset+"%d"+reset+"\n"
                         + green +"║══%s═" +reset+ "\n"
                         + green +"║ Caravana: " +reset+ "%s"+reset+"\n"
-                        + green +"║ Cliente: "+reset+"%s %s"+reset+"\n"
+                        + green +"║ Cliente: "+reset+ "%s"+reset+"\n"
                         + green +"║ Fecha Inicio: "+reset+"%s"+reset+"\n"
                         + green +"║ Fecha Fin: "+reset+"%s"+reset+"\n"
                         + green +"║ Precio Total: "+reset+"%.2f"+reset+"\n"
@@ -93,9 +148,8 @@ public class Print {
                 "═".repeat(Math.max(0, 36 + String.valueOf(idR).length() - 2)),
                 idR,
                 "═".repeat(Math.max(0, 37 + String.valueOf(idR).length() - 4)),
-                autocaravanaR.getMatricula(),
-                clienteR.getNombre(),
-                clienteR.getApellido(),
+                autocaravanaR,
+                clienteR,
                 fechaIni,
                 fechaFin,
                 precioTotal,
@@ -121,9 +175,12 @@ public class Print {
                 finalOutput += green+"║"+reset+"\n";}
 
         return finalOutput;
-
-
     }
+
+
+
+
+
 
 
     static String imprimir(Autocaravana autocaravana)
@@ -133,6 +190,7 @@ public class Print {
         BigDecimal precioPorDia = autocaravana.getPrecioPorDia();
         String matricula = autocaravana.getMatricula();
         int kilometraje = autocaravana.getKilometraje();
+        int plazas = autocaravana.getPlazas();
 
 
         String yellow = "\033[33m";
@@ -145,6 +203,8 @@ public class Print {
                         + yellow+"║ Precio por día: "+reset+"%.2f €\n"
                         + yellow+"║ Matrícula: "+reset+"%s\n"
                         + yellow+"║ Kilometraje: "+reset+"%d km\n"
+                        + yellow+"║ Plazas: "+reset+"%d\n"
+
                         + yellow+"╚═%s═\n" + reset,
                 "═".repeat(27 + String.valueOf(idA).length()),
                 idA,
@@ -153,6 +213,7 @@ public class Print {
                 precioPorDia,
                 matricula,
                 kilometraje,
+                plazas,
                 "═".repeat(27 + String.valueOf(idA).length()));
 
         //add ║ to each line at the end

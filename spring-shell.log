@@ -389,3 +389,60 @@
 1681986756127:mostrar-reserva 1
 1681986807895:listar-clientes
 1681986818343:listar-autocaravanas
+1682323256274:listar-clientes
+1682323900468:help
+1682323918979:modificar-cliente
+1682323922672:listar-cliente
+1682323927334:listar-clientes
+1682323948041:modificar-apellido
+1682323977104:modificar-apellido 2982132P makinon
+1682323980799:listar-clientes
+1682326909892:listar-autocaravanas 0
+1682326952265:mostrar-reserva 0
+1682331114491:listar-reservas
+1682331118372:listar-clientes
+1682331183945:listar-reservas
+1682332723969:listar-clientes
+1682333568940:mostrar-reserva 0
+1682335069610:listar-reservas
+1682335073821:mostrar-reserva 0
+1682335130426:mostrar-reserva1
+1682335132510:mostrar-reserva 1
+1682405458370:listar-clientes
+1682405468253:crear-cliente
+1682405693894:listar-clientes
+1682405804000:stacktrace
+1682406267853:listar-clientes
+1682429839911:listar-reserva
+1682429845421:listar-reservas
+1682434680718:listar-clientes
+1682434685616:lista-reservas
+1682434691575:listar-reservas
+1682434774603:mostrar-reserva 0
+1682434934105:listar-reservas 0
+1682434940639:mostrar-reserva 0
+1682435116285:listar-autocaravanas
+1682435124004:mostrar-reserva 0
+1682435281326:listar-cliente
+1682435285520:listar-clientes 0
+1682435289448:listar-reservas
+1682435294800:listar-autocaravanas
+1682435366221:mostrar-reserva 0
+1682435406243:listar-reservas
+1682440418764:mostrar-reserva 0
+1682440732918:listar-clientes
+1682440738475:listar-reservas
+1682440919350:crear-reserva
+1682440925971:crear-reserva 1 1
+1682440943652:crear-reserva 1 1 2024-04-04 2025-05-05 idA idC
+1682440993674:listar-reservas
+1682441231714:crear-reserva
+1682441250922:crear-reserva 1 1 2024-04-04 2025-05-05 idA idC
+1682441286179:listar-reservas
+1682442093457:crear-reserva 1 1 2024-04-04 2025-05-05 idA idC
+1682442110573:listar-reservas
+1682443070859:crear-reserva 1 1 2024-04-04 2025-05-05 idA idC
+1682443076615:listar-reservas
+1682444025595:crear-reserva 1 1 2024-04-04 2025-05-05 idA idC
+1682444029008:listar-reservas
+1682444035679:mostrar-reserva 1

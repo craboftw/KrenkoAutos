@@ -3,29 +3,21 @@ package uca.springCli.UI;
 
 
 import uca.core.servicio.ClienteServicio;
-import uca.springCli.Implementaciones.ClienteEstadoRepositorioImpl;
-import uca.springCli.Implementaciones.ClienteReglasBasicas;
-import uca.springCli.Implementaciones.ClienteRepositorioImpl;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import uca.core.servicio.iClienteServicio;
+import uca.core.servicio.reglas.ClienteReglas;
+import uca.springCli.Implementaciones.ClienteEstadoRepositorioImpl;
+import uca.springCli.Implementaciones.ClienteRepositorioImpl;
 
 
 @ShellComponent
 public class ClienteShell {
 
-    private final ClienteServicio clienteServicio;
-
-
-    public ClienteShell() {
-        this.clienteServicio = new ClienteServicio( new ClienteReglasBasicas() , new ClienteRepositorioImpl(), new ClienteEstadoRepositorioImpl());
-    }
-
-
-    //I want to Override the method to_string from Cliente class to show the information of the client
-
-
+   // @Autowired
+    private final iClienteServicio clienteServicio = new ClienteServicio (new ClienteRepositorioImpl(),new ClienteEstadoRepositorioImpl());
 
 
 

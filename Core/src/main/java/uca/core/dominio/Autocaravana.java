@@ -1,4 +1,4 @@
-package uca.core;
+package uca.core.dominio;
 
 
 import java.math.BigDecimal;
@@ -86,16 +86,16 @@ public class Autocaravana {
     }
     public int        getVecesReservada() {return vecesReservada;}
 
-    void setModelo(String mod) {this.modelo = mod;}
+    public void setModelo(String mod) {this.modelo = mod;}
 
-    void setPrecioPorDia(BigDecimal precioPorDia) {this.precioPorDia = precioPorDia;}
+    public void setPrecioPorDia(BigDecimal precioPorDia) {this.precioPorDia = precioPorDia;}
 
-    void setKilometraje(int kilometraje){this.kilometraje = kilometraje;}
+    public void setKilometraje(int kilometraje){this.kilometraje = kilometraje;}
 
     public void setPlazas(int plazas) {
         this.plazas= plazas;
     }
-    void setEstado(String Estado) {
+    public void setEstado(String Estado) {
             estadoA = Estado;
     }
 

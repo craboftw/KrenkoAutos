@@ -1,5 +1,8 @@
-package uca.core;
+package uca.core.dao;
 
+import uca.core.dominio.Reserva;
+
+import java.io.IOException;
 import java.util.Collection;
 
 public interface ReservaRepositorio {

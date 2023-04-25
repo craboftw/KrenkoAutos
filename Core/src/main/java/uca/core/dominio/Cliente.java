@@ -1,7 +1,6 @@
-package uca.core;
+package uca.core.dominio;
 
 import java.time.LocalDate;
-import java.util.Collection;
 
 public class Cliente {
     private int idC;
@@ -60,6 +59,7 @@ public class Cliente {
     public int getCantidadReservasRealizadas() {return cantidadReservasRealizadas;}
     public int getMultas() {return multas;}
     public String getEstado() {return estado;}
+
     public int Edad() {
         LocalDate hoy = LocalDate.now();
         LocalDate fechaparseada = LocalDate.parse(fechaNacimiento);
@@ -75,17 +75,17 @@ public class Cliente {
 
 
 
-    void setNombre(String nombre){this.nombre = nombre;}
+    public void setNombre(String nombre){this.nombre = nombre;}
 
-    void setApellido(String apellido) {this.apellido = apellido;}
+    public void setApellido(String apellido) {this.apellido = apellido;}
 
     public void setTelefono(String telefono) {this.telefono = telefono;}
 
-    void setEmail(String email){this.email = email;}
+    public void setEmail(String email){this.email = email;}
 
-    void setDni(String dni){this.dni = dni;}
+    public void setDni(String dni){this.dni = dni;}
 
-    void setFechaNacimiento(String fecha) {this.fechaNacimiento = fecha;}
+    public void setFechaNacimiento(String fecha) {this.fechaNacimiento = fecha;}
 
     public void setNuevaMulta() {this.multas++; }
 

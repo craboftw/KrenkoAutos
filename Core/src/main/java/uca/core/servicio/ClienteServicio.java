@@ -1,8 +1,9 @@
-package uca.core;
+package uca.core.servicio;
 
 import uca.core.dao.ClienteEstadoRepositorio;
 import uca.core.dao.ClienteRepositorio;
 import uca.core.dominio.Cliente;
+import uca.core.servicio.reglas.ClienteReglas;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -12,16 +13,16 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 
-public class ClienteServicio {
+public class ClienteServicio implements iClienteServicio {
+
+    private  ClienteRepositorio clienteRepositorio;
+
+    private  ClienteEstadoRepositorio clienteEstadoRepositorio;
+    private final ClienteReglas clienteReglas = new ClienteReglas(clienteRepositorio);
 
 
-    private final ClienteReglas clienteReglas;
-    private final ClienteRepositorio clienteRepositorio;
-    private final ClienteEstadoRepositorio clienteEstadoRepositorio;
 
-
-  public ClienteServicio(ClienteReglas clienteReglas, ClienteRepositorio clienteRepositorio, ClienteEstadoRepositorio clienteEstadoRepositorio) {
-        this.clienteReglas = clienteReglas;
+    public ClienteServicio(ClienteRepositorio clienteRepositorio, ClienteEstadoRepositorio clienteEstadoRepositorio) {
         this.clienteRepositorio = clienteRepositorio;
         this.clienteEstadoRepositorio = clienteEstadoRepositorio;
     }
@@ -31,25 +32,29 @@ public class ClienteServicio {
 
 
 
+    @Override
     public void altaCliente(String nom, String ape, String telef, String fecha, String dn, String ema){
         comprobarCliente(nom, ape, telef, fecha, dn, ema);
         String estado = clienteEstadoRepositorio.cargarEstadoDefault();
         int idC = clienteRepositorio.cargarCliente().stream().mapToInt(Cliente::getIdC).max().orElse(0) +1 ;
         if (idC == -1) idC = 1;
-
         Cliente c = new Cliente(idC, nom, ape, telef, fecha, dn, ema, clienteEstadoRepositorio.cargarEstadoDefault());
         clienteRepositorio.guardarCliente(c);    }
 
+    @Override
     public int getNumeroClientes() { return clienteRepositorio.cargarCliente().size(); }
 
+    @Override
     public Cliente buscarCliente(int idC) {
         return clienteRepositorio.cargarCliente().stream().filter(c -> c.getIdC() == idC).findFirst().orElse(Cliente.ClienteNulo);
     }
 
+    @Override
     public Cliente buscarCliente(String dni) {
         return clienteRepositorio.cargarCliente().stream().filter(c -> c.getDni().equals(dni)).findFirst().orElse(Cliente.ClienteNulo);
     }
 
+    @Override
     public Collection<Cliente> buscarCliente(String campo, String dato) {
             switch (campo) {
                 case "nombre":
@@ -70,11 +75,13 @@ public class ClienteServicio {
         return emptyList();
     }
 
+    @Override
     public void eliminarCliente(String dni) {
             clienteRepositorio.eliminarCliente(dni);
 
     }
 
+    @Override
     public void eliminarCliente(int idC) {
         if (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getIdC() == idC))
             clienteRepositorio.guardarCliente(clienteRepositorio.cargarCliente().stream().filter((c -> c.getIdC() != idC)).toList());
@@ -83,6 +90,7 @@ public class ClienteServicio {
     }
 
 
+    @Override
     public void comprobarCliente(String nom, String ape, String telef, String cumpleanos, String dn, String ema) {
         LocalDate diaDeCum;
         try {
@@ -118,6 +126,7 @@ public class ClienteServicio {
     }
 
 
+    @Override
     public void setNombre(int idC, String nombre) {
         if (nombre.isEmpty())
             throw new IllegalArgumentException("El nombre no puede estar vacio");
@@ -128,6 +137,7 @@ public class ClienteServicio {
         clienteRepositorio.guardarCliente(clientes);
     }
 
+    @Override
     public void setNombre(String dni, String nombre) {
         if (nombre.isEmpty())
             throw new IllegalArgumentException("El nombre no puede estar vacio");
@@ -138,6 +148,7 @@ public class ClienteServicio {
         clienteRepositorio.guardarCliente(clientes);
     }
 
+    @Override
     public void setApellido(int idC, String apellido) {
         if (apellido.isEmpty())
             throw new IllegalArgumentException("El apellido no puede estar vacio");
@@ -148,6 +159,7 @@ public class ClienteServicio {
         clienteRepositorio.guardarCliente(clientes);
     }
 
+    @Override
     public void setApellido(String dni, String apellido) {
         if (apellido.isEmpty())
             throw new IllegalArgumentException("El apellido no puede estar vacio");
@@ -156,6 +168,7 @@ public class ClienteServicio {
         clienteRepositorio.guardarCliente(clientes);
     }
 
+    @Override
     public void setEmail(String dni, String email) {
 
         if (email.isEmpty())
@@ -166,6 +179,7 @@ public class ClienteServicio {
         clientes.stream().filter(c -> c.getDni().equals(dni)).findFirst().ifPresent(c -> c.setEmail(email));
         clienteRepositorio.guardarCliente(clientes);}
 
+    @Override
     public void setEmail(int idC, String email)
     {
         if (email.isEmpty())
@@ -177,6 +191,7 @@ public class ClienteServicio {
         clienteRepositorio.guardarCliente(clientes);
     }
 
+    @Override
     public void setDni(int idC, String dni) {
         if (dni.isEmpty())
             throw new IllegalArgumentException("El DNI no puede estar vacio");
@@ -189,6 +204,7 @@ public class ClienteServicio {
     }
 
 
+    @Override
     public void setFechaNacimiento(String dni, String fechaNacimiento) {
         LocalDate nueva;
         try {
@@ -211,6 +227,7 @@ public class ClienteServicio {
     }
 
 
+    @Override
     public void setFechaNacimiento(int idC, String fechaNacimiento) {
         LocalDate nueva;
         try {
@@ -232,6 +249,7 @@ public class ClienteServicio {
         clienteRepositorio.guardarCliente(clientes);
 }
 
+    @Override
     public void setTelefono(int idC, String telefono) {
         if (telefono.isEmpty())
             throw new IllegalArgumentException("El telefono no puede estar vacio");
@@ -242,6 +260,7 @@ public class ClienteServicio {
         clienteRepositorio.guardarCliente(clientes);
     }
 
+    @Override
     public void setTelefono(String dni, String telefono) {
         if (telefono.isEmpty())
             throw new IllegalArgumentException("El telefono no puede estar vacio");
@@ -253,7 +272,8 @@ public class ClienteServicio {
     }
 
 
-    void eliminarEstadoCliente(String estado)
+    @Override
+    public void eliminarEstadoCliente(String estado)
     {
         if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstadosCliente().stream().anyMatch(e -> e.equals(estado))) {
             clienteEstadoRepositorio.eliminarEstadoCliente(estado);
@@ -262,7 +282,8 @@ public class ClienteServicio {
         }
     }
 
-    void addEstadocliente(String estado) {
+    @Override
+    public void addEstadocliente(String estado) {
         if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstadosCliente().stream().noneMatch(e -> e.equals(estado))) {
             clienteEstadoRepositorio.guardarEstadoCliente(estado);
         } else {
@@ -270,13 +291,16 @@ public class ClienteServicio {
         }
     }
 
+    @Override
     public  Collection<String> getListaEstadoclientes() {
         return clienteEstadoRepositorio.cargarEstadosCliente();
     }
+    @Override
     public  Collection<Cliente> getListaClientes() {
         return clienteRepositorio.cargarCliente();
     }
 
+    @Override
     public void guardarCliente(Cliente c) {
         clienteRepositorio.guardarCliente(c);
     }

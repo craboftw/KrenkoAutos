@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import uca.core.dao.ReservaRepositorio;
 import uca.core.servicio.AutocaravanaServicio;
 import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Cliente;
@@ -20,17 +21,14 @@ import uca.springCli.Implementaciones.*;
 @ShellComponent
 public class ReservaShell {
 
-    private final ReservaServicio reservaServicio;
-    private final ClienteServicio clienteServicio;
-    private final AutocaravanaServicio autocaravanaServicio;
+    //@Autowired
+    private final ClienteServicio clienteServicio = new ClienteServicio(new ClienteRepositorioImpl(),new ClienteEstadoRepositorioImpl());
+    private final AutocaravanaServicio autocaravanaServicio = new AutocaravanaServicio(new AutocaravanaRepositorioImpl(), new AutocaravanaEstadoRepositorioImpl());
+    private final ReservaServicio reservaServicio = new ReservaServicio(new ReservaRepositorioImpl(), new ReservaEstadoRepositorioImpl(), autocaravanaServicio, clienteServicio);
 
 
 
-    public ReservaShell() {
-        this.reservaServicio = new ReservaServicio(new ReservaReglasBasicas(new ReservaRepositorioImpl()), new ReservaRepositorioImpl(), new ReservaEstadoRepositorioImpl());
-        this.clienteServicio = new ClienteServicio(new ClienteReglasBasicas(), new ClienteRepositorioImpl(), new ClienteEstadoRepositorioImpl());
-        this.autocaravanaServicio = new AutocaravanaServicio(new AutocaravanaRepositorioImpl(), new AutocaravanaReglasBasicas(), new AutocaravanaEstadoRepositorioImpl());
-    }
+
 
 
     //    @ShellMethod(key = "buscar-cliente", value = "Busca un cliente por un dato")
@@ -97,25 +95,20 @@ public class ReservaShell {
             //muestra la reserva con el cliente y la autocaravana uno al lao del otro.
             //divido ambos en lineas y sumo cada linea de cada uno en una lista;
             //luego muestro la lista
-            List<String> printreserva= Print.imprimir(reserva).lines().collect(Collectors.toList());
-            var cliente = reserva.getCliente();
+            var cliente = clienteServicio.buscarCliente(reserva.getCliente());
             var Stringcliente = Print.imprimir(cliente);
             List<String> printcliente= Stringcliente.lines().toList();
-            var autocaravana = reserva.getAutocaravana();
+            var autocaravana = autocaravanaServicio.buscarAutocarvana(reserva.getAutocaravana());
             var Stringautocaravana = Print.imprimir(autocaravana);
             List<String> printautocaravana= Stringautocaravana.lines().toList();
+            List<String> printreserva= Print.imprimir(reserva,autocaravana,cliente).lines().collect(Collectors.toList());
+
             String bold = "\033[0;1m";
 
             System.out.println(bold+"═".repeat(117));
             System.out.println(bold+" ".repeat(15) + "Reserva" + " ".repeat(35) + "Cliente" + " ".repeat(29) + "Autocaravana");
-            for (int i = 0; i < printautocaravana.size(); i++) {
+            for (int i = 0; i < printautocaravana.size()-1; i++) {
                 System.out.println(printreserva.get(i) + " " + printcliente.get(i) + " " + printautocaravana.get(i));
-            }
-            for (int i = printautocaravana.size(); i < printcliente.size(); i++) {
-                System.out.println(printreserva.get(i) + " " + printcliente.get(i));
-            }
-            for (int i = printcliente.size(); i < printreserva.size(); i++) {
-                System.out.println(printreserva.get(i));
             }
 
 
@@ -215,7 +208,7 @@ public class ReservaShell {
            var reservas = reservaServicio.getListaReservas();
             if (!reservas.isEmpty()) {
               for (Reserva reserva : reservas) {
-                if(reserva.getAutocaravana().getIdA() == (autocaravana.getIdA()))
+                if(reserva.getAutocaravana() == (autocaravana.getIdA()))
                 {
                 reservaServicio.setAutocaravana(reserva, autocaravana);
                 }
@@ -233,7 +226,7 @@ public class ReservaShell {
                 return;
             }
             for (Reserva reserva : reservas) {
-                if(reserva.getCliente().getIdC() == (cliente.getIdC()))
+                if(reserva.getCliente() == (cliente.getIdC()))
                 {
                     reservaServicio.setCliente(reserva, cliente);
 

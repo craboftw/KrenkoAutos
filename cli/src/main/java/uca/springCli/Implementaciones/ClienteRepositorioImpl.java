@@ -8,7 +8,6 @@ import uca.core.dominio.Cliente;
 import uca.core.dao.ClienteRepositorio;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,8 +19,10 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 
     @Override
     public void guardarCliente(Collection<Cliente> clientes) {
-
         try {
+            if (!new File(CLIENTES_FILE_PATH).exists()) {
+                new File(CLIENTES_FILE_PATH).createNewFile();
+            }
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);

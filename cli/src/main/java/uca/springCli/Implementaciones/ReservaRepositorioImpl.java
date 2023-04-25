@@ -25,21 +25,19 @@ public class ReservaRepositorioImpl implements ReservaRepositorio {
     String RESERVAS_FILE_PATH = "reservas.json";
 
     @Override
-    public Collection<Reserva> cargarReserva() {
-        try {
-            File file = new File(RESERVAS_FILE_PATH);
-            if (file.exists()) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-                return arreglarReservas( objectMapper.readValue(file, new TypeReference<Collection<Reserva>>() {
-                }));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public Collection<Reserva> cargarReserva() {        try {
+        File file = new File(RESERVAS_FILE_PATH);
+        if (file.exists()) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+            return objectMapper.readValue(file, new TypeReference<Collection<Reserva>>() { });
         }
-        return Collections.emptyList();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+        return new ArrayList<>();
+}
 
 
     @Override
@@ -90,81 +88,43 @@ public class ReservaRepositorioImpl implements ReservaRepositorio {
                     }
                 }
                 break;
-            case "nombre":
+            case "fechaInicio":
                 for (Reserva reserva : listaReservas) {
-                    if (reserva.getCliente().getNombre().equals(dato)) {
+                    if (reserva.fechaIniF().equals(LocalDate.parse(dato))) {
                         listaReservasFiltrada.add(reserva);
                     }
                 }
                 break;
-            case "apellidos":
+            case "fechaFin":
                 for (Reserva reserva : listaReservas) {
-                    if (reserva.getCliente().getApellido().equals(dato)) {
+                    if (reserva.fechaFinF().equals(LocalDate.parse(dato))) {
                         listaReservasFiltrada.add(reserva);
                     }
                 }
                 break;
-            case "dni":
+            case "precio":
                 for (Reserva reserva : listaReservas) {
-                    if (reserva.getCliente().getDni().equals(dato)) {
+                    if (reserva.getPrecioTotal().equals(new BigDecimal(dato))) {
+                        listaReservasFiltrada.add(reserva);
+                    }
+                }
+            break;
+            case "idC":
+                for (Reserva reserva : listaReservas) {
+                    if (reserva.getCliente() == Integer.parseInt(dato)) {
                         listaReservasFiltrada.add(reserva);
                     }
                 }
                 break;
-            case "telefono":
+            case "idA":
                 for (Reserva reserva : listaReservas) {
-                    if (reserva.getCliente().getTelefono().equals(dato)) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "email":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getCliente().getEmail().equals(dato)) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "fecha":
-                for (Reserva reserva : listaReservas) {
-                    LocalDate fecha = LocalDate.parse(dato);
-                    //between fechaInicio y fechaFin
-                    if ((reserva.fechaIniF().equals(fecha)) || (reserva.fechaIniF().isBefore(fecha)) && ((reserva.fechaFinF().isAfter(fecha) || (reserva.fechaFinF().equals(fecha))))) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "matricula":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getAutocaravana().getMatricula().equals(dato)) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "modelo":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getAutocaravana().getModelo().equals(dato)) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "precioPorDia":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getAutocaravana().getPrecioPorDia().equals(BigDecimal.valueOf(Integer.parseInt(dato)))) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "estado":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getEstadoReserva().equals(dato)) {
+                    if (reserva.getAutocaravana() == Integer.parseInt(dato)) {
                         listaReservasFiltrada.add(reserva);
                     }
                 }
                 break;
             default:
-                throw new IllegalArgumentException("No existe el tipo de busqueda");
-
+                throw new IllegalArgumentException("No existe el tipo de busqueda. Debe ser id|fechaInicio|fechaFin|precio|idC|idA");
         }
     return listaReservasFiltrada;
     }
@@ -174,13 +134,13 @@ public class ReservaRepositorioImpl implements ReservaRepositorio {
             List<Cliente> listaClientes = new ArrayList<>(new ClienteRepositorioImpl().cargarCliente());
             for  (Reserva reserva : listaReservas) {
                 for (Autocaravana autocaravana : listaAutocaravanas) {
-                    if (reserva.getAutocaravana().getIdA() == autocaravana.getIdA()) {
-                        reserva.setAutocaravana(autocaravana);
+                    if (reserva.getAutocaravana() == autocaravana.getIdA()) {
+                        reserva.setAutocaravana(autocaravana.getIdA());
                     }
                 }
                 for (Cliente cliente : listaClientes) {
-                    if (reserva.getCliente().getIdC() == cliente.getIdC()) {
-                        reserva.setCliente(cliente);
+                    if (reserva.getCliente() == cliente.getIdC()) {
+                        reserva.setCliente(cliente.getIdC());
                     }
                 }
             

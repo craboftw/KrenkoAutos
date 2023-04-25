@@ -1,4 +1,4 @@
-package uca.core;
+package uca.core.dao;
 
 import uca.core.dominio.Autocaravana;
 

@@ -8,8 +8,10 @@ import java.util.Collection;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.stereotype.Service;
 import uca.core.dao.AutocaravanaEstadoRepositorio;
 
+@Service
 public class AutocaravanaEstadoRepositorioImpl implements AutocaravanaEstadoRepositorio {
 
     String AUTOCARAVANAS_FILE_PATH = "autocaravanas.json";

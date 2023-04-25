@@ -4,10 +4,10 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
-import uca.core.servicio.AutocaravanaReglas;
+import uca.core.servicio.iAutocaravanaServicio;
+import uca.core.servicio.reglas.AutocaravanaReglas;
 import uca.core.servicio.AutocaravanaServicio;
 import uca.springCli.Implementaciones.AutocaravanaEstadoRepositorioImpl;
-import uca.springCli.Implementaciones.AutocaravanaReglasBasicas;
 import uca.springCli.Implementaciones.AutocaravanaRepositorioImpl;
 
 import java.math.BigDecimal;
@@ -16,13 +16,10 @@ import java.math.BigDecimal;
 public class AutocaravanaShell {
   // Igual que ClienteUI pero con Autocaravana
     AutocaravanaShell() {
-        this.autocaravanaReglas = new AutocaravanaReglasBasicas();
-        this.autocaravanaServicio = new AutocaravanaServicio(new AutocaravanaRepositorioImpl(), new AutocaravanaReglasBasicas(), new AutocaravanaEstadoRepositorioImpl());
+        this.autocaravanaServicio = new AutocaravanaServicio(new AutocaravanaRepositorioImpl(), new AutocaravanaEstadoRepositorioImpl());
     }
 
-
-    private final AutocaravanaServicio autocaravanaServicio;
-    private final AutocaravanaReglas autocaravanaReglas;
+    private final iAutocaravanaServicio autocaravanaServicio;
 
     @ShellMethod(key = "crear-autocaravana", value = "Crea una nueva autocaravana")
     public String crearAutocaravana(@ShellOption String modelo, @ShellOption String matricula, @ShellOption BigDecimal precio, @ShellOption int plazas, @ShellOption int kilometraje) {
