@@ -1,6 +1,10 @@
 package uca.springCli.Implementaciones;
 
-import uca.core.*;
+import uca.core.dao.ReservaRepositorio;
+import uca.core.dominio.Autocaravana;
+import uca.core.dominio.Cliente;
+import uca.core.dominio.Reserva;
+import uca.core.servicio.ReservaReglas;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

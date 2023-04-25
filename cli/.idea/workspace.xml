@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86038fc9-d444-43dd-9a3e-dbd07bbd4de1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ReservaEstadoRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/AutocaravanaEstadoRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/AutocaravanaEstadoRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/AutocaravanaRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/AutocaravanaRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/AutocaravanaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/AutocaravanaServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ClienteEstadoRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ClienteEstadoRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ClienteRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ClienteRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ReservaRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ReservaRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ReservaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Core/src/main/java/Uca/Core/ReservaServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/spring-shell.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +32,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -1,8 +1,8 @@
 package uca.springCli.Implementaciones;
 
-import uca.core.Cliente;
-import uca.core.ClienteReglas;
-import uca.core.ClienteRepositorio;
+import uca.core.dominio.Cliente;
+import uca.core.servicio.ClienteReglas;
+import uca.core.dao.ClienteRepositorio;
 
 public class ClienteReglasBasicas implements ClienteReglas {
         ClienteRepositorio clienteRepositorio = null;

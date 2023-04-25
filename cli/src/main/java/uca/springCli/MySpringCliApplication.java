@@ -23,27 +23,10 @@ public class MySpringCliApplication {
 	public static void main(String[] args) throws IOException, InterruptedException {
 		runAnimation();
 		SpringApplication app = new SpringApplication(MySpringCliApplication.class);
-		//app.setAdditionalProfiles("cli");
-		//spring.banner.image.location=banner.gif
-		//spring.banner.image.width=80
-		//spring.banner.image.height=40
-		//spring.banner.image.pixelmode=BLOCK
-		//spring.banner.image.margin=4
-		//spring.banner.image.bitdepth=7
-		Map<String, Object> map = Map.of(
-				"spring.banner.image.location", "banner.gif",
-				"spring.banner.image.width", 80,
-				"spring.banner.image.height", 40,
-				"spring.banner.image.pixelmode", "BLOCK",
-				"spring.banner.image.margin", 4,
-				"spring.banner.image.bitdepth", 7
-		);
-		app.setDefaultProperties(map);
+		app.setBannerMode(Banner.Mode.OFF);
+		app.setLogStartupInfo(false);
 		app.run(args);
 	}
-
-	// ...
-
 
 
 
