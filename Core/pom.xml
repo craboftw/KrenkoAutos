@@ -18,6 +18,12 @@
             <version>6.0.7</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <name>Core</name>
 	<description>Nucleo de un sistema de reservas para coches.</description>

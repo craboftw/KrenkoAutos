@@ -45,7 +45,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
     }
 
     @Override
-    public Autocaravana buscarAutocarvana(int idA){
+    public Autocaravana buscarAutocaravana(int idA){
         return autocaravanaRepositorio.cargarAutocaravana().stream().filter(a -> a.getIdA() == idA).findFirst().orElseThrow(IllegalArgumentException::new);
     }
 
@@ -147,7 +147,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
         if (!autocaravanaEstadoRepositorio.cargarEstadosAutocaravana().contains(estado))
             throw new IllegalArgumentException("El estado no es correcto");
         var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
-        autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setEstado(estado));
+        autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setEstadoA(estado));
         autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
     }
 
@@ -158,7 +158,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
         if (!autocaravanaEstadoRepositorio.cargarEstadosAutocaravana().contains(estado))
             throw new IllegalArgumentException("El estado no es correcto");
         var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
-        autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setEstado(estado));
+        autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setEstadoA(estado));
         autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
     }
 

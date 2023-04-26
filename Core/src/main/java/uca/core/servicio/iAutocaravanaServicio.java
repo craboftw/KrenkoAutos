@@ -10,7 +10,7 @@ public interface iAutocaravanaServicio {
 
     void comprobarAutocaravana(String mod, BigDecimal precio, int plaz, String matr, int kilometraj);
 
-    Autocaravana buscarAutocarvana(int idA);
+    Autocaravana buscarAutocaravana(int idA);
 
     Collection<Autocaravana> buscarAutocaravana(String tipo, String dato);
 

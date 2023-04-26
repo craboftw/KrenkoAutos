@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/cli/cli.iml" filepath="$PROJECT_DIR$/cli/cli.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/core.iml" filepath="$PROJECT_DIR$/Core/core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/dss2022--2023-MACFLG.iml" filepath="$PROJECT_DIR$/.idea/dss2022--2023-MACFLG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/prueba.iml" filepath="$PROJECT_DIR$/.idea/prueba.iml" />
     </modules>
   </component>
 </project>

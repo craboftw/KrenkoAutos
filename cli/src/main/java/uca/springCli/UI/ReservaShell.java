@@ -39,17 +39,12 @@ public class ReservaShell {
 
     @ShellMethod(key = "crear-reserva", value = "Crea una nueva reserva")
     public String crearReserva(
-            @ShellOption(help = "Valor del identificador") String datoA,
-            @ShellOption(help = "Valor del identificador") String datoC,
+            @ShellOption(help = "Valor del identificador") int datoA,
+            @ShellOption(help = "Valor del identificador") int datoC,
             @ShellOption(help = "Fecha de inicio") String fechaInicio,
-            @ShellOption(help = "Fecha de fin") String fechaFin,
-            @ShellOption(help = "Tipo de identificador") String tipoA,
-            @ShellOption(help = "Tipo de identificador") String tipoC) {
-
+            @ShellOption(help = "Fecha de fin") String fechaFin) {
         try {
-            Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana(tipoA, datoA).stream().toList().get(0);
-            Cliente cliente = clienteServicio.buscarCliente(tipoC, datoC).stream().toList().get(0);
-            reservaServicio.altaReserva(autocaravana, cliente, fechaInicio, fechaFin);
+            reservaServicio.altaReserva(datoA, datoC, fechaInicio, fechaFin);
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -61,7 +56,6 @@ public class ReservaShell {
     public String checkin(@ShellOption(help = "Valor del identificador") String dato,
                           @ShellOption(help = "Tipo de identificador") String tipo) {
         try {
-            Reserva reserva = reservaServicio.buscarReserva(tipo, dato).stream().toList().get(0);
             return reservaServicio.checkin(reserva);
         } catch (Exception e) {
             return e.getMessage();
@@ -73,7 +67,6 @@ public class ReservaShell {
     public String checkout(@ShellOption(help = "Valor del identificador") String dato,
                            @ShellOption(help = "Tipo de identificador") String tipo) {
         try {
-            Reserva reserva = reservaServicio.buscarReserva(tipo, dato).stream().toList().get(0);
             return reservaServicio.checkout(reserva);
         } catch (Exception e) {
             return e.getMessage();
@@ -95,10 +88,10 @@ public class ReservaShell {
             //muestra la reserva con el cliente y la autocaravana uno al lao del otro.
             //divido ambos en lineas y sumo cada linea de cada uno en una lista;
             //luego muestro la lista
-            var cliente = clienteServicio.buscarCliente(reserva.getCliente());
+            var cliente = clienteServicio.buscarCliente(reserva.getIdCliente());
             var Stringcliente = Print.imprimir(cliente);
             List<String> printcliente= Stringcliente.lines().toList();
-            var autocaravana = autocaravanaServicio.buscarAutocarvana(reserva.getAutocaravana());
+            var autocaravana = autocaravanaServicio.buscarAutocarvana(reserva.getIdAutocaravana());
             var Stringautocaravana = Print.imprimir(autocaravana);
             List<String> printautocaravana= Stringautocaravana.lines().toList();
             List<String> printreserva= Print.imprimir(reserva,autocaravana,cliente).lines().collect(Collectors.toList());
@@ -208,7 +201,7 @@ public class ReservaShell {
            var reservas = reservaServicio.getListaReservas();
             if (!reservas.isEmpty()) {
               for (Reserva reserva : reservas) {
-                if(reserva.getAutocaravana() == (autocaravana.getIdA()))
+                if(reserva.getIdAutocaravana() == (autocaravana.getIdA()))
                 {
                 reservaServicio.setAutocaravana(reserva, autocaravana);
                 }
@@ -226,7 +219,7 @@ public class ReservaShell {
                 return;
             }
             for (Reserva reserva : reservas) {
-                if(reserva.getCliente() == (cliente.getIdC()))
+                if(reserva.getIdCliente() == (cliente.getIdC()))
                 {
                     reservaServicio.setCliente(reserva, cliente);
 

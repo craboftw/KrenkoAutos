@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,132 +21,65 @@ import uca.core.dao.ReservaRepositorio;
 public class ReservaRepositorioImpl implements ReservaRepositorio {
 
     String RESERVAS_FILE_PATH = "reservas.json";
+    ObjectMapper objectMapper = new ObjectMapper();
+    Map<Integer,Reserva> reservas = cargaInicial();
 
-    @Override
-    public Collection<Reserva> cargarReserva() {        try {
-        File file = new File(RESERVAS_FILE_PATH);
-        if (file.exists()) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-            return objectMapper.readValue(file, new TypeReference<Collection<Reserva>>() { });
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-        return new ArrayList<>();
-}
-
-
-    @Override
-    public void guardarReserva(Collection<Reserva> listaReservas) {
-
+    private Map<Integer,Reserva> cargaInicial(){
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-            objectMapper.writeValue(new File(RESERVAS_FILE_PATH), arreglarReservas(listaReservas));
+            File file = new File(RESERVAS_FILE_PATH);
+            if (file.exists())
+            {
+                return objectMapper.readValue(file, new TypeReference<List<Reserva>>() {}).stream().collect(Collectors.toMap(Reserva::getIdR, reserva -> reserva));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Map.of();
+    }
+
+    @Override
+    public void guardarReserva(Collection<Reserva> caravanas) {
+        try {
+            objectMapper.writeValue(new File(RESERVAS_FILE_PATH), caravanas);
+            this.reservas= caravanas.stream().collect(Collectors.toMap(Reserva::getIdR, reserva -> reserva));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void guardarReserva(Reserva reserva) {
-        List<Reserva> listaReservas = new ArrayList<>(cargarReserva());
-        //Si existe una reserva tiene el mismo id, la borramos y la volvemos a guardar
-        if (listaReservas.stream().anyMatch(r -> r.getIdR() == reserva.getIdR()))  {
-            listaReservas.removeIf(r -> r.getIdR() == reserva.getIdR());
-            guardarReserva(listaReservas);
-        }
-        listaReservas.add(reserva);
-        guardarReserva(listaReservas);
+    public void guardarReserva(Reserva caravana) {
+        reservas.put(caravana.getIdR(), caravana);
+        guardarReserva(new ArrayList<>(reservas.values()));
     }
 
     @Override
-    public void eliminarReserva(Reserva reserva) {
-        if (cargarReserva().contains(reserva)) {
-            Collection<Reserva> listaReservas = cargarReserva();
-            listaReservas.remove(reserva);
-            guardarReserva(listaReservas);
+    public Collection<Reserva> cargarReserva() {return reservas.values();  }
+
+    @Override
+    public Collection<Reserva> buscarReserva(String tipo, String dato) {
+        if (!reservas.isEmpty()) {
+            switch (tipo) {
+                case "id" -> {  return reservas.values().stream().filter(reserva -> reserva.getIdR() == Integer.parseInt(dato)).collect(Collectors.toList());}
+                case "idC" -> { return reservas.values().stream().filter(reserva -> reserva.getIdCliente() == Integer.parseInt(dato)).collect(Collectors.toList());}
+                case "idA" -> {return reservas.values().stream().filter(reserva -> reserva.getIdAutocaravana() == Integer.parseInt(dato)).collect(Collectors.toList());}
+                case "fecha" -> {  return reservas.values().stream().filter(reserva -> reserva.fechaIniF().isBefore(LocalDate.parse(dato)) && reserva.fechaFinF().isAfter(LocalDate.parse(dato))).collect(Collectors.toList());}
+                case "precio" -> { return reservas.values().stream().filter(reserva -> reserva.getPrecioTotal().equals(BigDecimal.valueOf(Double.parseDouble(dato)))).collect(Collectors.toList());}
+                default -> {throw new IllegalStateException("Tipo no valido: " + tipo + ". Debe ser idR, idC, idA, fecha o precio");}
+            }
         }
-        throw new IllegalArgumentException("La reserva no existe");
+        return new ArrayList<>();
+    }
+
+    public Reserva buscarReserva(int idR) {
+        return reservas.get(idR);
     }
 
     @Override
-    public Collection<Reserva> buscarReserva(String tipo, String dato)
-    {
-        Collection<Reserva> listaReservas = cargarReserva();
-        Collection<Reserva> listaReservasFiltrada = new ArrayList<>();
-        switch (tipo) {
-            case "id":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getIdR() == Integer.parseInt(dato)) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "fechaInicio":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.fechaIniF().equals(LocalDate.parse(dato))) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "fechaFin":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.fechaFinF().equals(LocalDate.parse(dato))) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "precio":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getPrecioTotal().equals(new BigDecimal(dato))) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-            break;
-            case "idC":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getCliente() == Integer.parseInt(dato)) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            case "idA":
-                for (Reserva reserva : listaReservas) {
-                    if (reserva.getAutocaravana() == Integer.parseInt(dato)) {
-                        listaReservasFiltrada.add(reserva);
-                    }
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("No existe el tipo de busqueda. Debe ser id|fechaInicio|fechaFin|precio|idC|idA");
-        }
-    return listaReservasFiltrada;
+    public void eliminarReserva(int idR) {
+        reservas.remove(idR);
+        guardarReserva(new ArrayList<>(reservas.values()));
     }
-
-    private Collection<Reserva> arreglarReservas(Collection<Reserva> listaReservas) {
-            List<Autocaravana> listaAutocaravanas = new ArrayList<>(new AutocaravanaRepositorioImpl().cargarAutocaravana());
-            List<Cliente> listaClientes = new ArrayList<>(new ClienteRepositorioImpl().cargarCliente());
-            for  (Reserva reserva : listaReservas) {
-                for (Autocaravana autocaravana : listaAutocaravanas) {
-                    if (reserva.getAutocaravana() == autocaravana.getIdA()) {
-                        reserva.setAutocaravana(autocaravana.getIdA());
-                    }
-                }
-                for (Cliente cliente : listaClientes) {
-                    if (reserva.getCliente() == cliente.getIdC()) {
-                        reserva.setCliente(cliente.getIdC());
-                    }
-                }
-            
-        }
-return listaReservas;
-    }
-
-
 }
 
 

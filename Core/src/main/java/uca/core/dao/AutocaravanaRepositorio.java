@@ -10,6 +10,7 @@ public interface AutocaravanaRepositorio {
     void guardarAutocaravana(Collection<Autocaravana> caravanas) ;
     void guardarAutocaravana(Autocaravana caravana) ;
     Collection<Autocaravana> cargarAutocaravana() ;
+    Autocaravana buscarAutocaravana(int idA);
     Collection<Autocaravana> buscarAutocaravana(String estado,String dato) ;
     void eliminarAutocaravana(String matricula);
     void eliminarAutocaravana(int idA);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Cliente;
 import uca.core.dao.ClienteRepositorio;
 
@@ -12,83 +13,80 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ClienteRepositorioImpl implements ClienteRepositorio {
+    /*
+    * Replicar el comportamiento de AutocaravanaRepositorioImpl
+    * */
 
-    String CLIENTES_FILE_PATH = "clientes.json";
+    private static final String CLIENTES_FILE_PATH = "clientes.json";
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private Map<Integer,Cliente> clientes = cargaInicial();
+
+    private Map<Integer,Cliente> cargaInicial(){
+        try {
+            File file = new File(CLIENTES_FILE_PATH);
+            if (file.exists())
+            {
+                return objectMapper.readValue(file, new TypeReference<List<Cliente>>() {}).stream().collect(Collectors.toMap(Cliente::getIdC, cliente -> cliente));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Map.of();
+    }
 
     @Override
     public void guardarCliente(Collection<Cliente> clientes) {
         try {
-            if (!new File(CLIENTES_FILE_PATH).exists()) {
-                new File(CLIENTES_FILE_PATH).createNewFile();
-            }
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
             objectMapper.writeValue(new File(CLIENTES_FILE_PATH), clientes);
+            this.clientes= clientes.stream().collect(Collectors.toMap(Cliente::getIdC, cliente -> cliente));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public void guardarCliente(Cliente cliente) {
-        Collection<Cliente> clientes = cargarCliente();
-        clientes.add(cliente);
-        guardarCliente(clientes);
-
+        clientes.put(cliente.getIdC(), cliente);
+        guardarCliente(new ArrayList<>(clientes.values()));
     }
 
     @Override
-    public Collection<Cliente> cargarCliente() {
-        try {
-            File file = new File(CLIENTES_FILE_PATH);
-            if (file.exists()) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-                objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-                return objectMapper.readValue(file, new TypeReference<Collection<Cliente>>() {
-                });
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public Collection<Cliente> cargarCliente() {return clientes.values();}
+
+    @Override
+    public Collection<Cliente> buscarCliente(String tipo, String dato) {
+        if (!clientes.isEmpty()) {
+         switch (tipo) {
+                case "dni" -> { return clientes.values().stream().filter(cliente -> cliente.getDni().equals(dato)).collect(Collectors.toList()); }
+                case "nombre" -> { return clientes.values().stream().filter(cliente -> cliente.getNombre().equals(dato)).collect(Collectors.toList()); }
+                case "apellidos" -> { return clientes.values().stream().filter(cliente -> cliente.getApellido().equals(dato)).collect(Collectors.toList()); }
+                case "telefono" -> { return clientes.values().stream().filter(cliente -> cliente.getTelefono().equals(dato)).collect(Collectors.toList()); }
+                case "email" -> { return clientes.values().stream().filter(cliente -> cliente.getEmail().equals(dato)).collect(Collectors.toList()); }
+               case "idC" -> { return clientes.values().stream().filter(cliente -> cliente.getIdC() == Integer.parseInt(dato)).collect(Collectors.toList()); }
+             default -> {throw new IllegalArgumentException("Tipo no valido: " + tipo + ". Debe ser dni, nombre, apellidos, telefono, email o idC");}
+              }
         }
         return new ArrayList<>();
     }
 
     @Override
-    public Collection<Cliente> buscarCliente(String estado, String dato) {
-        Collection<Cliente> clientes = cargarCliente();
-        if (clientes != null) {
-            switch (estado) {
-                case "idC" -> clientes.removeIf(c -> !(c.getIdC() == (Integer.parseInt(dato))));
-                case "nombre" -> clientes.removeIf(c -> !c.getNombre().equals(dato));
-                case "dni" -> clientes.removeIf(c -> !c.getDni().equals(dato));
-                case "fechaNacimiento" -> clientes.removeIf(c -> !c.getFechaNacimiento().equals(dato));
-                case "telefono" -> clientes.removeIf(c -> !c.getTelefono().equals(dato));
-                case "email" -> clientes.removeIf(c -> !c.getEmail().equals(dato));
-                default -> {
-                    throw new IllegalStateException("Estado no valido: " + estado
-                            + ". Debe ser idC, nombre, dni, fechaNacimiento, telefono o email");
-                }
-            }
-        }
-        return clientes;
-    }
-
-    @Override
     public void eliminarCliente(String dni) {
-        // delete de cliente por dni
-        var clientes = cargarCliente();
-        clientes.removeIf(c -> c.getDni().equals(dni));
-        guardarCliente(clientes);
-    }
+        if(clientes.values().stream().anyMatch(cliente -> cliente.getDni().equals(dni))){
+            clientes.values().removeIf(cliente -> cliente.getDni().equals(dni));
+            guardarCliente(new ArrayList<>(clientes.values()));
+        }
+            }
 
     @Override
     public void eliminarCliente(int idC) {
-        guardarCliente(cargarCliente().stream().filter(c -> c.getIdC() != idC).toList());
+        if(clientes.values().stream().anyMatch(cliente -> cliente.getIdC() == idC)){
+            clientes.values().removeIf(cliente -> cliente.getIdC() == idC);
+            guardarCliente(new ArrayList<>(clientes.values()));
+        }
     }
-
 }

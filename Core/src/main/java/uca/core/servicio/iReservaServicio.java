@@ -8,39 +8,39 @@ import java.math.BigDecimal;
 import java.util.Collection;
 
 public interface iReservaServicio {
-    void altaReserva(Autocaravana A, Cliente C, String fechI, String fechF);
+    void altaReserva(int idA, int idC, String fechI, String fechF);
 
-    String checkout(Reserva R);
+    String checkout (int idR);
 
-    String checkin(Reserva R);
+    String checkin (int idR);
 
-    Reserva buscarReserva(int i);
+    Reserva buscarReserva (int i);
 
     Collection<Reserva> buscarReserva(String tipo, String info);
 
     int getCantidadReservas();
 
-    void eliminarReserva(Reserva reserva);
+    void eliminarReserva(int idR);
 
-    void cancelarReserva(Reserva reserva);
+    void cancelarReserva(int idR);
 
-    void setEstadoReserva(Reserva R, String estado);
+    void setEstadoReserva(int idR, String estado);
 
-    void setPrecioTotal(Reserva R, float precioTotal);
+    void setPrecioTotal(int idR, float precioTotal);
 
-    void setAutocaravana(Reserva R, Autocaravana A);
+    void setAutocaravana(int idR, Autocaravana A);
 
-    void setCliente(Reserva R, Cliente C);
+    void setCliente(int idR, Cliente C);
 
-    void setFechaIni(Reserva R, String fechaIni);
+    void setFechaIni(int idR, String fechaIni);
 
-    void setFechaFin(Reserva R, String fechaFin);
+    void setFechaFin(int idR, String fechaFin);
 
-    void setPrecioTotal(Reserva R, BigDecimal precioTotal);
+    void setPrecioTotal(int idR, BigDecimal precioTotal);
 
-    void modificarReservaEnCurso(Reserva reserva, String fechF);
+    void modificarReservaEnCurso(int idR, String fechF);
 
-    void modificarReserva(Reserva reserva, Autocaravana a, String fechI, String fechF);
+    void modificarReserva(int idR, int idA, String fechI, String fechF);
 
     Collection<Reserva> getListaReservas();
 }

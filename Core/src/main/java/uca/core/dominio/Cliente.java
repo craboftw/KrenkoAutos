@@ -1,7 +1,11 @@
 package uca.core.dominio;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 
+
+@Data
 public class Cliente {
     private int idC;
     private String nombre;
@@ -30,6 +34,7 @@ public class Cliente {
         multas = 0;
         estado = est;
     }
+
     public Cliente() {
         idC = 0;
         nombre = "";
@@ -49,17 +54,6 @@ public class Cliente {
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y Setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
-    public int getIdC() {return idC;}
-    public String getNombre() {return nombre;}
-    public String getApellido() { return apellido;}
-    public String getEmail() {return email;}
-    public String getDni() {return dni;}
-    public String getTelefono() {return telefono;}
-    public String getFechaNacimiento() {return fechaNacimiento.toString();}
-    public int getCantidadReservasRealizadas() {return cantidadReservasRealizadas;}
-    public int getMultas() {return multas;}
-    public String getEstado() {return estado;}
-
     public int Edad() {
         LocalDate hoy = LocalDate.now();
         LocalDate fechaparseada = LocalDate.parse(fechaNacimiento);
@@ -72,25 +66,9 @@ public class Cliente {
         return edad;
     }
 
-
-
-
-    public void setNombre(String nombre){this.nombre = nombre;}
-
-    public void setApellido(String apellido) {this.apellido = apellido;}
-
-    public void setTelefono(String telefono) {this.telefono = telefono;}
-
-    public void setEmail(String email){this.email = email;}
-
-    public void setDni(String dni){this.dni = dni;}
-
-    public void setFechaNacimiento(String fecha) {this.fechaNacimiento = fecha;}
-
     public void setNuevaMulta() {this.multas++; }
 
     public void setNuevaReservaRealizada() {this.cantidadReservasRealizadas++; }
-
 
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧

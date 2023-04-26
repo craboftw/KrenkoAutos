@@ -71,11 +71,11 @@ public class Print {
         String green = "\033[32m";
         String reset = "\033[0m";
         var idR = reserva.getIdR();
-        var autocaravanaR = reserva.getAutocaravana();
-        var clienteR = reserva.getCliente();
+        var autocaravanaR = reserva.getIdAutocaravana();
+        var clienteR = reserva.getIdCliente();
         var fechaIni = reserva.getFechaIni();
         var fechaFin = reserva.getFechaFin();
-        var estadoR = reserva.getEstadoReserva();
+        var estadoR = reserva.getEstadoR();
         var precioTotal = reserva.getPrecioTotal();
         var precioPagado = reserva.getPagado();
 
@@ -126,11 +126,11 @@ public class Print {
         String green = "\033[32m";
         String reset = "\033[0m";
         var idR = reserva.getIdR();
-        var autocaravanaR = reserva.getAutocaravana();
-        var clienteR = reserva.getCliente();
+        var autocaravanaR = reserva.getIdAutocaravana();
+        var clienteR = reserva.getIdCliente();
         var fechaIni = reserva.getFechaIni();
         var fechaFin = reserva.getFechaFin();
-        var estadoR = reserva.getEstadoReserva();
+        var estadoR = reserva.getEstadoR();
         var precioTotal = reserva.getPrecioTotal();
 
 

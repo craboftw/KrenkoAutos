@@ -28,13 +28,32 @@ public class ReservaServicio implements iReservaServicio {
     }
 
     @Override
-    public void altaReserva(Autocaravana A, Cliente C, String fechI, String fechF)
+    public void altaReserva(int idA, int idC, String fechI, String fechF)
     {
         LocalDate fechaIni;
         LocalDate fechaFin;
+        Autocaravana A;
+        Cliente C;
+        try
+        {
+            A = autocaravanaServicio.buscarAutocaravana(idA);
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("Error no se encontro la autocaravana");
+        }
         if (!reservaReglas.comprobarAutocaravana(A)) {
             throw new IllegalArgumentException("La caravana seleccionada no cumple las condiciones");
         }
+        try
+        {
+            C = clienteServicio.buscarCliente(idC);
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("Error no se encontro el cliente");
+        }
+
         try
         {
             fechaIni = LocalDate.parse(fechI);
@@ -44,6 +63,7 @@ public class ReservaServicio implements iReservaServicio {
         {
             throw new IllegalArgumentException("Error en el formato de las fechas");
         }
+
         //Comprobaciones del cliente
         if (!reservaReglas.comprobarCliente(C)) {
             throw new IllegalArgumentException("El cliente no cumple las condiciones");
@@ -58,8 +78,16 @@ public class ReservaServicio implements iReservaServicio {
     }
 
     @Override
-    public String checkout(Reserva R) {
-        switch (R.getEstadoReserva()) {
+    public String checkout(int idR) {
+        Reserva R;
+        try{
+            R = reservaRepositorio.buscarReserva(idR);
+        }
+        catch (Exception e){
+            throw new IllegalArgumentException("Error no se encontro la reserva");
+        }
+
+        switch (R.getEstadoR()) {
             case "Cancelada":
                 return ("La reserva está cancelada");
             case "Finalizada":
@@ -68,13 +96,13 @@ public class ReservaServicio implements iReservaServicio {
                 if (LocalDate.now().isAfter(R.fechaFinF())
                         || LocalDate.now().isEqual(R.fechaFinF())) {
                     R.setPrecioTotal((reservaReglas.calcularTasaFinalizacion(R)));
-                    R.setEstadoReserva("Finalizada");
+                    R.setEstadoR("Finalizada");
                     reservaRepositorio.guardarReserva(R);
                     String mensaje = "La reserva ha sido finalizada.";
                 } else {
                     if (LocalDate.now().isBefore(R.fechaFinF())) {
                         R.setPrecioTotal((reservaReglas.calcularTasaCancelacion(R)));
-                        R.setEstadoReserva("Cancelada");
+                        R.setEstadoR("Cancelada");
                         reservaRepositorio.guardarReserva(R);
                         String mensaje = "La reserva ha sido cancelada por haber finalizado antes de la fecha prevista.";
                         if (R.getPrecioTotal().compareTo( R.getPagado()) < 0)
@@ -89,13 +117,16 @@ public class ReservaServicio implements iReservaServicio {
             case "Pendiente":
                 return ("La reserva no ha empezado");
             default:
-                return ("El estado de la reserva es " + R.getEstadoReserva());
+                return ("El estado de la reserva es " + R.getEstadoR());
         }
-        return ("El estado de la reserva es " + R.getEstadoReserva());    }
+        return ("El estado de la reserva es " + R.getEstadoR());    }
 
     @Override
-    public String checkin(Reserva R) {
-        switch (R.getEstadoReserva()) {
+    public String checkin(int  idR) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            return ("No se ha encontrado la reserva");
+        switch (R.getEstadoR()) {
         case "Cancelada":
             return ("La reserva está cancelada");
         case "Finalizada":
@@ -106,11 +137,11 @@ public class ReservaServicio implements iReservaServicio {
             if ((LocalDate.now().isAfter(R.fechaIniF())
                     || LocalDate.now().isEqual(R.fechaIniF()))
                     & LocalDate.now().isBefore(R.fechaFinF())) {
-                R.setEstadoReserva("En curso");
+                R.setEstadoR("En curso");
                 reservaRepositorio.guardarReserva(R);
             } else {
                 if (LocalDate.now().isAfter(R.fechaFinF())) {
-                    R.setEstadoReserva("Finalizada");
+                    R.setEstadoR("Finalizada");
                     R.setPrecioTotal(reservaReglas.calcularTasaAcabadaSinCheckOut(R));
                     reservaRepositorio.guardarReserva(R);
                 } else
@@ -118,9 +149,9 @@ public class ReservaServicio implements iReservaServicio {
             }
             break;
         default:
-            return ("El estado de la reserva es " + R.getEstadoReserva());
+            return ("El estado de la reserva es " + R.getEstadoR());
     }
-        return ("El estado de la reserva es " + R.getEstadoReserva());
+        return ("El estado de la reserva es " + R.getEstadoR());
     }
 
 
@@ -128,13 +159,11 @@ public class ReservaServicio implements iReservaServicio {
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
     @Override
-    public Reserva buscarReserva(int i) {
-        for (Reserva r : reservaRepositorio.cargarReserva()) {
-            if (r.getIdR() == i) {
-                return r;
-            }
-        }
-        return null;
+    public Reserva buscarReserva(int idR) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("No se ha encontrado la reserva");
+        return R;
     }
 
     @Override
@@ -146,106 +175,128 @@ public class ReservaServicio implements iReservaServicio {
     public int getCantidadReservas() {return reservaRepositorio.cargarReserva().size();}
 
     @Override
-    public void eliminarReserva(Reserva reserva) {
-            reservaRepositorio.eliminarReserva(reserva);
+    public void eliminarReserva(int idR) {
+        reservaRepositorio.eliminarReserva(idR);
     }
 
     @Override
-    public void cancelarReserva(Reserva reserva)
+    public void cancelarReserva(int idR)
     {
-        if (reserva.getEstadoReserva().equals("Cancelada"))
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
+        if (R.getEstadoR().equals("Cancelada"))
             throw new IllegalArgumentException("La reserva ya está cancelada");
-        if (reserva.getEstadoReserva().equals("Finalizada"))
+        if (R.getEstadoR().equals("Finalizada"))
             throw new IllegalArgumentException("La reserva ya está finalizada");
-        if(reservaReglas.condicionesCancelacion(reserva))
-            reserva.setEstadoReserva("Cancelada");
-        reserva.setPrecioTotal(reserva.getPrecioTotal().subtract(reservaReglas.calcularTasaCancelacion(reserva)));
-    }
-
-    @Override
-    public void setEstadoReserva(Reserva R, String estado) {
-       if( reservaEstadoRepositorio.cargarReservaEstado().contains(estado) && reservaRepositorio.cargarReserva().contains(R)){
-        reservaRepositorio.eliminarReserva(R);
-        R.setEstadoReserva(estado);
+        if(reservaReglas.condicionesCancelacion(R))
+            R.setEstadoR("Cancelada");
+        R.setPrecioTotal(R.getPrecioTotal().subtract(reservaReglas.calcularTasaCancelacion(R)));
         reservaRepositorio.guardarReserva(R);
     }
-        else
-            throw new IllegalArgumentException("El estado o la reserva no son correctos");
+
+
+    @Override
+    public void setEstadoReserva(int idR, String estado) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
+        R.setEstadoR(estado);
+        reservaRepositorio.guardarReserva(R);
     }
 
     @Override
-    public void setPrecioTotal(Reserva R, float precioTotal)
+    public void setPrecioTotal(int idR, float precioTotal)
     {
-        if (!reservaRepositorio.cargarReserva().contains(R))
-            throw new IllegalArgumentException("La reserva no existe");
-        reservaRepositorio.eliminarReserva(R);
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
         R.setPrecioTotal(BigDecimal.valueOf(precioTotal));
         reservaRepositorio.guardarReserva(R);
     }
 
     @Override
-    public void setAutocaravana(Reserva R, Autocaravana A) {
+    public void setAutocaravana(int idR, Autocaravana A) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
         if (reservaRepositorio.cargarReserva().contains(A))
             throw new IllegalArgumentException("La autocaravana no existe");
-        if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),A, clienteServicio.buscarCliente(R.getCliente())))
+        if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),A, clienteServicio.buscarCliente(R.getIdCliente())))
             throw new IllegalArgumentException("La autocaravana no puede reservarse");
-        reservaRepositorio.eliminarReserva(R);
-        R.setAutocaravana(A.getIdA());
+        R.setIdAutocaravana(A.getIdA());
         reservaRepositorio.guardarReserva(R);
 
     }
 
     @Override
-    public void setCliente(Reserva R, Cliente C) {
+    public void setCliente(int idR, Cliente C) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
+
         if (reservaRepositorio.cargarReserva().contains(C))
             throw new IllegalArgumentException("El cliente no existe");
-        if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),autocaravanaServicio.buscarAutocarvana(R.getAutocaravana()), C))
+        if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),autocaravanaServicio.buscarAutocaravana(idR), C))
             throw new IllegalArgumentException("El cliente no puede reservar la autocaravana");
-        reservaRepositorio.eliminarReserva(R);
-        R.setCliente(C.getIdC());
+        R.setIdCliente(C.getIdC());
         reservaRepositorio.guardarReserva(R);
     }
 
     @Override
-    public void setFechaIni(Reserva R, String fechaIni) {
+    public void setFechaIni(int  idR, String fechaIni) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
+
         try {
             LocalDate.parse(fechaIni);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error en el formato de las fechas.");
         }
-        reservaRepositorio.eliminarReserva(R);
         R.setFechaIni(fechaIni);
         reservaRepositorio.guardarReserva(R);
     }
 
     @Override
-    public void setFechaFin(Reserva R, String fechaFin) {
+    public void setFechaFin(int idR, String fechaFin) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
         try {
             LocalDate.parse(fechaFin);
         } catch (Exception e) {
             throw new IllegalArgumentException("Error en el formato de las fechas.");
         }
-        reservaRepositorio.eliminarReserva(R);
         R.setFechaFin(fechaFin);
         reservaRepositorio.guardarReserva(R);}
 
     @Override
-    public void setPrecioTotal(Reserva R, BigDecimal precioTotal) {
+    public void setPrecioTotal(int idR, BigDecimal precioTotal) {
+        Reserva R = reservaRepositorio.buscarReserva(idR);
+        if (R == null)
+            throw new IllegalArgumentException("Error no se encontro la reserva");
+
         if (precioTotal.compareTo(BigDecimal.ZERO) < 0)
             throw new IllegalArgumentException("El precio no puede ser negativo");
-        R.setPrecioTotal(precioTotal); }
+        R.setPrecioTotal(precioTotal);
+        reservaRepositorio.guardarReserva(R);
+    }
 
 
     @Override
-    public void modificarReservaEnCurso(Reserva reserva, String fechF) {
+    public void modificarReservaEnCurso(int idR, String fechF) {
+        Reserva reserva = reservaRepositorio.buscarReserva(idR);
+        if (reserva == null)
+            throw new IllegalArgumentException("No se ha encontrado la reserva.");
         LocalDate fechaFin;
-        if (reserva.getEstadoReserva().equals("Cancelada")) {
+        if (reserva.getEstadoR().equals("Cancelada")) {
             throw new IllegalArgumentException("La reserva está cancelada.");
         }
-        if (reserva.getEstadoReserva().equals("Finalizada")) {
+        if (reserva.getEstadoR().equals("Finalizada")) {
             throw new IllegalArgumentException("La reserva está finalizada.");
         }
-        if (reserva.getEstadoReserva().equals("En curso")) {
+        if (reserva.getEstadoR().equals("En curso")) {
 
             try {
                 fechaFin = LocalDate.parse(fechF);
@@ -253,27 +304,34 @@ public class ReservaServicio implements iReservaServicio {
                 throw new IllegalArgumentException("Error en el formato de las fechas.");
             }
 
-            if (reservaReglas.comprobarReserva(reserva.fechaIniF(), fechaFin,autocaravanaServicio.buscarAutocarvana(reserva.getAutocaravana()), clienteServicio.buscarCliente(reserva.getCliente()))) {
+            if (reservaReglas.comprobarReserva(reserva.fechaIniF(), fechaFin,autocaravanaServicio.buscarAutocaravana(idR), clienteServicio.buscarCliente(reserva.getIdR()))) {
                 throw new IllegalArgumentException("La autocaravana no está disponible en las fechas seleccionadas.");
             }
             if(!reservaReglas.condicionesModificacion(reserva))
                 throw new IllegalArgumentException("No se puede modificar la reserva.");
             reserva.setFechaFin(fechF);
-            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(autocaravanaServicio.buscarAutocarvana(reserva.getAutocaravana()),clienteServicio.buscarCliente(reserva.getCliente()), reserva.fechaIniF(), fechaFin).add( reservaReglas.calcularTasaModificacion(reserva)));
+            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(autocaravanaServicio.buscarAutocaravana(idR),clienteServicio.buscarCliente(reserva.getIdR()), reserva.fechaIniF(), fechaFin).add( reservaReglas.calcularTasaModificacion(reserva)));
+            reservaRepositorio.guardarReserva(reserva);
         }
     }
 
     @Override
-    public void modificarReserva(Reserva reserva, Autocaravana a, String fechI, String fechF){ //todavia no esta en curso
+    public void modificarReserva(int idR, int idA, String fechI, String fechF){ //todavia no esta en curso
+        Reserva reserva = reservaRepositorio.buscarReserva(idR);
+        Autocaravana a = autocaravanaServicio.buscarAutocaravana(idA);
+        if (reserva == null)
+            throw new IllegalArgumentException("No se ha encontrado la reserva");
+        if (a == null)
+            throw new IllegalArgumentException("No se ha encontrado la autocaravana");
         LocalDate fechaIni;
         LocalDate fechaFin;
-        if (reserva.getEstadoReserva().equals("Cancelada")) {
+        if (reserva.getEstadoR().equals("Cancelada")) {
             throw new IllegalArgumentException("La reserva está cancelada");
         }
-        if (reserva.getEstadoReserva().equals("Finalizada")) {
+        if (reserva.getEstadoR().equals("Finalizada")) {
             throw new IllegalArgumentException("La reserva está finalizada");
         }
-        if (!reserva.getEstadoReserva().equals("En curso")) {
+        if (!reserva.getEstadoR().equals("En curso")) {
 
             try {
                 fechaIni = LocalDate.parse(fechI);
@@ -288,13 +346,13 @@ public class ReservaServicio implements iReservaServicio {
             if (fechaIni.isBefore(LocalDate.now())) {
                 throw new IllegalArgumentException("La fecha inicial no puede ser anterior a la fecha actual");
             }
-            if (reservaReglas.comprobarReserva(fechaIni, fechaFin, a, clienteServicio.buscarCliente(reserva.getCliente()))) {
+            if (reservaReglas.comprobarReserva(fechaIni, fechaFin, a, clienteServicio.buscarCliente(reserva.getIdCliente()))) {
                 throw new IllegalArgumentException("La autocaravana no está disponible en las fechas seleccionadas");
             }
 
             reserva.setFechaIni(fechI);
             reserva.setFechaFin(fechF);
-            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(a, clienteServicio.buscarCliente(reserva.getCliente()), fechaIni, fechaFin));
+            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(a, clienteServicio.buscarCliente(reserva.getIdCliente()), fechaIni, fechaFin));
         } else
             throw new IllegalArgumentException("La reserva no está en curso");
     }

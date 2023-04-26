@@ -75,13 +75,13 @@ public class ReservaReglas
     //Tasa por modificar tras comenzar la reserva
     {
         int diasRestantes = (int) (R.fechaFinF().toEpochDay() - LocalDate.now().toEpochDay());
-        return R.getPrecioTotal().subtract(autocaravanaServicio.buscarAutocarvana(R.getAutocaravana()).getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)));
+        return R.getPrecioTotal().subtract(autocaravanaServicio.buscarAutocaravana(R.getIdAutocaravana()).getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)));
     }
 
     public BigDecimal calcularTasaFinalizacion(Reserva R) {
         //si cancelo la reserva con dias de antelacion me devuelven el 50% del precio de los dias que me queden por utilizar
         int diasRestantes = (int) (R.fechaFinF().toEpochDay() - LocalDate.now().toEpochDay());
-        return R.getPrecioTotal().subtract(autocaravanaServicio.buscarAutocarvana(R.getAutocaravana()).getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)).multiply(BigDecimal.valueOf(0.5)));
+        return R.getPrecioTotal().subtract(autocaravanaServicio.buscarAutocaravana(R.getIdAutocaravana()).getPrecioPorDia().multiply(BigDecimal.valueOf(diasRestantes)).multiply(BigDecimal.valueOf(0.5)));
     }
 
     //Funciones que calculan la multa por incumplimiento.
@@ -117,7 +117,7 @@ public class ReservaReglas
         if (reservaRepositorio.cargarReserva().isEmpty())
             return true;
         for (Reserva R : reservaRepositorio.cargarReserva()) {
-            if (autocaravanaServicio.buscarAutocarvana(R.getAutocaravana()).equals(A) & R.getEstadoReserva() != "Cancelada" & R.getEstadoReserva() != "Finalizada") {
+            if (autocaravanaServicio.buscarAutocaravana(R.getIdAutocaravana()).equals(A) & R.getEstadoR() != "Cancelada" & R.getEstadoR() != "Finalizada") {
                 //comprobar si las fechas de la Reserva R se solapan con las fechas de la reserva que se quiere hacer
                 if (
                         (fechaIni.isBefore(R.fechaFinF()) & fechaIni.isAfter(R.fechaIniF())) |

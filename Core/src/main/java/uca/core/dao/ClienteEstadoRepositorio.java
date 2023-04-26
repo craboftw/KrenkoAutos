@@ -2,6 +2,7 @@ package uca.core.dao;
 
 import java.util.Collection;
 
+
 public interface ClienteEstadoRepositorio {
     Collection<String> cargarEstadosCliente() ;
     void guardarEstadoCliente(Collection<String> listaEstados);

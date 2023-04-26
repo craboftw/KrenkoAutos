@@ -3,9 +3,12 @@ package uca.core.dominio;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import lombok.Data;
+
+
+@Data
 public class Reserva {
     private int idR;
-    private Autocaravana autocaravanaR;
     private int idCliente;
     private int idAutocaravana;
     private String fechaIni;
@@ -55,27 +58,10 @@ public class Reserva {
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Getters y Setters‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
 
-    public int        getIdR() {return idR;}
-    public int        getAutocaravana() {return idAutocaravana;}
-    public int        getCliente() {return idCliente;}
-    public String     getFechaIni() {return fechaIni;}
-    public LocalDate  fechaIniF() {return LocalDate.parse(fechaIni);}
-    public String     getFechaFin() { return fechaFin;}
-    public LocalDate  fechaFinF() {return LocalDate.parse(fechaFin);}
-    public BigDecimal getPrecioTotal() {return precioTotal;}
-    public String     getEstadoReserva() {return estadoR;}
-    public BigDecimal getPagado() {return pagado;}
 
-    public void setEstadoReserva(String estado) { this.estadoR = estado; }
-    public void setPrecioTotal(BigDecimal precioTotal) { this.precioTotal = precioTotal; }
-    public void setFechaIni(String fechaIni) {this.fechaIni = fechaIni;}
-    public void setFechaFin(String fechaFin) {this.fechaFin = fechaFin;}
-    public void setPrecioTotal(String precioTotal) {this.precioTotal = new BigDecimal(precioTotal);}
-    public void setCliente(int cliente) {idCliente = cliente;}
-    public void setAutocaravana(int autocaravana) {idAutocaravana = autocaravana;}
-    public void setPagado(BigDecimal pagado) {this.pagado = pagado;}
     public boolean estaPagada() {return pagado.compareTo(precioTotal) == 0;}
-
+    public LocalDate fechaFinF() {return LocalDate.parse(fechaFin);}
+    public LocalDate fechaIniF() {return LocalDate.parse(fechaIni);}
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros metodos ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
@@ -83,7 +69,7 @@ public class Reserva {
     public String toString() {
         return "Reserva{" +
                 "idR=" + idR +
-                ", IDautocaravana=" + autocaravanaR +
+                ", IDautocaravana=" + idAutocaravana +
                 ", IDcliente=" + idCliente +
                 ", fechaIni='" + fechaIni + '\'' +
                 ", fechaFin='" + fechaFin + '\'' +

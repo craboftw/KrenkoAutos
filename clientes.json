@@ -1,11 +1,22 @@
 [ {
   "idC" : 1,
   "nombre" : "pakito",
-  "apellido" : "makinon",
+  "apellido" : "lopez",
   "telefono" : "58348737",
   "email" : "fran@lopez.guerrero",
   "dni" : "2982132P",
   "fechaNacimiento" : "1999-11-17",
   "cantidadReservasRealizadas" : 0,
   "multas" : 0
+}, {
+  "idC" : 2,
+  "nombre" : "kaisa",
+  "apellido" : "farmiga",
+  "telefono" : "5959595995595",
+  "email" : "lasarga@lakaisa.laformiga",
+  "dni" : "1029102902P",
+  "fechaNacimiento" : "1996-12-18",
+  "cantidadReservasRealizadas" : 0,
+  "multas" : 0,
+  "estado" : "Disponible"
 } ]

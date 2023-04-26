@@ -11,10 +11,21 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-starter:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-autoconfigure:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:3.0.5" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:3.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-core:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:3.0.5" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.4.6" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.4.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-to-slf4j:2.19.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.19.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:2.0.7" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:6.0.7" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:6.0.7" level="project" />
+    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.33" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-starter:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-autoconfigure:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-core:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-validation:3.0.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:10.1.7" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:8.0.0.Final" level="project" />
@@ -26,24 +37,12 @@
     <orderEntry type="library" name="Maven: org.antlr:ST4:4.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard:3.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard-commands:3.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-table:3.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:3.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:3.0.5" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.4.6" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.4.6" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-to-slf4j:2.19.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.19.0" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:2.0.7" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.33" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard-commands:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-table:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:3.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-core:6.0.7" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:6.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:6.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:6.0.7" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:6.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:6.0.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:3.0.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:3.0.5" level="project" />
@@ -74,14 +73,11 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:6.0.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.9.1" level="project" />
-    <orderEntry type="module" module-name="core" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.14.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.14.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.14.2" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-autoconfigure:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-core:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard-commands:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-table:3.0.1" level="project" />
+    <orderEntry type="module" module-name="core" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:6.0.7" level="project" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.26" level="project" />
   </component>
 </module>
