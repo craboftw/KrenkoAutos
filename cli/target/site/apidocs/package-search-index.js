@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"uca.springCli"},{"l":"uca.springCli.repositorio.Implementaciones"},{"l":"uca.springCli.shell"}];updateSearchResults();

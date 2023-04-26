@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import uca.core.servicio.*;
 import uca.core.dominio.Reserva;
+import uca.core.servicio.interfaces.iAutocaravanaServicio;
+import uca.core.servicio.interfaces.iClienteServicio;
+import uca.core.servicio.interfaces.iReservaServicio;
 
 @ShellComponent
 public class ReservaShell {
@@ -175,6 +177,46 @@ public class ReservaShell {
             return e.getMessage();
         }
         return "Reserva eliminada con éxito";
+    }
+
+    @ShellMethod(key = "listar-reservas-cliente", value = "Lista todas las reservas de un cliente")
+    public void listarReservasCliente(@ShellOption(help = "Valor del identificador") int id) {
+        try {
+            List<Reserva> reservas = reservaServicio.getListaReservas().stream().toList();
+            if (!reservas.isEmpty())
+                PrintShell.imprimir(reservas.stream().filter(r -> r.getIdCliente() == id).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @ShellMethod(key = "listar-reservas-autocaravana", value = "Lista todas las reservas de una autocaravana")
+    public void listarReservasAutocaravana(@ShellOption(help = "Valor del identificador") int id) {
+        try {
+            List<Reserva> reservas = reservaServicio.getListaReservas().stream().toList();
+            if (!reservas.isEmpty())
+                PrintShell.imprimir(reservas.stream().filter(r -> r.getIdAutocaravana() == id).toList());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @ShellMethod(key = "crear-estado-reserva", value = "Crea un estado de reserva")
+    public String crearEstadoReserva(@ShellOption(help = "Valor del estado") String valor) {
+        try {
+            return reservaServicio.crearEstado(valor);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ShellMethod(key = "eliminar-estado-reserva", value = "Eliminar un estado de reserva")
+    public String eliminarEstadoReserva(@ShellOption(help = "Valor del estado") String valor) {
+        try {
+            return reservaServicio.eliminarEstado(valor);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
 

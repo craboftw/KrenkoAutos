@@ -6,10 +6,10 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import uca.core.dominio.Autocaravana;
-import uca.core.servicio.iAutocaravanaServicio;
-import uca.core.servicio.AutocaravanaServicioImpl;
-import uca.springCli.Implementaciones.AutocaravanaRepositorioImpl;
-import uca.springCli.Implementaciones.EstadoRepositorio;
+import uca.core.servicio.interfaces.iAutocaravanaServicio;
+import uca.core.servicio.implementaciones.AutocaravanaServicioImpl;
+import uca.springCli.repositorio.Implementaciones.AutocaravanaRepositorioImpl;
+import uca.springCli.repositorio.Implementaciones.EstadoRepositorio;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -196,9 +196,23 @@ public class AutocaravanaShell {
         return "Autocaravana borrada con éxito";
     }
 
-    
+    @ShellMethod(key = "crear-estado-autocaravana", value = "Crea un estado de autocaravana")
+    public String crearEstadoautocaravana(@ShellOption(help = "Valor del estado") String valor) {
+        try {
+            return autocaravanaServicio.crearEstado(valor);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
-
+    @ShellMethod(key = "eliminar-estado-autocaravana", value = "Eliminar un estado de autocaravana")
+    public String eliminarEstadoautocaravana(@ShellOption(help = "Valor del estado") String valor) {
+        try {
+            return autocaravanaServicio.eliminarEstado(valor);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
 
 

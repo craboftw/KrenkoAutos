@@ -23,7 +23,7 @@ import java.util.Vector;
 public class MySpringCliApplication {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		//runAnimation();
+		runAnimation();
 		SpringApplication app = new SpringApplication(MySpringCliApplication.class);
 		app.setBannerMode(Banner.Mode.OFF);
 		app.setLogStartupInfo(false);

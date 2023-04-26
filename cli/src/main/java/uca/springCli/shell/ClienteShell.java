@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
-import uca.core.servicio.iClienteServicio;
+import uca.core.servicio.interfaces.iClienteServicio;
 
 
 @ShellComponent
@@ -197,6 +197,23 @@ public class ClienteShell {
         return "Cliente eliminado con éxito";
     }
 
+    @ShellMethod(key = "crear-estado-cliente", value = "Crea un estado de cliente")
+    public String crearEstadocliente(@ShellOption(help = "Valor del estado") String valor) {
+        try {
+            return clienteServicio.crearEstado(valor);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @ShellMethod(key = "eliminar-estado-cliente", value = "Eliminar un estado de cliente")
+    public String eliminarEstadocliente(@ShellOption(help = "Valor del estado") String valor) {
+        try {
+            return clienteServicio.eliminarEstado(valor);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 }
 
 
