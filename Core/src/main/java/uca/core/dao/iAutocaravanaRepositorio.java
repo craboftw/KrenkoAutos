@@ -4,7 +4,7 @@ import uca.core.dominio.Autocaravana;
 
 import java.util.Collection;
 
-public interface AutocaravanaRepositorio {
+public interface iAutocaravanaRepositorio {
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Autocaravana‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     void guardarAutocaravana(Collection<Autocaravana> caravanas) ;

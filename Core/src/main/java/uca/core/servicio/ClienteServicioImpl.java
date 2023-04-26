@@ -1,8 +1,11 @@
 package uca.core.servicio;
 
-import uca.core.dao.ClienteEstadoRepositorio;
-import uca.core.dao.ClienteRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import uca.core.dao.iClienteRepositorio;
+import uca.core.dao.iEstadoRepositorio;
 import uca.core.dominio.Cliente;
+import uca.core.dominio.Estado;
 import uca.core.servicio.reglas.ClienteReglas;
 
 import java.time.LocalDate;
@@ -13,16 +16,16 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 
-public class ClienteServicio implements iClienteServicio {
+@Service
+public class ClienteServicioImpl implements iClienteServicio {
 
-    private  ClienteRepositorio clienteRepositorio;
+    private iClienteRepositorio clienteRepositorio;
 
-    private  ClienteEstadoRepositorio clienteEstadoRepositorio;
+    private iEstadoRepositorio clienteEstadoRepositorio;
     private final ClienteReglas clienteReglas = new ClienteReglas(clienteRepositorio);
 
-
-
-    public ClienteServicio(ClienteRepositorio clienteRepositorio, ClienteEstadoRepositorio clienteEstadoRepositorio) {
+    @Autowired
+    public ClienteServicioImpl(iClienteRepositorio clienteRepositorio, iEstadoRepositorio clienteEstadoRepositorio) {
         this.clienteRepositorio = clienteRepositorio;
         this.clienteEstadoRepositorio = clienteEstadoRepositorio;
     }
@@ -30,15 +33,13 @@ public class ClienteServicio implements iClienteServicio {
     //crear-cliente miriam armario 666777666 2000-12-21 440999333R armaricon@gmail.com
 
 
-
-
     @Override
     public void altaCliente(String nom, String ape, String telef, String fecha, String dn, String ema){
         comprobarCliente(nom, ape, telef, fecha, dn, ema);
-        String estado = clienteEstadoRepositorio.cargarEstadoDefault();
+        String estado = clienteEstadoRepositorio.cargarEstadoDefault("Cliente").getValor();
         int idC = clienteRepositorio.cargarCliente().stream().mapToInt(Cliente::getIdC).max().orElse(0) +1 ;
         if (idC == -1) idC = 1;
-        Cliente c = new Cliente(idC, nom, ape, telef, fecha, dn, ema, clienteEstadoRepositorio.cargarEstadoDefault());
+        Cliente c = new Cliente(idC, nom, ape, telef, fecha, dn, ema, estado);
         clienteRepositorio.guardarCliente(c);    }
 
     @Override
@@ -275,31 +276,31 @@ public class ClienteServicio implements iClienteServicio {
     @Override
     public void eliminarEstadoCliente(String estado)
     {
-        if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstadosCliente().stream().anyMatch(e -> e.equals(estado))) {
-            clienteEstadoRepositorio.eliminarEstadoCliente(estado);
+        if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstado("Cliente").stream().anyMatch(e -> e.equals(estado))) {
+            clienteEstadoRepositorio.eliminarEstado(new Estado("Cliente",estado));
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
         }
     }
 
     @Override
-    public void addEstadocliente(String estado) {
-        if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstadosCliente().stream().noneMatch(e -> e.equals(estado))) {
-            clienteEstadoRepositorio.guardarEstadoCliente(estado);
+    public String addEstadocliente(String estado) {
+        if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstado("Cliente").stream().noneMatch(e -> e.equals(estado))) {
+            clienteEstadoRepositorio.guardarEstado(new Estado("Cliente",estado));
+            return ("El estado se ha añadido correctamente");
         } else {
-            throw new IllegalArgumentException("El estado no es correcto");
+            return ("El estado no es correcto");
         }
     }
 
     @Override
     public  Collection<String> getListaEstadoclientes() {
-        return clienteEstadoRepositorio.cargarEstadosCliente();
+        return clienteEstadoRepositorio.cargarEstado("Cliente");
     }
     @Override
     public  Collection<Cliente> getListaClientes() {
         return clienteRepositorio.cargarCliente();
     }
-
     @Override
     public void guardarCliente(Cliente c) {
         clienteRepositorio.guardarCliente(c);

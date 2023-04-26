@@ -1,12 +1,14 @@
-package uca.springCli.UI;
+package uca.springCli.shell;
 
 import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Cliente;
 import uca.core.dominio.Reserva;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Print {
+public class PrintShell {
     static String imprimir(Cliente cli)
     {
         var idC = cli.getIdC();
@@ -34,9 +36,9 @@ public class Print {
                         + red+"║ DNI: %s%s%s\n"
                         + red+"║ Fecha de nacimiento: %s%s%s\n"
                         + red+"║ Reservas realizadas: %s%d%s\n",
-                "═".repeat(36+ String.valueOf(idC).length()),
+                "═".repeat(33+ String.valueOf(idC).length()),
                 idC,
-                "═".repeat(36 + String.valueOf(idC).length()),
+                "═".repeat(33 + String.valueOf(idC).length()),
                 reset, nombre, apellido, red,
                 reset, email, red,
                 reset, dni, red,
@@ -46,7 +48,7 @@ public class Print {
         if (multas > 0) {
             output += String.format("║ Multas: %s%d%s\n", green, multas, reset);
         }
-        output += String.format(red + "╚═%s═%s\n", "═".repeat(36 + String.valueOf(idC).length()), reset);
+        output += String.format(red + "╚═%s═%s\n", "═".repeat(33 + String.valueOf(idC).length()), reset);
 
         String finalOutput = "";
         for (int i = 0; i < output.lines().toList().size(); i++){
@@ -54,7 +56,7 @@ public class Print {
             if (i != 0 & i!= 2 & i!= output.lines().toList().size() - 1)
 
                 //add a " " until every line has the same length
-                for (int j = 0; j < 54 - output.lines().toList().get(i).length(); j++){
+                for (int j = 0; j < 51 - output.lines().toList().get(i).length(); j++){
                     finalOutput += " ";
                 }
             if (i == 0)
@@ -236,6 +238,50 @@ public class Print {
 
     }
 
+    //List can be only of Autocaravana or Reserva or Cliente
 
 
+    //List of Reserva or Autocaravana or Cliente ONLY ONE TYPE
+    static void imprimir(List<?> listObject)
+    {
+        //transform the listObject into a list of autocaravanas or reservas or clientes
+        if (!(listObject.get(0) instanceof Autocaravana) & !(listObject.get(0) instanceof Reserva) & !(listObject.get(0) instanceof Cliente))
+            throw new IllegalArgumentException("The list must be of Autocaravana, Reserva or Cliente");
+
+        List<String> print = new ArrayList<>();
+        int lineas = imprimir(listObject.get(0)).lines().toList().size();
+        for (int i = 0; i < lineas; i++) {
+            print.add("");
+        }
+        //get the three autocaravanas and print them one next to the other. Add a print line every three autocaravanas
+        for (int i = 0; i < listObject.size(); i++) {
+            for (int j=0; j< PrintShell.imprimir(listObject.get(i)).lines().toList().size(); j++) {
+                print.set(j,print.get(j)+PrintShell.imprimir(listObject.get(i)).lines().toList().get(j));
+            }
+            if ((i + 1) % 3 == 0) {
+                for (String s : print) {
+                    System.out.println(s);
+                    print.set(print.indexOf(s), "");
+                }
+            }
+        }
+        if (!print.get(0).equals("")) {
+            for (String s : print) {
+                System.out.println(s);
+                print.set(print.indexOf(s), "");
+            }
+        }
+    }
+
+    static String imprimir(Object object)
+    {
+        if (!(object instanceof Autocaravana) & !(object instanceof Reserva) & !(object instanceof Cliente))
+            throw new IllegalArgumentException("The object must be of Autocaravana, Reserva or Cliente");
+        if (object instanceof Autocaravana)
+            return imprimir((Autocaravana) object);
+        else if (object instanceof Reserva)
+            return imprimir((Reserva) object);
+        else
+            return imprimir((Cliente) object);
+    }
 }

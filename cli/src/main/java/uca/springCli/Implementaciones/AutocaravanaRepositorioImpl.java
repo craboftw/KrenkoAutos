@@ -3,8 +3,9 @@ package uca.springCli.Implementaciones;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.stereotype.Repository;
 import uca.core.dominio.Autocaravana;
-import uca.core.dao.AutocaravanaRepositorio;
+import uca.core.dao.iAutocaravanaRepositorio;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class AutocaravanaRepositorioImpl implements AutocaravanaRepositorio
+@Repository
+public class AutocaravanaRepositorioImpl implements iAutocaravanaRepositorio
 {
     private static final String AUTOCARAVANAS_FILE_PATH = "autocaravanas.json";
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -25,6 +27,10 @@ public class AutocaravanaRepositorioImpl implements AutocaravanaRepositorio
             File file = new File(AUTOCARAVANAS_FILE_PATH);
             if (file.exists())
             {
+                if (file.length() == 0)
+                {
+                    return Map.of();
+                }
                 return objectMapper.readValue(file, new TypeReference<List<Autocaravana>>() {}).stream().collect(Collectors.toMap(Autocaravana::getIdA, autocaravana -> autocaravana));
             }
         } catch (IOException e) {

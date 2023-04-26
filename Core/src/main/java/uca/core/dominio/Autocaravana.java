@@ -52,7 +52,7 @@ public class Autocaravana {
 
     public String toString() {
            return "ID: " + idA + " | Modelo: " + modelo + " | Precio por día: " + precioPorDia + " | Plazas: " + plazas + " | Matrícula: " + matricula + " | Kilometraje: " + kilometraje + " | Estado: " + estadoA + " | Veces reservada: " + vecesReservada;
-        }
+    }
 
 }
 

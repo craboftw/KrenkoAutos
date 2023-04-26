@@ -1,11 +1,13 @@
 package uca.core.servicio;
 
+import org.springframework.stereotype.Repository;
 import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Cliente;
 import uca.core.dominio.Reserva;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+
 
 public interface iReservaServicio {
     void altaReserva(int idA, int idC, String fechI, String fechF);
@@ -28,9 +30,9 @@ public interface iReservaServicio {
 
     void setPrecioTotal(int idR, float precioTotal);
 
-    void setAutocaravana(int idR, Autocaravana A);
+    void setAutocaravana(int idR, int idA);
 
-    void setCliente(int idR, Cliente C);
+    void setCliente(int idR, int idC);
 
     void setFechaIni(int idR, String fechaIni);
 

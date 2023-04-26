@@ -2,13 +2,12 @@ package uca.springCli.Implementaciones;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
-import uca.core.dominio.Autocaravana;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import uca.core.dominio.Cliente;
-import uca.core.dao.ClienteRepositorio;
+import uca.core.dao.iClienteRepositorio;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ClienteRepositorioImpl implements ClienteRepositorio {
+@Repository
+public class ClienteRepositorioImpl implements iClienteRepositorio {
     /*
     * Replicar el comportamiento de AutocaravanaRepositorioImpl
     * */
@@ -31,6 +31,10 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
             File file = new File(CLIENTES_FILE_PATH);
             if (file.exists())
             {
+                if (file.length() == 0)
+                {
+                    return Map.of();
+                }
                 return objectMapper.readValue(file, new TypeReference<List<Cliente>>() {}).stream().collect(Collectors.toMap(Cliente::getIdC, cliente -> cliente));
             }
         } catch (IOException e) {

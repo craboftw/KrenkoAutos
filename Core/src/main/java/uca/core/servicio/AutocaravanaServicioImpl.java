@@ -1,22 +1,25 @@
 package uca.core.servicio;
 
-import uca.core.dao.AutocaravanaEstadoRepositorio;
-import uca.core.dao.AutocaravanaRepositorio;
+import org.springframework.stereotype.Service;
+import uca.core.dao.iAutocaravanaRepositorio;
+import uca.core.dao.iEstadoRepositorio;
 import uca.core.dominio.Autocaravana;
+import uca.core.dominio.Estado;
 import uca.core.servicio.reglas.AutocaravanaReglas;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-public class AutocaravanaServicio implements iAutocaravanaServicio {
+@Service
+public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
 
-    private final AutocaravanaRepositorio autocaravanaRepositorio;
-    private final AutocaravanaEstadoRepositorio autocaravanaEstadoRepositorio;
+    private final iAutocaravanaRepositorio autocaravanaRepositorio;
+    private final iEstadoRepositorio autocaravanaEstadoRepositorio;
     private final AutocaravanaReglas autocaravanaReglas = new AutocaravanaReglas();
 
 
 
-    public AutocaravanaServicio(AutocaravanaRepositorio autocaravanaRepositorio, AutocaravanaEstadoRepositorio autocaravanaEstadoRepositorio) {
+    public AutocaravanaServicioImpl(iAutocaravanaRepositorio autocaravanaRepositorio, iEstadoRepositorio autocaravanaEstadoRepositorio) {
         this.autocaravanaRepositorio = autocaravanaRepositorio;
         this.autocaravanaEstadoRepositorio = autocaravanaEstadoRepositorio;
 
@@ -26,7 +29,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
     @Override
     public void altaAutocaravana(String mod, BigDecimal precio, int plaz, String matr, int kilometraj) {
         comprobarAutocaravana(mod, precio, plaz, matr, kilometraj);
-        String estado = autocaravanaEstadoRepositorio.cargarEstadoDefault();
+        String estado = autocaravanaEstadoRepositorio.cargarEstadoDefault("Autocaravana").getValor();
         int idA = autocaravanaRepositorio.cargarAutocaravana().stream().mapToInt(Autocaravana::getIdA).max().orElse(0) + 1;
         Autocaravana A = new Autocaravana(idA, mod, precio, plaz, matr, kilometraj, estado);
         autocaravanaRepositorio.guardarAutocaravana(A);
@@ -72,7 +75,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
 
     @Override
     public Collection<String> getListaEstadoAutocaravana() {
-        return autocaravanaEstadoRepositorio.cargarEstadosAutocaravana();
+        return autocaravanaEstadoRepositorio.cargarEstado("Autocaravana");
     }
 
     @Override
@@ -82,7 +85,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
 
     @Override
     public boolean comprobarEstadoAutocaravana(String estado) {
-        return autocaravanaEstadoRepositorio.cargarEstadosAutocaravana().contains(estado);
+        return autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado);
     }
 
 
@@ -144,7 +147,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
     public void setEstado(int idA, String estado) {
         if (estado.isEmpty())
             throw new IllegalArgumentException("El estado no puede estar vacio");
-        if (!autocaravanaEstadoRepositorio.cargarEstadosAutocaravana().contains(estado))
+        if (!autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado))
             throw new IllegalArgumentException("El estado no es correcto");
         var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
         autocaravanas.stream().filter(a -> a.getIdA() == idA).forEach(a -> a.setEstadoA(estado));
@@ -155,7 +158,7 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
     public void setEstado(String matricula, String estado) {
         if (estado.isEmpty())
             throw new IllegalArgumentException("El estado no puede estar vacio");
-        if (!autocaravanaEstadoRepositorio.cargarEstadosAutocaravana().contains(estado))
+        if (!autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado))
             throw new IllegalArgumentException("El estado no es correcto");
         var autocaravanas = autocaravanaRepositorio.cargarAutocaravana().stream().toList();
         autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setEstadoA(estado));
@@ -182,16 +185,21 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
 
     @Override
     public void eliminarAutocaravana(int idA) {
+        autocaravanaRepositorio.eliminarAutocaravana(idA);
+    }
+
+    @Override
+    public void eliminarAutocaravana(String matricula) {
         var autocaravanas = new ArrayList<>(autocaravanaRepositorio.cargarAutocaravana().stream().toList());
-        autocaravanas.removeIf(a -> a.getIdA() == idA);
+        autocaravanas.removeIf(a -> a.getMatricula().equals(matricula));
         autocaravanaRepositorio.guardarAutocaravana(autocaravanas);
     }
 
 
     @Override
     public void eliminarEstadoAutocaravana(String estado) {
-           if (!estado.isEmpty() & autocaravanaEstadoRepositorio.cargarEstadosAutocaravana().contains(estado)) {
-               autocaravanaEstadoRepositorio.eliminarEstadoAutocaravana(estado);
+           if (!estado.isEmpty() & autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado)) {
+               autocaravanaEstadoRepositorio.eliminarEstado(new Estado("Autocaravana", estado));
             } else {
                 throw new IllegalArgumentException("El estado no es correcto");
             }
@@ -199,8 +207,8 @@ public class AutocaravanaServicio implements iAutocaravanaServicio {
 
     @Override
     public void addEstadoAutocaravana(String estado) {
-        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.cargarEstadosAutocaravana().contains(estado)) {
-            autocaravanaEstadoRepositorio.guardarEstadoAutocaravana(estado);
+        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado)) {
+            autocaravanaEstadoRepositorio.guardarEstado(new Estado("Autocaravana", estado));
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
         }

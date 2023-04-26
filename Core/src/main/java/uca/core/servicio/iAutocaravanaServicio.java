@@ -43,6 +43,7 @@ public interface iAutocaravanaServicio {
     void setKilometraje(String matricula, int kilometraje);
 
     void eliminarAutocaravana(int idA);
+    void eliminarAutocaravana(String matricula);
 
     void eliminarEstadoAutocaravana(String estado);
 

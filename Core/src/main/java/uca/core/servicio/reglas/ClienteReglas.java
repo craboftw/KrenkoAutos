@@ -1,13 +1,13 @@
 package uca.core.servicio.reglas;
 
-import uca.core.dao.ClienteRepositorio;
+import uca.core.dao.iClienteRepositorio;
 import uca.core.dominio.Cliente;
 
 public class ClienteReglas {
-    public ClienteReglas(ClienteRepositorio clienteRepositorio) {
+    public ClienteReglas(iClienteRepositorio clienteRepositorio) {
         this.clienteRepositorio = clienteRepositorio;
     }
-    ClienteRepositorio clienteRepositorio = null;
+    iClienteRepositorio clienteRepositorio = null;
 
     public boolean comprobarDNI(String dn) {
         return true;

@@ -3,6 +3,7 @@ package uca.springCli;
 import org.springframework.boot.ResourceBanner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.shell.standard.commands.Clear;
@@ -18,10 +19,11 @@ import java.util.Map;
 import java.util.Vector;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"uca.core", "uca.springCli"})
 public class MySpringCliApplication {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		runAnimation();
+		//runAnimation();
 		SpringApplication app = new SpringApplication(MySpringCliApplication.class);
 		app.setBannerMode(Banner.Mode.OFF);
 		app.setLogStartupInfo(false);

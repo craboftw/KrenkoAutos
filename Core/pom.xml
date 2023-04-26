@@ -24,6 +24,12 @@
             <version>1.18.26</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>ST4</artifactId>
+            <version>4.3.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <name>Core</name>
 	<description>Nucleo de un sistema de reservas para coches.</description>

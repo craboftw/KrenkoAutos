@@ -8,24 +8,18 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-import uca.core.dao.ReservaRepositorio;
-import uca.core.dominio.Autocaravana;
-import uca.core.dominio.Cliente;
-import uca.core.dominio.Reserva;
+import uca.core.dao.iReservaRepositorio;
 import uca.core.servicio.iAutocaravanaServicio;
 import uca.core.servicio.iClienteServicio;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 public class ReservaReglas
 {
-    ReservaRepositorio reservaRepositorio;
+    iReservaRepositorio reservaRepositorio;
     iClienteServicio clienteServicio;
     iAutocaravanaServicio autocaravanaServicio;
     //Separar funciones en distintas clases por ambito
 
-    public ReservaReglas(ReservaRepositorio reservaRepositorio, iClienteServicio clienteServicio, iAutocaravanaServicio autocaravanaServicio){
+    public ReservaReglas(iReservaRepositorio reservaRepositorio, iClienteServicio clienteServicio, iAutocaravanaServicio autocaravanaServicio){
         this.reservaRepositorio = reservaRepositorio;
         this.clienteServicio = clienteServicio;
         this.autocaravanaServicio = autocaravanaServicio;

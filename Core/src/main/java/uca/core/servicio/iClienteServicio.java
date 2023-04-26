@@ -1,8 +1,10 @@
 package uca.core.servicio;
 
+import org.springframework.stereotype.Repository;
 import uca.core.dominio.Cliente;
 
 import java.util.Collection;
+
 
 public interface iClienteServicio {
     void altaCliente(String nom, String ape, String telef, String fecha, String dn, String ema);
@@ -45,7 +47,7 @@ public interface iClienteServicio {
 
     void eliminarEstadoCliente(String estado);
 
-    void addEstadocliente(String estado);
+    String addEstadocliente(String estado);
 
     Collection<String> getListaEstadoclientes();
 

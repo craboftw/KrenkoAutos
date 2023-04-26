@@ -1,25 +1,23 @@
-package uca.springCli.UI;
+package uca.springCli.shell;
 
 
 
-import uca.core.servicio.ClienteServicio;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import uca.core.servicio.iClienteServicio;
-import uca.core.servicio.reglas.ClienteReglas;
-import uca.springCli.Implementaciones.ClienteEstadoRepositorioImpl;
-import uca.springCli.Implementaciones.ClienteRepositorioImpl;
 
 
 @ShellComponent
 public class ClienteShell {
 
-   // @Autowired
-    private final iClienteServicio clienteServicio = new ClienteServicio (new ClienteRepositorioImpl(),new ClienteEstadoRepositorioImpl());
+    private final iClienteServicio clienteServicio;
 
-
+    @Autowired
+    public ClienteShell(iClienteServicio clienteServicio) {
+        this.clienteServicio = clienteServicio;
+    }
 
     @ShellMethod(key = "crear-cliente", value = "Crea un nuevo cliente")
     public String crearCliente(@ShellOption String nom, @ShellOption String ape, @ShellOption String tel, @ShellOption String fecha, @ShellOption String dni, @ShellOption String email) {
@@ -34,7 +32,9 @@ public class ClienteShell {
     @ShellMethod(key = "listar-clientes", value = "Lista todos los clientes")
     public void listarClientes() {
         //transform every uca.core.cliente to a uca.springCli.UI.cliente
-        clienteServicio.getListaClientes().forEach(cli -> System.out.println(Print.imprimir(cli)));
+    var listaclientes = clienteServicio.getListaClientes().stream().toList();
+    if(listaclientes.size()!=0)
+        PrintShell.imprimir(listaclientes);
     }
 
     @ShellMethod(key = "buscar-cliente", value = "Busca un cliente por un dato")

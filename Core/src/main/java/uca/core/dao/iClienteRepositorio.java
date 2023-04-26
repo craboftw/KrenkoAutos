@@ -5,7 +5,7 @@ import uca.core.dominio.Cliente;
 import java.util.Collection;
 
 
-public interface ClienteRepositorio {
+public interface iClienteRepositorio {
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Cliente‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     void guardarCliente(Collection<Cliente> clientes) ;

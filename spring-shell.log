@@ -20,3 +20,74 @@
 1682459091436:crear-autocaravana
 1682459118965:crear-autocaravana ferrari 1921DSS 1 9 19212
 1682459123659:listar-autocaravanas
+1682500633500:help
+1682500645217:crear-cliente
+1682501799556:listar-clientes
+1682501812925:crear-reserva 1 1 2024-04-04 2025-05-05
+1682501816661:listar-reservas
+1682501822649:mostrar-reserva 1
+1682502235493:listar-clientes
+1682503249810:listar-autocaravanas
+1682503376125:star-autocaravanas
+1682503381156:listar-autocaravanas
+1682504342665:crear-autocaravana
+1682504385395:crear-autocaravana tanque-sovietico 9999URS 90 1 0
+1682504408732:crear-autocaravana tanque-sovietico 9999VRS 90 1 0
+1682504413253:listar-autocaravanas
+1682504576995:eliminar-autocaravana
+1682504581854:borrar-autocaravana
+1682504585317:help
+1682504769013:listar-autocaravanas
+1682504772078:help
+1682504782157:borrar-autocaravana 4
+1682504786413:listar-autocaravanas
+1682504836712:mostrar-reserva 0
+1682504841606:mostrar-reserva 1
+1682504845578:listar-reservas
+1682505292481:listar-autocaravanas
+1682506651051:listar-clientes
+1682506656546:listar-autocaravanas
+1682506771182:listar-reservas
+1682506778257:crear-reserva
+1682506809393:crear-reserva 1 3 2023-05-05 2023-05-20
+1682506819829:crear-reserva 1 2 2023-05-05 2023-05-20
+1682506823683:listar-reservas
+1682506879349:listar-clientes
+1682506973506:mostrar-reserva 0
+1682506977288:mostrar-reserva 1
+1682506980623:listar-clientes
+1682507072076:crear-clientes
+1682507078144:crear-cliente
+1682507109008:crear-cliente sascha pistacha 6577474273 2001-10-03 29313238P sascha@esquizo.frenia
+1682507112684:listar-clientes
+1682507121564:mostrar-reserva 0
+1682507128335:mostrar-reserva 1
+1682507207876:listar-clientes
+1682507377794:mostra-reserva 1
+1682507386878:stacktrace 1
+1682507396577:mostrar-reserva 1
+1682507403077:listar-clientes
+1682507491615:mostrar-reserva 1
+1682507549592:listar-clientes
+1682507554009:mostrar-reserva 0
+1682507558008:mostrar-reserva 1
+1682507578787:listar-clientes
+1682507613478:mostrar-reserva 0
+1682507618014:mostrar-reserva 1
+1682507702710:listar-clientes
+1682507707794:listar-autocaravanas
+1682507739352:listar-reservas
+1682507824012:eliminar-reserva
+1682507829954:eliminar-reserva 1
+1682507834586:eliminar-reserva 2
+1682507839784:listar-reservas
+1682507875543:crear-reserva 1 1 2025-05-05 2026-06-06
+1682507878847:listar-reservas
+1682507982146:help
+1682519729827:listar-clientes
+1682520880876:listar-reservas
+1682520887894:listar-autocaravanas
+1682523767936:listar-clientes
+1682524067705:help
+1682524091596:listar-clientes
+1682524217442:help

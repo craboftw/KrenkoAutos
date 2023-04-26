@@ -1,22 +1,28 @@
-package uca.springCli.UI;
+package uca.springCli.shell;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import uca.core.dominio.Autocaravana;
 import uca.core.servicio.iAutocaravanaServicio;
-import uca.core.servicio.reglas.AutocaravanaReglas;
-import uca.core.servicio.AutocaravanaServicio;
-import uca.springCli.Implementaciones.AutocaravanaEstadoRepositorioImpl;
+import uca.core.servicio.AutocaravanaServicioImpl;
 import uca.springCli.Implementaciones.AutocaravanaRepositorioImpl;
+import uca.springCli.Implementaciones.EstadoRepositorio;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import static uca.springCli.shell.PrintShell.imprimir;
 
 @ShellComponent
 public class AutocaravanaShell {
   // Igual que ClienteUI pero con Autocaravana
+
+    @Autowired
     AutocaravanaShell() {
-        this.autocaravanaServicio = new AutocaravanaServicio(new AutocaravanaRepositorioImpl(), new AutocaravanaEstadoRepositorioImpl());
+        this.autocaravanaServicio = new AutocaravanaServicioImpl(new AutocaravanaRepositorioImpl(), new EstadoRepositorio());
     }
 
     private final iAutocaravanaServicio autocaravanaServicio;
@@ -33,7 +39,9 @@ public class AutocaravanaShell {
 
     @ShellMethod(key = "listar-autocaravanas", value = "Lista todas las autocaravanas")
     public void listarAutocaravanas() {
-        autocaravanaServicio.getListaAutocaravanas().forEach(autocaravana -> System.out.println(Print.imprimir(autocaravana)));
+        List<Autocaravana> autocaravanas = autocaravanaServicio.getListaAutocaravanas().stream().toList();
+        if (autocaravanas.size() != 0)
+        PrintShell.imprimir(autocaravanas);
     }
 
     @ShellMethod(key = "buscar-autocaravana", value = "Busca una autocaravana por un dato")
@@ -48,15 +56,19 @@ public class AutocaravanaShell {
     }
 
     @ShellMethod(key = "modificar-modelo", value = "Modifica el modelo de una autocaravana.")
-    public String modificarEmail(@ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato [matricula|idA]") String type,
-                                 @ShellOption(help = "Valor del dato") String dato,
-                                 @ShellOption(help = "Nuevo modelo") String modelo) {
+    public String modificarmodelo(@ShellOption(help = "Valor del dato") String dato,
+                                  @ShellOption(help = "Nuevo modelo") String modelo,
+                                  @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato [matricula|idA]") String type) {
         try {
-            if (type.equals("matricula")) {
+            if (type.equals("matricula"))
                 autocaravanaServicio.setModelo(dato, modelo);
-            } else if (type.equals("idA")) {
-                int idC = Integer.parseInt(dato);
-                autocaravanaServicio.setModelo(idC, modelo);
+            if (type.equals("idA")) {
+                try {
+                    int idC = Integer.parseInt(dato);
+                    autocaravanaServicio.setModelo(idC, modelo);
+                } catch (Exception e) {
+                    return "El id debe ser un número";
+                }
             } else {
                 return "Tipo de dato no válido";
             }
@@ -69,25 +81,23 @@ public class AutocaravanaShell {
     @ShellMethod(key = "modificar-precio", value = "Modifica el precio de una autocaravana.")
     public String modificarPrecio(          @ShellOption(help = "Dato identificador") String dato,
                                             @ShellOption(help = "Nuevo precio por dia", value = { "-m", "--modelo" }) BigDecimal precio,
-                                            @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+                                            @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
 
         try {
-            if (type.equals("matricula")) {
+            if (type.equals("matricula"))
                 autocaravanaServicio.setPrecio(dato, precio);
-            } else if (type.equals("idA")) {
+            if (type.equals("idA")) {
                 try {
                     int idC = Integer.parseInt(dato);
                     autocaravanaServicio.setPrecio(idC, precio);
                 } catch (Exception e) {
                     return "El id debe ser un número";
                 }
-            } else {
-                return "Tipo de dato no válido";
             }
+            return "Tipo de dato no válido";
         } catch (Exception e) {
             return e.getMessage();
         }
-        return "Precio modificado con éxito";
     }
 
     @ShellMethod(key = "modificar-plazas", value = "Modifica el número de plazas de una autocaravana.")
@@ -96,18 +106,19 @@ public class AutocaravanaShell {
                                             @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
 
         try {
-            if (type.equals("matricula")) {
+            if (type.equals("matricula"))
                 autocaravanaServicio.setPlazas(dato, plazas);
-            } else if (type.equals("idA")) {
-                try {
-                    int idC = Integer.parseInt(dato);
-                    autocaravanaServicio.setPlazas(idC, plazas);
-                } catch (Exception e) {
-                    return "El id debe ser un número";
+                if (type.equals("idA")) {
+                    try {
+                        int idC = Integer.parseInt(dato);
+                        autocaravanaServicio.setPlazas(idC, plazas);
+                    } catch (Exception e) {
+                        return "El id debe ser un número";
+                    }
+                } else {
+                    return "Tipo de dato no válido";
                 }
-            } else {
-                return "Tipo de dato no válido";
-            }
+
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -115,7 +126,7 @@ public class AutocaravanaShell {
     }
 
     @ShellMethod(key = "modificar-kilometraje", value = "Modifica el kilometraje de una autocaravana.")
-    public String modificarKilometraje(          @ShellOption(help = "Dato identificador") String dato,
+    public String modificarKilometraje(     @ShellOption(help = "Dato identificador") String dato,
                                             @ShellOption(help = "Nuevo kilometraje", value = { "-m", "--modelo" }) int kilometraje,
                                             @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
 
@@ -160,6 +171,29 @@ public class AutocaravanaShell {
             return e.getMessage();
         }
         return "Estado modificado con éxito";
+    }
+
+    //borrar autocaravana
+    @ShellMethod(key = "borrar-autocaravana", value = "Borra una autocaravana")
+    public String borrarAutocaravana(@ShellOption(help = "Dato identificador") String dato,
+                                     @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+        try {
+            if (type.equals("matricula")) {
+                autocaravanaServicio.eliminarAutocaravana(dato);
+            } else if (type.equals("idA")) {
+                try {
+                    int idC = Integer.parseInt(dato);
+                    autocaravanaServicio.eliminarAutocaravana(idC);
+                } catch (Exception e) {
+                    return "El id debe ser un número";
+                }
+            } else {
+                return "Tipo de dato no válido";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Autocaravana borrada con éxito";
     }
 
     

@@ -1,9 +1,11 @@
 package uca.core.servicio;
 
-import uca.core.dao.ReservaEstadoRepositorio;
-import uca.core.dao.ReservaRepositorio;
+import org.springframework.stereotype.Service;
+import uca.core.dao.iReservaRepositorio;
+import uca.core.dao.iEstadoRepositorio;
 import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Cliente;
+import uca.core.dominio.Estado;
 import uca.core.dominio.Reserva;
 import uca.core.servicio.reglas.ReservaReglas;
 
@@ -11,15 +13,15 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
-
-public class ReservaServicio implements iReservaServicio {
+@Service
+public class ReservaServicioImpl implements iReservaServicio {
     private final ReservaReglas reservaReglas;
-    private final ReservaRepositorio reservaRepositorio;
-    private final ReservaEstadoRepositorio reservaEstadoRepositorio;
-    private final AutocaravanaServicio autocaravanaServicio;
-    private final ClienteServicio clienteServicio;
+    private final iReservaRepositorio reservaRepositorio;
+    private final iEstadoRepositorio reservaEstadoRepositorio;
+    private final AutocaravanaServicioImpl autocaravanaServicio;
+    private final ClienteServicioImpl clienteServicio;
 
-    public ReservaServicio(ReservaRepositorio reservaRepositorio, ReservaEstadoRepositorio reservaEstadoRepositorio, AutocaravanaServicio autocaravanaServicio, ClienteServicio clienteServicio) {
+    public ReservaServicioImpl(iReservaRepositorio reservaRepositorio, iEstadoRepositorio reservaEstadoRepositorio, AutocaravanaServicioImpl autocaravanaServicio, ClienteServicioImpl clienteServicio) {
         this.reservaReglas = new ReservaReglas(reservaRepositorio,clienteServicio,autocaravanaServicio);
         this.reservaRepositorio = reservaRepositorio;
         this.reservaEstadoRepositorio = reservaEstadoRepositorio;
@@ -216,13 +218,15 @@ public class ReservaServicio implements iReservaServicio {
     }
 
     @Override
-    public void setAutocaravana(int idR, Autocaravana A) {
+    public void setAutocaravana(int idR, int idA) {
         Reserva R = reservaRepositorio.buscarReserva(idR);
         if (R == null)
             throw new IllegalArgumentException("Error no se encontro la reserva");
-        if (reservaRepositorio.cargarReserva().contains(A))
+        if (reservaRepositorio.buscarReserva(idA) == null)
             throw new IllegalArgumentException("La autocaravana no existe");
-        if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),A, clienteServicio.buscarCliente(R.getIdCliente())))
+        Autocaravana A = autocaravanaServicio.buscarAutocaravana(idA);
+        Cliente C = clienteServicio.buscarCliente(R.getIdCliente());
+        if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),A, C))
             throw new IllegalArgumentException("La autocaravana no puede reservarse");
         R.setIdAutocaravana(A.getIdA());
         reservaRepositorio.guardarReserva(R);
@@ -230,13 +234,13 @@ public class ReservaServicio implements iReservaServicio {
     }
 
     @Override
-    public void setCliente(int idR, Cliente C) {
+    public void setCliente(int idR, int idC) {
         Reserva R = reservaRepositorio.buscarReserva(idR);
         if (R == null)
             throw new IllegalArgumentException("Error no se encontro la reserva");
-
-        if (reservaRepositorio.cargarReserva().contains(C))
+        if (reservaRepositorio.buscarReserva(idC) == null)
             throw new IllegalArgumentException("El cliente no existe");
+        Cliente C = clienteServicio.buscarCliente(idC);
         if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),autocaravanaServicio.buscarAutocaravana(idR), C))
             throw new IllegalArgumentException("El cliente no puede reservar la autocaravana");
         R.setIdCliente(C.getIdC());
@@ -362,4 +366,23 @@ public class ReservaServicio implements iReservaServicio {
     public Collection<Reserva> getListaReservas() {
         return reservaRepositorio.cargarReserva();
     }
+
+    public String crearEstado(String estado)
+    {
+        if(reservaEstadoRepositorio.cargarEstado("Reserva").contains(estado)) return "Ya existe el estado en la lista de estados de reserva";
+        reservaEstadoRepositorio.guardarEstado(new Estado("Reserva",estado));
+        return "Estado creado correctamente";
+    }
+
+    public String eliminarEstado(String estado)
+    {
+        if(reservaEstadoRepositorio.cargarEstado("Reserva").contains(estado)) return "No existe el estado en la lista de estados de reserva";
+        reservaEstadoRepositorio.eliminarEstado(new Estado("Reserva",estado));
+        return "Estado eliminado correctamente";
+    }
+
+
 }
+
+
+

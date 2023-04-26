@@ -9,26 +9,27 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
-import uca.core.dominio.Autocaravana;
-import uca.core.dominio.Cliente;
+import org.springframework.stereotype.Repository;
 import uca.core.dominio.Reserva;
-import uca.core.dao.ReservaRepositorio;
+import uca.core.dao.iReservaRepositorio;
 
-
-public class ReservaRepositorioImpl implements ReservaRepositorio {
+@Repository
+public class ReservaRepositorioImpl implements iReservaRepositorio {
 
     String RESERVAS_FILE_PATH = "reservas.json";
     ObjectMapper objectMapper = new ObjectMapper();
     Map<Integer,Reserva> reservas = cargaInicial();
 
-    private Map<Integer,Reserva> cargaInicial(){
+    private Map<Integer,Reserva> cargaInicial() {
         try {
             File file = new File(RESERVAS_FILE_PATH);
             if (file.exists())
             {
+                if (file.length() == 0)
+                {
+                    return Map.of();
+                }
                 return objectMapper.readValue(file, new TypeReference<List<Reserva>>() {}).stream().collect(Collectors.toMap(Reserva::getIdR, reserva -> reserva));
             }
         } catch (IOException e) {
@@ -36,6 +37,7 @@ public class ReservaRepositorioImpl implements ReservaRepositorio {
         }
         return Map.of();
     }
+
 
     @Override
     public void guardarReserva(Collection<Reserva> caravanas) {

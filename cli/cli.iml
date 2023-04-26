@@ -34,8 +34,6 @@
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-messaging:6.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.jline:jline:3.21.0" level="project" />
-    <orderEntry type="library" name="Maven: org.antlr:ST4:4.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.shell:spring-shell-standard-commands:3.0.1" level="project" />
@@ -79,5 +77,7 @@
     <orderEntry type="module" module-name="core" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:6.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.26" level="project" />
+    <orderEntry type="library" name="Maven: org.antlr:ST4:4.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
   </component>
 </module>
