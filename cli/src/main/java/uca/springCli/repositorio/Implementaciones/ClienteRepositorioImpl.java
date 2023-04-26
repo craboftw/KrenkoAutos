@@ -63,6 +63,14 @@ public class ClienteRepositorioImpl implements iClienteRepositorio {
     public Collection<Cliente> cargarCliente() {return clientes.values();}
 
     @Override
+    public Cliente buscarCliente(int idC) {
+        if (clientes.values().stream().anyMatch(cliente -> cliente.getIdC() == idC)) {
+            return clientes.values().stream().filter(cliente -> cliente.getIdC() == idC).findFirst().get();
+        }
+        throw new IllegalArgumentException("No existe cliente con idC: " + idC);
+    }
+
+    @Override
     public Collection<Cliente> buscarCliente(String tipo, String dato) {
         if (!clientes.isEmpty()) {
          switch (tipo) {
