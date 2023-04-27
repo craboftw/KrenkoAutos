@@ -1,46 +1,4 @@
-```
-█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-████████████    █████   ███████           ████████         ████████           ████████    ████    ███████         ███
-███████████      ███     █████             █████ *          ██████             ██████     ████    █████ *           █
-███████████*    ████*  *█████      ██      ████    *██      ██████*    ██*     █████      ███     ████    *██       █
-██████████     ████     █████     ████   *████      ███     █████     ███     ██████     ████   *█████*    ███     ██
-██████████     ████   *█████     ████     ████*    ████   *█████      ███    ██████     ████     ████     ███      ██
-█████████*   *████     ████      ████   *████     ██████████████*    ███     █████      ███    *████    *████*    ███
-████████      ███     █████*   *████*   █████     █████████████    *███     ██████    *███ *  *█████     ███     ████
-████████*   *██ *  * █████      ██     █████    *██████████████     ███*    █████      █      █████     ████     ████
-███████        *  ████████      *    ██████     ██████████████     ███     ██████*     * *  ██████     ████     █████
-██████          █████████          ████████*       *█████████     ████*    █████          ████████*    ███     ██████
-██████*          *██████     **      █████     **** █████████     ███     █████     **      █████     ████     ██████
-█████      ██     ██████     ███     █████     █████████████     ███     ██████*   *███     ████      ███    *███████
-█████     ███     █████      ███     ████     ██████████████     ███     █████     ████     ████     ████     ███████
-████    *████     █████     ███     ████    *██████████████*    ███     ██████     ███    *████    *████     ████████
-███      ███     █████    *███     █████*    ███     █████    *████     █████     ███     █████     ███     █████████
-███*    ███     █████      ███     ████     ███     ██████*    ███     █████      ███     ████      ███     █████████
-██    *████*    █████*    ████   *████      ███*    █████     ███     ██████*    ████   *████       ██     ██████████
-█      ███     █████    *████     ████             ██████    ████     █████    *████*    ████             ███████████
-█  ** ████ *   █████ **  ████    █████ ** ******* ██████   * ████*** ██████ **  ████ ** ██████  ***** *  ████████████
-█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-████████████           ██████ ** ████     ███ *   ******* █████   * ****  ████████     ***** ████████████████████████
-███████████            █████     ████    ████        *    ████    *        ██████            ████████████████████████
-██████████     ███    *█████   *████     ███████    *████████     ███      █████     ███*    ████████████████████████
-██████████     ███     ████     ███     ███████      ████████*    ███    *█████     ████    █████████████████████████
-█████████     ████   *████    *████*    ███████     ████████     ███      █████*   ████     █████████████████████████
-█████████    ████     ████*   ████     ███████     ████████     ████     █████    █████  ████████████████████████████
-████████     ███    *████     ███     ████████     ████████*    ███    *██████    ███████████████████████████████████
-███████    *████*   █████     ███     ███████     ████████     ████     █████    ████████████████████████████████████
-███████             ████     ███     ████████     ███████     ████     █████           ██████████████████████████████
-██████             ████    *████*    ███████     ████████*    ███     ██████            █████████████████████████████
-█████         *    ████     ███     ███████     ████████    *████     █████████████    *█████████████████████████████
-█████     ███     ████     ███    *████████*    ███████     ████    *██████████████     █████████████████████████████
-████    *████*   █████     ███     ███████     ████████     ████     ██████████████*   ██████████████████████████████
-████     ███     ████     ███    *███████      ███████     ████     █████    █████    ███████████████████████████████
-███     ████   *████    *████    ████████     ████████     ███     █████     █████    ███████████████████████████████
-██    *████     ████     ███     ███████    *████████      ███*    ████      ████    ████████████████████████████████
-██*    ███     ████      ██    *████████*    ████████      ██     █████*     ███    █████████████████████████████████
-█     ████*    ████      * *    ███████     █████████*           ██████*      *   * █████████████████████████████████
-██   █████    ██████           ████████    ███████████         █████████          ███████████████████████████████████
-█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-```
+![LogoEpico](logo.png)
 
 # HITO 0
 ### El equipo está compuesto por Francisco López y Miriam Armario.
@@ -455,4 +413,18 @@ En el diseño inicial del proyecto, como solo sabíamos C++ pensamos un diseño 
 
 Al consultar con el profesor se llegó a la conclusión de que se debía utilizar el patrón de diseño **Strategy**  para lograr un mejor diseño.
 
-En el nuevo diseño, se eliminó la lista de funciones para implementar reglas de negocio y se agregaron varias interfaces **ReglasReserva**, **ReglasAutocaravana**, **ReglasCliente** las cuales utiliza el **Patrón Strategy** para definir diferentes estrategias de negocio. Por consejo del profesor, también implemtamos unas interfaces para seguir el **Patrón Respository**. Se agregaron las clases **ServicioReserva**, **ServicioAutocaravana** y **ServicioCliente** que implementan las interfaces y definen los métodos. Estas tres últimas clases, son las que el Cliente tendría que implementar para definir las reglas de trabajo y el cómo se almacenan. 
+En el nuevo diseño, se eliminó la lista de funciones para implementar reglas de negocio y se agregaron varias interfaces **ReglasReserva**, **ReglasAutocaravana**, **ReglasCliente** las cuales utiliza el **Patrón Strategy** para definir diferentes estrategias de negocio. Por consejo del profesor, también implemtamos unas interfaces para seguir el **Patrón Respository**. Se agregaron las clases **ServicioReserva**, **ServicioAutocaravana** y **ServicioCliente** que implementan las interfaces y definen los métodos. Estas tres últimas clases, son las que el Cliente tendría que implementar para definir las reglas de trabajo y el cómo se almacenan.
+
+
+# HITO 2
+Para el Hito 2 hemos empezado por corregir errores señalados y encontrados del HITO 1. Hemos decidido usar PlantUML porque aparte de representar los paquetes y clases, también nos permite representar los diagramas de secuencia. Hemos creado un diagrama de clases para el core y otro para la aplicación shell. También hemos creado un diagrama de secuencia para un método ejemplo del shell, en este caso el método mostrarReserva().
+A continuación una vista de los diagramas adjuntados para ver los cambios de organización
+
+![MCDcore](coreMCD.png)
+![SDcore](ClienteServicioImpl_altaClienteSD.png)
+
+### CLI
+A continuación se muestra el diagrama de clases de la aplicación shell que se ha creado para probar el HITO 2.
+
+![MCDshell](cliMCD.png)
+![SDshell](ReservaShell_mostrarReservaSD.png)
