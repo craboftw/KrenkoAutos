@@ -44,7 +44,7 @@ public class Reserva {
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 //
 //⠀  ⠀   (\__/)
-//       (•ㅅ•)      Aqui antes hubo una lista
+//       (•ㅅ•)      Aqui antes hubo una lista y muchas cosas mas
 //     ＿ノヽ ノ＼＿      ahora solo el y yo.
 //` /　`/ ⌒Ｙ⌒ Ｙ  ヽ     Siga circulando
 //  ( 　(三ヽ人　 /　  |

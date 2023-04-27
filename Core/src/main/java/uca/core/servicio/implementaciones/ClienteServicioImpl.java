@@ -22,7 +22,7 @@ public class ClienteServicioImpl implements iClienteServicio {
 
     private iClienteRepositorio clienteRepositorio;
 
-    private iEstadoRepositorio clienteEstadoRepositorio;
+    private final iEstadoRepositorio clienteEstadoRepositorio;
     private final ClienteReglas clienteReglas = new ClienteReglas(clienteRepositorio);
 
     @Autowired

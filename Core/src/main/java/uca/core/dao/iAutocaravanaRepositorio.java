@@ -6,7 +6,6 @@ import java.util.Collection;
 
 public interface iAutocaravanaRepositorio {
 
-    // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Autocaravana‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     void guardarAutocaravana(Collection<Autocaravana> caravanas) ;
     void guardarAutocaravana(Autocaravana caravana) ;
     Collection<Autocaravana> cargarAutocaravana() ;

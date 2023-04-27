@@ -1,0 +1,117 @@
+@startuml
+class uca.springCli.shell.PrintShell {
+~ {static} String imprimir(Cliente)
+~ {static} String imprimir(Reserva,Autocaravana,Cliente)
+~ {static} String imprimir(Reserva)
+~ {static} String imprimir(Autocaravana)
+~ {static} void imprimir(List<?>)
+~ {static} String imprimir(Object)
+}
+class uca.springCli.repositorio.Implementaciones.AutocaravanaRepositorioImpl {
+- {static} String AUTOCARAVANAS_FILE_PATH
+- ObjectMapper objectMapper
+- Map<Integer,Autocaravana> autocaravanas
+- Map<Integer,Autocaravana> cargaInicial()
++ void guardarAutocaravana(Collection<Autocaravana>)
++ void guardarAutocaravana(Autocaravana)
++ Collection<Autocaravana> cargarAutocaravana()
++ Autocaravana buscarAutocaravana(int)
++ Collection<Autocaravana> buscarAutocaravana(String,String)
++ void eliminarAutocaravana(String)
++ void eliminarAutocaravana(int)
+}
+class uca.springCli.shell.ReservaShell {
+- iClienteServicio clienteServicio
+- iAutocaravanaServicio autocaravanaServicio
+- iReservaServicio reservaServicio
++ String crearReserva(int,int,String,String)
++ String checkin(int)
++ String checkout(int)
++ void listarReservas()
++ void mostrarReserva(int)
++ String modificarCliente(int,int)
++ String modificarAutocaravana(int,int)
++ String modificarFechaInicio(int,String)
++ String modificarFechaFin(int,String)
++ String modificarPrecio(int,String)
++ String eliminarReserva(int)
++ void listarReservasCliente(int)
++ void listarReservasAutocaravana(int)
++ String crearEstadoReserva(String)
++ String eliminarEstadoReserva(String)
+}
+class uca.springCli.shell.AutocaravanaShell {
+- iAutocaravanaServicio autocaravanaServicio
++ String crearAutocaravana(String,String,BigDecimal,int,int)
++ void listarAutocaravanas()
++ void buscarAutocaravana(String,String)
++ String modificarmodelo(String,String,String)
++ String modificarPrecio(String,BigDecimal,String)
++ String modificarPlazas(String,int,String)
++ String modificarKilometraje(String,int,String)
++ String modificarEstado(String,String,String)
++ String borrarAutocaravana(String,String)
++ String crearEstadoautocaravana(String)
++ String eliminarEstadoautocaravana(String)
+}
+class uca.springCli.MySpringCliApplication {
++ {static} void main(String[])
++ {static} void runAnimation()
+}
+class uca.springCli.shell.ClienteShell {
+- iClienteServicio clienteServicio
++ String crearCliente(String,String,String,String,String,String)
++ void listarClientes()
++ void buscarCliente(String,String)
++ String modificarEmail(String,String,String)
++ String modificarTelefono(String,String,String)
++ String modificarNombre(String,String,String)
++ String modificarapellido(String,String,String)
++ String modificarfecha(String,String,String)
++ String borrarcliente(String,String)
++ String crearEstadocliente(String)
++ String eliminarEstadocliente(String)
+}
+class uca.springCli.repositorio.Implementaciones.EstadoRepositorio {
+~ ObjectMapper objectMapper
+- {static} String ESTADOS_FILE_PATH
+~ MultiMap<String,Estado> estados
+- MultiMap<String,Estado> cargaInicial()
++ void guardarEstado(Estado)
++ void guardarEstado(List<Estado>)
++ void eliminarEstado(Estado)
++ Estado cargarEstadoDefault(String)
++ List<String> cargarEstado(String)
+}
+class uca.springCli.repositorio.Implementaciones.ReservaRepositorioImpl {
+~ String RESERVAS_FILE_PATH
+~ ObjectMapper objectMapper
+~ Map<Integer,Reserva> reservas
+- Map<Integer,Reserva> cargaInicial()
++ void guardarReserva(Collection<Reserva>)
++ void guardarReserva(Reserva)
++ Collection<Reserva> cargarReserva()
++ Collection<Reserva> buscarReserva(String,String)
++ Reserva buscarReserva(int)
++ void eliminarReserva(int)
+}
+class uca.springCli.repositorio.Implementaciones.ClienteRepositorioImpl {
+- {static} String CLIENTES_FILE_PATH
+- ObjectMapper objectMapper
+- Map<Integer,Cliente> clientes
+- Map<Integer,Cliente> cargaInicial()
++ void guardarCliente(Collection<Cliente>)
++ void guardarCliente(Cliente)
++ Collection<Cliente> cargarCliente()
++ Cliente buscarCliente(int)
++ Collection<Cliente> buscarCliente(String,String)
++ void eliminarCliente(String)
++ void eliminarCliente(int)
+}
+
+
+uca.core.dao.iAutocaravanaRepositorio <|.. uca.springCli.repositorio.Implementaciones.AutocaravanaRepositorioImpl
+uca.core.dao.iEstadoRepositorio <|.. uca.springCli.repositorio.Implementaciones.EstadoRepositorio
+uca.core.dao.iReservaRepositorio <|.. uca.springCli.repositorio.Implementaciones.ReservaRepositorioImpl
+uca.core.dao.iClienteRepositorio <|.. uca.springCli.repositorio.Implementaciones.ClienteRepositorioImpl
+@enduml

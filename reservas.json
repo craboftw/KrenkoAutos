@@ -1,1 +1,1 @@
-[{"idR":1,"idCliente":1,"idAutocaravana":1,"fechaIni":"2025-05-05","fechaFin":"2026-06-06","estadoR":"Pendiente","precioTotal":0,"pagado":0}]
+[{"idR":2,"idCliente":2,"idAutocaravana":1,"fechaIni":"2023-04-28","fechaFin":"2023-04-29","estadoR":"Pendiente","precioTotal":1,"pagado":0},{"idR":3,"idCliente":3,"idAutocaravana":2,"fechaIni":"2025-05-25","fechaFin":"2026-06-06","estadoR":"Pendiente","precioTotal":21154,"pagado":0},{"idR":6,"idCliente":3,"idAutocaravana":2,"fechaIni":"2025-05-25","fechaFin":"2026-06-06","estadoR":"Pendiente","precioTotal":38567.1,"pagado":0}]

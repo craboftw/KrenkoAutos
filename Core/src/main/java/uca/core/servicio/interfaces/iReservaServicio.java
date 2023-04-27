@@ -45,6 +45,6 @@ public interface iReservaServicio {
     void modificarReserva(int idR, int idA, String fechI, String fechF);
 
     Collection<Reserva> getListaReservas();
-    public String crearEstado(String estado);
-    public String eliminarEstado(String estado);
+    String crearEstado(String estado);
+    String eliminarEstado(String estado);
 }

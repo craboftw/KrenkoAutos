@@ -6,7 +6,6 @@ import java.util.Collection;
 
 public interface iReservaRepositorio {
 
-    // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Reserva‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     void guardarReserva(Collection<Reserva> caravanas) ;
     void guardarReserva(Reserva caravana) ;
     Collection<Reserva> cargarReserva() ;

@@ -1,0 +1,61 @@
+sequenceDiagram
+actor User
+User ->> ClienteServicioImpl : altaCliente
+activate ClienteServicioImpl
+ClienteServicioImpl ->> ClienteServicioImpl : comprobarCliente
+activate ClienteServicioImpl
+ClienteServicioImpl ->> ClienteReglas : comprobarEdad
+activate ClienteReglas
+ClienteReglas -->> ClienteServicioImpl : #32; 
+deactivate ClienteReglas
+ClienteServicioImpl ->> iClienteRepositorio : cargarCliente
+activate iClienteRepositorio
+iClienteRepositorio -->> ClienteServicioImpl : #32; 
+deactivate iClienteRepositorio
+ClienteServicioImpl ->> iClienteRepositorio : cargarCliente
+activate iClienteRepositorio
+iClienteRepositorio -->> ClienteServicioImpl : #32; 
+deactivate iClienteRepositorio
+ClienteServicioImpl ->> ClienteServicioImpl : () -&gt;
+activate ClienteServicioImpl
+ClienteServicioImpl -->> ClienteServicioImpl : #32; 
+deactivate ClienteServicioImpl
+ClienteServicioImpl ->> iClienteRepositorio : cargarCliente
+activate iClienteRepositorio
+iClienteRepositorio -->> ClienteServicioImpl : #32; 
+deactivate iClienteRepositorio
+ClienteServicioImpl ->> ClienteServicioImpl : () -&gt;
+activate ClienteServicioImpl
+ClienteServicioImpl -->> ClienteServicioImpl : #32; 
+deactivate ClienteServicioImpl
+ClienteServicioImpl ->> iClienteRepositorio : cargarCliente
+activate iClienteRepositorio
+iClienteRepositorio -->> ClienteServicioImpl : #32; 
+deactivate iClienteRepositorio
+ClienteServicioImpl ->> ClienteServicioImpl : () -&gt;
+activate ClienteServicioImpl
+ClienteServicioImpl -->> ClienteServicioImpl : #32; 
+deactivate ClienteServicioImpl
+ClienteServicioImpl ->> ClienteReglas : comprobarDNI
+activate ClienteReglas
+ClienteReglas -->> ClienteServicioImpl : #32; 
+deactivate ClienteReglas
+ClienteServicioImpl -->> ClienteServicioImpl : #32; 
+deactivate ClienteServicioImpl
+ClienteServicioImpl ->> iEstadoRepositorio : cargarEstadoDefault
+activate iEstadoRepositorio
+iEstadoRepositorio -->> ClienteServicioImpl : #32; 
+deactivate iEstadoRepositorio
+ClienteServicioImpl ->> iClienteRepositorio : cargarCliente
+activate iClienteRepositorio
+iClienteRepositorio -->> ClienteServicioImpl : #32; 
+deactivate iClienteRepositorio
+ClienteServicioImpl ->> Cliente : new
+activate Cliente
+Cliente -->> ClienteServicioImpl : #32; 
+deactivate Cliente
+ClienteServicioImpl ->> iClienteRepositorio : guardarCliente
+activate iClienteRepositorio
+iClienteRepositorio -->> ClienteServicioImpl : #32; 
+deactivate iClienteRepositorio
+deactivate ClienteServicioImpl

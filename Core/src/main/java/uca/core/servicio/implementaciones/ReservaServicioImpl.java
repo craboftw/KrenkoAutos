@@ -76,7 +76,7 @@ public class ReservaServicioImpl implements iReservaServicio {
               throw new IllegalArgumentException("La reserva ya existe");
             }
         int idR = reservaRepositorio.cargarReserva().stream().mapToInt(Reserva::getIdR).max().orElse(0) +1 ;
-        Reserva reserva = new Reserva(idR, fechI, fechF,BigDecimal.ZERO, BigDecimal.ZERO, A.getIdA(), C.getIdC(), "Pendiente");
+        Reserva reserva = new Reserva(idR, fechI, fechF,reservaReglas.calculaPrecioTotal(A,C,fechaIni,fechaFin), BigDecimal.ZERO, A.getIdA(), C.getIdC(), "Pendiente");
         reservaRepositorio.guardarReserva(reserva);
     }
 
@@ -109,9 +109,9 @@ public class ReservaServicioImpl implements iReservaServicio {
                         reservaRepositorio.guardarReserva(R);
                         String mensaje = "La reserva ha sido cancelada por haber finalizado antes de la fecha prevista.";
                         if (R.getPrecioTotal().compareTo( R.getPagado()) < 0)
-                            mensaje += "Queda pendiente de pagar " + (R.getPrecioTotal().subtract(R.getPagado())).toString() + "€";
+                            mensaje += "Queda pendiente de pagar " + (R.getPrecioTotal().subtract(R.getPagado())) + "€";
                         if (R.getPrecioTotal().compareTo( R.getPagado()) > 0)
-                            mensaje += "Se le devuelve " + (R.getPagado().subtract(R.getPrecioTotal())).toString() + "€";
+                            mensaje += "Se le devuelve " + (R.getPagado().subtract(R.getPrecioTotal())) + "€";
                         return mensaje;
                     } else
                         return ("La reserva no ha acabado");
