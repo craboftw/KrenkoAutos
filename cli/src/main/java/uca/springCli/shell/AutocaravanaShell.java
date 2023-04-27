@@ -80,7 +80,7 @@ public class AutocaravanaShell {
 
     @ShellMethod(key = "modificar-precio", value = "Modifica el precio de una autocaravana.")
     public String modificarPrecio(          @ShellOption(help = "Dato identificador") String dato,
-                                            @ShellOption(help = "Nuevo precio por dia", value = { "-m", "--modelo" }) BigDecimal precio,
+                                            @ShellOption(help = "Nuevo precio por dia") BigDecimal precio,
                                             @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
 
         try {
@@ -102,8 +102,8 @@ public class AutocaravanaShell {
 
     @ShellMethod(key = "modificar-plazas", value = "Modifica el número de plazas de una autocaravana.")
     public String modificarPlazas(          @ShellOption(help = "Dato identificador") String dato,
-                                            @ShellOption(help = "Nuevo número de plazas", value = { "-m", "--modelo" }) int plazas,
-                                            @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+                                            @ShellOption(help = "Nuevo número de plazas") int plazas,
+                                            @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
 
         try {
             if (type.equals("matricula"))
@@ -127,8 +127,8 @@ public class AutocaravanaShell {
 
     @ShellMethod(key = "modificar-kilometraje", value = "Modifica el kilometraje de una autocaravana.")
     public String modificarKilometraje(     @ShellOption(help = "Dato identificador") String dato,
-                                            @ShellOption(help = "Nuevo kilometraje", value = { "-m", "--modelo" }) int kilometraje,
-                                            @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+                                            @ShellOption(help = "Nuevo kilometraje") int kilometraje,
+                                            @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
 
         try {
             if (type.equals("matricula")) {
@@ -151,8 +151,8 @@ public class AutocaravanaShell {
 
     @ShellMethod(key = "modificar-estado", value = "Modifica el estado de una autocaravana.")
     public String modificarEstado(          @ShellOption(help = "Dato identificador") String dato,
-                                            @ShellOption(help = "Nuevo estado", value = { "-m", "--modelo" }) String estado,
-                                            @ShellOption(defaultValue = "matricula", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
+                                            @ShellOption(help = "Nuevo estado") String estado,
+                                            @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
 
         try {
             if (type.equals("matricula")) {

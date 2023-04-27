@@ -1,15 +1,15 @@
-import Uca.Core.Autocaravana;
-import Uca.Core.Cliente;
-import Uca.Core.Reserva;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import uca.core.dominio.Autocaravana;
+import uca.core.dominio.Cliente;
+import uca.core.dominio.Reserva;
 
+
+import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/*
 public class AutocaravanaTest {
 
     @BeforeEach
@@ -221,4 +221,4 @@ public class AutocaravanaTest {
 }
 
 
-     */
+

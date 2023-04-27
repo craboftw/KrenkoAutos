@@ -39,7 +39,7 @@ public class ClienteShell {
 
     @ShellMethod(key = "buscar-cliente", value = "Busca un cliente por un dato")
     public void buscarCliente(@ShellOption(help = "Valor del identificador") String identificador,
-                              @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de identificador [dni|idC|edad|nombre]") String type) {
+                              @ShellOption(defaultValue = "idC", value = "-t", help = "Tipo de identificador [dni|idC|edad|nombre]") String type) {
 
         var cliente = clienteServicio.buscarCliente(type, identificador);
         if (!cliente.isEmpty()) {
@@ -54,7 +54,7 @@ public class ClienteShell {
     public String modificarEmail(
             @ShellOption(help = "Valor del identificador") String identificador,
             @ShellOption(help = "Nuevo email", value = { "-e", "--email" }) String email,
-            @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de identificador [dni|idC]") String type) {
+            @ShellOption(defaultValue = "idC", value = "-t", help = "Tipo de identificador [dni|idC]") String type) {
         try {
             if (type.equals("dni")) {
                 clienteServicio.setEmail(identificador, email);
@@ -77,7 +77,7 @@ public class ClienteShell {
     @ShellMethod(key = "modificar-telefono", value = "Modifica el teléfono de un cliente")
     public String modificarTelefono(@ShellOption(help = "Valor del identificador") String identificador,
                                     @ShellOption(help = "Nuevo teléfono", value = { "-t", "--telefono" }) String telefono,
-                                    @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de identificador [dni|idC]") String type) {
+                                    @ShellOption(defaultValue = "idC", value = "-t", help = "Tipo de identificador [dni|idC]") String type) {
         try {
             if (type.equals("dni")) {
                 clienteServicio.setTelefono(identificador, telefono);
@@ -103,7 +103,7 @@ public class ClienteShell {
     public String modificarNombre(
             @ShellOption(help = "Valor del identificador") String identificador,
             @ShellOption(help = "Nuevo nombre", value = { "-n", "--nombre" }) String nombre,
-            @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de identificador [dni|idC]") String type
+            @ShellOption(defaultValue = "idC", value = "-t", help = "Tipo de identificador [dni|idC]") String type
 
             ) {
         try {
@@ -129,7 +129,7 @@ public class ClienteShell {
     @ShellMethod(key = "modificar-apellido", value = "Modifica el apellido de un cliente")
     public String modificarapellido(@ShellOption(help = "Valor del identificador") String identificador,
                                     @ShellOption(help = "Nuevo apellido", value = { "-a", "--apellido" }) String nombre,
-                                    @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de identificador [dni|idC]") String type)
+                                    @ShellOption(defaultValue = "idC", value = "-t", help = "Tipo de identificador [dni|idC]") String type)
     {
         try {
             if (type.equals("dni")) {
@@ -154,7 +154,7 @@ public class ClienteShell {
     @ShellMethod(key = "modificar-fecha", value = "Modifica la fecha de nacimiento de un cliente")
     public String modificarfecha(@ShellOption(help = "Valor del identificador") String identificador,
                                  @ShellOption(help = "Nueva fecha de nacimiento", value = { "-f", "--fecha" }) String nombre,
-                                 @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de identificador [dni|idC]") String type)
+                                 @ShellOption(defaultValue = "idC", value = "-t", help = "Tipo de identificador [dni|idC]") String type)
     {
         try {
             if (type.equals("dni")) {
@@ -177,7 +177,7 @@ public class ClienteShell {
 
     @ShellMethod(key = "borrar-cliente", value = "Modifica la fecha de nacimiento de un cliente")
     public String borrarcliente(@ShellOption(help = "Valor del identificador") String identificador,
-                                @ShellOption(defaultValue = "dni", value = "-t", help = "Tipo de identificador [dni|idC]") String type){
+                                @ShellOption(defaultValue = "idC", value = "-t", help = "Tipo de identificador [dni|idC]") String type){
         try {
             if (type.equals("dni")) {
                 clienteServicio.eliminarCliente(identificador);            }

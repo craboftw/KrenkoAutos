@@ -227,6 +227,7 @@ public class PrintShell {
                 for (int j = 0; j < 40 - output.lines().toList().get(i).length(); j++){
                     finalOutput += " ";
                 }
+
             if (i == 0)
                 finalOutput += yellow+"╗"+reset+"\n";
             else if (i == output.lines().toList().size() - 2)

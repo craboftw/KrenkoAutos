@@ -1,22 +1,21 @@
-import Uca.Core.Autocaravana;
-import Uca.Core.Cliente;
-import Uca.Core.ReservaReglas;
-import Uca.Core.Reserva;
+
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import uca.core.dominio.Autocaravana;
+import uca.core.dominio.Cliente;
+import uca.core.dominio.Reserva;
+
 
 import java.time.LocalDate;
 import java.util.List;
 
-/*
+
 public class ReservaTest {
     @BeforeEach
     public void setUp() {
         //Borrar todos los clientes existentes
-        Cliente.getListaClientes().clear();
-        Autocaravana.getListaAutocaravanas().clear();
-        Reserva.getListaReservas().clear();
     }
 
     //TESTS CONSTRUCTORES
@@ -330,5 +329,3 @@ public class ReservaTest {
     }
 }
 
-
- */
