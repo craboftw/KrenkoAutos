@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+//PATRON TEMPLATE
+
 public class PrintShell {
     static String imprimir(Cliente cli)
     {
@@ -194,6 +196,7 @@ public class PrintShell {
         int kilometraje = autocaravana.getKilometraje();
         int plazas = autocaravana.getPlazas();
 
+        if (!(listObject.get(0) instanceof Autocaravana) & !(listObject.get(0) instanceof Reserva) & !(listObject.get(0) instanceof Cliente))
 
         String yellow = "\033[33m";
         String reset = "\033[0m";
