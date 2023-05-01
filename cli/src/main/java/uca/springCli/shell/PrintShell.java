@@ -1,3 +1,4 @@
+
 package uca.springCli.shell;
 
 import uca.core.dominio.Autocaravana;
@@ -195,8 +196,6 @@ public class PrintShell {
         String matricula = autocaravana.getMatricula();
         int kilometraje = autocaravana.getKilometraje();
         int plazas = autocaravana.getPlazas();
-
-        if (!(listObject.get(0) instanceof Autocaravana) & !(listObject.get(0) instanceof Reserva) & !(listObject.get(0) instanceof Cliente))
 
         String yellow = "\033[33m";
         String reset = "\033[0m";

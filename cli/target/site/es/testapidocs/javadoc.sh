@@ -1,1 +1,0 @@
-/usr/lib/jvm/java-17-openjdk-17.0.6.0.10-1.fc37.x86_64/bin/javadoc @options @packages
