@@ -5,9 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49349009-ddd1-4139-a5c3-18ca715234d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ClienteShell.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ClienteShell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/PrintShell.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/PrintShell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ReservaShell.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ReservaShell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iClienteRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iClienteRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iReservaRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iReservaRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Reserva.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ClienteReglas.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ClienteReglas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iClienteServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iClienteServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iReservaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iReservaServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/SpringApp/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/SpringApp/WebApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/sql/ClienteDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/sql/ClienteRepositorioServicio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,27 +57,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/craboftw/Documentos/GitHub/KrenkoAutos/web/src/main/resources/templates",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "0898b22730d57afcd394d8e4889ece4a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/craboftw/Documentos/GitHub/KrenkoAutos&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0898b22730d57afcd394d8e4889ece4a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/web/src/main/resources/templates" />
@@ -93,6 +112,9 @@
       <workItem from="1682944385062" duration="1320000" />
       <workItem from="1682947250630" duration="611000" />
       <workItem from="1683013398910" duration="450000" />
+      <workItem from="1683034202891" duration="16000" />
+      <workItem from="1683037242259" duration="81000" />
+      <workItem from="1683037398983" duration="22000" />
     </task>
     <servers />
   </component>

@@ -3,6 +3,8 @@ package uca.core.servicio.implementaciones.reglas;
 import uca.core.dao.iClienteRepositorio;
 import uca.core.dominio.Cliente;
 
+import java.util.List;
+
 public class ClienteReglas {
     public ClienteReglas(iClienteRepositorio clienteRepositorio) {
         this.clienteRepositorio = clienteRepositorio;
@@ -18,8 +20,15 @@ public class ClienteReglas {
     }
 
     public void comprobarTelefono(Cliente cli, String t){
-        if (t.isEmpty() || (clienteRepositorio.cargarCliente().stream().anyMatch(c -> c.getTelefono().equals(t) && c.getIdC() != cli.getIdC())))
-            throw new IllegalArgumentException("El telefono no puede estar vacio");
+        if (t.length() != 9) {
+            throw new IllegalArgumentException("El telefono debe tener 9 digitos");
+        }
+        var clientes = (List<Cliente>) clienteRepositorio.findAll();
+        for (Cliente c : clientes) {
+            if (c.getTelefono().equals(t)) {
+                throw new IllegalArgumentException("El telefono ya existe");
+            }
+        }
         cli.setTelefono(t);
     }
 

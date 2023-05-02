@@ -1,10 +1,10 @@
 package uca.core.dao;
 
+import org.springframework.data.repository.CrudRepository;
 import uca.core.dominio.Cliente;
-import uca.core.dominio.Estado;
 
-import java.util.Collection;
 
+/*
 public interface iClienteRepositorio {
 
     void guardarCliente(Collection<Cliente> clientes) ;
@@ -16,4 +16,8 @@ public interface iClienteRepositorio {
     void eliminarCliente(int idC);
 
 
+}
+*/
+
+public interface iClienteRepositorio extends CrudRepository<Cliente,Long>{
 }

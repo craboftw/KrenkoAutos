@@ -10,7 +10,7 @@ public interface iClienteServicio {
 
     int getNumeroClientes();
 
-    Cliente buscarCliente(int idC);
+    Cliente buscarCliente(Long idC);
 
     Cliente buscarCliente(String dni);
 
@@ -18,29 +18,29 @@ public interface iClienteServicio {
 
     void eliminarCliente(String dni);
 
-    void eliminarCliente(int idC);
+    void eliminarCliente(Long idC);
 
     void comprobarCliente(String nom, String ape, String telef, String cumpleanos, String dn, String ema);
 
-    void setNombre(int idC, String nombre);
+    void setNombre(Long idC, String nombre);
 
     void setNombre(String dni, String nombre);
 
-    void setApellido(int idC, String apellido);
+    void setApellido(Long idC, String apellido);
 
     void setApellido(String dni, String apellido);
 
     void setEmail(String dni, String email);
 
-    void setEmail(int idC, String email);
+    void setEmail(Long idC, String email);
 
-    void setDni(int idC, String dni);
+    void setDni(Long idC, String dni);
 
     void setFechaNacimiento(String dni, String fechaNacimiento);
 
-    void setFechaNacimiento(int idC, String fechaNacimiento);
+    void setFechaNacimiento(Long idC, String fechaNacimiento);
 
-    void setTelefono(int idC, String telefono);
+    void setTelefono(Long idC, String telefono);
 
     void setTelefono(String dni, String telefono);
 

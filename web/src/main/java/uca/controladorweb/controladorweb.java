@@ -1,7 +1,10 @@
 package uca.controladorweb;
 
 import lombok.extern.slf4j.Slf4j;
-import uca.core.servicio.interfaces.iClienteServicio;
+import uca.core.dominio.Cliente;
+import uca.core.dao.iClienteRepositorio;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,18 +15,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class controladorweb {
 
-    public controladorweb(iClienteServicio personaService) {
-        this.personaService = personaService;
-    }
-
     @Autowired
-    private iClienteServicio personaService;
+    public controladorweb(iClienteRepositorio personaService) {
+        this.clienteServicio = personaService;
+    }
+    
+    private iClienteRepositorio clienteServicio;
+
+
 
     @GetMapping("/")
     public String inicio(Model model){
-        var personas = personaService.getListaClientes();
+        var clientes = (List<Cliente>) clienteServicio.findAll();
         log.info("ejecutando el controlador Spring MVC");
-        model.addAttribute("personas", personas);
+        model.addAttribute("clientes", clientes);
         return "index";
     }
 }

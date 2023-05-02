@@ -31,7 +31,7 @@ public class ReservaServicioImpl implements iReservaServicio {
     }
 
     @Override
-    public void altaReserva(int idA, int idC, String fechI, String fechF)
+    public void altaReserva(int idA, Long idC, String fechI, String fechF)
     {
         LocalDate fechaIni;
         LocalDate fechaFin;
@@ -76,7 +76,7 @@ public class ReservaServicioImpl implements iReservaServicio {
               throw new IllegalArgumentException("La reserva ya existe");
             }
         int idR = reservaRepositorio.cargarReserva().stream().mapToInt(Reserva::getIdR).max().orElse(0) +1 ;
-        Reserva reserva = new Reserva(idR, fechI, fechF,reservaReglas.calculaPrecioTotal(A,C,fechaIni,fechaFin), BigDecimal.ZERO, A.getIdA(), C.getIdC(), "Pendiente");
+        Reserva reserva = new Reserva(idR, fechI, fechF,reservaReglas.calculaPrecioTotal(A,C,fechaIni,fechaFin), BigDecimal.ZERO, C.getIdC(), A.getIdA(), "Pendiente");
         reservaRepositorio.guardarReserva(reserva);
     }
 
@@ -235,13 +235,13 @@ public class ReservaServicioImpl implements iReservaServicio {
     }
 
     @Override
-    public void setCliente(int idR, int idC) {
+    public void setCliente(int idR, Long idC) {
         Reserva R = reservaRepositorio.buscarReserva(idR);
         if (R == null)
             throw new IllegalArgumentException("Error no se encontro la reserva");
-        if (reservaRepositorio.buscarReserva(idC) == null)
+        if (reservaRepositorio.buscarReserva(idR) == null)
             throw new IllegalArgumentException("El cliente no existe");
-        Cliente C = clienteServicio.buscarCliente(idC);
+            Cliente C = clienteServicio.buscarCliente(idC);
         if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),autocaravanaServicio.buscarAutocaravana(idR), C))
             throw new IllegalArgumentException("El cliente no puede reservar la autocaravana");
         R.setIdCliente(C.getIdC());
@@ -309,13 +309,13 @@ public class ReservaServicioImpl implements iReservaServicio {
                 throw new IllegalArgumentException("Error en el formato de las fechas.");
             }
 
-            if (reservaReglas.comprobarReserva(reserva.fechaIniF(), fechaFin,autocaravanaServicio.buscarAutocaravana(idR), clienteServicio.buscarCliente(reserva.getIdR()))) {
+            if (reservaReglas.comprobarReserva(reserva.fechaIniF(), fechaFin,autocaravanaServicio.buscarAutocaravana(idR), clienteServicio.buscarCliente(reserva.getIdCliente()))) {
                 throw new IllegalArgumentException("La autocaravana no está disponible en las fechas seleccionadas.");
             }
             if(!reservaReglas.condicionesModificacion(reserva))
                 throw new IllegalArgumentException("No se puede modificar la reserva.");
             reserva.setFechaFin(fechF);
-            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(autocaravanaServicio.buscarAutocaravana(idR),clienteServicio.buscarCliente(reserva.getIdR()), reserva.fechaIniF(), fechaFin).add( reservaReglas.calcularTasaModificacion(reserva)));
+            reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(autocaravanaServicio.buscarAutocaravana(idR),clienteServicio.buscarCliente(reserva.getIdCliente()), reserva.fechaIniF(), fechaFin).add( reservaReglas.calcularTasaModificacion(reserva)));
             reservaRepositorio.guardarReserva(reserva);
         }
     }

@@ -10,7 +10,7 @@ import java.util.Collection;
 
 
 public interface iReservaServicio {
-    void altaReserva(int idA, int idC, String fechI, String fechF);
+    void altaReserva(int idA, Long idC, String fechI, String fechF);
 
     String checkout (int idR);
 
@@ -32,7 +32,7 @@ public interface iReservaServicio {
 
     void setAutocaravana(int idR, int idA);
 
-    void setCliente(int idR, int idC);
+    void setCliente(int idR, Long idC);
 
     void setFechaIni(int idR, String fechaIni);
 

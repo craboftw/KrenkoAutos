@@ -1,22 +1,21 @@
 package uca.core.dominio;
 
 import lombok.Data;
-//Importaciones de JPA
-import javax.persistence.Entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+
+//Importaciones de JPA
 
 
 @Data
 @Entity
-public class Cliente {
-
+@Table(name = "clientes")
+public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idC;
+    private Long idC;
     private String nombre;
     private String apellido;
     private String telefono;
@@ -28,10 +27,10 @@ public class Cliente {
 
     private String estado;
 
-    public static final Cliente ClienteNulo = new Cliente(-1, "0", "0", "0", "0001-01-01", "0", "0", "0");
+    public static final Cliente ClienteNulo = new Cliente();
 
 //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Cliente(int id, String nom, String ape, String telef, String fech, String dn, String ema, String est) {
+    public Cliente(Long id, String nom, String ape, String telef, String fech, String dn, String ema, String est) {
         idC = id;
         nombre = nom;
         apellido = ape;
@@ -45,7 +44,7 @@ public class Cliente {
     }
 
     public Cliente() {
-        idC = 0;
+        idC = (long) 0;
         nombre = "";
         apellido = "";
         telefono = "";
@@ -83,9 +82,7 @@ public class Cliente {
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
 
-
-
-}
+  }
 
 
 //              ▓▓▓▓▓▓▓▓▓▓▓▓                                              ████████

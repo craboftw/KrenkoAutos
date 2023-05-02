@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class Reserva {
     private int idR;
-    private int idCliente;
+    private Long idCliente;
     private int idAutocaravana;
     private String fechaIni;
     private String fechaFin;
@@ -17,7 +17,7 @@ public class Reserva {
     private BigDecimal precioTotal;
     private BigDecimal pagado;
     //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Reserva(int id, String fechI, String fechF,BigDecimal precioTot,BigDecimal paga, int idC, int idA, String estado) {
+    public Reserva(int id, String fechI, String fechF,BigDecimal precioTot,BigDecimal paga, Long idC, int idA, String estado) {
         idR = id;
         idCliente = idC;
         idAutocaravana = idA;
@@ -31,7 +31,7 @@ public class Reserva {
     public Reserva()
     {
         idR = 0;
-        idCliente = 0;
+        idCliente = Long .valueOf(0);
         idAutocaravana = 0;
         estadoR = null;
         fechaIni = null;
