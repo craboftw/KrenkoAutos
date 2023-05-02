@@ -14,7 +14,7 @@
                     <th>Email</th>
                     <th>Teléfono</th>
                 </tr>
-                <tr th:each="persona : ${personas}">
+                <tr th:each="cliente : ${clientes}">
                     <td th:text="${persona.nombre}">Mostrar Nombre</td>
                     <td th:text="${persona.apellido}">Mostrar Apellido</td>
                     <td th:text="${persona.email}">Mostrar Email</td>

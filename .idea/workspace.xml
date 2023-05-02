@@ -5,358 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49349009-ddd1-4139-a5c3-18ca715234d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/.jpb/persistence-units.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/java/uca/sql/ClienteDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dss2022--2023-MACFLG.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_4_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_4_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_14_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_14_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_14_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_7_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_2_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_2_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_4_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_12_23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_12_23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_2_4_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_4_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_ST4_4_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_antlr_antlr_runtime_3_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_19_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_19_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_10_1_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_23_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_8_0_0_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_5_0_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jline_jline_3_21_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_9_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_4_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_4_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_3_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_9_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_26.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_2_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_2_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_3_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_shell_spring_shell_autoconfigure_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_shell_spring_shell_core_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_shell_spring_shell_standard_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_shell_spring_shell_standard_commands_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_shell_spring_shell_starter_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_shell_spring_shell_table_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_6_0_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_9_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_33.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/clientes.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/clientes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/core/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/core/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/core/spring-shell.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dao/iAutocaravanaRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iAutocaravanaRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dao/iClienteRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iClienteRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dao/iEstadoRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iEstadoRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dao/iReservaRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iReservaRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dominio/Autocaravana.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Autocaravana.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dominio/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dominio/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Estado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/dominio/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Reserva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/implementaciones/AutocaravanaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/AutocaravanaServicioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/implementaciones/reglas/AutocaravanaReglas.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/AutocaravanaReglas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/implementaciones/reglas/ClienteReglas.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ClienteReglas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/implementaciones/reglas/ReservaReglas.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ReservaReglas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/interfaces/iAutocaravanaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iAutocaravanaServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/interfaces/iClienteServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iClienteServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/uca/core/servicio/interfaces/iReservaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iReservaServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/sql/ClienteRepositorioServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/notest/java/AutocaravanaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/notest/java/AutocaravanaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/notest/java/ClienteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/notest/java/ClienteTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/notest/java/ReservaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/notest/java/ReservaTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/MySpringCliApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/MySpringCliApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/PrintShell.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/PrintShell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/MySpringCliApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/MySpringCliApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/EstadoRepositorio$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/EstadoRepositorio$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/EstadoRepositorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/EstadoRepositorio.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/AutocaravanaShell.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/AutocaravanaShell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ClienteShell.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ClienteShell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/PrintShell.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/PrintShell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ReservaShell.class" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/classes/uca/springCli/shell/ReservaShell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/cli-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/cli-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/cli-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/cli-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/javadoc-bundle-options/javadoc-options-javadoc-resources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/maven-javadoc-plugin-stale-data.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/index-all.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/jquery-ui.overrides.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/overview-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/script-dir/jquery-3.6.0.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/script-dir/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/script-dir/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/MySpringCliApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/class-use/MySpringCliApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/EstadoRepositorio.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/class-use/AutocaravanaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/class-use/ClienteRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/class-use/EstadoRepositorio.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/class-use/ReservaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/repositorio/Implementaciones/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/AutocaravanaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/ClienteShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/PrintShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/ReservaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/class-use/AutocaravanaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/class-use/ClienteShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/class-use/PrintShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/class-use/ReservaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/apidocs/uca/springCli/shell/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/css/apache-maven-fluido-2.0.0-M2.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/css/maven-base.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/css/maven-theme.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/css/print.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/css/site.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/dependencies.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/dependency-info.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/dependency-management.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/index-all.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/jquery-ui.overrides.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/overview-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/script-dir/jquery-3.6.0.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/script-dir/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/script-dir/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/MySpringCliApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/class-use/MySpringCliApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/EstadoRepositorio.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/class-use/AutocaravanaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/class-use/ClienteRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/class-use/EstadoRepositorio.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/class-use/ReservaRepositorioImpl.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/repositorio/Implementaciones/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/AutocaravanaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/ClienteShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/PrintShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/ReservaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/class-use/AutocaravanaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/class-use/ClienteShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/class-use/PrintShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/class-use/ReservaShell.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/apidocs/uca/springCli/shell/package-use.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/css/apache-maven-fluido-2.0.0-M2.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/css/print.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/css/site.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/accessories-text-editor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/add.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/apache-maven-project-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/application-certificate.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/contact-new.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/document-properties.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/drive-harddisk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/fix.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/icon_error_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/icon_help_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/icon_info_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/icon_success_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/icon_warning_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/image-x-generic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/internet-web-browser.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/logos/build-by-maven-black.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/logos/build-by-maven-white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/logos/maven-feather.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/network-server.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/package-x-generic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/profiles/pre-release.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/profiles/retired.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/profiles/sandbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/remove.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/rss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/update.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/images/window-new.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/img/glyphicons-halflings-white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/img/glyphicons-halflings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/js/apache-maven-fluido-2.0.0-M2.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/testapidocs/javadoc.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/testapidocs/options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/es/testapidocs/packages" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/accessories-text-editor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/add.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/apache-maven-project-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/application-certificate.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/close.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/collapsed.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/contact-new.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/document-properties.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/drive-harddisk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/expanded.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/external.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/fix.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/icon_error_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/icon_help_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/icon_info_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/icon_success_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/icon_warning_sml.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/image-x-generic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/internet-web-browser.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/logos/build-by-maven-black.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/logos/build-by-maven-white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/logos/maven-feather.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/network-server.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/newwindow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/package-x-generic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/profiles/pre-release.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/profiles/retired.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/profiles/sandbox.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/remove.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/rss.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/update.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/images/window-new.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/img/glyphicons-halflings-white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/img/glyphicons-halflings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/js/apache-maven-fluido-2.0.0-M2.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/licenses.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/plugin-management.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/plugins.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/project-info.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/project-reports.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/scm.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/team.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/testapidocs/javadoc.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/testapidocs/options" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/target/site/testapidocs/packages" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/spring-shell.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,27 +38,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/craboftw/Documentos/GitHub/KrenkoAutos&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;0898b22730d57afcd394d8e4889ece4a&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/home/craboftw/Documentos/GitHub/KrenkoAutos/web/src/main/resources/templates",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "0898b22730d57afcd394d8e4889ece4a",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/src/main/resources/templates" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MySpringCliApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="cli" />
@@ -436,6 +92,7 @@
       <workItem from="1682944287774" duration="78000" />
       <workItem from="1682944385062" duration="1320000" />
       <workItem from="1682947250630" duration="611000" />
+      <workItem from="1683013398910" duration="450000" />
     </task>
     <servers />
   </component>

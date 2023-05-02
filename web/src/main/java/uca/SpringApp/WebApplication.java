@@ -1,4 +1,4 @@
-package uca.web;
+package uca.SpringApp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
