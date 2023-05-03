@@ -60,7 +60,7 @@ public class ClienteShell {
                 clienteServicio.setEmail(identificador, email);
             } else if (type.equals("idC")) {
                 try {
-                    int idC = Integer.parseInt(identificador);
+                    Long idC = Long.parseLong(identificador);
                     clienteServicio.setEmail(idC, email);
                 }catch (Exception e){
                     return "El idC debe ser un número";
@@ -83,7 +83,7 @@ public class ClienteShell {
                 clienteServicio.setTelefono(identificador, telefono);
             } else if (type.equals("idC")) {
                 try {
-                    int idC = Integer.parseInt(identificador);
+                    Long idC = Long.parseLong(identificador);
                     clienteServicio.setTelefono(idC, telefono);
                 }catch (Exception e){
                     return "El idC debe ser un número";
@@ -111,7 +111,7 @@ public class ClienteShell {
                 clienteServicio.setNombre(identificador, nombre);
             } else if (type.equals("idC")) {
                 try{
-                    int idC = Integer.parseInt(identificador);
+                    Long idC = Long.parseLong(identificador);
                     clienteServicio.setNombre(idC, nombre);
                 }catch (Exception e){
                     return "El idC debe ser un número";
@@ -136,7 +136,7 @@ public class ClienteShell {
                 clienteServicio.setApellido(identificador, nombre);
             } else if (type.equals("idC")) {
                 try {
-                    int idC = Integer.parseInt(identificador);
+                    Long idC = Long.parseLong(identificador);
                     clienteServicio.setApellido(idC, nombre);
                 }catch (Exception e){
                     return "El idC debe ser un número";
@@ -161,7 +161,7 @@ public class ClienteShell {
                 clienteServicio.setFechaNacimiento(identificador , nombre);
             } else if (type.equals("idC")) {
                 try {
-                    int idC = Integer.parseInt(identificador);
+                    Long idC = Long.parseLong(identificador);
                     clienteServicio.setFechaNacimiento(idC, nombre);
                 }catch (Exception e){
                     return "El idC debe ser un número";
@@ -183,7 +183,7 @@ public class ClienteShell {
                 clienteServicio.eliminarCliente(identificador);            }
             else if (type.equals("idC")) {
                 try {
-                    int idC = Integer.parseInt(identificador);
+                    Long idC = Long.parseLong(identificador);
                     clienteServicio.eliminarCliente(idC);
                 }catch (Exception e){
                     return "El idC debe ser un número";

@@ -6,7 +6,6 @@ import lombok.Data;
 public class Estado {
     String tipo;
     String valor;
-
     public Estado(String tip, String val)
     {
         tipo = tip;

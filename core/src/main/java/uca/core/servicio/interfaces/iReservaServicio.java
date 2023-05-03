@@ -1,50 +1,51 @@
 package uca.core.servicio.interfaces;
 
-import org.springframework.stereotype.Repository;
 import uca.core.dominio.Autocaravana;
-import uca.core.dominio.Cliente;
 import uca.core.dominio.Reserva;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 
 public interface iReservaServicio {
-    void altaReserva(int idA, Long idC, String fechI, String fechF);
+    void altaReserva(Long idA, Long idC, String fechI, String fechF);
 
-    String checkout (int idR);
+    String checkout (Long idR);
 
-    String checkin (int idR);
+    String checkin (Long idR);
 
-    Reserva buscarReserva (int i);
+    Reserva buscarReserva (Long idR);
 
     Collection<Reserva> buscarReserva(String tipo, String info);
 
     int getCantidadReservas();
 
-    void eliminarReserva(int idR);
+    void eliminarReserva(Long idR);
 
-    void cancelarReserva(int idR);
+    void cancelarReserva(Long idR);
 
-    void setEstadoReserva(int idR, String estado);
+    void setEstadoReserva(Long idR, String estado);
 
-    void setPrecioTotal(int idR, float precioTotal);
+    void setPrecioTotal(Long idR, float precioTotal);
 
-    void setAutocaravana(int idR, int idA);
+    void setAutocaravana(Long idR, Long idA);
 
-    void setCliente(int idR, Long idC);
+    void setCliente(Long idR, Long idC);
 
-    void setFechaIni(int idR, String fechaIni);
+    void setFechaIni(Long idR, String fechaIni);
 
-    void setFechaFin(int idR, String fechaFin);
+    void setFechaFin(Long idR, String fechaFin);
 
-    void setPrecioTotal(int idR, BigDecimal precioTotal);
+    void setPrecioTotal(Long idR, BigDecimal precioTotal);
 
-    void modificarReservaEnCurso(int idR, String fechF);
+    void modificarReservaEnCurso(Long idR, String fechF);
 
-    void modificarReserva(int idR, int idA, String fechI, String fechF);
+    void modificarReserva(Long idR, Long idA, String fechI, String fechF);
 
     Collection<Reserva> getListaReservas();
     String crearEstado(String estado);
     String eliminarEstado(String estado);
+    List<Autocaravana> getListaAutocaravanasDisponibles(LocalDate fecha);
 }

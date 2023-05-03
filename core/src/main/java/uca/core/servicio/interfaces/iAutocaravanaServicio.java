@@ -10,7 +10,7 @@ public interface iAutocaravanaServicio {
 
     void comprobarAutocaravana(String mod, BigDecimal precio, int plaz, String matr, int kilometraj);
 
-    Autocaravana buscarAutocaravana(int idA);
+    Autocaravana buscarAutocaravana(Long idA);
 
     Collection<Autocaravana> buscarAutocaravana(String tipo, String dato);
 
@@ -18,31 +18,30 @@ public interface iAutocaravanaServicio {
 
     Collection<String> getListaEstadoAutocaravana();
 
-    boolean quedanCaravanas();
 
     boolean comprobarEstadoAutocaravana(String estado);
 
-    void setModelo(int idA, String mod);
+    void setModelo(Long idA, String mod);
 
     void setModelo(String matricula, String mod);
 
-    void setPrecioPorDia(int idA, BigDecimal precioPorDia);
+    void setPrecioPorDia(Long idA, BigDecimal precioPorDia);
 
     void setPrecioPorDia(String matricula, BigDecimal precioPorDia);
 
-    void setPlazas(int idA, int plazas);
+    void setPlazas(Long idA, int plazas);
 
     void setPlazas(String matricula, int plazas);
 
-    void setEstado(int idA, String estado);
+    void setEstado(Long idA, String estado);
 
     void setEstado(String matricula, String estado);
 
-    void setKilometraje(int idA, int kilometraje);
+    void setKilometraje(Long idA, int kilometraje);
 
     void setKilometraje(String matricula, int kilometraje);
 
-    void eliminarAutocaravana(int idA);
+    void eliminarAutocaravana(Long idA);
     void eliminarAutocaravana(String matricula);
 
     void eliminarEstadoAutocaravana(String estado);
@@ -51,7 +50,7 @@ public interface iAutocaravanaServicio {
 
     void setPrecio(String matricula, BigDecimal precio);
 
-    void setPrecio(int idA, BigDecimal precio);
+    void setPrecio(Long idA, BigDecimal precio);
 
     String crearEstado(String estado);
     String eliminarEstado(String estado);

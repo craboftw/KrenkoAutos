@@ -1,6 +1,7 @@
 package uca.core.servicio.implementaciones;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,16 +24,15 @@ import static java.util.Collections.emptyList;
 public class ClienteServicioImpl implements iClienteServicio {
 
     private iClienteRepositorio clienteRepositorio;
-
     private final iEstadoRepositorio clienteEstadoRepositorio;
-    private final ClienteReglas clienteReglas = new ClienteReglas(clienteRepositorio);
+    private  ClienteReglas clienteReglas = new ClienteReglas(clienteRepositorio);
 
     @Autowired
     public ClienteServicioImpl(iClienteRepositorio clienteRepositorio, iEstadoRepositorio clienteEstadoRepositorio) {
         this.clienteRepositorio = clienteRepositorio;
         this.clienteEstadoRepositorio = clienteEstadoRepositorio;
     }
-    
+
     //crear-cliente miriam armario 666777666 2000-12-21 440999333R armaricon@gmail.com
 
 

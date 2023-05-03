@@ -3,23 +3,26 @@ package uca.core.dominio;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
 import java.math.BigDecimal;
 
 @Data
 public class Autocaravana {
 
     private int vecesReservada;
-    private final int idA;
+    private final Long idA;
     private final String matricula;
     private int plazas;
     private String modelo;
     private BigDecimal precioPorDia;
     private int kilometraje;
     private String estadoA = "Disponible";
+    @Transient
+    static public Autocaravana AutocaravanaNulo = new Autocaravana();
 
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Autocaravana(int id, String mod, BigDecimal precio, int plaz, String matr, int kilometraj, String estado) {
+    public Autocaravana(Long id, String mod, BigDecimal precio, int plaz, String matr, int kilometraj, String estado) {
 
         idA = id;
         modelo = mod;
@@ -33,7 +36,7 @@ public class Autocaravana {
 
     public Autocaravana() {
 
-        idA = 0;
+        idA = 0L;
         modelo = "";
         precioPorDia = BigDecimal.valueOf(-1);
         plazas = 0;

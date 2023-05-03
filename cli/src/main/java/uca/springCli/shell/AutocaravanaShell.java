@@ -64,7 +64,7 @@ public class AutocaravanaShell {
                 autocaravanaServicio.setModelo(dato, modelo);
             if (type.equals("idA")) {
                 try {
-                    int idC = Integer.parseInt(dato);
+                    Long idC = Long.parseLong(dato);
                     autocaravanaServicio.setModelo(idC, modelo);
                 } catch (Exception e) {
                     return "El id debe ser un número";
@@ -88,7 +88,7 @@ public class AutocaravanaShell {
                 autocaravanaServicio.setPrecio(dato, precio);
             if (type.equals("idA")) {
                 try {
-                    int idC = Integer.parseInt(dato);
+                    Long idC = Long.parseLong(dato);
                     autocaravanaServicio.setPrecio(idC, precio);
                 } catch (Exception e) {
                     return "El id debe ser un número";
@@ -110,7 +110,7 @@ public class AutocaravanaShell {
                 autocaravanaServicio.setPlazas(dato, plazas);
                 if (type.equals("idA")) {
                     try {
-                        int idC = Integer.parseInt(dato);
+                        Long idC = Long.parseLong(dato);
                         autocaravanaServicio.setPlazas(idC, plazas);
                     } catch (Exception e) {
                         return "El id debe ser un número";
@@ -135,7 +135,7 @@ public class AutocaravanaShell {
                 autocaravanaServicio.setKilometraje(dato, kilometraje);
             } else if (type.equals("idA")) {
                 try {
-                    int idC = Integer.parseInt(dato);
+                    Long idC = Long.parseLong(dato);
                     autocaravanaServicio.setKilometraje(idC, kilometraje);
                 } catch (Exception e) {
                     return "El id debe ser un número";
@@ -159,7 +159,7 @@ public class AutocaravanaShell {
                 autocaravanaServicio.setEstado(dato, estado);
             } else if (type.equals("idA")) {
                 try {
-                    int idC = Integer.parseInt(dato);
+                    Long idC = Long.parseLong(dato);
                     autocaravanaServicio.setEstado(idC, estado);
                 } catch (Exception e) {
                     return "El id debe ser un número";
@@ -182,7 +182,7 @@ public class AutocaravanaShell {
                 autocaravanaServicio.eliminarAutocaravana(dato);
             } else if (type.equals("idA")) {
                 try {
-                    int idC = Integer.parseInt(dato);
+                    Long idC = Long.parseLong(dato);
                     autocaravanaServicio.eliminarAutocaravana(idC);
                 } catch (Exception e) {
                     return "El id debe ser un número";

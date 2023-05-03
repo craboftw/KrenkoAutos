@@ -37,8 +37,8 @@ public class ReservaShell {
 
     @ShellMethod(key = "crear-reserva", value = "Crea una nueva reserva")
     public String crearReserva(
-            @ShellOption(help = "Valor del identificador") int idA,
-            @ShellOption(help = "Valor del identificador") int idC,
+            @ShellOption(help = "Valor del identificador") Long idA,
+            @ShellOption(help = "Valor del identificador") Long idC,
             @ShellOption(help = "Fecha de inicio") String fechaInicio,
             @ShellOption(help = "Fecha de fin") String fechaFin) {
         try {
@@ -51,7 +51,7 @@ public class ReservaShell {
 
     //Realizar el checkin a una reserva dada
     @ShellMethod(key = "checkin", value = "Realiza el checkin a una reserva")
-    public String checkin(@ShellOption(help = "Valor del identificador") int id) {
+    public String checkin(@ShellOption(help = "Valor del identificador") Long id) {
         try {
             return reservaServicio.checkin(id);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class ReservaShell {
 
     //Realizar el checkout a una reserva dada
     @ShellMethod(key = "checkout", value = "Realiza el checkout a una reserva")
-    public String checkout(@ShellOption(help = "Valor del identificador") int id){
+    public String checkout(@ShellOption(help = "Valor del identificador") Long id){
         try {
             return reservaServicio.checkout(id);
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class ReservaShell {
     }
 
     @ShellMethod(key = "mostrar-reserva", value = "Muestra una reserva con la informacion del cliente y el coche")
-        public void mostrarReserva(@ShellOption(help = "Valor del identificador") int id) {
+        public void mostrarReserva(@ShellOption(help = "Valor del identificador") Long id) {
         try {
             Reserva reserva = reservaServicio.buscarReserva(id);
             //muestra la reserva con el cliente y la autocaravana uno al lao del otro.
@@ -109,8 +109,8 @@ public class ReservaShell {
 
     @ShellMethod(key = "modificar-cliente", value = "Modifica una reserva")
     public String modificarCliente (
-            @ShellOption(help = "Valor del identificador de la reserva") int id,
-            @ShellOption(help = "Valor del identificador del cliente") int idC) {
+            @ShellOption(help = "Valor del identificador de la reserva") Long id,
+            @ShellOption(help = "Valor del identificador del cliente") Long idC) {
         try {
             reservaServicio.setCliente(id, idC);
         } catch (Exception e) {
@@ -121,8 +121,8 @@ public class ReservaShell {
 
     @ShellMethod(key = "modificar-autocaravana", value = "Modifica una reserva")
     public String modificarAutocaravana (
-            @ShellOption(help = "Valor del identificador de la reserva") int id,
-            @ShellOption(help = "Valor del identificador de la autocaravana") int idA) {
+            @ShellOption(help = "Valor del identificador de la reserva") Long id,
+            @ShellOption(help = "Valor del identificador de la autocaravana") Long idA) {
         try {
             reservaServicio.setAutocaravana(id,idA);
         } catch (Exception e) {
@@ -133,7 +133,7 @@ public class ReservaShell {
 
     @ShellMethod(key = "modificar-fechaInicio", value = "Modifica una reserva")
     public String modificarFechaInicio (
-            @ShellOption(help = "Valor del identificador de la reserva") int id,
+            @ShellOption(help = "Valor del identificador de la reserva") Long id,
             @ShellOption(help = "Fecha de inicio") String fechaInicio) {
         try {
             LocalDate.parse(fechaInicio);
@@ -146,7 +146,7 @@ public class ReservaShell {
 
     @ShellMethod(key = "modificar-fechaFin", value = "Modifica una reserva")
     public String modificarFechaFin (
-            @ShellOption(help = "Valor del identificador de la reserva") int id,
+            @ShellOption(help = "Valor del identificador de la reserva") Long id,
             @ShellOption(help = "Fecha de fin") String fechaFin) {
         try {
             LocalDate.parse(fechaFin);
@@ -159,7 +159,7 @@ public class ReservaShell {
 
     @ShellMethod(key = "modificar-precio", value = "Modifica una reserva")
     public String modificarPrecio (
-            @ShellOption(help = "Valor del identificador de la reserva") int id,
+            @ShellOption(help = "Valor del identificador de la reserva") Long id,
             @ShellOption(help = "Precio") String precio) {
         try {
             reservaServicio.setPrecioTotal(id, BigDecimal.valueOf(Double.parseDouble(precio)));
@@ -170,7 +170,7 @@ public class ReservaShell {
     }
 
     @ShellMethod(key = "eliminar-reserva", value = "Elimina una reserva")
-    public String eliminarReserva(@ShellOption(help = "Valor del identificador") int id){
+    public String eliminarReserva(@ShellOption(help = "Valor del identificador") Long id){
         try {
             reservaServicio.eliminarReserva(id);
         } catch (Exception e) {
@@ -180,7 +180,7 @@ public class ReservaShell {
     }
 
     @ShellMethod(key = "listar-reservas-cliente", value = "Lista todas las reservas de un cliente")
-    public void listarReservasCliente(@ShellOption(help = "Valor del identificador") int id) {
+    public void listarReservasCliente(@ShellOption(help = "Valor del identificador") Long id) {
         try {
             List<Reserva> reservas = reservaServicio.getListaReservas().stream().toList();
             if (!reservas.isEmpty())
@@ -191,7 +191,7 @@ public class ReservaShell {
     }
 
     @ShellMethod(key = "listar-reservas-autocaravana", value = "Lista todas las reservas de una autocaravana")
-    public void listarReservasAutocaravana(@ShellOption(help = "Valor del identificador") int id) {
+    public void listarReservasAutocaravana(@ShellOption(help = "Valor del identificador") Long id) {
         try {
             List<Reserva> reservas = reservaServicio.getListaReservas().stream().toList();
             if (!reservas.isEmpty())

@@ -190,7 +190,7 @@ public class PrintShell {
 
     static String imprimir(Autocaravana autocaravana)
     {
-        int idA = autocaravana.getIdA();
+        var idA = autocaravana.getIdA();
         String modelo = autocaravana.getModelo();
         BigDecimal precioPorDia = autocaravana.getPrecioPorDia();
         String matricula = autocaravana.getMatricula();

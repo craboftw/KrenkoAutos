@@ -5,19 +5,23 @@ import java.time.LocalDate;
 
 import lombok.Data;
 
+import javax.persistence.Transient;
+
 
 @Data
 public class Reserva {
-    private int idR;
+    private Long idR;
     private Long idCliente;
-    private int idAutocaravana;
+    private Long idAutocaravana;
     private String fechaIni;
     private String fechaFin;
     private String estadoR;
     private BigDecimal precioTotal;
     private BigDecimal pagado;
+    @Transient
+    public static Reserva ReservaNulo = new Reserva();
     //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
-    public Reserva(int id, String fechI, String fechF,BigDecimal precioTot,BigDecimal paga, Long idC, int idA, String estado) {
+    public Reserva(Long id, String fechI, String fechF,BigDecimal precioTot,BigDecimal paga, Long idC, Long idA, String estado) {
         idR = id;
         idCliente = idC;
         idAutocaravana = idA;
@@ -30,15 +34,16 @@ public class Reserva {
 
     public Reserva()
     {
-        idR = 0;
-        idCliente = Long .valueOf(0);
-        idAutocaravana = 0;
+        idR = 0L;
+        idCliente = 0L;
+        idAutocaravana = 0L;
         estadoR = null;
         fechaIni = null;
         fechaFin = null;
         estadoR = null;
         precioTotal = null;
         pagado = null;
+
     }
 
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧

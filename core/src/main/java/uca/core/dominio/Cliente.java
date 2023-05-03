@@ -1,18 +1,24 @@
 package uca.core.dominio;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 //Importaciones de JPA
 
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "clientes")
 public class Cliente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idC;
@@ -27,6 +33,8 @@ public class Cliente implements Serializable {
 
     private String estado;
 
+    //Anotate
+    @Transient
     public static final Cliente ClienteNulo = new Cliente();
 
 //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
@@ -82,7 +90,19 @@ public class Cliente implements Serializable {
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
 
-  }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return getIdC() != null && Objects.equals(getIdC(), cliente.getIdC());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+}
 
 
 //              ▓▓▓▓▓▓▓▓▓▓▓▓                                              ████████

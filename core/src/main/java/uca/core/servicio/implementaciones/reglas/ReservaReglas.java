@@ -109,9 +109,9 @@ public class ReservaReglas
     //comprueba si una caravana y un cliente son validos para la reserva.
     {
         if (true) return true;
-        if (reservaRepositorio.cargarReserva().isEmpty())
+        if (reservaRepositorio.findAll().isEmpty())
             return true;
-        for (Reserva R : reservaRepositorio.cargarReserva()) {
+        for (Reserva R : reservaRepositorio.findAll()) {
             if (autocaravanaServicio.buscarAutocaravana(R.getIdAutocaravana()).equals(A) & R.getEstadoR() != "Cancelada" & R.getEstadoR() != "Finalizada") {
                 //comprobar si las fechas de la Reserva R se solapan con las fechas de la reserva que se quiere hacer
                 if (

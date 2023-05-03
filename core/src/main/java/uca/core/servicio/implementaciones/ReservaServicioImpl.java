@@ -1,5 +1,6 @@
 package uca.core.servicio.implementaciones;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uca.core.dao.iReservaRepositorio;
 import uca.core.dao.iEstadoRepositorio;
@@ -13,6 +14,7 @@ import uca.core.servicio.implementaciones.reglas.ReservaReglas;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservaServicioImpl implements iReservaServicio {
@@ -22,6 +24,7 @@ public class ReservaServicioImpl implements iReservaServicio {
     private final AutocaravanaServicioImpl autocaravanaServicio;
     private final ClienteServicioImpl clienteServicio;
 
+    @Autowired
     public ReservaServicioImpl(iReservaRepositorio reservaRepositorio, iEstadoRepositorio reservaEstadoRepositorio, AutocaravanaServicioImpl autocaravanaServicio, ClienteServicioImpl clienteServicio) {
         this.reservaReglas = new ReservaReglas(reservaRepositorio,clienteServicio,autocaravanaServicio);
         this.reservaRepositorio = reservaRepositorio;
@@ -31,7 +34,7 @@ public class ReservaServicioImpl implements iReservaServicio {
     }
 
     @Override
-    public void altaReserva(int idA, Long idC, String fechI, String fechF)
+    public void altaReserva(Long idA, Long idC, String fechI, String fechF)
     {
         LocalDate fechaIni;
         LocalDate fechaFin;
@@ -75,16 +78,17 @@ public class ReservaServicioImpl implements iReservaServicio {
        if ( !reservaReglas.comprobarReserva(fechaIni, fechaFin, A, C)){
               throw new IllegalArgumentException("La reserva ya existe");
             }
-        int idR = reservaRepositorio.cargarReserva().stream().mapToInt(Reserva::getIdR).max().orElse(0) +1 ;
+       //el idR es el id de la reserva mas alta +1
+        Long idR =  (reservaRepositorio.findAll().stream().max(Comparator.comparing(Reserva::getIdR)).get().getIdR() + 1L);
         Reserva reserva = new Reserva(idR, fechI, fechF,reservaReglas.calculaPrecioTotal(A,C,fechaIni,fechaFin), BigDecimal.ZERO, C.getIdC(), A.getIdA(), "Pendiente");
-        reservaRepositorio.guardarReserva(reserva);
+        reservaRepositorio.save(reserva);
     }
 
     @Override
-    public String checkout(int idR) {
+    public String checkout(Long idR) {
         Reserva R;
         try{
-            R = reservaRepositorio.buscarReserva(idR);
+            R = reservaRepositorio.getById(idR);
         }
         catch (Exception e){
             throw new IllegalArgumentException("Error no se encontro la reserva");
@@ -100,13 +104,13 @@ public class ReservaServicioImpl implements iReservaServicio {
                         || LocalDate.now().isEqual(R.fechaFinF())) {
                     R.setPrecioTotal((reservaReglas.calcularTasaFinalizacion(R)));
                     R.setEstadoR("Finalizada");
-                    reservaRepositorio.guardarReserva(R);
+                    reservaRepositorio.save(R);
                     String mensaje = "La reserva ha sido finalizada.";
                 } else {
                     if (LocalDate.now().isBefore(R.fechaFinF())) {
                         R.setPrecioTotal((reservaReglas.calcularTasaCancelacion(R)));
                         R.setEstadoR("Cancelada");
-                        reservaRepositorio.guardarReserva(R);
+                        reservaRepositorio.save(R);
                         String mensaje = "La reserva ha sido cancelada por haber finalizado antes de la fecha prevista.";
                         if (R.getPrecioTotal().compareTo( R.getPagado()) < 0)
                             mensaje += "Queda pendiente de pagar " + (R.getPrecioTotal().subtract(R.getPagado())) + "€";
@@ -125,9 +129,9 @@ public class ReservaServicioImpl implements iReservaServicio {
         return ("El estado de la reserva es " + R.getEstadoR());    }
 
     @Override
-    public String checkin(int  idR) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public String checkin(Long idR ){
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             return ("No se ha encontrado la reserva");
         switch (R.getEstadoR()) {
         case "Cancelada":
@@ -141,12 +145,12 @@ public class ReservaServicioImpl implements iReservaServicio {
                     || LocalDate.now().isEqual(R.fechaIniF()))
                     & LocalDate.now().isBefore(R.fechaFinF())) {
                 R.setEstadoR("En curso");
-                reservaRepositorio.guardarReserva(R);
+                reservaRepositorio.save(R);
             } else {
                 if (LocalDate.now().isAfter(R.fechaFinF())) {
                     R.setEstadoR("Finalizada");
                     R.setPrecioTotal(reservaReglas.calcularTasaAcabadaSinCheckOut(R));
-                    reservaRepositorio.guardarReserva(R);
+                    reservaRepositorio.save(R);
                 } else
                     return ("La reserva no ha empezado");
             }
@@ -162,31 +166,61 @@ public class ReservaServicioImpl implements iReservaServicio {
     //‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Manejo de la lista‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
     @Override
-    public Reserva buscarReserva(int idR) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public Reserva buscarReserva(Long idR) {
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == R.ReservaNulo)
             throw new IllegalArgumentException("No se ha encontrado la reserva");
         return R;
     }
 
     @Override
     public Collection<Reserva> buscarReserva(String tipo, String info) {
-        return reservaRepositorio.buscarReserva(tipo, info);
+        List<Reserva> lista = reservaRepositorio.findAll();
+        List<Reserva> lista2 = new ArrayList<>();
+        switch (tipo) {
+            case "idR":
+                lista2 = lista.stream().filter(r -> r.getIdR().equals(Long.parseLong(info))).collect(Collectors.toList());
+                break;
+            case "fechaIni":
+                lista2 = lista.stream().filter(r -> r.getFechaIni().equals(info)).collect(Collectors.toList());
+                break;
+            case "fechaFin":
+                lista2 = lista.stream().filter(r -> r.getFechaFin().equals(info)).collect(Collectors.toList());
+                break;
+            case "precioTotal":
+                lista2 = lista.stream().filter(r -> r.getPrecioTotal().equals(BigDecimal.valueOf(Double.parseDouble(info)))).collect(Collectors.toList());
+                break;
+            case "pagado":
+                lista2 = lista.stream().filter(r -> r.getPagado().equals(BigDecimal.valueOf(Double.parseDouble(info)))).collect(Collectors.toList());
+                break;
+            case "idC":
+                lista2 = lista.stream().filter(r -> r.getIdCliente().equals(Long.parseLong(info))).collect(Collectors.toList());
+                break;
+            case "idA":
+                lista2 = lista.stream().filter(r -> r.getIdAutocaravana().equals(Long.parseLong(info))).collect(Collectors.toList());
+                break;
+            case "estadoR":
+                lista2 = lista.stream().filter(r -> r.getEstadoR().equals(info)).collect(Collectors.toList());
+                break;
+            default:
+                throw new IllegalArgumentException("Error en el tipo de busqueda");
+        }
+        return lista2;
     }
 
     @Override
-    public int getCantidadReservas() {return reservaRepositorio.cargarReserva().size();}
+    public int getCantidadReservas() {return reservaRepositorio.findAll().size();}
 
     @Override
-    public void eliminarReserva(int idR) {
-        reservaRepositorio.eliminarReserva(idR);
+    public void eliminarReserva(Long idR) {
+        reservaRepositorio.deleteById(idR);
     }
 
     @Override
-    public void cancelarReserva(int idR)
+    public void cancelarReserva(Long idR)
     {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
         if (R.getEstadoR().equals("Cancelada"))
             throw new IllegalArgumentException("La reserva ya está cancelada");
@@ -195,63 +229,63 @@ public class ReservaServicioImpl implements iReservaServicio {
         if(reservaReglas.condicionesCancelacion(R))
             R.setEstadoR("Cancelada");
         R.setPrecioTotal(R.getPrecioTotal().subtract(reservaReglas.calcularTasaCancelacion(R)));
-        reservaRepositorio.guardarReserva(R);
+        reservaRepositorio.save(R);
     }
 
 
     @Override
-    public void setEstadoReserva(int idR, String estado) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public void setEstadoReserva(Long idR, String estado) {
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
         R.setEstadoR(estado);
-        reservaRepositorio.guardarReserva(R);
+        reservaRepositorio.save(R);
     }
 
     @Override
-    public void setPrecioTotal(int idR, float precioTotal)
+    public void setPrecioTotal(Long idR, float precioTotal)
     {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
         R.setPrecioTotal(BigDecimal.valueOf(precioTotal));
-        reservaRepositorio.guardarReserva(R);
+        reservaRepositorio.save(R);
     }
 
     @Override
-    public void setAutocaravana(int idR, int idA) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public void setAutocaravana(Long idR, Long idA) {
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
-        if (reservaRepositorio.buscarReserva(idA) == null)
+        if (reservaRepositorio.getById(idA) == Reserva.ReservaNulo)
             throw new IllegalArgumentException("La autocaravana no existe");
         Autocaravana A = autocaravanaServicio.buscarAutocaravana(idA);
         Cliente C = clienteServicio.buscarCliente(R.getIdCliente());
         if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),A, C))
             throw new IllegalArgumentException("La autocaravana no puede reservarse");
         R.setIdAutocaravana(A.getIdA());
-        reservaRepositorio.guardarReserva(R);
+        reservaRepositorio.save(R);
 
     }
 
     @Override
-    public void setCliente(int idR, Long idC) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public void setCliente(Long idR, Long idC) {
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
-        if (reservaRepositorio.buscarReserva(idR) == null)
+        if (reservaRepositorio.getById(idR) == Reserva.ReservaNulo)
             throw new IllegalArgumentException("El cliente no existe");
             Cliente C = clienteServicio.buscarCliente(idC);
         if (!reservaReglas.comprobarReserva(R.fechaIniF(), R.fechaFinF(),autocaravanaServicio.buscarAutocaravana(idR), C))
             throw new IllegalArgumentException("El cliente no puede reservar la autocaravana");
         R.setIdCliente(C.getIdC());
-        reservaRepositorio.guardarReserva(R);
+        reservaRepositorio.save(R);
     }
 
     @Override
-    public void setFechaIni(int  idR, String fechaIni) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public void setFechaIni(Long  idR, String fechaIni) {
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
 
         try {
@@ -260,13 +294,13 @@ public class ReservaServicioImpl implements iReservaServicio {
             throw new IllegalArgumentException("Error en el formato de las fechas.");
         }
         R.setFechaIni(fechaIni);
-        reservaRepositorio.guardarReserva(R);
+        reservaRepositorio.save(R);
     }
 
     @Override
-    public void setFechaFin(int idR, String fechaFin) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public void setFechaFin(Long idR, String fechaFin) {
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
         try {
             LocalDate.parse(fechaFin);
@@ -274,24 +308,24 @@ public class ReservaServicioImpl implements iReservaServicio {
             throw new IllegalArgumentException("Error en el formato de las fechas.");
         }
         R.setFechaFin(fechaFin);
-        reservaRepositorio.guardarReserva(R);}
+        reservaRepositorio.save(R);}
 
     @Override
-    public void setPrecioTotal(int idR, BigDecimal precioTotal) {
-        Reserva R = reservaRepositorio.buscarReserva(idR);
-        if (R == null)
+    public void setPrecioTotal(Long idR, BigDecimal precioTotal) {
+        Reserva R = reservaRepositorio.getById(idR);
+        if (R == Reserva.ReservaNulo)
             throw new IllegalArgumentException("Error no se encontro la reserva");
 
         if (precioTotal.compareTo(BigDecimal.ZERO) < 0)
             throw new IllegalArgumentException("El precio no puede ser negativo");
         R.setPrecioTotal(precioTotal);
-        reservaRepositorio.guardarReserva(R);
+        reservaRepositorio.save(R);
     }
 
 
     @Override
-    public void modificarReservaEnCurso(int idR, String fechF) {
-        Reserva reserva = reservaRepositorio.buscarReserva(idR);
+    public void modificarReservaEnCurso(Long idR, String fechF) {
+        Reserva reserva = reservaRepositorio.getById(idR);
         if (reserva == null)
             throw new IllegalArgumentException("No se ha encontrado la reserva.");
         LocalDate fechaFin;
@@ -316,13 +350,13 @@ public class ReservaServicioImpl implements iReservaServicio {
                 throw new IllegalArgumentException("No se puede modificar la reserva.");
             reserva.setFechaFin(fechF);
             reserva.setPrecioTotal(reservaReglas.calculaPrecioTotal(autocaravanaServicio.buscarAutocaravana(idR),clienteServicio.buscarCliente(reserva.getIdCliente()), reserva.fechaIniF(), fechaFin).add( reservaReglas.calcularTasaModificacion(reserva)));
-            reservaRepositorio.guardarReserva(reserva);
+            reservaRepositorio.save(reserva);
         }
     }
 
     @Override
-    public void modificarReserva(int idR, int idA, String fechI, String fechF){ //todavia no esta en curso
-        Reserva reserva = reservaRepositorio.buscarReserva(idR);
+    public void modificarReserva(Long idR, Long idA, String fechI, String fechF){ //todavia no esta en curso
+        Reserva reserva = reservaRepositorio.getById(idR);
         Autocaravana a = autocaravanaServicio.buscarAutocaravana(idA);
         if (reserva == null)
             throw new IllegalArgumentException("No se ha encontrado la reserva");
@@ -365,7 +399,7 @@ public class ReservaServicioImpl implements iReservaServicio {
 
     @Override
     public Collection<Reserva> getListaReservas() {
-        return reservaRepositorio.cargarReserva();
+        return reservaRepositorio.findAll();
     }
 
     @Override
@@ -382,6 +416,23 @@ public class ReservaServicioImpl implements iReservaServicio {
         if(reservaEstadoRepositorio.cargarEstado("Reserva").contains(estado)) return "No existe el estado en la lista de estados de reserva";
         reservaEstadoRepositorio.eliminarEstado(new Estado("Reserva",estado));
         return "Estado eliminado correctamente";
+    }
+
+    @Override
+    public List<Autocaravana> getListaAutocaravanasDisponibles(LocalDate fecha) {
+        List<Autocaravana> autocaravanas = (List<Autocaravana>) autocaravanaServicio.getListaAutocaravanas();
+        List<Reserva> reservas = reservaRepositorio.findAll();
+        List<Autocaravana> autocaravanasDisponibles = new ArrayList<>();
+        for (Autocaravana a : autocaravanas) {
+            for (Reserva r : reservas) {
+                if (r.getIdAutocaravana() == a.getIdA()) {
+                    if (fecha.isAfter(r.fechaIniF()) && fecha.isBefore(r.fechaFinF())) {
+                        autocaravanasDisponibles.add(a);
+                    }
+                }
+            }
+        }
+        return autocaravanasDisponibles;
     }
 
 
