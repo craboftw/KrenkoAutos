@@ -1,22 +1,18 @@
 package uca.core.servicio.implementaciones;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import uca.core.dao.iClienteRepositorio;
 import uca.core.dao.iEstadoRepositorio;
 import uca.core.dominio.Cliente;
 import uca.core.dominio.Estado;
-import uca.core.servicio.interfaces.iClienteServicio;
 import uca.core.servicio.implementaciones.reglas.ClienteReglas;
+import uca.core.servicio.interfaces.iClienteServicio;
 
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
-
-
 
 import static java.util.Collections.emptyList;
 
@@ -25,7 +21,7 @@ public class ClienteServicioImpl implements iClienteServicio {
 
     private iClienteRepositorio clienteRepositorio;
     private final iEstadoRepositorio clienteEstadoRepositorio;
-    private  ClienteReglas clienteReglas = new ClienteReglas(clienteRepositorio);
+    private final ClienteReglas clienteReglas = new ClienteReglas();
 
     @Autowired
     public ClienteServicioImpl(iClienteRepositorio clienteRepositorio, iEstadoRepositorio clienteEstadoRepositorio) {

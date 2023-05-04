@@ -5,21 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49349009-ddd1-4139-a5c3-18ca715234d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/web/src/main/java/WEB-INF/spring/app.config.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/MainWebAppInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/cliente/listar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/templates/sample.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/src/main/java/SpringbootThymeleafWebAppApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iClienteRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iClienteRepositorio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/spring-shell.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/web/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.jpb/persistence-units.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/web/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/web/mvnw.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/SpringApp/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/SpringApp/WebApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/WEB-INF/spring/app.config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/SpringApp/WebApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/MainWebAppInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dummyimplementaciones/AutocaravanaRepositorioImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dummyimplementaciones/EstadoRepositorio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dummyimplementaciones/ReservaRepositorioImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/cliente/listar.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/uca/web/WebApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/uca/web/WebApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/sample.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/uca/web/WebApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +64,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/craboftw/Documentos/GitHub/KrenkoAutos&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/craboftw/Documentos/GitHub/KrenkoAutos/web/src/main/java&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -73,7 +82,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/src/main/java" />
       <recent name="$PROJECT_DIR$/web/src/main/resources/templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/src/main/java" />
     </key>
   </component>
   <component name="RunManager">
@@ -111,6 +124,8 @@
       <workItem from="1683067987359" duration="17000" />
       <workItem from="1683068027807" duration="16000" />
       <workItem from="1683068062962" duration="594000" />
+      <workItem from="1683141116423" duration="911000" />
+      <workItem from="1683142676991" duration="787000" />
     </task>
     <servers />
   </component>

@@ -1,16 +1,25 @@
 package uca.core.dominio;
 
+import lombok.Getter;
+import lombok.Setter;
 
-import lombok.Data;
-
-import javax.persistence.Transient;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.math.BigDecimal;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@Entity
+@Table(name = "autocaravanas")
 public class Autocaravana {
 
-    private int vecesReservada;
+    @Id
     private final Long idA;
+
+    private int vecesReservada;
     private final String matricula;
     private int plazas;
     private String modelo;
@@ -57,6 +66,18 @@ public class Autocaravana {
            return "ID: " + idA + " | Modelo: " + modelo + " | Precio por día: " + precioPorDia + " | Plazas: " + plazas + " | Matrícula: " + matricula + " | Kilometraje: " + kilometraje + " | Estado: " + estadoA + " | Veces reservada: " + vecesReservada;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Autocaravana that = (Autocaravana) o;
+        return getIdA() != null && Objects.equals(getIdA(), that.getIdA());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
 
 

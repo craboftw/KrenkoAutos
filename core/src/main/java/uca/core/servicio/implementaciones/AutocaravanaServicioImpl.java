@@ -6,26 +6,26 @@ import uca.core.dao.iAutocaravanaRepositorio;
 import uca.core.dao.iEstadoRepositorio;
 import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Estado;
-import uca.core.servicio.interfaces.iAutocaravanaServicio;
 import uca.core.servicio.implementaciones.reglas.AutocaravanaReglas;
+import uca.core.servicio.interfaces.iAutocaravanaServicio;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 @Service
 public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
 
-    private final iAutocaravanaRepositorio autocaravanaRepositorio;
+    private iAutocaravanaRepositorio autocaravanaRepositorio;
     private final iEstadoRepositorio autocaravanaEstadoRepositorio;
     private final AutocaravanaReglas autocaravanaReglas = new AutocaravanaReglas();
-
 
     @Autowired
     public AutocaravanaServicioImpl(iAutocaravanaRepositorio autocaravanaRepositorio, iEstadoRepositorio autocaravanaEstadoRepositorio) {
         this.autocaravanaRepositorio = autocaravanaRepositorio;
         this.autocaravanaEstadoRepositorio = autocaravanaEstadoRepositorio;
-
     }
 
 

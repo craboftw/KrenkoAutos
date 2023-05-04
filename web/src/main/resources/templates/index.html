@@ -1,10 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prueba</title>
+    <title>Lista de Clientes</title>
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
 </head>
 <body>
-<h1>Prueba</h1>
+<h1>Lista de Clientes</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>DNI</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Cantidad de Reservas</th>
+        <th>Multas</th>
+        <th>Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Use Thymeleaf to loop through the list of clients -->
+    <tr th:each="cliente : ${clientes}">
+        <td th:text="${cliente.idC}"></td>
+        <td th:text="${cliente.nombre}"></td>
+        <td th:text="${cliente.apellido}"></td>
+        <td th:text="${cliente.telefono}"></td>
+        <td th:text="${cliente.email}"></td>
+        <td th:text="${cliente.dni}"></td>
+        <td th:text="${cliente.fechaNacimiento}"></td>
+        <td th:text="${cliente.cantidadReservasRealizadas}"></td>
+        <td th:text="${cliente.multas}"></td>
+        <td th:text="${cliente.estado}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
-
 </html>

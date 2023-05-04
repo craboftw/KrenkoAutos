@@ -1,26 +1,29 @@
 package uca.core.dominio;
 
-import lombok.*;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+
+
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 //Importaciones de JPA
 
 
+
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "clientes")
-public class Cliente implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idC;
     private String nombre;
     private String apellido;
@@ -89,6 +92,22 @@ public class Cliente implements Serializable {
 
     // ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Otros métodos‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "idC=" + idC +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", dni='" + dni + '\'' +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", cantidadReservasRealizadas=" + cantidadReservasRealizadas +
+                ", multas=" + multas +
+                ", estado='" + estado + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
