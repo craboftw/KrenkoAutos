@@ -435,6 +435,9 @@ public class ReservaServicioImpl implements iReservaServicio {
         return autocaravanasDisponibles;
     }
 
+    public void guardarReserva(Reserva reserva) {
+        reservaRepositorio.save(reserva);
+    }
 
 }
 

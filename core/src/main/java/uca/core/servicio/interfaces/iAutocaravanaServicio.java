@@ -52,6 +52,8 @@ public interface iAutocaravanaServicio {
 
     void setPrecio(Long idA, BigDecimal precio);
 
+    void guardarAutocaravana(Autocaravana autocaravana);
+
     String crearEstado(String estado);
     String eliminarEstado(String estado);
 }

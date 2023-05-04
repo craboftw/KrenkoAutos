@@ -48,4 +48,6 @@ public interface iReservaServicio {
     String crearEstado(String estado);
     String eliminarEstado(String estado);
     List<Autocaravana> getListaAutocaravanasDisponibles(LocalDate fecha);
+
+    void guardarReserva(Reserva r);
 }
