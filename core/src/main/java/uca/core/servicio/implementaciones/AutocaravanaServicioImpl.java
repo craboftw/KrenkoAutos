@@ -262,6 +262,7 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
     public void guardarAutocaravana(Autocaravana autocaravana) {
         if (autocaravana == Autocaravana.AutocaravanaNulo)
             throw new IllegalArgumentException("La autocaravana no puede ser nula");
+
         autocaravanaRepositorio.save(autocaravana);
     }
 }
