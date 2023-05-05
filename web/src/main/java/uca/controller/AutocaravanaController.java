@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import uca.core.dominio.Autocaravana;
 import uca.core.servicio.interfaces.iAutocaravanaServicio;
+import uca.dto.AutocaravanaDTO;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -26,7 +27,7 @@ public class AutocaravanaController {
     @GetMapping("/{id}")
     public ResponseEntity<Autocaravana> buscarAutocaravanaPorId(@PathVariable("id") Long id) {
         Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana(id);
-        if (autocaravana == null) {
+        if (autocaravana == autocaravana.AutocaravanaNulo) {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok(autocaravana);
@@ -34,9 +35,10 @@ public class AutocaravanaController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Autocaravana> altaAutocaravana(@RequestParam String mod, @RequestParam BigDecimal precio, @RequestParam int plaz, @RequestParam String matr, @RequestParam int kilometraj) {
-        autocaravanaServicio.altaAutocaravana(mod, precio, plaz, matr, kilometraj);
-        return ResponseEntity.created(URI.create("/autocaravanas/" + matr)).build();
+    public ResponseEntity<Autocaravana> altaAutocaravana(@RequestParam AutocaravanaDTO intento) {
+        autocaravanaServicio.altaAutocaravana(intento.getModelo(), intento.getPrecioPorDia(), intento.getPlazas(), intento.getMatricula(), intento.getKilometraje());
+        Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana("matricula",intento.getMatricula()).stream().findFirst().get();
+        return ResponseEntity.created(URI.create("/autocaravanas/" + autocaravana.getIdA())).body(autocaravana);
     }
 
     @GetMapping("/numero-autocaravanas")
@@ -56,22 +58,7 @@ public class AutocaravanaController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Autocaravana> modificarAutocaravana(@PathVariable("id") Long id, @RequestBody Autocaravana autocaravana) {
-        Autocaravana autocaravanaActual = autocaravanaServicio.buscarAutocaravana(id);
-        if (autocaravanaActual == null) {
-            return ResponseEntity.notFound().build();
-        } else {
-            autocaravana.setIdA(id);
-            autocaravanaServicio.setKilometraje(id, autocaravana.getKilometraje());
-            autocaravanaServicio.setEstado(id, autocaravana.getEstadoA());
-            autocaravanaServicio.setModelo(id, autocaravana.getModelo());
-            autocaravanaServicio.setPrecio(id, autocaravana.getPrecioPorDia());
-            autocaravanaServicio.setPlazas(id, autocaravana.getPlazas());
-            autocaravanaServicio.guardarAutocaravana(autocaravana);
-            return ResponseEntity.ok(autocaravana);
-        }
-    }
+   @PostMapping
 
     @GetMapping
     public ResponseEntity<Collection<Autocaravana>> buscarAutocaravanaPorTipoDato(@RequestParam(required = false) String tipo,
@@ -86,6 +73,45 @@ public class AutocaravanaController {
             return ResponseEntity.ok(autocaravanas);
         }
     }
+
+    @PutMapping("/modelo{id}")
+    public ResponseEntity<Autocaravana> modificarModelo(@PathVariable("id") Long id, @RequestParam String modelo) {
+        Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana(id);
+        if (autocaravana == Autocaravana.AutocaravanaNulo) {
+            return ResponseEntity.notFound().build();
+        } else {
+            autocaravanaServicio.setModelo(id, modelo);
+            return ResponseEntity.ok(autocaravana);
+        }
+    }
+
+    @PutMapping("/precioPorDia{id}")
+    public ResponseEntity<Autocaravana> modificarPrecioPorDia(@PathVariable("id") Long id, @RequestParam BigDecimal precioPorDia) {
+        Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana(id);
+        if (autocaravana == Autocaravana.AutocaravanaNulo) {
+            return ResponseEntity.notFound().build();
+        } else {
+            autocaravanaServicio.setPrecio(id, precioPorDia);
+            return ResponseEntity.ok(autocaravana);
+        }
+    }
+
+    @PutMapping("/plazas{id}")
+    public ResponseEntity<Autocaravana> modificarPlazas(@PathVariable("id") Long id, @RequestParam int plazas) {
+        Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana(id);
+        if (autocaravana == Autocaravana.AutocaravanaNulo) {
+            return ResponseEntity.notFound().build();
+        } else {
+            autocaravanaServicio.setPlazas(id, plazas);
+            return ResponseEntity.ok(autocaravana);
+        }
+    }
+
+
+
+
+
+
 
 
 

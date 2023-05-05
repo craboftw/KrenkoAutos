@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import uca.core.dominio.Cliente;
 import uca.core.servicio.interfaces.iClienteServicio;
+import uca.dto.ClienteDTO;
 
 import java.net.URI;
 import java.util.Collection;
@@ -34,8 +35,9 @@ public class ClienteController {
 	}
 
 	@PostMapping("/")
-	public ResponseEntity<Cliente> altaCliente(@RequestBody Cliente cliente) {
-		clienteServicio.guardarCliente(cliente);
+	public ResponseEntity<Cliente> altaCliente(@RequestBody ClienteDTO intento) {
+		clienteServicio.altaCliente(intento.getNombre(), intento.getApellido(), intento.getTelefono(), intento.getFechaNacimiento(), intento.getDni(), intento.getEmail());
+		Cliente cliente = clienteServicio.buscarCliente(intento.getDni());
 		return ResponseEntity.created(URI.create("/clientes/" + cliente.getIdC())).body(cliente);
 	}
 
@@ -56,51 +58,52 @@ public class ClienteController {
 		}
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> modificarCliente(@PathVariable("id") Long id, @RequestBody Cliente cliente) {
-		Cliente clienteActual = clienteServicio.buscarCliente(id);
-		if (clienteActual == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			cliente.setIdC(id);
-			clienteServicio.guardarCliente(cliente);
-			return ResponseEntity.ok(cliente);
-		}
-	}
 
-	@GetMapping
-	public ResponseEntity<Collection<Cliente>> buscarClientePorDni(@RequestParam(required = false) String dni,
-																   @RequestParam(required = false) String campo,
+
+	@GetMapping("/buscar{campo}/{dato}")
+	public ResponseEntity<Collection<Cliente>> buscarClientePorDni(@RequestParam(required = false) String campo,
 																   @RequestParam(required = false) String dato) {
-		Collection<Cliente> clientes;
-		if (dni != null) {
-			clientes = (Collection<Cliente>) clienteServicio.buscarCliente(dni);
-		} else if (campo != null && dato != null) {
-			clientes = clienteServicio.buscarCliente(campo, dato);
-		} else {
-			clientes = clienteServicio.getListaClientes();
-		}
-		return ResponseEntity.ok(clientes);
+		return ResponseEntity.ok(clienteServicio.buscarCliente(campo, dato));
 	}
 
-
-	@PutMapping("/{id}")
-	public ResponseEntity<?> actualizarClientePorId(@PathVariable Long id, @RequestBody Cliente cliente) {
-		Cliente clienteActual = clienteServicio.buscarCliente(id);
-		if (clienteActual != null) {
-			clienteActual.setNombre(cliente.getNombre());
-			clienteActual.setApellido(cliente.getApellido());
-			clienteActual.setTelefono(cliente.getTelefono());
-			clienteActual.setEmail(cliente.getEmail());
-			clienteActual.setDni(cliente.getDni());
-			clienteActual.setFechaNacimiento(cliente.getFechaNacimiento());
-			clienteActual.setMultas(cliente.getMultas());
-			clienteActual.setCantidadReservasRealizadas(cliente.getCantidadReservasRealizadas());
-			clienteActual.setEstado(cliente.getEstado());
-			clienteServicio.guardarCliente(clienteActual);
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
+	//Actualizar todos los campos de un cliente
+	@PutMapping("/dni/{id}")
+	public ResponseEntity<Cliente> modificarDni(@PathVariable("id") Long id, @RequestBody String dni) {
+			clienteServicio.setDni(id, dni);
+			return ResponseEntity.ok(clienteServicio.buscarCliente(id));
 		}
-	}
+
+	@PutMapping("/nombre/{id}")
+		public ResponseEntity<Cliente> modificarNombre(@PathVariable("id") Long id, @RequestBody String nombre) {
+			clienteServicio.setNombre(id, nombre);
+			return ResponseEntity.ok(clienteServicio.buscarCliente(id));
+		}
+
+	@PutMapping("/apellidos/{id}")
+		public ResponseEntity<Cliente> modificarApellidos(@PathVariable("id") Long id, @RequestBody String apellidos) {
+			clienteServicio.setApellido(id, apellidos);
+			return ResponseEntity.ok(clienteServicio.buscarCliente(id));
+		}
+
+	@PutMapping("/telefono/{id}")
+		public ResponseEntity<Cliente> modificarTelefono(@PathVariable("id") Long id, @RequestBody String telefono) {
+			clienteServicio.setTelefono(id, telefono);
+			return ResponseEntity.ok(clienteServicio.buscarCliente(id));
+		}
+
+	@PutMapping("/email/{id}")
+		public ResponseEntity<Cliente> modificarEmail(@PathVariable("id") Long id, @RequestBody String email) {
+			clienteServicio.setEmail(id, email);
+			return ResponseEntity.ok(clienteServicio.buscarCliente(id));
+		}
+
+	@PutMapping("/fechaNacimiento/{id}")
+		public ResponseEntity<Cliente> modificarFechaNacimiento(@PathVariable("id") Long id, @RequestBody String fechaNacimiento) {
+			clienteServicio.setFechaNacimiento(id, fechaNacimiento);
+			return ResponseEntity.ok(clienteServicio.buscarCliente(id));
+		}
+
+
+
+
 }
