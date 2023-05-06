@@ -8,5 +8,4 @@ public class ReservaDTO {
     private Long idAutocaravana;
     private String fechaIni;
     private String fechaFin;
-    private String estadoR;
 }

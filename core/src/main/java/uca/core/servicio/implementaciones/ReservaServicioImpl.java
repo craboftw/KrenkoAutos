@@ -79,7 +79,12 @@ public class ReservaServicioImpl implements iReservaServicio {
               throw new IllegalArgumentException("La reserva ya existe");
             }
        //el idR es el id de la reserva mas alta +1
-        Long idR =  (reservaRepositorio.findAll().stream().max(Comparator.comparing(Reserva::getIdR)).get().getIdR() + 1L);
+        Long idR = 0L;
+        for (Reserva R : reservaRepositorio.findAll()) {
+            if (R.getIdR() > idR)
+                idR = R.getIdR();
+        }
+        idR++;
         Reserva reserva = new Reserva(idR, fechI, fechF,reservaReglas.calculaPrecioTotal(A,C,fechaIni,fechaFin), BigDecimal.ZERO, C.getIdC(), A.getIdA(), "Pendiente");
         reservaRepositorio.save(reserva);
     }

@@ -35,9 +35,9 @@ public class AutocaravanaController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Autocaravana> altaAutocaravana(@RequestParam AutocaravanaDTO intento) {
+    public ResponseEntity<Autocaravana> altaAutocaravana(@RequestBody AutocaravanaDTO intento) {
         autocaravanaServicio.altaAutocaravana(intento.getModelo(), intento.getPrecioPorDia(), intento.getPlazas(), intento.getMatricula(), intento.getKilometraje());
-        Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana("matricula",intento.getMatricula()).stream().findFirst().get();
+        Autocaravana autocaravana = autocaravanaServicio.getListaAutocaravanas().stream().toList().get(autocaravanaServicio.getListaAutocaravanas().size()-1);
         return ResponseEntity.created(URI.create("/autocaravanas/" + autocaravana.getIdA())).body(autocaravana);
     }
 

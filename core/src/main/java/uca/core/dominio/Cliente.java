@@ -59,6 +59,7 @@ public class Cliente {
         nombre = "";
         apellido = "";
         telefono = "";
+        fechaNacimiento = "1000-01-01";
         dni = "";
         email = "";
         cantidadReservasRealizadas = 0;

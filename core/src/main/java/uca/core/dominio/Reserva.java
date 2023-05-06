@@ -1,10 +1,11 @@
 package uca.core.dominio;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -24,6 +25,8 @@ public class Reserva {
     private String estadoR;
     private BigDecimal precioTotal;
     private BigDecimal pagado;
+
+    @Transient
     public static Reserva ReservaNulo = new Reserva();
     //    ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧ Constructores‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
     public Reserva(Long id, String fechI, String fechF,BigDecimal precioTot,BigDecimal paga, Long idC, Long idA, String estado) {

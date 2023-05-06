@@ -11,7 +11,8 @@ import uca.dto.ReservaDTO;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-@RestController("/reservas")
+@RestController
+@RequestMapping("/reservas")
 public class ReservaController {
 
     private iReservaServicio reservaServicio;
@@ -44,7 +45,7 @@ public class ReservaController {
 
 
     @PostMapping("/")
-    public ResponseEntity<Reserva> altaReserva(@RequestBody uca.dto.ReservaDTO intento) {
+    public ResponseEntity<Reserva> altaReserva(@RequestBody ReservaDTO intento) {
         reservaServicio.altaReserva(intento.getIdAutocaravana(), intento.getIdCliente(), intento.getFechaIni(), intento.getFechaFin());
         //get the last reserva
         Reserva R = reservaServicio.getListaReservas().stream().toList().get(reservaServicio.getListaReservas().size()-1);
@@ -124,6 +125,28 @@ public class ReservaController {
             return ResponseEntity.notFound().build();
         } else {
             reservaServicio.setPrecioTotal(id, precioTotal);
+            return ResponseEntity.ok(reserva);
+        }
+    }
+
+    @PutMapping("/checkin/{id}")
+    public ResponseEntity<Reserva> modificarReservaCheckin(@PathVariable("id") Long id) {
+        Reserva reserva = reservaServicio.buscarReserva(id);
+        if (reserva == Reserva.ReservaNulo) {
+            return ResponseEntity.notFound().build();
+        } else {
+            reservaServicio.checkin(id);
+            return ResponseEntity.ok(reserva);
+        }
+    }
+
+    @PutMapping("/checkout/{id}")
+    public ResponseEntity<Reserva> modificarReservaCheckout(@PathVariable("id") Long id) {
+        Reserva reserva = reservaServicio.buscarReserva(id);
+        if (reserva == Reserva.ReservaNulo) {
+            return ResponseEntity.notFound().build();
+        } else {
+            reservaServicio.checkout(id);
             return ResponseEntity.ok(reserva);
         }
     }
