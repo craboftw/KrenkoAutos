@@ -33,7 +33,6 @@ public class Cliente {
     private String fechaNacimiento;
     private int cantidadReservasRealizadas;
     private int multas;
-
     private String estado;
 
     //Anotate

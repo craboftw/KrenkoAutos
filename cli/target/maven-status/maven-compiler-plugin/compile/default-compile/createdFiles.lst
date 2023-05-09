@@ -2,12 +2,12 @@ uca/springCli/shell/ClienteShell.class
 uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.class
 uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl.class
 uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.class
-uca/springCli/repositorio/Implementaciones/EstadoRepositorio$1.class
+uca/springCli/repositorio/Implementaciones/EstadoRepositorioImpl$1.class
 uca/springCli/MySpringCliApplication.class
+uca/springCli/repositorio/Implementaciones/EstadoRepositorioImpl.class
 uca/springCli/shell/PrintShell.class
 uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl$1.class
 uca/springCli/shell/AutocaravanaShell.class
-uca/springCli/repositorio/Implementaciones/EstadoRepositorio.class
 uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl$1.class
 uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl$1.class
 uca/springCli/shell/ReservaShell.class

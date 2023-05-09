@@ -410,16 +410,16 @@ public class ReservaServicioImpl implements iReservaServicio {
     @Override
     public String crearEstado(String estado)
     {
-        if(reservaEstadoRepositorio.cargarEstado("Reserva").contains(estado)) return "Ya existe el estado en la lista de estados de reserva";
-        reservaEstadoRepositorio.guardarEstado(new Estado("Reserva",estado));
+        if (estado.isEmpty() & reservaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Reserva",estado))) return "Ya existe el estado en la lista de estados de reserva";
+        reservaEstadoRepositorio.save(new Estado("Reserva",estado));
         return "Estado creado correctamente";
     }
 
     @Override
     public String eliminarEstado(String estado)
     {
-        if(reservaEstadoRepositorio.cargarEstado("Reserva").contains(estado)) return "No existe el estado en la lista de estados de reserva";
-        reservaEstadoRepositorio.eliminarEstado(new Estado("Reserva",estado));
+        if(reservaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Reserva",estado))) return "No existe el estado en la lista de estados de reserva";
+        reservaEstadoRepositorio.delete(new Estado("Reserva",estado));
         return "Estado eliminado correctamente";
     }
 

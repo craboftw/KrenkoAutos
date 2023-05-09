@@ -1,9 +1,21 @@
 package uca.core.dominio;
 
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@Entity
+@Table(name = "estados")
 public class Estado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Transient
+    public static Estado EstadoNulo = new Estado();
     String tipo;
     String valor;
     public Estado(String tip, String val)
@@ -14,6 +26,7 @@ public class Estado {
 
     public Estado()
     {
+        id = 0L;
         tipo = "";
         valor = "";
     }

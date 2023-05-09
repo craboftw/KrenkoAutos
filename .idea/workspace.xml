@@ -5,29 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49349009-ddd1-4139-a5c3-18ca715234d3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/web/src/main/java/SpringbootThymeleafWebAppApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/spring-shell.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/web/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.jpb/persistence-units.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/web/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/web/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iEstadoRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iEstadoRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Estado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/AutocaravanaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/AutocaravanaServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/WEB-INF/spring/app.config.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/SpringApp/WebApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/MainWebAppInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/WebConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controladorweb/controladorweb.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dummyimplementaciones/AutocaravanaRepositorioImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dummyimplementaciones/EstadoRepositorio.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dummyimplementaciones/ReservaRepositorioImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/cliente/listar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/sample.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/uca/web/WebApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/EstadoRepositorio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/controller/ClienteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controller/ReservaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/controller/ReservaController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +114,7 @@
       <workItem from="1683068062962" duration="594000" />
       <workItem from="1683141116423" duration="911000" />
       <workItem from="1683142676991" duration="787000" />
+      <workItem from="1683615000462" duration="10000" />
     </task>
     <servers />
   </component>

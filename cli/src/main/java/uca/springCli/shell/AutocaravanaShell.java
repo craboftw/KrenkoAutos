@@ -9,7 +9,7 @@ import uca.core.dominio.Autocaravana;
 import uca.core.servicio.interfaces.iAutocaravanaServicio;
 import uca.core.servicio.implementaciones.AutocaravanaServicioImpl;
 import uca.springCli.repositorio.Implementaciones.AutocaravanaRepositorioImpl;
-import uca.springCli.repositorio.Implementaciones.EstadoRepositorio;
+import uca.springCli.repositorio.Implementaciones.EstadoRepositorioImpl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,7 +22,7 @@ public class AutocaravanaShell {
 
     @Autowired
     AutocaravanaShell() {
-        this.autocaravanaServicio = new AutocaravanaServicioImpl(new AutocaravanaRepositorioImpl(), new EstadoRepositorio());
+        this.autocaravanaServicio = new AutocaravanaServicioImpl(new AutocaravanaRepositorioImpl(), new EstadoRepositorioImpl());
     }
 
     private final iAutocaravanaServicio autocaravanaServicio;

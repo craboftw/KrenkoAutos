@@ -82,14 +82,17 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
 
     @Override
     public Collection<String> getListaEstadoAutocaravana() {
-        return autocaravanaEstadoRepositorio.cargarEstado("Autocaravana");
+        var lista =  autocaravanaEstadoRepositorio.findAll().stream().filter(e -> e.getTipo().equals("Autocaravana"));
+        List<String> estados = new ArrayList<>();
+        lista.forEach(e -> estados.add(e.getValor()));
+        return estados;
     }
 
 
 
     @Override
     public boolean comprobarEstadoAutocaravana(String estado) {
-        return autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado);
+        return autocaravanaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Autocaravana",estado));
     }
 
 
@@ -151,7 +154,7 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
     public void setEstado(Long id, String estado) {
         if (estado.isEmpty())
             throw new IllegalArgumentException("El estado no puede estar vacio");
-        if (!autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado))
+        if (!autocaravanaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Autocaravana",estado)))
             throw new IllegalArgumentException("El estado no es correcto");
         var autocaravanas = autocaravanaRepositorio.findAll();
         autocaravanas.stream().filter(a -> a.getIdA() == id).forEach(a -> a.setEstadoA(estado));
@@ -162,7 +165,7 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
     public void setEstado(String matricula, String estado) {
         if (estado.isEmpty())
             throw new IllegalArgumentException("El estado no puede estar vacio");
-        if (!autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado))
+        if (!autocaravanaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Autocaravana",estado)))
             throw new IllegalArgumentException("El estado no es correcto");
         var autocaravanas = autocaravanaRepositorio.findAll();
         autocaravanas.stream().filter(a -> a.getMatricula().equals(matricula)).forEach(a -> a.setEstadoA(estado));
@@ -202,8 +205,8 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
 
     @Override
     public void eliminarEstadoAutocaravana(String estado) {
-           if (!estado.isEmpty() & autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado)) {
-               autocaravanaEstadoRepositorio.eliminarEstado(new Estado("Autocaravana", estado));
+        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Autocaravana",estado))) {
+               autocaravanaEstadoRepositorio.delete(new Estado("Autocaravana", estado));
             } else {
                 throw new IllegalArgumentException("El estado no es correcto");
             }
@@ -211,8 +214,8 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
 
     @Override
     public void addEstadoAutocaravana(String estado) {
-        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado)) {
-            autocaravanaEstadoRepositorio.guardarEstado(new Estado("Autocaravana", estado));
+        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Autocaravana",estado))) {
+            autocaravanaEstadoRepositorio.save(new Estado("Autocaravana", estado));
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
         }
@@ -239,8 +242,8 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
     @Override
     public String crearEstado(String estado)
     {
-        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado)) {
-            autocaravanaEstadoRepositorio.guardarEstado(new Estado("Autocaravana", estado));
+        if (!estado.isEmpty() & !autocaravanaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Autocaravana",estado))) {
+            autocaravanaEstadoRepositorio.save(new Estado("Autocaravana", estado));
         } else {
             return "El estado no es correcto";
         }
@@ -250,8 +253,8 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
     @Override
     public String eliminarEstado(String estado)
     {
-        if (!estado.isEmpty() & autocaravanaEstadoRepositorio.cargarEstado("Autocaravana").contains(estado)) {
-               autocaravanaEstadoRepositorio.eliminarEstado(new Estado("Autocaravana", estado));
+        if (!estado.isEmpty() & autocaravanaEstadoRepositorio.findAll().stream().toList().contains(new Estado("Autocaravana",estado))) {
+               autocaravanaEstadoRepositorio.delete(new Estado("Autocaravana", estado));
                return "Estado eliminado";
             } else {
                 return "El estado no existe";

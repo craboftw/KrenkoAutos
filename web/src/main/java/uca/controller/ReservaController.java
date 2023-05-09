@@ -3,6 +3,7 @@ package uca.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uca.core.dao.iReservaRepositorio;
 import uca.core.dominio.Reserva;
 import uca.core.servicio.interfaces.iReservaServicio;
 
@@ -16,10 +17,13 @@ import java.util.Collection;
 public class ReservaController {
 
     private iReservaServicio reservaServicio;
+    private final uca.core.dao.iReservaRepositorio iReservaRepositorio;
 
     @Autowired
-    public ReservaController(iReservaServicio reservaServicio) {
+    public ReservaController(iReservaServicio reservaServicio,
+                             iReservaRepositorio iReservaRepositorio) {
         this.reservaServicio = reservaServicio;
+        this.iReservaRepositorio = iReservaRepositorio;
     }
 
     @GetMapping("/")

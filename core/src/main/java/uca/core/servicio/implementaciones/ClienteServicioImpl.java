@@ -324,8 +324,8 @@ public class ClienteServicioImpl implements iClienteServicio {
     @Override
     public String eliminarEstado(String estado)
     {
-        if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstado("Cliente").stream().anyMatch(e -> e.equals(estado))) {
-            clienteEstadoRepositorio.eliminarEstado(new Estado("Cliente",estado));
+        if (!estado.isEmpty() & clienteEstadoRepositorio.findAll().stream().toList().contains(new Estado("Cliente",estado))) {
+            clienteEstadoRepositorio.delete(new Estado("Cliente",estado));
         } else {
             throw new IllegalArgumentException("El estado no es correcto");
         }
@@ -334,8 +334,8 @@ public class ClienteServicioImpl implements iClienteServicio {
 
     @Override
     public String crearEstado(String estado) {
-        if (!estado.isEmpty() & clienteEstadoRepositorio.cargarEstado("Cliente").stream().noneMatch(e -> e.equals(estado))) {
-            clienteEstadoRepositorio.guardarEstado(new Estado("Cliente",estado));
+        if (!estado.isEmpty() & clienteEstadoRepositorio.findAll().stream().toList().contains(new Estado("Cliente",estado))) {
+            clienteEstadoRepositorio.save(new Estado("Cliente",estado));
             return ("El estado se ha añadido correctamente");
         } else {
             return ("El estado no es correcto");

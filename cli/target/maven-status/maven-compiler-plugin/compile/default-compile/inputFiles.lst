@@ -3,7 +3,7 @@
 /home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/shell/ClienteShell.java
 /home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/MySpringCliApplication.java
 /home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/shell/AutocaravanaShell.java
-/home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/repositorio/Implementaciones/EstadoRepositorio.java
 /home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.java
 /home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/shell/PrintShell.java
 /home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/shell/ReservaShell.java
+/home/craboftw/Documentos/GitHub/KrenkoAutos/cli/src/main/java/uca/springCli/repositorio/Implementaciones/EstadoRepositorioImpl.java
