@@ -21,7 +21,7 @@ public class AutocaravanaRepositorioImpl implements iAutocaravanaRepositorio {
     private static final String AUTOCARAVANAS_FILE_PATH = "autocaravanas.json";
 
     private ObjectMapper objectMapper;
-    private List<Autocaravana> autocaravanas =  findAll();
+    private List<Autocaravana> autocaravanas;
 
     public AutocaravanaRepositorioImpl() {
         objectMapper = new ObjectMapper();

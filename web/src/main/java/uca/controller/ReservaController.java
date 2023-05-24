@@ -2,10 +2,17 @@ package uca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSender;
 import org.springframework.web.bind.annotation.*;
+import uca.NotificacionEmail;
 import uca.core.dao.iReservaRepositorio;
+import uca.core.dominio.Autocaravana;
+import uca.core.dominio.Cliente;
 import uca.core.dominio.Reserva;
+import uca.core.servicio.interfaces.iAutocaravanaServicio;
+import uca.core.servicio.interfaces.iClienteServicio;
 import uca.core.servicio.interfaces.iReservaServicio;
+
 
 import uca.dto.ReservaDTO;
 
@@ -17,13 +24,18 @@ import java.util.Collection;
 public class ReservaController {
 
     private iReservaServicio reservaServicio;
-    private final uca.core.dao.iReservaRepositorio iReservaRepositorio;
+    private iAutocaravanaServicio autocaravanaServicio;
+    private iClienteServicio clienteServicio;
+    private iReservaRepositorio iReservaRepositorio;
+    private NotificacionEmail notificacionEmail;
 
     @Autowired
-    public ReservaController(iReservaServicio reservaServicio,
-                             iReservaRepositorio iReservaRepositorio) {
+    public ReservaController(iReservaServicio reservaServicio, iAutocaravanaServicio autocaravanaServicio, iClienteServicio clienteServicio, iReservaRepositorio iReservaRepositorio,NotificacionEmail mailSender) {
         this.reservaServicio = reservaServicio;
+        this.autocaravanaServicio = autocaravanaServicio;
+        this.clienteServicio = clienteServicio;
         this.iReservaRepositorio = iReservaRepositorio;
+        this.notificacionEmail = mailSender;
     }
 
     @GetMapping("/")
@@ -52,8 +64,12 @@ public class ReservaController {
     public ResponseEntity<Reserva> altaReserva(@RequestBody ReservaDTO intento) {
         reservaServicio.altaReserva(intento.getIdAutocaravana(), intento.getIdCliente(), intento.getFechaIni(), intento.getFechaFin());
         //get the last reserva
-        Reserva R = reservaServicio.getListaReservas().stream().toList().get(reservaServicio.getListaReservas().size()-1);
-        return ResponseEntity.created(java.net.URI.create("/reservas/" + R.getIdR())).body(R);
+        Reserva R = reservaServicio.getListaReservas().stream().toList().get(reservaServicio.getListaReservas().size() - 1);
+        Cliente cliente = clienteServicio.buscarCliente(intento.getIdCliente());
+        Autocaravana autocaravana = autocaravanaServicio.buscarAutocaravana(intento.getIdAutocaravana());
+        //send email
+        notificacionEmail.enviarReservaRealizadaNotifiacion(R, cliente, autocaravana);
+        return ResponseEntity.ok(R);
     }
 
     @DeleteMapping("/{id}")

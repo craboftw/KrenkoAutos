@@ -80,6 +80,7 @@ public class AutocaravanaServicioImpl implements iAutocaravanaServicio {
         return autocaravanaRepositorio.findAll();
     }
 
+
     @Override
     public Collection<String> getListaEstadoAutocaravana() {
         var lista =  autocaravanaEstadoRepositorio.findAll().stream().filter(e -> e.getTipo().equals("Autocaravana"));

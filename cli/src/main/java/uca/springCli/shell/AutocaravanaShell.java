@@ -129,7 +129,6 @@ public class AutocaravanaShell {
     public String modificarKilometraje(     @ShellOption(help = "Dato identificador") String dato,
                                             @ShellOption(help = "Nuevo kilometraje") int kilometraje,
                                             @ShellOption(defaultValue = "idA", value = "-t", help = "Tipo de dato identificador [matricula|idA]") String type) {
-
         try {
             if (type.equals("matricula")) {
                 autocaravanaServicio.setKilometraje(dato, kilometraje);

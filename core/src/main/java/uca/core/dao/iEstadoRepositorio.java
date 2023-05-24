@@ -17,7 +17,7 @@ public interface iEstadoRepositorio extends JpaRepository<Estado,Long> {
                 return new Estado("Reserva", "Activa");
             }
             default -> {
-                throw new IllegalStateException("Tipo no compatible: " + tipo);
+                throw new IllegalArgumentException("Tipo no compatible: " + tipo);
             }
         }
     }

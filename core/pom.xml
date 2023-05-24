@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uca</groupId>
 	<artifactId>core</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.6</version>
         <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+    </parent>	<version>0.0.1-SNAPSHOT</version>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>

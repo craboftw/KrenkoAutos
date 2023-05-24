@@ -26,7 +26,7 @@ public class Estado {
 
     public Estado()
     {
-        id = 0L;
+        id = -1L;
         tipo = "";
         valor = "";
     }

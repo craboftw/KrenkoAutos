@@ -45,7 +45,7 @@ public class Autocaravana {
 
     public Autocaravana() {
 
-        idA = 0L;
+        idA = -1L;
         modelo = "";
         precioPorDia = BigDecimal.valueOf(-1);
         plazas = 0;

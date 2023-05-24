@@ -1,5 +1,4 @@
 package uca.core.servicio.implementaciones.reglas;
-
 import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Cliente;
 import uca.core.dominio.Reserva;
