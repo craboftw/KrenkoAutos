@@ -5,17 +5,120 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49349009-ddd1-4139-a5c3-18ca715234d3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/KrenkoAutos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KrenkoAutos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4511ce81-bac6-45f4-9b71-88d9fe073fd6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4511ce81-bac6-45f4-9b71-88d9fe073fd6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteServicioImpl_altaCliente.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteServicioImpl_altaCliente.mmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/ConfigBeans.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/ConfigBeans.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/FakeGrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/FakeGrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/HolyGrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/HolyGrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSS/src/main/java/com/example/dss/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSS/src/test/java/com/example/dss/KnightOfTheRoundTableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSS/src/test/java/com/example/dss/KnightOfTheRoundTableTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/dominio/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/dominio/Estudiante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoGriffindor.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoGriffindor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoHufflepuff.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoHufflepuff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoRavenclaw.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoRavenclaw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoSlytherin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Hogwarts/src/main/java/hogwarts/magic/hogwarts/implementaciones/ComportamientoSlytherin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/Proyectos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/Proyectos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proyectos/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/Proyectos/spring-shell.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReservaShell_mostrarReserva.mmd" beforeDir="false" afterPath="$PROJECT_DIR$/ReservaShell_mostrarReserva.mmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/cli/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/cli/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/cli/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/cli/spring-shell.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/MySpringCliApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/MySpringCliApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/AutocaravanaRepositorioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/ClienteRepositorioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/EstadoRepositorioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/EstadoRepositorioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/repositorio/Implementaciones/ReservaRepositorioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/AutocaravanaShell.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/AutocaravanaShell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/ClienteShell.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/ClienteShell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/PrintShell.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/PrintShell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/ReservaShell.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/uca/springCli/shell/ReservaShell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/test/java/uca/SpringCli/SpringCliApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/test/java/uca/SpringCli/SpringCliApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/spring-aot/test/resources/META-INF/native-image/uca/cli/reflect-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/spring-aot/test/resources/META-INF/native-image/uca/cli/reflect-config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/spring-aot/test/sources/org/springframework/test/context/aot/AotTestAttributes__Generated.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/spring-aot/test/sources/org/springframework/test/context/aot/AotTestAttributes__Generated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/spring-aot/test/sources/org/springframework/test/context/aot/AotTestContextInitializers__Generated.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/spring-aot/test/sources/org/springframework/test/context/aot/AotTestContextInitializers__Generated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/target/test-classes/META-INF/native-image/uca/cli/reflect-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/cli/target/test-classes/META-INF/native-image/uca/cli/reflect-config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/core/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/clientes.json" beforeDir="false" afterPath="$PROJECT_DIR$/core/clientes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/core/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/core/mvnw.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/core/spring-shell.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iAutocaravanaRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iAutocaravanaRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iClienteRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iClienteRepositorio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iEstadoRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iEstadoRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iReservaRepositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dao/iReservaRepositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Autocaravana.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Autocaravana.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Cliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Estado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/dominio/Reserva.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/AutocaravanaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/AutocaravanaServicioImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ClienteServicioImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/ReservaServicioImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/AutocaravanaReglas.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/AutocaravanaReglas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ClienteReglas.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ClienteReglas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ReservaReglas.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/implementaciones/reglas/ReservaReglas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iAutocaravanaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iAutocaravanaServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iClienteServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iClienteServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iReservaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/uca/core/servicio/interfaces/iReservaServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/AutocaravanaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/AutocaravanaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/ClienteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/ClienteTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/ReservaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/ReservaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coreMCD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/coreMCD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcd.puml" beforeDir="false" afterPath="$PROJECT_DIR$/mcd.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modelo.puml" beforeDir="false" afterPath="$PROJECT_DIR$/modelo.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-shell.log" beforeDir="false" afterPath="$PROJECT_DIR$/spring-shell.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/web/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/web/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/web/mvnw.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/EstadoRepositorio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/NotificacionEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/NotificacionEmail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/SpringbootThymeleafWebAppApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/SpringbootThymeleafWebAppApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controller/AutocaravanaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/controller/AutocaravanaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controller/ClienteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/controller/ClienteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/controller/ReservaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/controller/ReservaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dto/AutocaravanaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/dto/AutocaravanaDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dto/ClienteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/dto/ClienteDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/uca/dto/ReservaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/uca/dto/ReservaDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/add-student.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/add-student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/update-student.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/update-student.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/net/springboot/javaguides/SpringbootThymeleafWebAppApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/net/springboot/javaguides/SpringbootThymeleafWebAppApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

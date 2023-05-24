@@ -87,15 +87,20 @@ public class ClienteTest {
     @Test
     public void testEliminarClienteId(){
         clienteservicio.altaCliente("John", "Doe", "555-555-5555", "1990-01-01", "12345678", "john@gmail.com");
-        clienteservicio.eliminarCliente(1L);
-        Assertions.assertEquals(null, clienteservicio.buscarCliente(1L));
+        Cliente c = clienteservicio.buscarCliente(0L);
+        var lista = clienteservicio.getListaClientes();
+        clienteservicio.eliminarCliente(0L);
+        Assertions.assertTrue(!lista.contains(c));
     }
 
     @Test
     public void testEliminarClienteDNI(){
         clienteservicio.altaCliente("John", "Doe", "555-555-5555", "1990-01-01", "12345678", "john@gmail.com");
+        Cliente c = clienteservicio.buscarCliente(0L);
         clienteservicio.eliminarCliente("12345678");
-        Assertions.assertEquals(null, clienteservicio.buscarCliente("12345678"));
+        var lista = clienteservicio.getListaClientes();
+        clienteservicio.eliminarCliente("12345678");
+        Assertions.assertTrue(!lista.contains(c));
     }
 
     @Test
@@ -216,15 +221,14 @@ public class ClienteTest {
 
     }
 
+
     @Test
     public void testGetListaCliente(){
         clienteservicio.altaCliente("John", "Doe", "555-555-555", "1990-01-01", "12345678", "john@gmail.com");
-        clienteservicio.altaCliente("Mary", "Doe", "555-555-555", "1990-01-01", "87654321", "money@money.money");
-        clienteservicio.altaCliente("Joe", "Doe", "555-555-555", "1990-01-01", "11111111", "joe@maria.jose");
-        var listaClientes = clienteservicio.getListaClientes();
-        for (Cliente cliente : listaClientes) {
-            Assertions.assertTrue(cliente.getNombre().equals("John") || cliente.getNombre().equals("Mary") || cliente.getNombre().equals("Joe"));
-        }
+        Cliente c = clienteservicio.buscarCliente(0L);
+        List<Cliente> lista = (List<Cliente>) (clienteservicio.getListaClientes());
+        Assertions.assertEquals(1, lista.size());
+        Assertions.assertTrue(lista.contains(c));
     }
 
     @Test

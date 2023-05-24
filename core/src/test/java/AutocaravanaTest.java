@@ -206,18 +206,20 @@ public class AutocaravanaTest {
     @Test
     public void testEliminarAutocaravana() {
         autocaravanaServicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 8, "4029PKT", 420);
-        var a = autocaravanaServicio.getListaAutocaravanas();
+        Autocaravana a = autocaravanaServicio.buscarAutocaravana(0L);
+        var lista = autocaravanaServicio.getListaAutocaravanas();
         autocaravanaServicio.eliminarAutocaravana(0L);
-        assertTrue(a.size()< autocaravanaServicio.getListaAutocaravanas().size());
+        assertTrue(!lista.contains(a));
 
     }
 
     @Test
     public void testEliminarAutocaravana2() {
         autocaravanaServicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 8, "4029PKT", 420);
-        var a = autocaravanaServicio.getListaAutocaravanas();
+        Autocaravana a = autocaravanaServicio.buscarAutocaravana(0L);
+        var lista = autocaravanaServicio.getListaAutocaravanas();
         autocaravanaServicio.eliminarAutocaravana("4029PKT");
-        assertTrue(a.size()< autocaravanaServicio.getListaAutocaravanas().size());
+        assertTrue(!lista.contains(a));
     }
 
     @Test
