@@ -428,3 +428,26 @@ A continuación se muestra el diagrama de clases de la aplicación shell que se 
 
 ![MCDshell](cliMCD.png)
 ![SDshell](ReservaShell_mostrarReservaSD.png)
+
+
+# HITO 3
+
+Esta release de la REST API del Sistema de Autocaravanas incluye varias funcionalidades importantes para mejorar la gestión de autocaravanas y ofrecer una mejor experiencia a los usuarios finales. A continuación, se describen las características principales implementadas en esta versión.
+
+## 1. Controladores HTTP con Spring Web
+
+Se han creado controladores HTTP utilizando Spring Web para manejar las distintas operaciones relacionadas con las autocaravanas. Estos controladores proporcionan endpoints para realizar operaciones CRUD (crear, leer, actualizar y eliminar) sobre los datos de las autocaravanas. Los endpoints están diseñados siguiendo las mejores prácticas y convenciones REST para una fácil integración y uso.
+
+## 2. Documentación del API con Swagger
+
+La documentación del API se ha implementado utilizando Swagger. Ahora los desarrolladores y usuarios pueden acceder a una interfaz interactiva para explorar y probar los diferentes endpoints de la REST API. Swagger proporciona una descripción clara de cada endpoint, los parámetros requeridos y las respuestas esperadas, lo que facilita el desarrollo y la integración con la API.
+
+## 3. Persistencia en MySQL con Spring Data
+
+La persistencia de los datos se ha implementado utilizando Spring Data y una base de datos no volátil MySQL. Se han creado entidades y repositorios que permiten almacenar y recuperar la información relacionada con las autocaravanas de manera eficiente. Spring Data simplifica la interacción con la base de datos al proporcionar una capa de abstracción que maneja las consultas y operaciones de persistencia.
+
+## 4. Sistema de notificaciones con Spring Mail
+
+Se ha integrado un sistema de notificaciones mediante Spring Mail para informar a los clientes finales sobre las operaciones que afecten a sus autocaravanas. Con esta funcionalidad, los clientes recibirán notificaciones por correo electrónico cuando se realicen cambios relevantes en sus reservas, actualizaciones de disponibilidad u otras acciones importantes relacionadas con su autocaravana.
+
+Estas nuevas características mejoran la usabilidad y la eficiencia del sistema de autocaravanas, ofreciendo una REST API potente y bien documentada. Con estas funcionalidades, los usuarios podrán gestionar y disfrutar de su experiencia de autocaravanas de manera más efectiva.
