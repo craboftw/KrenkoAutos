@@ -5,21 +5,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import uca.core.dominio.Autocaravana;
 import uca.core.dominio.Cliente;
 import uca.core.dominio.Reserva;
-import uca.core.servicio.implementaciones.ClienteServicioImpl;
-import uca.core.servicio.implementaciones.AutocaravanaServicioImpl;
-import uca.core.servicio.implementaciones.ReservaServicioImpl;
+import uca.core.servicio.interfaces.iAutocaravanaServicio;
+import uca.core.servicio.interfaces.iClienteServicio;
+import uca.core.servicio.interfaces.iReservaServicio;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 
 public class ReservaTest {
-    
+
     @Autowired
-    ReservaServicioImpl reservaservicio;
+    iReservaServicio reservaservicio;
+    @Autowired
+    iClienteServicio clienteservicio;
+    @Autowired
+    iAutocaravanaServicio autocaravanaservicio;
 
     @BeforeEach
     public void setUp() {
@@ -31,14 +38,12 @@ public class ReservaTest {
         reservaservicio.eliminarReserva(0L);
     }
 
-    @Test   
+    @Test
     public void testAltaReserva(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
-        
+
         Reserva r = reservaservicio.buscarReserva(0L);
         Assertions.assertEquals("2023-25-05", r.getFechaIni());
         Assertions.assertEquals("2023-30-05", r.getFechaFin());
@@ -55,9 +60,7 @@ public class ReservaTest {
 
     @Test
     public void testCheckout(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.checkout(0L);
@@ -65,15 +68,13 @@ public class ReservaTest {
         Assertions.assertEquals("Finalizada", r.getEstadoR());
         Assertions.assertEquals(BigDecimal.valueOf(500), r.getPrecioTotal());
         autocaravanaservicio.eliminarAutocaravana(0L);
-        clienteservicio.eliminarCliente(0L); 
+        clienteservicio.eliminarCliente(0L);
 
     }
 
     @Test
     public void testCheckin(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.checkin(0L);
@@ -89,9 +90,7 @@ public class ReservaTest {
 
     @Test
     public void testBuscarReserva(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
 
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
@@ -103,9 +102,7 @@ public class ReservaTest {
 
     @Test
     public void testBuscarReservaCampo(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         Reserva r = reservaservicio.buscarReserva(0L);
@@ -128,9 +125,7 @@ public class ReservaTest {
 
     @Test
     public void testEliminarReserva(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         Reserva r = reservaservicio.buscarReserva(0L);
@@ -143,9 +138,7 @@ public class ReservaTest {
 
     @Test
     public void testCancelarReserva(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.cancelarReserva(0L);
@@ -160,9 +153,7 @@ public class ReservaTest {
     @Test
     public void testSetEstadoReserva(){
 
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.setEstadoReserva(0L, "En curso");
@@ -176,9 +167,7 @@ public class ReservaTest {
 
     @Test
     public void testSetPrecioTotal(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.setPrecioTotal(0L, BigDecimal.valueOf(1000));
@@ -191,9 +180,7 @@ public class ReservaTest {
 
     @Test
     public void testSetAutocaravana(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         autocaravanaservicio.altaAutocaravana("Modelo2", BigDecimal.valueOf(100), 4, "4023PKT", 1);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
@@ -208,12 +195,10 @@ public class ReservaTest {
 
     @Test
     public void testSetCliente(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "666-666-666", "1990-01-01", "12345678A", "john@gmail.com");
         Cliente c = clienteservicio.buscarCliente(0L);
         clienteservicio.altaCliente("Mary", "Doe", "999-999-999", "1990-01-11", "87654321B", "mary@gmail.com");
         Cliente c2 = clienteservicio.buscarCliente(1L);
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.setCliente(0L, 1L);
@@ -226,9 +211,7 @@ public class ReservaTest {
 
     @Test
     public void testSetFechaInicio(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "12345678", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.setFechaIni(0L, "2023-26-05");
@@ -241,9 +224,7 @@ public class ReservaTest {
 
     @Test
     public void testSetFechaFin(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "12345678", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.setFechaFin(0L, "2023-31-05");
@@ -256,9 +237,7 @@ public class ReservaTest {
 
     @Test
     public void testModificarReservaEnCurso(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "12345678", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.modificarReservaEnCurso(0L, "2023-31-05");
@@ -273,9 +252,7 @@ public class ReservaTest {
 
     @Test
     public void testModificarReserva(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "12345678", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         reservaservicio.modificarReserva(0L, 0L, "2023-26-05", "2023-31-05");
@@ -291,10 +268,8 @@ public class ReservaTest {
 
     @Test
     public void testGetListaReservas(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "12345678", "1990-01-01", "12345678A", "john@gmail.com");
         clienteservicio.altaCliente("Mary", "Doe", "999-999-999", "1990-01-11", "87654321B", "mary@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         autocaravanaservicio.altaAutocaravana("Modelo2", BigDecimal.valueOf(200), 8, "8058PKT", 1);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
@@ -331,12 +306,10 @@ public class ReservaTest {
         reservaservicio.eliminarEstado(estado3);
     }
 
-  
+
     @Test
     public void testGetListaAutocaravanasDisponibles(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "12345678", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         autocaravanaservicio.altaAutocaravana("Modelo2", BigDecimal.valueOf(200), 8, "8058PKT", 1);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
@@ -353,9 +326,7 @@ public class ReservaTest {
 
     @Test
     public void testGuardarReserva(){
-        ClienteServicioImpl clienteservicio;
         clienteservicio.altaCliente("John", "Doe", "12345678", "1990-01-01", "12345678A", "john@gmail.com");
-        AutocaravanaServicioImpl autocaravanaservicio;
         autocaravanaservicio.altaAutocaravana("Modelo1", BigDecimal.valueOf(100), 4, "4023PKT", 0);
         reservaservicio.altaReserva(0L, 0L, "2023-25-05", "2023-30-05");
         Reserva r = reservaservicio.buscarReserva(0L);
